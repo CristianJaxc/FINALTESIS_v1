@@ -1,0 +1,39 @@
+
+{% extends "voluntarios/pagina_voluntario.html" %}
+{% load static %}
+{% block tema %}
+Detalles de la Solicitud 
+ {% endblock tema %}
+
+{% block contenido %}
+
+<body>
+  
+   
+    <ul>
+      
+        <li><a href="{% url 'contacto_listado' %}">listado contacto</a></li>
+    </ul>
+    <br><hr>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6 mb-4">
+                <div class="card shadow mb-4">
+                <div class="card-header py-3">
+        <h6 style="text-align: center;">Datos de la solicitud</h6>
+                </div>
+        <ul>
+            <li style="list-style: none;"><strong>codigo contacto:</strong> {{contactos.id}}</li>
+            <li style="list-style: none;"><strong>solicitante:</strong> {{contactos.nombres}} {{contactos.apellidos}}</li>
+            <li style="list-style: none;"><strong>telefono:</strong> {{contactos.telefono}}</li>
+            <li style="list-style: none;"><strong>email:</strong> {{contactos.email}}</li>
+            <li style="list-style: none;"><strong>descripccion</strong> {{contactos.descripcion}}</li>
+        </ul>
+    </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+
+{% endblock contenido %}

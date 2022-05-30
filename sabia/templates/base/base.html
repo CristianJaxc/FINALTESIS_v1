@@ -1,0 +1,530 @@
+{% load static %}
+
+{% load pwa %}
+{% progressive_web_app_meta %}
+{% csrf_token %}
+{% load i18n %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <!-- encabesado para declaracion del nombre, adaptacion y modo responsive  -->
+    <meta charset="UTF-8">
+    <meta name="description" content="Sabia_Diseño">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta name="keywords" content="refugio, mascotas, donaciones, html">
+
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <!-- creando el titulo que llevara la plantilla donde se herede el bloque de contenido "TITULO" -->
+    <title>{% block titulo %} Fundación SABIA{% endblock %}</title>
+    <!-- ARCHIVOS CDN REFERENCIA  -->
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <!-- referencia a los archivos de tipo javascript propios para Boostrap 5 tanto para la funcionalidad como para el diseño  -->
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <!-- Instalacion de appweb-->
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+    crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.min.js"></script>
+
+
+    <link rel="manifest" href="/manifest.json">
+    <!-- referencia a los estilos propios de Boostrap 5 , para el tipo de estilos , modelos y  alertas necesarias  -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+      integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <!-- estilos de texto -->
+    <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900&display=swap"
+      rel="stylesheet">
+    <!-- Trabajar con  Font Awesome -->
+
+    <!-- Icon Font Stylesheet -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
+
+
+
+    <!-- Trabajar con Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" rel="stylesheet" />
+    <!-- trabajar con los modelos vistas  -->
+
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/3.10.1/mdb.min.css" rel="stylesheet" />
+
+    <link rel="stylesheet" href="{% static 'css/base.css' %}">
+    <link rel="stylesheet" href="{% static 'css/adaptativo.css' %}">
+
+<!-- Estilos staticos : :: -->
+    <!-- estilos de Bootstrap -->
+    <link     href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
+
+    <!-- Estilos del Template -->
+    <link href="{% static 'css/style1.css' %}" rel="stylesheet">
+    <link href="{% static 'css/lenguaje1.css' %}" rel="stylesheet">
+   <!--<link href="{% static 'css/perro1.css' %}" rel="stylesheet">-->
+<link rel="stylesheet" href="{% static 'css/dash.css' %}">
+
+ <!-- Libraries Stylesheet -->
+    <link href="{% static 'lib/owlcarousel/assets/owl.carousel.min.css' %}" rel="stylesheet">
+    <link href="{% static 'lib/animate/animate.min.css' %}" rel="stylesheet">
+    <link href="{% static 'lib/tempusdominus/css/tempusdominus-bootstrap-4.min.css' %}" rel="stylesheet" />
+    <link href="{% static 'lib/twentytwenty/twentytwenty.css' %}" rel="stylesheet" />
+
+
+
+ <!-- FIN DE ESTILOS ESTATICOS ::: -->
+
+    <!-- flickity CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/flickity@2/dist/flickity.min.css">
+    <!-- flickity JS -->
+    <script src="https://unpkg.com/flickity@2/dist/flickity.pkgd.min.js"></script>
+    {% load pwa %}
+    {% progressive_web_app_meta %}
+
+
+
+</head>
+
+
+<body >
+
+
+
+
+    <!-- Preloader Start -->
+<div id="preloader-active">
+    <div class="preloader d-flex align-items-center justify-content-center">
+        <div class="preloader-inner position-relative">
+            <div class="preloader-circle"></div>
+            <div class="preloader-img pere-text">
+               <img src="{% static 'img/logosabia.webp' %}" style="width: 100%;" alt="logo">
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Preloader Start -->
+
+
+
+  <!-- Topbar Start -->
+  <div class="container-fluid bg-light ps-5 pe-0 d-none d-lg-block">
+    <div class="row gx-0">
+        <div class="col-md-6 text-center text-lg-start mb-2 mb-lg-0">
+            <div class="d-inline-flex align-items-center">
+                <small class="py-2"><i class="far fa-clock text-primary me-2"></i>Abierto desde : Lunes - Domingo  : 8.00 am - 8.00 pm </small>
+            </div>
+        </div>
+        <div class="col-md-6 text-center text-lg-end">
+            <div class="position-relative d-inline-flex align-items-center bg-primary1 text-white top-shape px-5">
+                <div class="me-3 pe-3 border-end py-2">
+                    <p class="m-0"><i class="fa fa-envelope-open me-2"></i>Sabia@gmail.com</p>
+                </div>
+                <div class="pe-3 border-end " >
+                    <p class="m-0"><i class="fa fa-phone-alt me-2 "></i>+593 0998530277    </p>
+                </div>
+
+              <!-- PARA ADMIN MODO :: -->
+              <div class="me-3 pe-3 ">
+
+                {% if user.is_authenticated %}
+
+                <div class="dropdown  perfil ">
+                  <a href="#" class="dropdown-toggle" data-bs-toggle="dropdown">{{user.username}} </a>
+
+                  <div class="dropdown-menu m-0">
+                    <a href="{% url 'pagina' %}" class="dropdown-item">Perfil </a>
+                    <a href="{% url 'logout' %}" class="dropdown-item">Cerrar Sesion</a>
+
+                </div>
+
+
+
+               <!-- para cerrar la secion de usuario  -->
+                <!-- si no existe un usuario registrado  -->
+                {% else %}
+
+                  <a  href="{% url 'login' %}" class="perfil2 py-2 px-4 ms-3 ">     <i class="fas fa-user-cog  ">    </i> </a>
+
+                </a>
+                {% endif %}
+            </div>
+      </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+<!-- Topbar End -->
+
+<!-- Navbar Start -->
+<!-- <nav class="navbar navbar-expand-lg bg-white  navbar-light shadow-sm px-5 py-3 py-lg-0"> -->
+
+<nav class=" navbar-expand-lg bg-white  navbar-light shadow-sm px-5 py-3 py-lg-0">
+ <div>
+
+ </div>
+    <!-- <button class="navbar-toggler" aria-label="Center Align type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+        <span class="navbar-toggler-icon">
+
+          
+        </span>
+        <span class="visually-hidden">Opciones</span>
+    </button> -->
+
+    <H2 class="navbar-toggler" >
+<div class="row">
+    <div class="col-md-8" >
+            <img src="{% static 'img/logosabia.webp' %}" style="width: 35%; margin-left: -20px;" alt="logo">
+
+    </div>
+    <hr>
+    <div class="col-xs-12 col-md-8">
+                   <small class="py-2"><i class="far fa-clock text-primary me-2"></i>Abierto: 8.00 am - 8.00 pm </small>
+
+    </div>
+
+
+</div>
+
+
+
+    </H2>
+    <div class="collapse navbar-collapse" id="navbarCollapse" >
+      <a href="{% url 'home' %}" class="navbar-brand p-0">
+        <img src="{% static 'img/logosabia.webp' %}" style="width: 40%; margin-left: -20px;" alt="logo">
+      </a>
+        <div class="navbar-nav ms-auto py-0">
+            <a href="{% url 'home' %}" class="nav-item nav-link active ">Inicio</a>
+                 <div class="nav-item dropdown">
+                <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Sobre Nosotros</a>
+                <div class="dropdown-menu m-0">
+                    <a href="{% url 'quienes_somos' %}" class="dropdown-item">Labor Diario  </a>
+                    <a href="{% url 'contacto_registrar' %}" class="dropdown-item">Quienes Somos </a>
+
+                </div>
+            </div>
+            <a href="{% url 'pagina_denuncias' %}" class="nav-item nav-link">Denuncias </a>
+
+
+
+    <div class="nav-item dropdown">
+                <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Servicios</a>
+                <div class="dropdown-menu m-0">
+<!--
+                    <a href="{% url 'pagina_productos' %}"class="dropdown-item">Tienda SABIA </a>
+-->
+                      <a href="{% url 'product_list' %}"class="dropdown-item">Tienda SABIA </a>
+
+                    <a href="{% url 'pagina_esterilizacion' %}" class="dropdown-item">Esterilizacion</a>
+
+                </div>
+            </div>
+
+
+
+
+                  <div class="nav-item dropdown">
+                <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Donaciones</a>
+                <div class="dropdown-menu m-0">
+                    <a href="{% url 'pagina_apadrinamiento' %}"class="dropdown-item">Apadrinamiento </a>
+                    <a href="{% url 'pagina_donaciones' %}" class="dropdown-item">Donaciones Directas</a>
+
+                </div>
+            </div>
+
+
+
+
+            <a href="{% url 'pagina_adopciones' %}" class="nav-item nav-link">Adopciones</a>
+            <a href="{% url 'pagina_blogs' %}" class="nav-item nav-link">Voluntariado</a>
+        </div>
+    </div>
+</nav>
+<!-- Navbar End -->
+  {% if cart|length <= 0 %}
+   {% else %}
+    <div class="" style="padding:1%;background-color:yellow;text-align:center">
+      {% with total_items=cart|length %}
+        {% if cart|length > 0 %}
+            Revisa tu carrito de Compra , tienes :
+        <li class="fas fa-shopping-cart">
+             <a href="{% url 'cart_detail' %}" style="color:black">
+                {{ total_items }} Producto{{ total_items|pluralize }},
+                ${{ cart.get_total_price }}
+            </a>
+        </li>
+
+        {% else %}
+          No tiene Datos
+        {% endif %}
+    {% endwith %}
+
+
+                </div>
+
+
+        {% endif %}
+
+
+
+  <div class="offcanvas-menu-overlay">
+
+
+  </div>
+
+  <div class="canvas-open"   >
+    <i class="fa fa-bars">
+
+    </i>
+
+  </div>
+  <!-- inicio de la navegacion modo celular  -->
+  <div class="offcanvas-menu-wrapper"   style="  background: #43914E" >
+
+    <div class="canvas-close">
+      <i class="fas fa-times-circle" style="color: white;">
+
+      </i>
+
+    </div>
+ <!-- PERFIL VOLUNTARIADO - Y PERFIL USUARIO ADMIN .:: -->
+    <div class="row" >
+      <!-- inicio para perfil registrado -->
+      <div class="col-md-12 heading">
+
+        <!-- verificamos que exista un usuario  -->
+        {% if user.is_authenticated %}
+
+        <span class=" pull-left">
+
+          <!-- <img src="https://i.imgur.com/CeVfZyY.jpg" width="50" class="rounded-circle"> -->
+              <ul style="list-style:none">
+
+
+          <li class="nav-item dropdown">
+
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button"
+              data-bs-toggle="dropdown" aria-expanded="false">
+              <h2 class="title" style="font-size:15px;color: white;">{{user.username}}
+                  <span class="title-desc"
+                  style="font-size:15px;color: rgb(226, 223, 223);">Voluntario </span></h2>
+
+            </a>
+
+            <ul class="dropdown-menu"  style="">
+              <!-- redireccion al perfil  -->
+              <li><a class="dropdown-item" href="">Perfil</a></li>
+              <li>
+                <!-- cerrar la sesion  -->
+                <a class="dropdown-item" href="{% url 'logout' %}">Cerrar Sesion</a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+        </span>
+        <!-- para cerrar la secion de usuario  -->
+
+        <!-- si no existe un usuario registrado  -->
+        {% else %}
+        <a class="login-panel" href="{% url 'login' %}" style="padding-left: 10px;">
+          <i class="fas fa-users" style="padding: 2%; color: rgb(255, 255, 255); font-size: 15px; display: flex;"
+            id="color"> Sesion</i>
+        </a>
+        {% endif %}
+      </div>
+      <!-- fin de la condicion  -->
+    </div><!-- fin de la seccion de perfil registrado-->
+
+    <!-- inicio del menu modo celular -->
+    <nav class="main-menu" id="menu1">
+      <ul>
+        <li><a href="{% url 'home' %}"><i class="fas fa-home" style="font-size: 30px;"></i> Inicio</a></li>
+           {% if user.is_authenticated %}
+          <li><a href="{% url 'pagina' %}"><i class="fas fa-sign-out-alt" style="font-size: 30px;"></i>Pefil</a></li>
+           {% endif %}
+        <li><a href="{% url 'pagina_denuncias' %}"><i class="fas fa-home" style="font-size: 30px;"></i> denucias</a></li>
+        <li><a href="{% url 'pagina_donaciones' %}"><i class="fas fa-paw" style="font-size: 30px;"></i>donaciones</a></li>
+        <li><a href="{% url 'pagina_adopciones' %}"><i class="fas fa-hands-helping" style="font-size: 30px;"></i>adopciones</a></li>
+        <li><a href="{% url 'contacto_registrar' %}"><i class="fas fa-phone-volume" style="font-size: 30px;"></i>contactos</a></li>
+        <li><a href="{% url 'pagina_blogs' %}"><i class="fas fa-hands-helping" style="font-size: 30px;"></i>Voluntariado</a></li>
+      </ul>
+    </nav>
+    <!-- fin del menu modo celular  -->
+
+    <!-- find e decoraciones      -->
+  </div>
+  <!-- fin de la navegabilidad modo celular  -->
+
+
+<!-- LENGUAJE SELECTOR (PRUEBA :: FUNCIONALIDAD - MARZO /30/04/2022)-->
+<!-- Header End -->
+{% get_available_languages as LANGUAGES %}
+{% get_language_info_list for LANGUAGES as languages %}
+<!-- Style switcher start -->
+<div class="style-switch-wrapper"   style="background-color:#469150d2;">
+  <div class="style-switch-button" style="background-color:#469150;border-style: solid;border-color: white;">
+    <i class="fa fa-globe" aria-hidden="true"  type="submit" value="{{language.code}}" name="language"></i>
+  </div>
+  <h3 style="color: rgb(255, 249, 249); text-align: center;">Idiomas</h3>
+  <form action="{% url 'set_language' %}" method="post" id="myform">
+    {% csrf_token %}
+    <input type="hidden" name="next" value="{{redirect_to}}" >
+
+
+  {% for language in languages %}
+  <ul>
+    <li style="list-style:none" >
+      <div id="bande">
+      <button class="btn transparent" type="submit" value="{{language.code}}" name="language">
+
+
+
+          <img   {% if language.code == "es" %}  src="{% static 'img/espa.jpg' %}" alt="español" class="banderas" width="50%" height="50%"  {% else %} src="{% static 'img/estados.jpg' %}"  class="banderas"  width="50%" height="50%" alt="Ingles" {% endif %}>
+
+      </button>
+    </div>
+    </li>
+  </ul>
+<ul>
+
+
+
+    {# <li><a href="" onclick="document.getElementById('myform').submit('{{language.code}}')"><i class="material-icons" >language</i></a></li> #}
+    {# <li><input type="submit" value="{{language.code}}" name="language"><i class="material-icons">language</i></li> #}
+  </ul>
+  {% endfor %}
+</form>
+  <br/><br/>
+  <a class="btn btn-sm btn-secundario close-styler pull-right">Close X</a>
+
+
+
+</div>
+<!-- Style switcher end -->
+  <!-- Inicio del contenido de las paginas y de las demas secciones o modulos dentro del bloque heredado de la plantilla -->
+
+  <div class="row" >
+    <div class="col-12 " >
+      {% block contenido %}
+
+      {% endblock contenido %}
+    </div>
+
+  </div>
+
+    <section style="margin-top: 15%;">
+
+        <!-- Footer Start -->
+    <div class="container-fluid color1 text-light py-5 wow fadeInUp" data-wow-delay="0.3s" style="margin-top: -75px;">
+      <div class="container pt-5">
+          <div class="row g-5 pt-4">
+              <div class="col-lg-3 col-md-6">
+                  <h3 class="text-white mb-4">Secciones de Pagina </h3>
+                  <div class="d-flex flex-column justify-content-start">
+                      <a class="text-light mb-2" href="#"><i class="bi bi-arrow-right  me-2"></i>Inicio </a>
+                      <a class="text-light mb-2" href="#"><i class="bi bi-arrow-right  me-2"></i>Sobre Nossotros </a>
+                      <a class="text-light mb-2" href="#"><i class="bi bi-arrow-right  me-2"></i>Adopciones</a>
+                      <a class="text-light mb-2" href="#"><i class="bi bi-arrow-right me-2"></i>Donaciones</a>
+                      <a class="text-light" href="#"><i class="bi bi-arrow-right  me-2"></i>Denuncias</a>
+                  </div>
+              </div>
+              <div class="col-lg-3 col-md-6" data-wow-delay="0.6s">
+                <h3 class="text-white ">Mapa</h3>
+                  <iframe class="position-relative rounded w-100"
+                  src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d31915.274722075803!2d-78.55087092065428!3d-0.8203815028369347!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x91d45d3b235936ab%3A0x6221c3f4a528e60f!2sSantuario%20de%20bienestar%20animal%20SABIA!5e0!3m2!1ses-419!2sus!4v1641932004494!5m2!1ses-419!2sus"
+                      frameborder="0" style="min-height: 200px; border:0;" allowfullscreen="" aria-hidden="false"
+                      tabindex="0"></iframe>
+
+
+
+
+              </div>
+              <div class="col-lg-3 col-md-6">
+                  <h3 class="text-white mb-4">Ubicacion </h3>
+                  <p class="mb-2"><i class="bi bi-geo-alt  me-2"></i>Latacunga, Mulalo </p>
+                  <p class="mb-2"><i class="bi bi-envelope-open  me-2"></i>sabia@gmail.com</p>
+                  <p class="mb-0"><i class="bi bi-telephone  me-2"></i>+593 0998530277</p>
+              </div>
+              <div class="col-lg-3 col-md-6">
+                  <h3 class="text-white mb-4">Contactos</h3>
+                  <div class="d-flex">
+                      <a class="btn btn-lg btn-principal btn-lg-square rounded me-2" href="#"><i class="fab fa-twitter fw-normal"></i></a>
+                      <a class="btn btn-lg btn-principal btn-lg-square rounded me-2" href="#"><i class="fab fa-facebook-f fw-normal"></i></a>
+                      <a class="btn btn-lg btn-principal btn-lg-square rounded me-2" href="#"><i class="fab fa-linkedin-in fw-normal"></i></a>
+                      <a class="btn btn-lg btn-principal btn-lg-square rounded" href="#"><i class="fab fa-instagram fw-normal"></i></a>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
+  <div class="container-fluid text-light color2 py-4" >
+      <div class="container">
+          <div class="row g-0">
+              <div class="col-md-6 text-center text-md-start">
+                  <p class="mb-md-0">&copy; <a class="text-white border-bottom" href="#">Santuario Bienestar Animal </a>.Latacunga, Ecuador 2022.</p>
+              </div>
+              <div class="col-md-6 text-center text-md-end">
+                  <p class="mb-0">Desarrollado por : <a class="text-white border-bottom" href="https://htmlcodex.com">Cristian Acosta</a><br>
+
+                  </p>
+              </div>
+          </div>
+      </div>
+  </div>
+  <!-- Footer End -->
+
+    </section>
+   <a href="#" class="btn btn-lg btn-principal btn-lg-square rounded back-to-top"><i class="bi bi-arrow-up"></i></a>
+
+<!--
+{% if messages %}
+    {% for m in messages %}
+        <script>
+            Swal.fire({
+              title: 'Error!',
+              text: '{{m}}',
+              icon: 'error',
+              confirmButtonText: 'Ok'
+})
+        </script>
+    {% endfor %}
+{% endif %}-->
+</body>
+<script>
+    $(window).on('load', function () {
+      $('#preloader-active').delay(450).fadeOut('slow');
+      $('body').delay(450).css({
+        'overflow': 'visible'
+      });
+    });
+
+
+</script>
+<!-- FIN DE SECCION BODY  -->
+
+<!-- INICIO DE SECCION FOOTER O PIE DE PAGINA  -->
+<!-- End of .container -->
+<script type="text/javascript" src="{% static 'lib/wow/wow.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'lib/easing/easing.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'lib/waypoints/waypoints.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'lib/owlcarousel/owl.carousel.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'lib/tempusdominus/js/moment.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'lib/tempusdominus/js/moment-timezone.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'lib/twentytwenty/jquery.event.move.js' %}"></script>
+<script type="text/javascript" src="{% static 'lib/twentytwenty/jquery.twentytwenty.js' %}"></script>
+<!-- REFERENCIA JS -->
+
+<script type="text/javascript" src="{% static 'base.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/main.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/lenguaje.js' %}"></script>
+<!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script> -->
+
+<!-- <script type="text/javascript" src="{% static 'bootstrap.min.js' %}"></script> -->
+
+<!-- <script type="text/javascript" src="{% static 'jquery-3.3.1.min.js' %}"></script> -->
+
+<!-- FIN PIE DE PAGINA -->
+</html>
+<!-- FIN DEL DOCUMENTO HTML  -->

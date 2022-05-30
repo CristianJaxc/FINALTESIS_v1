@@ -1,0 +1,63 @@
+
+{% extends "administracion/usuarios/plantilla_tablas.html" %}
+
+
+<body>
+  
+    {% block tema %}
+ Donaciones SABIA 
+      {% endblock tema %}
+      {% block title %}Listado de posibles donaciones  {% endblock title  %} 
+     
+      {% block tablas %}
+      {% block tr %}
+                    <th scope="col">#</th>
+                    <th scope="col">Codigo</th>
+                    <th scope="col">Solicitante</th>
+                    <th scope="col">contacto</th>
+                    <th scope="col">estado</th>
+                    <th scope="col">producto</th>
+                    <th scope="col">Opciones</th>
+                    {% endblock tr %}
+      
+                    {% block tbody %}
+                          
+                {% for i in object_list %}
+                <tr>
+                    <th scope="row">{{forloop.counter}}</th>
+                    <td>{{i.id}}</td>
+                    <td>{{i.nombre}} {{i.apellido}}</td>
+                    <td>{{i.telefono}}</td>
+                    <td>{{i.estado}}</td>
+                    <td>{{i.productos_id}}</td>
+                    <td>
+                        
+                        <a href="{% url 'detalle_solicitud_donacion' i.id %}"class="btn btn-warning btn-icon-split">
+                            <span class="icon text-white-50">
+                                <i class="fas fa-save"></i>
+                            </span>
+                            <span class="text">Ver Detalle </span>
+                        </a>
+                        
+                        <div class="my-2">
+                    
+                        </div>
+                        <a href="{% url 'eliminar_solicitud_donacion' i.id %}"class="btn btn-danger btn-icon-split">
+                            <span class="icon text-white-50">
+                                <i class="fas fa-trash"></i>
+                            </span>
+                            <span class="text">Eliminar</span>
+                        </a>
+                    
+                 
+                    
+                    
+                    </td>
+                </tr>
+                {% endfor %}
+                    
+                {% endblock tbody  %}   
+                {% endblock tablas %}
+</body>
+
+

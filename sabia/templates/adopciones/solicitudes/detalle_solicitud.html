@@ -1,0 +1,73 @@
+
+{% extends "voluntarios/pagina_voluntario.html" %}
+{% load static %}
+<h2>{% block tema %}</h2>
+Detalles de la Solicitud 
+ {% endblock tema %}
+
+
+{% block contenido %}
+
+<body>
+
+    <!-- <ul>
+        <li><a href="{% url 'home' %}">Home</a></li>
+        <li><a href="{%  url 'pagina_adopciones' %}">adopciones</a></li>
+        
+        {% if user.is_authenticated %}
+        <li><a href="{% url 'pagina' %}">dashboard</a></li>
+        <li><a href="{% url 'adopciones_listado' %}">listado de solicitudes</a></li>
+        {% endif %}
+    </ul>
+    <br><hr> -->
+
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6 mb-4">
+                <div class="card shadow mb-4">
+                <div class="card-header py-3">
+        <h6 style="text-align: center;">Datos de la solicitud</h6>
+                </div>
+                <div class="card-body">
+            <li style="list-style: none;"><strong>codigo solicitud</strong>{{solicitud.id}}</li>
+            <li style="list-style: none;"><strong>nombre Solicitante</strong>{{solicitud.nombre}} {{solicitud.apellido}}</li>
+            <li style="list-style: none;"><strong>cedula Solicitante</strong>{{solicitud.cedula}}</li>
+            <li style="list-style: none;"><strong>Telefono</strong>{{solicitud.telefono}}</li>
+            <li style="list-style: none;"><strong>direccion </strong>{{solicitud.direccion}}</li>
+            <li style="list-style: none;"><strong>descripccion</strong>{{solicitud.descripcion}}</li>
+                </div>
+                </div>
+            </div>
+            <div class="col-lg-6 mb-4">
+                <div class="card shadow mb-4">
+                <div class="card-header py-3">
+        <h6 style="text-align: center;">Datos del Perro</h6>
+                </div>
+                <div class="card-body">
+            <li style="list-style: none;"><strong>codigo de perro:</strong> {{perro.id}}</li>
+            <li style="list-style: none;"><strong>Imagen</strong> {{perro.imagen_mascota}}</li>
+            <li style="list-style: none;"><strong>Nombre:</strong> {{perro.nombre}}</li>
+            <li style="list-style: none;"><strong>Raza:</strong> {{perro.raza}}</li>
+            <li style="list-style: none;"><strong>edad</strong> {{perro.edad}}</li>
+            <li style="list-style: none;"><strong>vacunas:</strong> {{perro.vacunas}}</li>
+            <li style="list-style: none;"><strong>disponible para adopcion:</strong> {{perro.estado}}</li>
+            <li style="list-style: none;"><strong>descripccion</strong> {{perro.descripcion}}</li>
+                </div>
+            </div>
+        </div>
+        </div>
+        {% if user.is_authenticated %}
+  
+        <a href="{% url 'editar_solicitud' solicitud.id %}" class="btn btn-success btn-icon-split">
+            <span class="icon text-white-50">
+                <i class="fas fa-check"></i>
+            </span>
+            <span class="text">Gestionar Solicitud </span>
+        </a>
+        {% endif %}
+    </div>
+   
+</body>
+
+
+{% endblock contenido %}

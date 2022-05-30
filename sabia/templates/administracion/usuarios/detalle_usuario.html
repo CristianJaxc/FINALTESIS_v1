@@ -1,0 +1,105 @@
+
+
+ {% extends "voluntarios/pagina_voluntario.html" %}
+ {% load static %}
+ {% block tema %}
+ Perfil de Usuario
+  {% endblock tema %}
+ {% block contenido %}
+ <head>
+     <link href="{% static 'css/perfil.css' %}" rel="stylesheet">
+ </head>
+ 
+     <div class="container">
+       <div class="row">
+   <div class="row">
+     <div class="col-lg-4 mb-4">
+ 
+           <div class="avatar">
+             <img src="{% static 'img/despues1.png'  %}" class="img-fluid" >
+           </div>
+         </div>
+   
+ 
+           <div class="col-lg-6 mb-4">
+             <div class="datosycontacto">
+               <div class="datos">
+                   <h5 style="text-align: center;padding: 5%;">Datos de Usuario </h5>
+                 <div><i class="fas fa-quote-left"></i><b>Nombre : </b>
+                   {{usuario.first_name}}</div>
+                   <div><i class="fas fa-quote-left"></i><b>Apellido: </b>
+                       {{usuario.last_name}}</div>
+       
+   
+                 <div><i class="fas fa-quote-left"></i><b>Cedula</b> {{perfil.cedula}}</div>
+                 <div><i class="fas fa-quote-left"></i><b>Telefono:</b>
+                   {{perfil.telefono}}</div>
+                 <div><i class="fas fa-quote-left"></i><b>Direccion</b> 
+                   {{perfil.direccion}}</div>
+                   <div><i class="fas fa-quote-left"></i><b>Email</b> 
+                       {{usuario.email}}</div>
+             
+   
+   
+               </div>
+             
+             </div>
+       
+             <div class="my-2"></div>
+             <a href="{% url 'editar_volunt' usuario.id %}"class="btn btn-success btn-icon-split" style="margin-left: 25%;">
+                 <span class="icon text-white-50">
+                     <i class="fas fa-check"></i>
+                 </span>
+               
+                 <span class="text">Editar Perfil </span>
+             </a>
+           </div>
+    
+        
+ 
+         <div class="col-lg-6 mb-4">
+ 
+           <div class="rango-de">
+            
+             <i class=" fas fa-globe-americas" style="color: rgb(95, 95, 95);font-size: 100px;padding-left: 5%;padding-top: 2%;"></i>
+        
+             <div class="rang"> {{perfil.nacionalidad}}    </div>
+           </div>
+       
+           <div class="footb"><i class="fas fa-quote-left"></i> Registrado el :    {{usuario.date_joined}}</div>
+           </div>
+         
+         </div>
+       </div>
+        
+       </div>
+ 
+    
+   
+ 
+ {% endblock contenido %}
+ 
+ 
+ <!-- 
+  <th scope="col">Nombre</th>
+  <th scope="col">Cedula</th>
+ 
+  <tr>
+     <th scope="row">{{usuario.username}}</th>
+     <th> {{perfil.cedula}}</th>
+     {% if user.is_superuser %}
+ 
+     {% else %}
+     {% endif %}
+ </tr>
+ 
+ 
+  {{usuario.username}}
+     <br>
+     {{perfil.cedula}}
+     {{perfil.nacionalidad}} 
+ 
+ 
+ 
+  -->
+ 

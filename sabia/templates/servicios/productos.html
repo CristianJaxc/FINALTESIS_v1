@@ -1,0 +1,67 @@
+{% extends "base/base.html" %}
+{% block titulo %} Tienda SABIA {% endblock %}
+
+{% load static %}
+
+{% block contenido %}
+
+ <div class="container-fluid colorFondo py-5  mb-5">
+    <div class="row py-3" >
+        <div class="col-12 text-center">
+            <h1 class="display-3 text-white animated zoomIn">Tienda SABIA</h1>
+
+        </div>
+    </div>
+</div>
+<!--
+MOSTRAMOS LOS PRODUCTOS -->
+<div class="container">
+
+
+<div class="row">
+    <div class="col-9">
+        <div class="row">
+            {% for product in product %}
+                <div class="col-md-3 col-sm-12 col-lg-4">
+                    <div class="card" style="width:100%">
+
+                        {% if product.image %}
+                <br/>
+                <img src="/media/{{product.image}}" alt="{{product.image}}" class="card-img-top">
+                {% else %}
+                <img src="{% static 'imagenes/adopciones/adop1.jpg'  %}" class="news-card__image">
+                {% endif %}
+
+
+                      <div class="card-body">
+                <h5 class="card-title">
+                    {{ product.name }}
+                </h5>
+                <p class="card-text">
+
+                    {{ product.excerpt }}
+                </p>
+                             <p class="card-text">
+
+                    {{ product.price }} $
+                </p>
+            </div>
+
+                        <div class="card-footer text-center">
+                        <a href="" class="btn btn-success">Añadir al Carrito</a>
+                        </div>
+
+</div>
+                        {% endfor %}
+                </div>
+   <a href="{% url 'product_list_by_category' %}"class="btn btn-success">Añadir al Carrito</a>
+
+        </div>
+    </div>
+
+    <div class="col-3">
+        <h2>Carrito</h2>
+    </div>
+</div>
+</div>
+{% endblock contenido %}

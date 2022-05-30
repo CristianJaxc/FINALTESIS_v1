@@ -1,0 +1,19 @@
+
+{% extends "administracion/usuarios/plantilla_tablas.html" %}
+
+{% block contenido %}
+
+<body>
+    <h1>Editar Denuncia</h1>
+    <br>
+    <hr>
+    <div class="container">
+        <form method="post", enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <input type="submit" value="Guardar Denuncia">
+        </form>
+    </div>
+
+</body>
+{% endblock contenido %}

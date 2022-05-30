@@ -1,0 +1,297 @@
+<!-- 
+  Nombre de la vista :VOLUNTARIADO , Informacion ,Registro
+  Description: Aqui se presenta la informacion del alvergue y el voluntariado , como la forma de unirse y los procesos Internacionales 
+  Author: Cristian Acosta
+  modificacion : Se realiza cambios de diseño 
+  Version: 1.0
+  Creado: 12/12/2021
+  modificado : 15/2/2022
+ -->
+ <!-- Extenciones para carga dla plantilla BASE -->
+ {% extends "base/base.html" %}
+<!-- inicio del bloque de contenido a presentarse -->
+{% block contenido %} 
+<!-- carga la clave de seguridad de proteccion de vistas  -->
+
+<!-- carga los archivos estaticos  -->
+{% load static %}
+
+<!-- extends "denuncias/pagina_denuncias.html" -->
+
+ <link rel="stylesheet" href="{% static 'css/voluntario1.css' %}">
+
+
+
+    <section class="voluntariado">
+         <!-- Hero Start -->
+ <div class="container-fluid colorFondo2 py-5  mb-5">
+    <div class="row py-3" >
+        <div class="col-12 text-center">
+            <h1 class="display-3 text-white animated zoomIn">Voluntariado</h1>
+           
+        </div>
+    </div>
+</div>
+<!-- Hero End -->
+        <!-- modal -->
+        <div class="modal fade" id="largeModal" tabindex="-1" role="dialog" aria-labelledby="" aria-hidden="true">
+          <div class="modal-dialog modal-lg" id="modal11">
+              
+            <div class="modal-content" >
+              <div class="modal-footer" >
+                  <h2>Santuario Bienestar Animal   </h2>
+                  <i  style="cursor: pointer;font-size: 30px;" class="fas fa-times-circle" data-dismiss="modal" ></i>
+                </div>
+                <!-- inicio contenido del modal  -->
+              <div class="modal-body">
+                 <!-- carousel -->
+                <div
+                     id='carouselExampleIndicators'
+                     class='carousel slide'
+                     data-ride='carousel'
+                     >
+                  <ol class='carousel-indicators'>
+                    <li
+                        data-target='#carouselExampleIndicators'
+                        data-slide-to='0'
+                        class='active'
+                        ></li>
+                    <li
+                        data-target='#carouselExampleIndicators'
+                        data-slide-to='1'
+                        ></li>
+                    <li
+                        data-target='#carouselExampleIndicators'
+                        data-slide-to='2'
+                        ></li>
+                  </ol>
+                  <!-- imagenes para el modal  -->
+                  <div class='carousel-inner'>
+                    <div class='carousel-item active'>
+                      <img        src="{% static 'img/Fondo_casaSabia.webp' %}" width="100%">
+       
+                    </div>
+                    <div class='carousel-item'>
+                      <img          src="{% static 'img/Fondo_Perro.webp' %} " width="100%">
+                    </div>
+                    <div class='carousel-item'>
+                      <img            src="{% static 'img/Fondo_voluntariado.webp' %}" width="100%">
+                    </div>
+                    <div class='carousel-item'>
+                      <img       src="{% static 'img/Fondo_casaSabia.webp' %}" width="100%">
+                    </div>
+                  </div>
+                  <!-- fin de imagenes carrusel  -->
+
+
+
+                  <a
+                     class='carousel-control-prev'
+                     href='#carouselExampleIndicators'
+                     role='button'
+                     data-slide='prev'
+                       >
+                      <span class="visually-hidden">previus</span>
+      <i class="fas fa-angle-left" style="font-size: 55px;"></i>
+
+                    <span class='sr-only' ></span>
+                  </a>
+                  <a
+                     class='carousel-control-next'
+                     href='#carouselExampleIndicators'
+                     role='button'
+                     data-slide='next'
+                            >
+                       <i class="fas fa-angle-right" style="font-size: 55px;"></i>
+                     <span class="visually-hidden">next</span>
+
+                  </a>
+                </div>
+                <!-- fin del carrusel de imagenes  -->
+              </div>
+            <!-- fin del contenido del modal  -->
+            </div>
+          </div>
+        </div>
+       <!-- fin del modal  -->
+       
+       <section id="main-container">
+          <div class="container">
+              <div class="row">
+                  <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12">
+                      <div class="post-content">
+                          <!-- imagen principal  -->
+                          <div class="post-image-wrapper">
+                              <img   src="{% static 'img/Fondo_casaSabia.webp' %}" data-toggle="modal" data-target="#largeModal" style="cursor: pointer;width: 100%;" >
+                              <a href="#" class="btn btn-secundario "  data-toggle="modal" data-target="#largeModal"  style="position: relative;margin-top:-10%;margin-left: 85%;" >Ver Fotos  </a>
+       
+                          </div><!-- fin de la imagen  --> 
+                      <p style="text-align: justify;padding-top: 5%;">
+                      ¡Tenemos 127 perros rescatados viviendo en nuestra gran granja! Necesitamos sacarlos a pasear, jugar con ellos y darles de comer. Estamos invitando a voluntarios para que nos ayuden principalmente a alimentar a los perritos, hacerlos felices y limpiar la casa. Muy cerca se encuentra el enorme volcán Cotopaxi, muchas granjas de rosas y sitios naturales vírgenes. Esta es una ubicación rural completa, con buenas vistas y grandes colinas para correr, andar en bicicleta, montar a caballo, etc.
+                       </p>
+                          <div class="gap-20"></div>
+                          <h3 class="widget-title" style="text-align: center;">¿Que Ofrece ?</h3>
+                          <div class="row" style="padding-top: 5%;">
+                              <!-- primera seccion  -->
+                              <div class="feature-box col-sm-6 wow fadeInDown" data-wow-delay=".5s">
+                                  <span class="feature-icon pull-left" ><i class="far fa-clock" style="font-size: 92px;padding-left: 15%;"></i></span>
+                                  <div class="feature-content">
+                                      <h3>6 Horas por dia</h3>
+                                      <p>Ayuda y colabora solo por algunas horas a la semana.</p>
+                                  </div>
+                              </div><!--/ fin de la seccion  -->
+                              <!--segunda  seccion  -->
+       
+                              <div class="feature-box col-sm-6 wow fadeInDown" data-wow-delay=".5s">
+                                  <span class="feature-icon pull-left" ><i class="fas fa-praying-hands" style="font-size: 92px;padding-left: 15%;"></i></span>
+                                  <div class="feature-content">
+                                      <h3>Trabajo Social </h3>
+                                      <p>Ayuda como voluntario en proyectos locales y comunidades.</p>
+                                  </div>
+                              </div><!--/ fin de la seccion 2  -->
+                          </div>
+       
+            <!-- segunda fila de servicios  -->
+                          <div class="row">
+                              <div class="feature-box col-sm-6 wow fadeInDown" data-wow-delay=".5s">
+                                  <span class="feature-icon pull-left" ><i class="fas fa-tools" style="font-size: 92px;padding-left: 15%;"></i></span>
+                                  <div class="feature-content">
+                                      <h3>Mantenimiento</h3>
+                                      <p>Ayuda con varias tareas de reparación o construcción.</p>
+                                  </div>
+                              </div><!--/ fin de la seccion 3 -->
+       
+                              <div class="feature-box col-sm-6 wow fadeInDown" data-wow-delay=".5s">
+                                  <span class="feature-icon pull-left" ><i class="fas fa-dog" style="font-size: 92px;padding-left: 15%;"></i></span>
+                                  <div class="feature-content">
+                                      <h3>Cuidado de Mascotas</h3>
+                                      <p>Ayuda a cuidar mascotas, paseandolas , alimentandolas y dandoles mucho amor .</p>
+                                  </div>
+                              </div><!--/fin de la seccion 4  -->
+                          </div>
+       <!-- fin de la segunda fila  -->
+       
+                      </div><!--/ fin de l post  -->
+       
+                  </div><!--/fin del contenedor -->
+       
+                  <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+                      <div class="sidebar sidebar-right">
+                          <!-- inicio de categorias sabia  -->
+                          <div class="widget widget-categories">
+                              <h3 class="widget-title">¿Que Obtienes?</h3>
+                              <ul class="category-list clearfix "  style="padding-top: 5%;">
+                                <li class="redondo" style="background-color: #469150;font-size: 16px;color: white;width: 300px;padding: 3%;"><i class="far fa-clock" style="padding-left: 2%;"></i><a href="#" style="color: white;">  2 Dias libres por Semana </a></li>
+                                <li  class="redondo"style="background-color: rgb(51, 50, 49);font-size: 16px;color: white;width: 300px;padding: 3%;"><i class="fas fa-bed" style="padding-left: 2%;"></i><a href="#" style="color: white;">  Habitacion Privada </a></li>
+                                <li  class="redondo" style="background-color: #469150;font-size: 16px;color: white;width: 300px;padding: 3%;"><i class="fas fa-home " style="padding-left: 2%;"></i><a href="#" style="color: white;">  Habitacion Compartida </a></li>
+       
+                                <li class="redondo" style="background-color: rgb(51, 50, 49);font-size: 16px;color: white;width: 300px;padding: 3%;"><i class="fas fa-utensils" style="padding-left: 2%;"></i><a href="#" style="color: white;">  Utiliza la cocina equipada </a></li>
+                               
+                          
+                              </ul>
+                          </div><!-- fin de las categorias ofertadas  -->
+       
+                          <!-- inicio de los tags -->
+                          <div class="widget widget-tags">
+                              <h3 class="widget-title">Cómo esta experiencia te transformará</h3>
+                              <ul class="unstyled clearfix" id="forma">
+                                    <li class="redondo" style="list-style: none;padding: 2%;" ><a href="#" style="color: rgb(41, 44, 40);width: 300px;" ><i class="fas fa-star" style="color:yellow"></i> Conexion con la Naturaleza </a></li>
+                                    <li  class="redondo"style="list-style: none;padding: 2%;"><a href="#" style="color: rgb(41, 44, 40);width: 300px;"><i class="fas fa-star" style="color:yellow"></i> Desarrollo  Ambiental </a></li>
+                                    <li  class="redondo"style="list-style: none;padding: 2%;"><a href="#" style="color: rgb(41, 44, 40);width: 300px;"><i class="fas fa-star" style="color:yellow"></i> Conexion con viajeros Internacionales</a></li>
+                                    <li  class="redondo"style="list-style: none;padding: 2%;"><a href="#" style="color: rgb(41, 44, 40);width: 300px;"><i class="fas fa-star" style="color:yellow"></i> Socializacion con los habitantes </a></li>
+                                    <li  class="redondo"style="list-style: none;padding: 2%;"><a href="#" style="color: rgb(41, 44, 40);width: 300px;"><i class="fas fa-star" style="color:yellow"></i> Te sumerges en la Cultura</a></li>
+       
+       
+                                
+                              </ul>
+                          </div><!-- fin del tags  -->
+       
+       
+                      </div><!--/ fin de la seccion de slider -->
+                  </div><!--/ fin de la columna de slider  -->
+              </div><!--/fin de la columna general -->
+          </div><!--/ fin del contenedor  -->
+       </section><!--/ fin de la seccion del voluntariado  -->
+       
+       <!-- Inicio de la seccion registrate  -->
+       <section class="call-to-action" style="padding-bottom: 1%;position:relative;">
+          <div class="container">
+              <div class="row "  style=" padding: 3%;border-style: double;border-color:  rgb(184, 211, 141);">
+                  <div class="col-sm-8">
+                      <h3 style="color: rgb(51, 50, 49)">Intentalo , y adentrate a una nueva Aventura !</h3>
+                  </div>
+              <div class="col" >
+                  <a href="https://www.worldpackers.com/es/positions/36380 " target="_blank"   class="pull-right btn btn-secundario white"  >Aplicar ahora </a>
+       
+              </div>
+              </div>
+          </div>
+          
+       </section>
+       <!-- fin de la seccion registrate  -->
+       
+  <!-- Titulo de la seccion  -->
+  <div class="row" style="background-color: white;">
+    <div class="col-md-12 heading" style="padding-left: 5%;padding-top: 2%;">
+        <span class="title-icon pull-left"><i class="fas fa-hand-holding-heart" aria-hidden="true"></i></span>
+        <h2 class="title">Comentarios   <span class="title-desc"> Reseñas por los Voluntarios SABIA   </span></h2>
+    </div>
+  </div><!--fin del titulo  -->  
+
+  <div class="comment-container theme--light">
+    <div class="comments" >
+             
+        {% for i in blogs %}
+      <div >
+        <div  class="card v-card v-sheet theme--light elevation-2">
+          <div  class="header">
+            <div  class="v-avatar avatar" style="height: 50px; width: 50px;"><img  src="https://images.unsplash.com/photo-1490894641324-cfac2f5cd077?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=100&q=70"></div>
+            <span  class="displayName title">{{i.titulo}}</span> <span  class="displayName caption">{{i.fecha_creacion}}</span></div>
+          <!---->
+          <div  class="wrapper comment">
+            <p>      {{i.descripcion}}</p>
+          </div>
+          <div  class="actions">
+            {% if user.is_superuser %}
+          
+            <a class=" title" href="{% url 'detalle_blogs' i.id %}">
+                
+                <button type="button" class="btn btn-sm " style="margin-left: 15%;">Revisar </button>
+           
+            </a>
+
+           
+         
+       
+      
+          
+          {% endif %}
+         
+          </div>
+          <div  class="v-dialog__container" style="display: block;"></div>
+        </div>
+        <!---->
+        <div  class="answers">
+          <!---->
+        </div>
+      </div>
+
+      
+    {% endfor %}
+    </div>
+  </div>
+    
+        <!-- fin de la vista voluntariado  -->
+      
+
+     </section>
+
+
+
+{% endblock %}
+
+
+<!-- FIN DEL MODAL -->
+
+
+<!-- fin del bloque heraddo de BASE -->

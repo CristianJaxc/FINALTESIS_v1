@@ -1,0 +1,49 @@
+{% extends "denuncias/pagina_denuncias.html" %}
+
+
+{% block contenido %}
+
+<body >
+  <!-- SignUP Area Start -->
+<section class="logRegForm " >
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-lg-7 col-md-10">
+            <div class="contact_form_wrappre2">
+              <h2>
+                Register
+              </h2>
+                 <form method="post", enctype="multipart/form-data">
+                    <div class="inputArea">
+                      <div class="form-row">
+
+                        <div class="col">
+                             {% csrf_token %}
+                                   {{ form.as_p }}
+                          <div class="input-group">
+                            <div class="input-group-prepend">
+
+                            </div>
+
+                          </div>
+                        </div>
+                      </div>
+
+                        <div class="col-md-12">
+                          <button class="loginnow" type="submit">Registrar</button>
+                        </div>
+                      </div>
+
+                  </form>
+            </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- SignUp Area End -->
+
+
+</body>
+
+
+{% endblock contenido %}

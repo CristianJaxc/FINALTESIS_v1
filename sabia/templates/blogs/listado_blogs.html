@@ -1,0 +1,76 @@
+{% extends "voluntarios/pagina_voluntario.html" %}
+{% block tema %}
+Blogs 
+ {% endblock tema %}
+{% block contenido %}
+<body>
+  
+    <div class="container-fluid">
+        <div class="card shadow mb-4">
+            <div class="card-header py-3">
+                <h6 class="m-0 font-weight-bold text-primary" style="text-align: center;">Blogs  Registrados </h6>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-bordered"  id="example" width="100%" cellspacing="0">
+            <thead class="thead-dark">
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">titulo</th>
+                    <th scope="col">fecha</th>
+                    <th scope="col">usuario</th>
+                    <th scope="col" style="text-align: center;">Opciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for i in object_list %}
+                <tr>
+                    <th scope="row">{{forloop.counter}}</th>
+                    <td>{{i.titulo}}</td>
+                    <td>{{i.fecha_creacion}}</td>
+               
+                    <td>{{i.User.first_name}}</td>
+
+             <td>
+                     
+
+                <div class="my-2">
+                    
+                </div>
+                <a href="{% url 'detalle_blogs' i.id %}" class="btn btn-warning btn-icon-split">
+                    <span class="icon text-white-50">
+                        <i class="fas fa-file-alt "></i>
+                    </span>
+
+                </a>
+                
+
+                <div class="my-2">
+                    
+                </div>
+                <a href="{% url 'eliminar_blogs' i.id %}"class="btn btn-danger btn-icon-split">
+                    <span class="icon text-white-50">
+                        <i class="fas fa-trash"></i>
+                    </span>
+
+                </a>
+
+
+             </td>
+          
+
+
+
+                 
+                </tr>
+                {% endfor %}
+                    
+            </tbody>
+        </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+{% endblock contenido %}
+    

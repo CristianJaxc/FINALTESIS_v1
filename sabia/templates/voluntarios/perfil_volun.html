@@ -1,0 +1,114 @@
+
+<!-- carga los archivos estaticos  -->
+{% load static %}
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://kit.fontawesome.com/ab00d86059.js" crossorigin="anonymous"></script>
+      
+    <link rel="stylesheet" href="{% static 'login1.css' %}">
+    <title>Registro</title>
+</head>
+<body>
+  <div class="nav">
+    <div class="nav-title">
+      <h1>SABIA</h1>
+    </div>
+  
+    <div class="nav-menu">
+      <ul>
+        <li>
+
+          <a href="{% url 'home' %}">
+       
+            <i class="  fas fa-house-user " style="font-size:30px;margin-right: 30%;color: #ffffff"></i>
+        </a>
+     
+      </li>
+      </ul>
+    </div>
+  </div>
+  <div class="container">
+    <div class="img">
+      <img src="{% static 'logosabia.png'  %}" class="img-fluid" style="margin-top: 5%;" width="100%">      
+  </div>
+
+
+<form method="post">
+  <img class="avatar"alt="">
+        
+  <i class=" fas fa-user-circle" style="font-size: 90px;margin-right: 30%;color: #43914E"></i>
+  <h2>Registro </h2>
+  {% csrf_token %}
+  {% for field in form %}
+
+
+  {% if form.errors %}
+
+  {% for error in field.errors %}
+  <p style="color:#1D281F">{{ error }}</p>
+  {% if field.help_text %}
+  <!-- <small style="color: grey">{{ field.help_text }}</small> -->
+  {% endif %}
+  {% endfor %}
+  {% endif %}
+  
+
+
+    <p>
+      <div class="input-div one">
+        <div class="i">
+          <i class="fas fa-user"></i>
+  
+          </div>
+        
+          <h5 style=" margin-top: 15px;
+          font-size: 15px;
+          color: #43914E;">
+            {{ field.label_tag }}
+          </h5>
+       
+        </div>
+     <br>
+     <div>
+     <div class="input" id="loco1">
+      {{ field }}
+     </div>
+     </div>
+    </p>
+  {% endfor %}
+
+  
+  
+  <input class="btn" type="submit" value="Continuar">
+
+ 
+
+</form>
+
+<!-- {# Assumes you setup the password_reset view in your URLconf #} -->
+
+
+</body>
+</html>
+
+
+
+
+
+<script type="text/javascript" src="js/main.js"></script>
+
+
+  
+
+
+
+
+
+</html>

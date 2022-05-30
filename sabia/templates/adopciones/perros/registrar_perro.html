@@ -1,0 +1,63 @@
+
+{% extends "administracion/usuarios/plantilla_tablas.html" %}
+
+
+{% block contenido %}
+<style>
+    .imagen {
+
+
+ background-image: url('/static/img/regisPerro.jpg'); 
+background-position: center; /* Center the image */
+ background-repeat: no-repeat; /* Do not repeat the image */
+ background-size: cover;  
+
+    }
+</style>
+<body class="bg-gradient-primary">
+    <div class="container">
+
+        <div class="card o-hidden border-0 shadow-lg my-5">
+            <div class="card-body p-0">
+                <!-- Nested Row within Card Body -->
+                <div class="row">
+                    <div class="col-lg-5 d-none d-lg-block imagen "></div>
+                    <div class="col-lg-7">
+                        <div class="p-5">
+                            <div class="text-center">
+                                <h1 class="h4 text-gray-900 mb-4">Datos del Animal </h1>
+                            </div>
+                            <form method="post", enctype="multipart/form-data">
+
+             
+           
+                               
+                                <div class="form-group row">
+                                    <div class="col-sm-6 mb-3 mb-sm-0">
+                                       
+                                    {% csrf_token %}
+                                    {{ form.as_p }}
+                                    </div>
+                                 
+                                </div>
+                                
+                                    <button class="btn btn-primary tn-block" type="submit" role="button" value="Registrar Perro">
+                                    Resgistrar Perro 
+                                    </button>
+                           
+                            </form>
+                        
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    
+</body>
+
+{% endblock contenido %}
+
+

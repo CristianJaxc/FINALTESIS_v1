@@ -1,0 +1,110 @@
+{% extends "base/base.html" %}
+{% block titulo %} Esterilizacion {% endblock %}
+
+{% load static %}
+
+{% block contenido %}
+<link rel="stylesheet" href="{% static 'css/labor/esterilizacion.css' %}">
+   <!-- Hero Start -->
+ <div class="container-fluid colorFondo py-5  mb-5">
+    <div class="row py-3" >
+        <div class="col-12 text-center">
+            <h1 class="display-3 text-white animated zoomIn">Esterilizacion</h1>
+
+        </div>
+    </div>
+</div>
+
+
+<div class="wrap">
+
+    <aside class="sidebar">
+    <div class="widget">
+      <h2 style="text-align:center;">Que es la Esterilizacio?</h2>
+      <p style="text-align:justify"> La esterilización preventiva constituye una de las intervenciones más sencillas, seguras y al mismo tiempo más beneficiosas para la salud y el bienestar de nuestras mascotas, con efectos positivos tanto a nivel fisiológico como de comportamiento, al evitar conductas no deseadas que pueden ser peligrosas.</p>
+      </div>
+      <div class="widget">
+      <h2 style="text-align:center;">Como Ayudara a mi mascota?</h2>
+      <p style="text-align:justify">Está comprobado que los animales esterilizados viven más y disfrutan de una mejor calidad de vida, previniendo la aparición de enfermedades graves como el cáncer testicular, anal y la prostatitis en machos y los tumores mamarios e infecciones de útero en hembras.</p>
+      </div>
+  </aside>
+    <div class="blog">
+  <div class="conteudo">
+    <div class="post-info">
+   SABIA,Animalista
+    </div>
+       <img class="img-fluid rounded-top" src="{% static 'img/Fondo_casaSabia.webp' %}"   alt="Esterilizacion">
+    <h1> Cuándo esterilizar a mi mascota</h1>
+    <hr>
+    <p>
+La edad idónea para la esterilización de nuestra mascota se alcanza cuando llega a la madurez sexual, lo cual puede variar en función de factores como la raza o el tamaño del paciente.
+    </p>
+     <p>
+     <table class="table">
+  <thead>
+    <tr>
+      <th scope="col">Especies</th>
+      <th scope="col">Machos</th>
+      <th scope="col">Hembras</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th scope="row">Perros</th>
+      <td>Entre los 6 y 12 meses</td>
+      <td>	Entre los 6 y 12 meses</td>
+
+    </tr>
+    <tr>
+      <th scope="row">	Gatos</th>
+      <td>Entre los 6 y 7 meses</td>
+      <td>	Entre los 6 y 9 meses</td>
+
+    </tr>
+
+  </tbody>
+</table>
+    </p>
+    <a href="#" class="continue-lendo">Informate mas →</a>
+  </div>
+    <div class="conteudo">
+    <div class="post-info">
+  SABIA, Animalista
+    </div>
+         <img class="img-fluid rounded-top" src="{% static 'img/Fondo_Perro.webp' %}"   alt="Esterilizacion">
+
+    <h1>Esterilizacion en  SABIA  </h1>
+    <hr>
+    <p>
+
+    </p>
+     <p>
+
+    </p>
+      <a href="#" class="continue-lendo">Leer mas →</a>
+  </div>
+
+  </div>
+</div>
+</div>
+
+    <!-- Offer Start -->
+    <div class="container-fluid containerEsterilizacion my-5 py-5 wow fadeInUp" data-wow-delay="0.1s">
+        <div class="container py-5">
+            <div class="row justify-content-center" >
+                <div class="col-lg-7 wow zoomIn" data-wow-delay="0.6s">
+                    <div class="text-center rounded p-5 " >
+                        <h1 class="display-5 text-white">No dejes Pasar tu Cita Hoy </h1>
+
+                        <a href="appointment.html" class="btn btn-dark py-3 px-5 me-3">Agendar Cita</a>
+                        <a href="" class="btn btn-light py-3 px-5">Contacto directo </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Offer End -->
+
+
+
+{% endblock contenido %}

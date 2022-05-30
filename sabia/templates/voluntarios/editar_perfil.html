@@ -1,0 +1,52 @@
+
+
+{% extends "voluntarios/pagina_voluntario.html" %}
+{% load static %}
+{% block tema %}
+Editar Perfil 
+ {% endblock tema %}
+{% block contenido %}
+<head>
+    <link href="{% static 'css/perfil.css' %}" rel="stylesheet">
+</head>
+
+    <div class="container">
+  <div class="flexbox-per">
+        <div class="bloque-avatar">
+          <div class="avatar">
+            <img src="{% static 'img/despues1.png'  %}" class="img-fluid" >
+          </div>
+        </div>
+        <div class="columna3">
+          <div class="">
+            <div class="">
+                <h5 style="text-align: center;padding: 5%;">Datos de Usuario </h5>
+                <form method="post">
+                    {% csrf_token %}
+                    {{ form.as_p  }}
+                    <hr><br>
+                    {{ form2.as_p  }}
+                    <div class="my-2"></div>
+                    <a href="{% url 'editar_volunt' user.id %}"class="btn btn-success btn-icon-split" style="margin-left: 25%;">
+                        <span class="icon text-white-50">
+                            <i class="fas fa-check"></i>
+                        </span>
+                      
+                        <input type="submit" value="Actualizar">
+                    </a>
+
+
+
+            </form>
+            </div> 
+          </div>      
+        </div>
+
+        </div>
+      </div>
+
+   
+  
+
+{% endblock contenido %}
+

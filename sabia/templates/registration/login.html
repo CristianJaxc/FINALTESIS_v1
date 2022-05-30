@@ -1,0 +1,140 @@
+<!-- carga los archivos estaticos  -->
+{% load static %}
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://kit.fontawesome.com/ab00d86059.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="{% static 'login.css' %}">
+    <title>Inicio de Sesion</title>
+    <!-- <img class="wave" src="" alt=""> -->
+</head>
+
+  <body>
+{% if form.errors %}
+        <script>
+            Swal.fire({
+              title: 'Inicio Cliente',
+              text: 'Su nombre o Contraseña son Incorrecto , Porfavor Ingrese denuevo ',
+              icon: 'info',
+              confirmButtonText: 'Ok'
+})
+        </script>
+      {% endif %}
+
+{% if next %}
+    {% if user.is_authenticated %}
+              <script>
+            Swal.fire({
+              title: 'Inicio Cliente',
+              text: 'No tiene acceso a la Pagina, Error , Contraseña/Nombre',
+              icon: 'info',
+              confirmButtonText: 'Ok'
+})
+        </script>
+
+    {% else %}
+                     <script>
+            Swal.fire({
+              title: 'Inicio Cliente',
+              text: ' Inicie Sesion Para continuar , Porfavor.',
+              icon: 'info',
+              confirmButtonText: 'Ok'
+})
+        </script>
+
+    {% endif %}
+{% endif %}
+
+
+
+
+
+
+<body>
+  <div class="container" >
+    <div class="forms-container">
+      <div class="signin-signup">
+              <form method="post" action="{% url 'login' %}" class="sign-in-form">
+                        {% csrf_token %}
+          <h2 class="title">Iniciar sesión</h2>
+          <div class="input-field">
+            <i class="fas fa-user"></i>
+            <input type="text" placeholder="Usuario" name="username" id="Usuario" />
+          </div>
+
+               <div class="input-field">
+            <i class="fas fa-lock"></i>
+            <input type="password" placeholder="Contraseña" name="password" />
+          </div>
+
+
+          <input type="submit" value="Iniciar Sesión" class="btn solid" />
+          <p class="social-text">O regístrate con plataformas sociales</p>
+          <div class="social-media">
+            <a href="#" class="social-icon">
+              <i class="fab fa-facebook-f"></i>
+            </a>
+            <a href="#" class="social-icon">
+              <i class="fab fa-twitter"></i>
+            </a>
+            <a href="#" class="social-icon">
+              <i class="fab fa-google"></i>
+            </a>
+            <a href="#" class="social-icon">
+              <i class="fab fa-linkedin-in"></i>
+            </a>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <div class="panels-container" >
+      <div class="panel left-panel" >
+        <div class="content" >
+          <h3>Bienvenido</h3>
+          <p>
+            Si desea , Regresar al Menu Principal
+          </p>
+          <a href="{% url 'home' %}">
+               <button class="btn transparent"  id="sign-up-btn">
+           Inicio
+          </button>
+          </a>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+
+
+      <script type="text/javascript" src="js/main.js"></script>
+  </body>
+
+
+
+
+<script>
+  
+  const inputs = document.querySelectorAll('.input');
+
+function focusFunc(){
+    let parent = this.parentNode.parentNode;
+    parent.classList.add('focus');
+}
+
+function blurFunc(){
+    let parent = this.parentNode.parentNode;
+    if(this.value == ""){
+        parent.classList.remove('focus');
+    }
+}
+
+inputs.forEach(input => {
+    input.addEventListener('focus', focusFunc);
+    input.addEventListener('blur', blurFunc);
+});
+</script>

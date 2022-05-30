@@ -1,0 +1,96 @@
+{% extends "base/base.html" %}
+{% block titulo %} Tienda SABIA {% endblock %}
+
+{% load static %}
+
+
+{% block contenido %}
+<div class="container">
+
+
+
+<table class="table table-bordered" style="margin-top:5%;">
+  <thead class="thead-dark">
+        <tr>
+            <th>Image</th>
+            <th>Nombre de Producto </th>
+            <th>Cantidad</th>
+            <th>Cancelar Pedido </th>
+            <th>Precio Unitario </th>
+            <th>Precio Total </th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for item in cart %}
+            {% with product=item.product %}
+                <tr>
+                    <td class="col-lg-4 mb-4 ">
+                        <a href="{{ product.get_absolute_url }}">
+                            <img class="img-fluid" src="
+                                    {% if product.image %}{{ product.image.url }}{% else %}{% static 'denun.png' %}{% endif %}" style="width: 40%;margin-left: 35%;">
+                        </a>
+                    </td>
+                    <td>{{ product.name }}</td>
+
+<td>
+    <form action="{% url 'cart_add' product.id %}"
+          method="post">
+        {{ item.update_quantity_form.quantity }}
+        {{ item.update_quantity_form.update }}
+        <input type="submit" class="btn btn-warning"  value="Actualizar">
+        {% csrf_token %}
+    </form>
+</td>
+                    <td>
+                     <!--   {% url 'cart_remove' product.id %}-->
+                        <button href="#"  onclick="EliminarProducto({{ product.id }})"  class="btn btn-danger" >Eliminar</button>
+                    </td>
+                    <td class="num">${{ item.price }}</td>
+                    <td class="num">${{ item.total_price }}</td>
+                </tr>
+            {% endwith %}
+        {% endfor %}
+        <tr class="total">
+
+            <td colspan="4"></td>
+                  <td style="text-align:center;">Total</td>
+            <td class="num">${{ cart.get_total_price }}</td>
+        </tr>
+        </tbody>
+    </table>
+    <p class="text-right">
+        <div class="row">
+    <div class="col">
+         <a href="{% url 'product_list' %}" class="button light btn btn-principal">Volver a la Tienda </a>
+    </div>
+ <div class="col">
+
+       <a href="{% url 'order_create' %}" class="button btn btn-success">Comprar </a>
+ </div>
+</div>
+
+    </p>
+
+</div>
+
+<script>
+    function EliminarProducto(id){
+         Swal.fire({
+                  title: 'Estas Seguro?',
+                  text: 'Esta Accion No se puede Deshacer',
+                  icon: 'question',
+                  showCancelButton:'true',
+                  cancelButtonText:'No,Cancelar',
+                  confirmButtonText:'Si, Eliminar',
+                  reverseButtons:'true',
+                  confirmButtonColor: '#dc3545'
+    }).then(function(result){
+    if(result.isConfirmed){
+    window.location.href ='remove/'+id
+    }
+    })
+
+
+    }
+</script>
+{% endblock %}

@@ -1,0 +1,49 @@
+
+{% extends "voluntarios/pagina_voluntario.html" %}
+{% load static %}
+{% block tema %}
+Detalles de la Solicitud 
+ {% endblock tema %}
+
+
+{% block contenido %}
+
+
+<body>
+   
+    <ul>
+
+        <li><a href="{% url 'denuncias_listado' %}">listado denuncias</a></li>
+    </ul>
+
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6 mb-4">
+                    <div class="card shadow mb-4">
+                        <div class="card-header py-3">
+                            <h6 style="text-align: center;">Datos de la Denuncia </h6>
+                                    </div>
+        <ul>
+            <li style="list-style: none;"><strong>codigo de denuncia:</strong> {{denuncias.id}}</li>
+            <li style="list-style: none;"><strong>codigo de denuncia:</strong> {{denuncias.imagen}}</li>
+            <li style="list-style: none;"><strong>Denunciante:</strong> {{denuncias.nombres}} {{denuncias.apellidos}}</li>
+            <li style="list-style: none;"><strong>telefono de denuncia:</strong> {{denuncias.telefono}}</li>
+            <li style="list-style: none;"><strong>direccion de denuncia:</strong> {{denuncias.direccion}}</li>
+            <li style="list-style: none;"><strong>estado de denuncia:</strong> {{denuncias.estado}}</li>
+            <li style="list-style: none;"><strong>descripccion</strong> {{denuncias.descripcion}}</li>
+        </ul>
+    </div>
+    <a href="{% url 'denuncias_update' denuncias.id %}" class="btn btn-success btn-icon-split">
+        <span class="icon text-white-50">
+            <i class="fas fa-check"></i>
+        </span>
+        <span class="text">Edicion de Solicitud </span>
+    </a>
+                    </div>
+                </div>
+          
+        </div>
+</body>
+
+
+{% endblock contenido %}

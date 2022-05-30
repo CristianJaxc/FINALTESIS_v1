@@ -1,0 +1,166 @@
+{% extends "base/base.html" %}
+{% block titulo %} Tienda SABIA {% endblock %}
+
+{% load static %}
+
+{% block contenido %}
+
+ <div class="container-fluid colorFondo py-5  mb-5">
+    <div class="row py-3" >
+        <div class="col-12 text-center">
+            <h1 class="display-3 text-white animated zoomIn">  {% if category %}{{ category.name }}{% else %}
+            Products{% endif %}</h1>
+
+        </div>
+    </div>
+</div>
+
+
+
+<main>
+  <!--Main layout-->
+  <div class="container">
+    <div class="row">
+
+      <!--Sidebar-->
+      <div class="col-md-3 col-sm-12 col-lg-4 wow fadeIn" data-wow-delay="0.2s">
+                 <div class="row">
+        <div class="widget-wrapper">
+          <h4>Categorias</h4>
+          <br>
+
+          <div class="list-group">
+
+<ul>
+
+
+            <li {% if not category %}class="selected"{% endif %} style="list-style:none;padding:2%">
+                <a href="{% url 'product_list' %}"  class="list-group-item  btn btn-secundario">All</a>
+
+
+            </li>
+            {% for c in categories %}
+                <li {% if category.slug == c.slug %}class="selected"{% endif %} style="list-style:none;padding:2%">
+                    <a href="{{ c.get_absolute_url }}" class="list-group-item  btn btn-secundario">{{ c.name }}</a>
+                </li>
+            {% endfor %}
+
+</ul>
+
+          </div>
+        </div>
+
+</div>
+      </div>
+      <!--/.Sidebar-->
+
+
+
+      <!--Main column-->
+      <div class="col-lg-8">
+
+        <!--First row-->
+        <div class="row wow fadeIn" data-wow-delay="0.4s">
+          <div class="col-lg-12">
+            <div class="divider-new">
+              <h2 class="h2-responsive">Productos SABIA </h2>
+                {{ Client.user }}
+                {{ User.Client }}
+                {{ client }}
+                {{ user.username }}
+                {{ User.user.username }}
+                {{ username }}
+                {{ User }}
+                {{ Client.username }}
+                {{ Client.user.username }}
+                  <a href="#" class="dropdown-toggle" data-bs-toggle="dropdown">     {{ user }} </a>
+
+                <a  href="{% url 'register_cliente' %}" class=" py-2 px-4 ms-3 "><i class="fas fa-user-cog  ">  Registrate</i> </a>
+
+                  <a href = "{% url 'login_cliente' %}">Iniciar</a>
+
+
+                  <a href = "{% url 'logout_cliente' %}">logout</a>
+
+            </div>
+
+
+
+          </div>
+        </div>
+        <!--/.First row-->
+        <br>
+        <hr class="extra-margins">
+
+        <!--Second row-->
+        <div class="row">
+          <!--First columnn-->
+              {% for product in products %}
+
+          <div class="col-lg-4">
+            <!--Card-->
+            <div class="card  wow fadeIn" data-wow-delay="0.2s">
+
+              <!--Card image-->
+              <div class="view overlay hm-white-slight">
+                  <a href="{{ product.get_absolute_url }}">
+
+                        {% if product.image %}
+                <br/>
+                <img src="/media/{{product.image}}" alt="{{product.image}}" class="card-img-top">
+                {% else %}
+                <img src="{% static 'imagenes/adopciones/adop1.jpg'  %}" class="news-card__image">
+                {% endif %}
+
+                </a>
+
+              </div>
+              <!--/.Card image-->
+
+              <!--Card content-->
+              <div class="card-block">
+                <!--Title-->
+                <h4 class="card-title" style="text-align:center;">{{ product.name }}</h4>
+                <!--Text-->
+                <p class="card-text"></p>
+                <a href="{{ product.get_absolute_url }}" class="btn btn-default">Adquiere a solo  <strong>  ${{ product.price }}</strong></a>
+              </div>
+              <!--/.Card content-->
+
+            </div>
+            <!--/.Card-->
+          </div>
+          <!--First columnn-->
+
+
+            {% endfor %}
+
+        </div>
+        <!--/.Second row-->
+
+      </div>
+      <!--/.Main column-->
+
+    </div>
+  </div>
+  <!--/.Main layout-->
+
+</main>
+
+{% if messages %}
+    {% for m in messages %}
+        <script>
+            Swal.fire({
+              title: 'Informacion',
+              text: '{{m}}',
+              icon: 'info',
+              confirmButtonText: 'Ok'
+})
+        </script>
+    {% endfor %}
+{% endif %}
+
+
+
+
+{% endblock contenido %}

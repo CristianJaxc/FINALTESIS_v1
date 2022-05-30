@@ -1,0 +1,23 @@
+
+{% extends "voluntarios/pagina_voluntario.html" %}
+{% load static %}
+<h2>{% block tema %}</h2>
+Edicion Donacion 
+ {% endblock tema %}
+{% block contenido %}
+
+<body>
+    <h1>Pagina de edicion de Productos para donaciones</h1>
+    <br>
+    <hr>
+    <div class="container">
+        <form method="post", enctype="multipart/form-data">
+
+            {% csrf_token %}
+            {{ form.as_p }}
+            <input type="submit" value="Guardar Producto">
+        </form>
+    </div>
+
+</body>
+{% endblock contenido %}

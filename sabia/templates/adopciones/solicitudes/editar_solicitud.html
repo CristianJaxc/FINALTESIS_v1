@@ -1,0 +1,27 @@
+
+{% extends "voluntarios/pagina_voluntario.html" %}
+{% load static %}
+<h2>{% block tema %}</h2>
+Edicion de Solisitud
+ {% endblock tema %}
+{% block contenido %}
+
+<body>
+ 
+    <div class="container">
+        <form method="post", enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ form.as_p }}
+
+            
+            <span class="text " ><button type="submit" class="btn bg-warning " style="color: white;">
+                <span class="icon text-white-50">
+                    <i class="fas fa-file-alt "> </i>
+                </span> Actualizar
+            </button>  </span>
+    
+        </form>
+    </div>
+
+</body>
+{% endblock contenido %}

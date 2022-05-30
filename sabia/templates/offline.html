@@ -1,0 +1,114 @@
+{% extends "base/base.html" %}
+
+{% block titulo %} Inicio {% endblock %}
+{% block contenido %} 
+{% load static %}
+{% load pwa %}
+{% progressive_web_app_meta %}
+<!DOCTYPE html>
+<html lang="en">
+
+
+<style>
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+header {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    font-family: 'Manrope', sans-serif;
+    background: url(body.svg) center no-repeat;
+    background-size: cover;
+}
+
+.textError {
+    position: absolute;
+    top: 50px;
+}
+
+.textError h1 {
+    font-size: 80px;
+    font-weight: 700;
+    line-height: 1;
+    color: #057ec2;
+    text-transform: uppercase;
+}
+
+.textError p {
+    font-size: 20px;
+}
+
+.mainText {
+    margin-top: 150px;
+    line-height: 0;
+}
+
+.image {
+    width: 100%;
+    margin-bottom: 50px;
+}
+
+.anchor {
+    position: relative;
+    padding: 25px 40px;
+    background-color: #057ec2;
+    display: inline-block;
+    color: white;
+    font-weight: 700;
+    text-decoration: none;
+    letter-spacing: 2px;
+    border-radius: 50px;
+}
+
+@media only screen and (min-width: 1200px) {
+    
+    .image {
+
+}
+
+    .mainText {
+        line-height: 0;
+    }
+
+}
+
+</style>
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>SABIA_OFFLINE</title>
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="404.css">
+</head>
+<body>
+   
+   <header>
+       
+       <div class="textError">
+           <h1> Oops! :( </h1>
+           <p>Navegando sin Internet </p>
+       </div>
+       
+       <div class="mainText">
+           <img src="{% static 'img/fondovoluntario.jpg ' %}"alt="Fondo" class="image">
+           <a href="{% url 'home' %}" class="anchor">Continuar : </a>
+       </div>
+       
+       
+   </header>
+    
+</body>
+</html>
+{% endblock %}
+

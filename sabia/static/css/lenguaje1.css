@@ -1,0 +1,150 @@
+
+/* Style Swithcer /lenguaje 
+================================================== */
+
+.style-switch-wrapper {
+	position: fixed;
+	top: 100px;
+	right: -250px;
+	width: 250px;
+	height: auto;
+	background-color:rgba(0,0,0,.75);
+	border-bottom-right-radius: 4px;
+	padding: 20px 20px;
+	z-index: 1000;
+	-webkit-transition: all 0.35s;
+	-moz-transition:  all 0.35s;
+	-o-transition:  all 0.35s;
+	transition:  all 0.35s;
+	list-style: none;
+}
+
+.style-switch-wrapper h3{
+	color: #fff;
+	margin-top: 0;
+	margin-bottom: 20px;
+}
+
+.style-switch-wrapper.active {
+	right: 0;
+}
+
+.style-switch-button {
+	position: absolute;
+	top: 0;
+	right: 250px;
+	width: 50px;
+	height: 50px;
+	background-color:rgba(0,0,0,.75);
+	border-top-left-radius: 4px;
+	border-bottom-left-radius: 4px;
+	z-index: 1000;
+	cursor: pointer;
+}
+
+.style-switch-button i {
+	color: #FFF;
+	position: relative;
+	line-height: 1;
+	top:15px;
+	left: 15px;
+	font-size: 20px;
+}
+
+.style-switch-wrapper button {
+	width: 50px;
+	height: 50px;
+	border-radius: 100% !important;
+	margin-bottom: 5px;
+	color: #fff;
+	display: inline-block;
+	padding: 0 !important;
+	margin-right: 2px;
+	border: 0 !important;
+}
+
+a.close-styler{
+	color: #fff !important;
+	padding: 7px 20px !important;
+	margin-right: 6px;
+}
+
+
+.style-switch-wrapper button:active, .style-switch-wrapper button:focus {
+	border: 2px solid #FFF;
+}
+
+.style-switch-wrapper #preset1 {
+  background-image: url('/static/images/general/flag-1.png'); 
+  background-position: center; /* Center the image */
+  background-repeat: no-repeat; /* Do not repeat the image */
+  background-size: cover; /* Resize the background image to cover the entire container */
+
+  
+}
+.banderas{
+
+    /* cambia estos dos valores para definir el tamaño de tu círculo */
+    height: 100%;
+    width: 100%;
+    /* los siguientes valores son independientes del tamaño del círculo */
+    background-repeat: no-repeat;
+
+    border-radius: 50%;
+    background-size: 100% auto;
+
+}
+#bande{
+padding-top: 15%;
+}
+.banderas:hover {
+	
+	-webkit-transform:scale(1.3);transform:scale(1.3);
+
+
+}
+
+
+
+.style-switch-wrapper #preset2 {
+  background-image: url('/static/images/general/flag-2.jpg');  
+  background-position: center; /* Center the image */
+  background-repeat: no-repeat; /* Do not repeat the image */
+  background-size: cover; /* Resize the background image to cover the entire container */
+}
+
+.style-switch-wrapper #preset3 {
+  background-image: url('/static/images/general/flag-3.png');  
+  background-position: center; /* Center the image */
+  background-repeat: no-repeat; /* Do not repeat the image */
+  background-size: cover; /* Resize the background image to cover the entire container */
+}
+
+.style-switch-wrapper #preset4 {
+  background-image: url('/static/images/flag-1.jpg');  
+  display: none;
+}
+
+.style-switch-wrapper #preset5 {
+  background-image: url('/static/general/images/flag-1.jpg');  
+  display: none;
+}
+
+.style-switch-wrapper #preset6 {
+  background-image: url('/static/images/flag-1.jpg');  
+  display: none;
+}
+
+.btn.btn-primary:hover{
+	color: #fff;
+
+}
+#desplegable{
+  background-color: #1d2820c4;
+  text-align: center;
+}
+#desplegable a:hover{
+  background-color: #a0fcaeb4;
+  color: white;
+}
+

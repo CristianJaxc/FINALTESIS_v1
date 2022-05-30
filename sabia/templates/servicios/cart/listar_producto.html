@@ -1,0 +1,103 @@
+
+{% extends "administracion/usuarios/plantilla_tablas.html" %}
+
+{% load static %}
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.15/dist/sweetalert2.all.min.js"></script>
+
+    <script src="https://kit.fontawesome.com/ab00d86059.js" crossorigin="anonymous"></script>
+    <!-- <img class="wave" src="" alt=""> -->
+</head>
+
+<body>
+
+    {% block tema %}
+    Productos Ventas
+      {% endblock tema %}
+      {% block title %}Listado de productos existentes  {% endblock title  %}
+
+
+      {% block tr %}
+                    <th scope="col">#</th>
+                    <th scope="col">Imagen</th>
+                    <th scope="col">Categoria</th>
+                    <th scope="col">Nombre</th>
+                    <th scope="col">slug</th>
+                    <th scope="col">Descripcion</th>
+                     <th scope="col">Precio</th>
+                     <th scope="col">Stock</th>
+               <th scope="col">Opciones</th>
+                    {% endblock tr %}
+
+                    {% block tbody %}
+
+
+                {% for i in object_list %}
+                <tr>
+                    <th scope="row">{{forloop.counter}}</th>
+
+                {% if i.image %}
+                <td class="col-lg-4 mb-4 ">
+                  <img src="/media/{{i.image }}" alt="{{i.image }}"  style="width: 40%;margin-left: 35%;" >
+      </td>
+                  {% else %}
+                    <td>
+          <img class="img-fluid rounded-top" src="{% static 'img/albergue1.png ' %}"    style="width: 40%;" alt="">
+
+                    </td>
+                  {% endif %}
+
+
+                     <td>{{i.category}}</td>
+                    <td>{{i.name}}</td>
+                    <td>{{i.slug}}</td>
+                    <td>{{i.description}}</td>
+                    <td>{{i.price}}</td>
+                        <td>{{i.stock}}</td>
+                    <td>
+                        <div class="my-2">
+
+                        </div>
+                        <a href="{% url 'editar_producto' i.id %}"class="btn btn-warning btn-icon-split">
+                            <span class="icon text-white-50">
+                                <i class="fas fa-save"></i>
+                            </span>
+                            <span class="text">Editar</span>
+                        </a>
+                        <div class="my-2">
+
+                        </div>
+
+
+                        <a href="{% url 'delete_producto' i.id  %}" class="btn btn-danger btn-icon-split">
+                            <span class="icon text-white-50">
+                                <i class="fas fa-trash"></i>
+                            </span>
+                            <span class="text">Eliminar</span>
+                        </a>
+                    </td>
+
+
+
+                </tr>
+
+                {% endfor %}
+
+                {% endblock tbody  %}
+                {% block edicion %}
+                <div class="my-2"></div>
+                <a href="{% url 'add_productos'  %} "class="btn btn-success btn-icon-split">
+                    <span class="icon text-white-50">
+                        <i class="fas fa-check"></i>
+                    </span>
+                    <span class="text">Registrar Producto</span>
+                </a>
+{% endblock edicion %}
+
+
+</body>
+

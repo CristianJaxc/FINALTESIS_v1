@@ -1,0 +1,19 @@
+{% extends "denuncias/pagina_denuncias.html" %}
+
+
+{% block contenido %}
+
+<body>
+    <h1>Pagina de edicion del de Perro</h1>
+    <br>
+    <hr>
+    <div class="container">
+        <form method="post", enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <input type="submit" value="Guardar Perro">
+        </form>
+    </div>
+
+</body>
+{% endblock contenido %}

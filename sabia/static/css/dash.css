@@ -1,0 +1,161 @@
+
+.color{
+    background-color:#43914E;
+}
+.colorFondo{
+
+background-image: url('/static/img/Fondo_Perro.webp');
+background-position: center; /* Center the image */
+ background-repeat: no-repeat; /* Do not repeat the image */
+background-size: cover;
+   opacity: 0.6;
+}
+.colorFondo1{
+
+background-image: url('/static/img/Fondo_casaSabia.webp');
+background-position: center; /* Center the image */
+ background-repeat: no-repeat; /* Do not repeat the image */
+background-size: cover;
+   opacity: 0.6;
+}
+.colorFondo2{
+
+background-image: url('/static/img/Fondo_voluntariado.webp');
+background-position: center; /* Center the image */
+ background-repeat: no-repeat; /* Do not repeat the image */
+background-size: cover;
+   opacity: 0.6;
+}
+.color1{
+ background-color:#43914E;
+
+}
+
+
+
+
+.logRegForm .loginnow,
+.logRegForm .lostpass,
+.logRegForm .loginwith,
+.logRegForm .loginwithfb,
+.logRegForm .loginwithgoogle {
+    width: 100%;
+    height: 60px;
+    line-height: 55px;
+    text-align: center;
+    color: #fff;
+    font-size: 16px;
+    font-weight: 700;
+    text-transform: uppercase;
+    cursor: pointer;
+    display: block;
+
+}
+
+.logRegForm .loginnow:focus,
+.logRegForm .lostpass:focus,
+.logRegForm .loginwith:focus,
+.logRegForm .loginwithfb:focus,
+.logRegForm .loginwithgoogle:focus {
+    outline: 0px;
+}
+
+
+.logRegForm .loginwith {
+    color: #cecece;
+    background: none;
+    margin: 3px 0px 3px;
+    display: inline-block;
+}
+
+.logRegForm .loginnow {
+    background: #9fde50;
+    border: 2px solid #9fde50;
+}
+
+.logRegForm .loginnow:hover {
+    background: #0e3571;
+    border-color: #0e3571;
+}
+
+
+.logRegForm .lostpass {
+    background: #555;
+    border: 2px solid #555;
+}
+
+.logRegForm .lostpass:hover {
+    background: #9e8b8000;
+    border: 2px siolid #555;
+    color: #555
+}
+
+
+.logRegForm .contact_form_wrappre2 {
+    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.164);
+    padding: 74px 60px 80px;
+}
+
+.logRegForm {
+    padding: 120px 0px 120px;
+}
+
+.logRegForm .input-group-text {
+    padding: 0px;
+    margin-bottom: 0;
+    font-size: 14px;
+    font-weight: 400;
+    color: #495057;
+    text-align: center;
+    background-color: #9fde50;
+    border: 0px solid #ced4da;
+    border-radius: 0px;
+    width: 60px;
+    height: 60px;
+}
+
+.logRegForm .input-group-text i {
+    color: #fff;
+    width: 60px;
+    height: 60px;
+    text-align: center;
+    line-height: 60px;
+    font-size: 14px;
+}
+
+.logRegForm .input-group {
+    margin-bottom: 30px;
+}
+
+.logRegForm .input-group input {
+    padding-left: 30px;
+    border: 2px solid rgba(0, 0, 0, 0.10);
+}
+
+.logRegForm textarea {
+    width: 100%;
+    height: 240px;
+    resize: none;
+    padding-left: 30px;
+    padding-top: 25px;
+    padding-right: 60px;
+    border: 2px solid rgba(0, 0, 0, 0.10);
+}
+
+.logRegForm .input-group .form-control {
+    height: 60px;
+    border-radius: 0px;
+}
+
+.logRegForm h2{
+    color: #333;
+    text-transform: capitalize;
+    font-weight: 700;
+    display: block;
+    text-align: center;
+    margin-bottom: 63px;
+    font-size: 46px;
+    line-height: 50px;
+}
+
+

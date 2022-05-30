@@ -1,0 +1,69 @@
+{% extends "denuncias/pagina_denuncias.html" %}
+
+{% block titulo %} Adopciones {% endblock %}
+
+{% block contenido %}
+ <!-- Appointment Start -->
+ <div class="container-fluid   my-5 wow fadeInUp" data-wow-delay="0.1s" style="background-color:#43914E;">
+    <div class="container" >
+        <div class="row gx-5" >
+            <div class="col-lg-6 py-5">
+                <div class="py-5">
+                    <h1 class="display-5 text-white mb-4">Santuario Bienestar Animal </h1>
+                    <p class="text-white mb-0">El proceo de Adopcion , es personal debido a que se debe conocer a las personas y el lugar donde acogera a las nuevas mascotas , por lo que puedes enviarnos tus datos 
+                        
+                        y nosotros estaremos comunicandos para informale de su solicitud .</p>
+                </div>
+            </div>
+            <div class="col-lg-6" >
+                <div class="appointment-form h-100 d-flex flex-column justify-content-center text-center p-5 wow zoomIn" data-wow-delay="0.6s" style="background-color: #80d88c;">
+                    <h1 class="text-white mb-4">Adopta a tu Nuevo Amigo </h1>
+                    <form method="post", enctype="multipart/form-data">
+                        <div class="row g-6">
+                            <div class="col-12 col-sm-12">
+                        
+                                 
+                                            {% csrf_token %}
+                                            <div style="color: white; text-align: left;">
+                                                {{ form.as_p }}
+                                            </div>
+                                      
+                                           
+                                            <div class="col-12">
+                                                <button class="btn btn-principal w-100 py-3" type="submit">Enviar Solicitud</button>
+                                            </div>
+                                    
+
+                          
+                                
+                          
+                            </div>
+                        
+                          
+                          
+                       
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Appointment End -->
+
+<!-- <body>
+    <h1>Pagina de registro de solicitud de adopcion</h1>
+    <br>
+    <hr>
+    <div class="container">
+        <form method="post", enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <input type="submit" value="Guardar Perro">
+        </form>
+    </div>
+
+</body> -->
+{% endblock contenido %}
+
+

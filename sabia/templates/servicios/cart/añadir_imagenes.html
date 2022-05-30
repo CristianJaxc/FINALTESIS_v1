@@ -1,0 +1,21 @@
+
+{% extends "voluntarios/pagina_voluntario.html" %}
+{% load static %}
+{% block tema %}
+Pagina de registro de Imagenes
+{% endblock tema %}
+{% block contenido %}
+<body>
+    <div class="container">
+        <form method="post", enctype="multipart/form-data">
+            {% csrf_token %}
+            <h2>Ingresar Imagenes : </h2>
+            {{ form }}
+            <input type="submit" value="Guardar Producto">
+        </form>
+        <hr>
+
+    </div>
+
+</body>
+{% endblock contenido %}

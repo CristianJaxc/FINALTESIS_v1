@@ -1,0 +1,69 @@
+
+{% extends "voluntarios/pagina_voluntario.html" %}
+{% load static %}
+{% block contenido %}
+<style>
+
+.containerNoticia{
+/* background-image: url('/static/img/banner2.png');
+background-position: center; /* Center the image */
+/* background-repeat: no-repeat; /* Do not repeat the image */
+/* background-size: cover;  */
+   background: linear-gradient(rgba(255,255,255,255), rgba(255,255,255,0.1)), url('/static/img/Fondo_casaSabia.webp') center center no-repeat;
+    background-size: cover;
+}
+</style>
+
+<!--
+<div class="login-div" data-title="Hello" data=intro="This is a login form">
+
+<button class="tuto1" data-title="Hey" data-intro="This is a login button">Login</button>
+-->
+
+
+
+  <!-- Project Card Example -->
+<head>
+          <!--intro-->
+<link href="https://unpkg.com/intro.js/minified/introjs.min.css" rel="stylesheet">
+<link href="https://unpkg.com/intro.js/themes/introjs-modern.css" rel="stylesheet">
+
+
+
+    <!--fin intro-->
+</head>
+</div>
+<div class="container containerNoticia">
+<h1 style="width:100%;height:500px;text-align:center;">En bien de la proteccion canina  </h1>
+
+</div>
+
+
+<!-- TUTOS SCRIPS  -->
+<script src="https://unpkg.com/intro.js/minified/intro.min.js"></script>
+<script>
+introJs().setOptions({
+       steps:[
+         {intro:"Bienvenido al modulo de Administradores "},
+         {element: document.querySelector('.tuto'),
+          intro:'<p>Aqui puedes Editar,Crear y Eliminar a los voluntarios " </p>',
+          position: "top"},
+          {element: document.querySelector('.tuto2'),
+          intro:'<p>Dentro de esta seccion puedes ver las posibls ayudas y denuncias  " </p>',
+          position: "top"},
+          {element: document.querySelector('.tuto3'),
+          intro:'<p>Si quieres dejar una reseña en el sitio , puedes hacerlo aqui " </p>',
+          position: "top"}
+       ],
+
+       tooltipClass:"GUI",
+       showProgress:true,
+       showBullets:false,
+       disableIteraction:true
+     }).start();
+     introJS.addHints();
+</script>
+
+
+{% endblock contenido %}
+    

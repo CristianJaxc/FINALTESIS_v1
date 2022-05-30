@@ -1,0 +1,152 @@
+{% extends "denuncias/pagina_denuncias.html" %}
+{% block titulo %}Detalle Adopcion {% endblock %}
+{% load static %}
+{% block contenido %}
+<head>
+
+</head>
+
+<body>
+<div class="container"  style="margin-bottom:10%;">
+	 <div class="row" style="margin-top:5%;">
+		      <div class="col-md-6" style="padding-top: 5%;">
+               <div class="widget widget-tab">
+
+				   <div class="tab-content" style="margin-left: 0%;">
+
+
+                   {% if perro.imagen_mascota %}
+
+            <img src="/media/{{perro.imagen_mascota}}" alt="{{perro.imagen_mascota}}" class="img-fluid" width="50%">
+
+            {% else %}
+            <img  class="article-banner" src="{% static 'img/albergue1.png ' %}"   alt="">
+            {% endif %}
+
+
+
+                      </div>
+                </div><!-- End default tabs -->
+            </div><!--/ fin de la columna de reportes -->
+            <div class="col-md-6">
+                <h3 class="title-border" style="text-align: center;" >Datos de :{{perro.nombre}} </h3>
+                <p>un poco de la Historia del canino :  </p>
+                <div class="accordion" id="accordionExample">
+                    <div >
+                        <div  class="click">
+                            <h2 class="mb-0" > <button class="btn btn-block btn-secundario  active1"   type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne"> 	<i class="fa fa-paw" aria-hidden="true" ></i>  Datos  </button> </h2>
+                        </div>
+                        <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
+                            <div class="card-body">
+                                		<p>
+												Raza: {{perro.raza}}
+											<hr>
+												Edad : {{perro.edad}}
+								<hr>
+												Sexo :
+
+
+
+                                        </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div >
+                        <div  class="click"  id="headingTwo">
+                            <h2 class="mb-0"> <button class="btn btn-block text-left btn-secundario   collapsed active1" type="button"  data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo"> 	<i class="fa fa-paw" aria-hidden="true"  ></i> Vacunas  </button> </h2>
+                        </div>
+                        <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
+                            <div class="card-body">
+                                <p>
+									Tiene vacunas : {{perro.vacunas}}
+
+
+								</p>
+
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <div >
+                        <div  class="click" id="headingOne">
+                            <h2 class="mb-0"> <button class="btn btn-block text-left btn-secundario   collapsed active1"  type="button"   data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree"> 	<i class="fa fa-paw" aria-hidden="true" ></i> Descripcion  </button> </h2>
+                        </div>
+                        <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
+                            <div class="card-body">
+
+                                <p>
+     				{{perro.descripcion}}
+								</p>
+                            </div>
+                        </div>
+
+<!-- IMAGEN DE REFFERENCIA  -->
+
+<!-- <img src="{% static 'img/banner2.png'  %}"  alt="banner" class="img-fluid" style="margin-top: 5%;" width="100%">                               -->
+<!-- <div id="rep" style="margin-top: 5%;padding-bottom: 0%;background-color: #dfefe3;color: white;">
+
+        <h2 ><i class="fas fa-caret-right" style="color: yellow;"></i> Recepcion via Telefonica <br>
+        <br>
+
+        <nav style="font-size: 20px;margin-top: -3%;padding-left: 5%;">Todos los dias de 8:30 a 16:30 </nav>
+        <br>
+        <nav style="color: yellow;margin-top:-3%;padding-left: 5%;">0998530277</nav>
+        </h2>
+        <h2><i class="fas fa-caret-right" style="color: yellow;"></i> Recepcion Secretaria de Ambiente <br>
+            <br>
+            <nav style="font-size: 20px;margin-top: -3%;padding-left: 5%;">ECU 911. </nav>
+            <br>
+            <nav style="color: yellow;margin-top:-3%;padding-left: 5%;">3952-300 ext. 24131.</nav>
+        </h2>
+
+         <h2 style="background-color: rgb(86, 122, 91);position: relative;padding-top: 2%;padding-left: 5%;padding-bottom: 2%;">
+        Santuario Bienestar Sabia
+       </h2>
+
+</div>   -->
+<!-- fin de referencia -->
+
+
+                    </div>
+
+
+                </div><!--/ Accordion end -->
+
+                <!-- Counter Strat -->
+
+
+
+            </div><!--/ fin de la columna de ayudas -->
+
+
+
+
+        </div>
+	<div class="" style="margin-top:5%;">
+		<a href="{% url 'registrar_solicitud' perro.id %}">
+
+            <button class="btn btn-principal" >Adoptar</button>
+
+        </a>
+    {% if user.is_authenticated %}
+
+
+              <a href="{% url 'editar_perro' perro.id %}">
+                <div class="btn btn-secundario">
+
+                    Editar perro
+                </div>
+
+
+            </a>
+                {% endif %}
+	</div>
+
+
+</div>
+
+</body>
+
+{% endblock contenido %}

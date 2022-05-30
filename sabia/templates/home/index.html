@@ -1,0 +1,848 @@
+{% extends "base/base.html" %}
+{% block contenido %}
+{% load static %}
+{% load pwa %}
+{% progressive_web_app_meta %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+
+    <!-- encabesado para declaracion del nombre, adaptacion y modo responsive  -->
+    <meta charset="UTF-8">
+    <meta name="description" content="Sabia_Diseño">
+    <meta name="keywords" content="refugio, mascotas, donaciones, html">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <!-- creando el titulo que llevara la plantilla donde se herede el bloque de contenido "TITULO" -->
+    <link rel="manifest" href="/manifest.json">
+    <!-- ARCHIVOS CDN REFERENCIA  -->
+    <!-- referencia a los archivos de tipo javascript propios para Boostrap 5 tanto para la funcionalidad como para el diseño  -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+            crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.min.js"></script>
+
+
+    <!-- referencia a los estilos propios de Boostrap 5 , para el tipo de estilos , modelos y  alertas necesarias  -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <!-- estilos de texto -->
+    <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900&display=swap"
+          rel="stylesheet">
+    <!-- Trabajar con  Font Awesome -->
+
+    <!-- Icon Font Stylesheet -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
+
+
+    <!-- Trabajar con Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" rel="stylesheet"/>
+    <!-- trabajar con los modelos vistas  -->
+
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/3.10.1/mdb.min.css" rel="stylesheet"/>
+
+    <link rel="stylesheet" href="{% static 'css/base.css' %}">
+    <link rel="stylesheet" href="{% static 'css/adaptativo1.css' %}">
+
+    <!-- Estilos staticos : :: -->
+    <!-- estilos de Bootstrap -->
+    <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
+
+    <!-- Estilos del Template -->
+    <link href="{% static 'css/style1.css' %}" rel="stylesheet">
+    <link href="{% static 'css/lenguaje1.css' %}" rel="stylesheet">
+
+    <!-- Libraries Stylesheet -->
+    <link href="{% static 'lib/owlcarousel/assets/owl.carousel.min.css' %}" rel="stylesheet">
+    <link href="{% static 'lib/animate/animate.min.css' %}" rel="stylesheet">
+    <link href="{% static 'lib/tempusdominus/css/tempusdominus-bootstrap-4.min.css' %}" rel="stylesheet"/>
+    <link href="{% static 'lib/twentytwenty/twentytwenty.css' %}" rel="stylesheet"/>
+
+
+    <!-- FIN DE ESTILOS ESTATICOS ::: -->
+
+
+    <!-- flickity CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/flickity@2/dist/flickity.min.css">
+    <!-- flickity JS -->
+    <script src="https://unpkg.com/flickity@2/dist/flickity.pkgd.min.js"></script>
+    {% load pwa %}
+    {% progressive_web_app_meta %}
+
+</head>
+<!--REDES SOCIALES -->
+
+    <div class="social ">
+
+            <ul class="socialAdaptativo ">
+			<li><a href="http://www.facebook.com/falconmasters" target="_blank" class="icon-facebook"><i class="fab fa-facebook-f fw-normal" style="width:20px"></i></a></li>
+			<li><a href="http://www.twitter.com/falconmasters" target="_blank" class="icon-twitter"><i class="fab fa-twitter fw-normal" style="width:20px"></i></a></li>
+			<li><a href="http://www.googleplus.com/falconmasters" target="_blank" class="icon-googleplus"><i class="fab fa-instagram fw-normal" style="width:20px"></i></a></li>
+
+		</ul>
+
+
+	</div>
+<!-- Carousel Start -->
+<div class="container-fluid p-0">
+    <div id="header-carousel" class="carousel slide carousel-fade" data-bs-ride="carousel">
+        <div class="carousel-inner">
+            <div class="carousel-item active">
+                <img class="w-100" src="{% static 'img/Fondo_voluntariado.webp' %}" alt="Image">
+                <div class="carousel-caption d-flex flex-column align-items-center justify-content-center">
+                    <div class="p-3" style="max-width: 900px;">
+                        <h5 class="text-white text-uppercase mb-3 animated slideInDown">Quieres Formar parte de
+                            Nosotros</h5>
+                        <h1 class="display-1 text-white mb-md-4 animated zoomIn">Tenemos Programas de Voluntariado </h1>
+                        <a href="{% url 'pagina_blogs' %}"
+                           class="btn btn-principal py-md-3 px-md-5 me-3 animated slideInLeft">Ver Programas </a>
+                        <a href="{% url 'quienes_somos' %}"
+                           class="btn  btn-secundario  py-md-3 px-md-5 animated slideInRight">Conocer mas sobre
+                            SABIA </a>
+                    </div>
+                </div>
+            </div>
+            <div class="carousel-item">
+                <img class="w-100" src="{% static 'img/Fondo_casaSabia.webp' %}" alt="Image">
+                <div class="carousel-caption d-flex flex-column align-items-center justify-content-center">
+                    <div class="p-3" style="max-width: 900px;">
+                        <p class="text-white text-uppercase mb-3 animated slideInDown">El Santuario Bienestar
+                            Animal </p>
+                        <h1 class="display-1 text-white mb-md-4 animated zoomIn">Se encuentra a pocos minutos de
+                            Latacunga </h1>
+                        <a href="{% url 'contacto_registrar' %}"
+                           class="btn btn-principal py-md-3 px-md-5 me-3 animated slideInLeft">Ver contactos</a>
+                        <a href="{% url 'quienes_somos' %}"
+                           class="btn btn-secundario py-md-3 px-md-5 animated slideInRight">Mas sobre SABIA</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#header-carousel"
+                data-bs-slide="prev">
+            <i class="fas fa-angle-left" style="font-size: 55px;"></i>
+            <span class="visually-hidden">previus</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#header-carousel"
+                data-bs-slide="next">
+            <i class="fas fa-angle-right" style="font-size: 55px;"></i>
+            <span class="visually-hidden">next</span>
+        </button>
+    </div>
+</div>
+<!-- Carousel End -->
+
+<!-- Banner Start -->
+
+<div class="container-fluid banner mb-5  responsive  ">
+    <div class="container ">
+        <div class="row gx-0">
+            <div class="col-lg-4 wow zoomIn" data-wow-delay="0.1s">
+                <div class="fondobanner d-flex flex-column p-5" style="height: 300px;">
+                    <i class="fas fa-exclamation-circle "
+                       style="color: white;font-size: 50px;text-align: center;padding-bottom: 2%;"></i>
+                    <h2 class="text-white mb-3">Rescates SABIA</h2>
+                    <div class="d-flex justify-content-between text-white mb-3">
+                        <p class="text-white mb-0">SABIA , investigara los casos de violencia , mediante los reportes
+                            ciudadanos </p>
+
+                    </div>
+
+
+                    <a href="{% url 'pagina_denuncias' %}" class="btn btn-light" href="">Reportar</a>
+                </div>
+            </div>
+            <div class="col-lg-4 wow zoomIn" data-wow-delay="0.3s">
+                <div class="fondobanner1 d-flex flex-column p-5" style="height: 300px;">
+                    <i class="fas fa-dog"
+                       style="color: white;font-size: 50px;text-align: center;padding-bottom: 2%;"></i>
+
+                    <h3 class="text-white mb-3">Quiero Adoptar </h3>
+
+
+                    <p class="text-white">Contamos con mas de 120 Perros rescatados , que buscan un Hogar </p>
+
+                    <a href="{% url 'pagina_adopciones' %}" class="btn btn-light" href="">Encuentra tu Mascota</a>
+                </div>
+            </div>
+            <div class="col-lg-4 wow zoomIn" data-wow-delay="0.6s">
+                <div class="fondobanner2  d-flex flex-column p-5" style="height: 300px;">
+                    <i class="       fas fa-hand-holding-usd"
+                       style="color: white;font-size: 50px;text-align: center;padding-bottom: 2%;"></i>
+
+
+                    <h3 class="text-white mb-3">Donaciones </h3>
+                    <p class="text-white">Si deseas impulsar nuestro crecimiento , puedes ayudarnos donando a la
+                        siguiente cuenta :</p>
+                    <h2 class="text-white mb-0">19291329391239</h2>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Banner Start -->
+
+
+<div class="container " style="margin-top:5%">
+    <div class="col mb-5">
+        <h5 class="position-relative text-uppercase" style="text-align:center;color:#469150;">Trabajando en Beneficio de
+            los Caninos </h5>
+        <h1 class="display-5 mb-0" style="text-align:center;color:#2C4430">Quienes Somos</h1>
+    </div>
+    <div class="row mt-0 " >
+        <div id="intro" class="col-sm-12 row spacer-b">
+            <div class="col-sm-6 d-flex flex-column justify-content-center">
+                <h1 style="color:#2C4430">Santuario Bienestar Animal </h1>
+                <p style="text-align:justify">
+                    <b> SABIA (Santuario de Bienestar Animal)</b> lleva 8 años dando cobijo a aninales abandonados y
+                    maltratados. Nació por la necesidad de actuar ante el maltrato, abandono y sufrimiento por la que
+                    pasan miles de aninales en estado de vulnerabilidad, principalmente en la zona centro del Ecuador.
+
+                    Esta iniciativa se ha logrado gracias al trabajo constante y a la entrega diaria de Fausto Subia,
+                    Sebastián Subía y Alejandra Moncayo, quienes dan su amor y cariño para rehabilitar cuerpos y
+                    corazones de los más de <b>127 perritos </b> que actualmente se encuentran en el albergue.
+
+                    SABIA(Santuario de Bienestar Animal) se encuentra ubicado en Mulaló(Provincia de Cotopaxi, Ecuador),
+                    a 3 minutos de la ciudad de Latacunga. Es una granja con 20 hectáreas de áreas verdes, bosque, río y
+                    montañas, formando un valle mágico y seguro en el cual los perritos rescatados pueden llevar una
+                    vida plena y asi esperar el día de suu adopción. Somos un "No Kill Shelter" (no utilizamos la
+                    Eutanasia en animales sanos y y tratables)
+                </p>
+            </div>
+            <div class="col-sm-6 order-xs-1">
+
+                <img src="{% static 'img/fondos/casadegradado.png' %}" alt="intro" class="img-fluid">
+            </div>
+        </div>
+        <div id="vision-mission" class="col-sm-12 row spacer-b">
+            <div class="col-sm-6">
+                <img src="{% static 'img/fondos/fondo_visio.png' %}" alt="our history" class="img-fluid responsive">
+            </div>
+            <div class="col-sm-6 d-flex flex-column justify-content-center">
+                <h1 style="color:#2C4430">Vision</h1>
+                <p>
+                <ul style=" list-style-type: circle;text-align:justify ">
+                    <li>Continuar rescatando animales necesitados y rehabilitarlos para su adopción.</li>
+                    <li>Conseguir el cumplimiento de las leyes a favor del bienestar animal</li>
+                    <li>Mejorar las instalaciones del refugio y crear uun modelo de refugio eficiente en el Ecuador</li>
+                    <li>Obtener ingresos mensuales a base de donaciones nacionales e internacionales para el
+                        mantenimiento del albergue, alimentacion diaria, gastos veterinarios, para en un punto llegar a
+                        la autosustentabilidad del Santuario.
+                    </li>
+                </ul>
+                </p>
+
+            </div>
+        </div>
+        <div id="vision-mision" class="col-sm-12 row spacer-b">
+            <div class="col-sm-6 text-sm-right d-flex flex-column justify-content-center">
+                <h1 style="color:#2C4430">Mision</h1>
+                <p>
+                <ul style=" list-style-type: circle;text-align:justify ">
+                    <li>
+                        Rescate, rehabilitación y adopción de perros, así como contribuir con información que ayude a la
+                        construcción de una sociedad más educación, consiencia y respeto para los animales
+
+                    </li>
+                    <li>
+                        Mejorar el bienestar de los animales, y acabar con la crueldad y la negligencia hacia ellos, con
+                        la cría descontrolada y el abandono de los mismos a través de rescates, rehabilitación y
+                        tratamiento veterinario.
+
+                    </li>
+                    <li>
+                        Controlar y mantener la actual población de perros callejeros por medio de campañas de
+                        esterilización a bajo costo o subsidiadas en zonas y poblaciones con alta problemática y
+                        maltrato animal.
+
+                    </li>
+                </ul>
+
+                </p>
+            </div>
+            <div class="col-sm-6">
+                <img src="{% static 'img/fondos/Fondo_vision.png' %}" alt="vision mision" class="img-fluid">
+            </div>
+        </div>
+
+
+    </div>
+</div>
+
+
+<!-- Titulo de la seccion  -->
+<div class="row" style="background-color: white;">
+    <div class="col-md-12 heading" style="padding-left: 5%;padding-top: 2%;">
+        <span class="title-icon pull-left responsive"><i class="fas fa-hands-helping" aria-hidden="true"></i></span>
+        <h2 class="title">Actuar Ciudadano <span class="title-desc"> Perdidas y Denunicas de Mascotas  </span></h2>
+    </div>
+</div><!--fin del titulo  -->
+
+
+<!-- NOTICIERO SABIA -->
+<section id="service" class="service " style="margin-top: 3%;">
+    <section id="main-container " alt="slider">
+        <!-- inicio del contenedor  -->
+        <div class="container">
+            <!-- Inicio del contendor de las columnas para el noticiero  -->
+            <div class="row">
+                <div class="col-md-6">
+                    <h3 class="title-border" style="text-align: center;">Tablon de Ayuda</h3>
+                    <p>Animate a explorar un pedacito de lo que es SABIA , Aqui tienes algunas Interrogantes </p>
+                    <div class="accordion" id="accordionExample">
+                        <div>
+                            <div class="click">
+                                <h2 class="mb-0">
+                                    <button class="btn btn-block btn-secundario  text-left active1" type="button"
+                                            data-toggle="collapse" data-target="#collapseOne" aria-expanded="true"
+                                            aria-controls="collapseOne"><i class="fa fa-paw" aria-hidden="true"></i>
+                                        ¿ Como puedes Ayudar A nuestra Labor ?
+                                    </button>
+                                </h2>
+                            </div>
+                            <div id="collapseOne" class="collapse show" aria-labelledby="headingOne"
+                                 data-parent="#accordionExample">
+                                <div class="card-body">
+                                    <p>SABIA,cuenta con productos , los cuales ayudan a mejorar el hogar de los caninos,
+                                        y poder brindarles , comida , hogar y mucho amor.
+                                        Puedes Impulsar nuestro labor con las Donaciones las cuales  ,estaran destinadas
+                                        al mejoramiento de las instalaciones,la alimentacion y la salud , para ello puedes
+                                        hacer tus donaciones  en el siguiente link.
+
+
+
+                                    </p>
+                                    <a style="color: white;" href="{% url 'pagina_denuncias' %}">
+                                        <button type="button" class="btn btn-principal"> Donaciones </button>
+                                    </a>
+
+
+                                </div>
+                            </div>
+                        </div>
+
+                        <div>
+                            <div class="click" id="headingTwo">
+                                <h2 class="mb-0">
+                                    <button class="btn btn-block text-left btn-secundario   collapsed active1"
+                                            type="button" data-toggle="collapse" data-target="#collapseTwo"
+                                            aria-expanded="false" aria-controls="collapseTwo"><i class="fa fa-paw"
+                                                                                                 aria-hidden="true"></i>
+                                        Informa de abusos en contra de los animales
+                                    </button>
+                                </h2>
+                            </div>
+                            <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo"
+                                 data-parent="#accordionExample">
+                                <div class="card-body">
+                                    <p>Cualquier signo de violencia contra una mascota puedes hacernoslas conocer ,
+                                        rellenando el siguiente
+                                        formulario , y de manera anonima , o de manera directa. !
+                                        <a href="">Mas Informacion</a>
+
+                                    </p>
+                                    <button type="submit" class="btn btn-principal">Formulario</button>
+
+                                </div>
+                            </div>
+                        </div>
+
+                        <div>
+                            <div class="click" id="headingOne">
+                                <h2 class="mb-0">
+                                    <button class="btn btn-block text-left btn-secundario   collapsed active1"
+                                            type="button" data-toggle="collapse" data-target="#collapseThree"
+                                            aria-expanded="false" aria-controls="collapseThree"><i class="fa fa-paw"
+                                                                                                   aria-hidden="true"></i>
+                                        ¿Quiero Adoptar?
+                                    </button>
+                                </h2>
+                            </div>
+                            <div id="collapseThree" class="collapse" aria-labelledby="headingThree"
+                                 data-parent="#accordionExample">
+                                <div class="card-body">
+
+                                    <p>El proceso de adopcion de una Mascota dentro del refugio SABIA se lo realiza con
+                                        una entrevista directa con el encargado
+                                        en donde se evaluaran las condiciones del adoptante , pero puedes conocer un
+                                        poco mas de tus futuras mascotas , en el siguiente enlace
+                                        y enviarnos tu peticion , para que podamos evaluar y responderte en un plazo de
+                                        48 horas , y responderte cualquier inquietud
+
+                                    <div class="card-cell-button ">
+                                            <a href="{% url 'pagina_adopciones' %}" style="color: #ffffff;">Adoptar </a>
+                                        </div>
+                                    </p>
+                                </div>
+                            </div>
+
+                            <!-- IMAGEN DE REFFERENCIA  -->
+
+                            <!-- <img src="{% static 'img/banner2.png'  %}"  alt="banner" class="img-fluid" style="margin-top: 5%;" width="100%">                               -->
+                            <!-- <div id="rep" style="margin-top: 5%;padding-bottom: 0%;background-color: #dfefe3;color: white;">
+
+                                    <h2 ><i class="fas fa-caret-right" style="color: yellow;"></i> Recepcion via Telefonica <br>
+                                    <br>
+
+                                    <nav style="font-size: 20px;margin-top: -3%;padding-left: 5%;">Todos los dias de 8:30 a 16:30 </nav>
+                                    <br>
+                                    <nav style="color: yellow;margin-top:-3%;padding-left: 5%;">0998530277</nav>
+                                    </h2>
+                                    <h2><i class="fas fa-caret-right" style="color: yellow;"></i> Recepcion Secretaria de Ambiente <br>
+                                        <br>
+                                        <nav style="font-size: 20px;margin-top: -3%;padding-left: 5%;">ECU 911. </nav>
+                                        <br>
+                                        <nav style="color: yellow;margin-top:-3%;padding-left: 5%;">3952-300 ext. 24131.</nav>
+                                    </h2>
+
+                                     <h2 style="background-color: rgb(86, 122, 91);position: relative;padding-top: 2%;padding-left: 5%;padding-bottom: 2%;">
+                                    Santuario Bienestar Sabia
+                                   </h2>
+
+                            </div>   -->
+                            <!-- fin de referencia -->
+
+
+                        </div>
+
+
+                    </div><!--/ Accordion end -->
+
+                    <!-- Counter Strat -->
+
+
+                </div><!--/ fin de la columna de ayudas -->
+
+
+                <div class="col-md-6" style="padding-top: 5%;">
+                    <h3 class="title-border" style="text-align: center;">Nuestros Productos SABIA </h3>
+                    <div class="widget widget-tab">
+                        <ul class="nav " style="margin-left: 25%;">
+
+                            <!-- <li class="active2 btn btn-principal"  ><a href="#tab1" data-toggle="tab"  style="color: #272a23;">Denuncias</a></li> -->
+                            <!-- <li  class="active2  btn btn-principal"><a href="#tab2" data-toggle="tab"   style="color: #272a23;" >Mascotas</a></li> -->
+                        </ul>
+                        <hr>
+                        <div class="tab-content" style="margin-left: 0%;">
+
+                            <div class="tab-pane active" id="tab1" style="text-align: center;">
+
+
+                                <!-- CARUSEL DE DESAPARICIONES :: -->
+                                <!-- Pricing Start -->
+
+                                <div class="col carousel-course-card wow zoomIn" data-wow-delay="0.1s"
+                                     data-flickity='{ "freescroll": true, "pageDots": false, "wrapAround": true }'>
+                                    {% for m in Ventas %}
+                                    <div class=" carousel-course-card-cell" style="height: 400px;width: 400px;">
+                                        <div class="card-cell-thumbnail">
+
+                                            {% if m.image %}
+
+
+                                            <img src="media/{{ m.image }}" alt="{{m.image}}" class="img-fluid"
+                                                 style="max-height: 200px;min-height: max-content;">
+
+
+                                            {% else %}
+                                            <img src="{% static 'adoptame1.png'  %}" alt="adoptame" class="img-fluid">
+
+
+                                            {% endif %}
+                                        </div>
+                                        <div class="card-cell-content">
+                                            <div class="card-cell-text">
+
+                                                <h3>{{m.name}}</h3>
+                                                <p style="text-align:justify">{{m.description }}</p>
+                                            </div>
+                                        </div>
+                                        <div class="card-cell-button btn-secundario">
+                                            <a href="{% url 'product_list' %}" style="color: #ffffff;">Ver mas </a>
+                                        </div>
+                                    </div>
+
+
+                                    {% endfor %}
+
+                                </div>
+
+                                <!-- Pricing End -->
+                            </div>
+
+
+                            <!-- <div class="tab-pane" id="tab2">
+                                    <div class="gap-40"></div>
+                                    <div class="col carousel-course-card wow zoomIn"  data-wow-delay="0.1s" data-flickity='{ "freescroll": true, "pageDots": false, "wrapAround": true }'  >
+                                        {% for m in mascotas %}
+
+                                      <div class=" carousel-course-card-cell"style="height: 500px;width: 500px;" >
+                                        <div class="card-cell-thumbnail">
+
+                                            {% if m.imagen_mascota %}
+                                            <img src="media/{{ m.imagen_mascota }}" alt="{{m.imagen_mascota }}" class="img-fluid"  style="max-height: 300px;min-height: max-content;" >
+                                            {% else %}
+                                            <img src="{% static 'adoptame1.png'  %}" class="img-fluid" >
+                                            {% endif %}
+                                        </div>
+                                        <div class="card-cell-content">
+                                            <div class="card-cell-text">
+                                                <h2>{{m.nombre}}</h2>
+                                                <h3>{{m.raza}}</h3>
+                                                <h3>{{m.descripcion}}</h3>
+                                            </div>
+                                            </div>
+                                            <div class="card-cell-button btn-secundario">
+                                                <a href="{% url 'pagina_adopciones' %}" style="color: #ffffff;">Leer Mas</a>
+                                            </div>
+                                        </div>
+                                        {% endfor %}
+
+                                      </div>
+
+
+                            </div>
+                         -->
+
+                        </div>
+                    </div><!-- End default tabs -->
+                </div><!--/ fin de la columna de reportes -->
+            </div><!-- fin del contenedor -->
+
+        </div><!--/ fin del contenedor -->
+
+    </section><!--/ fin de la seccion noticiero -->
+
+
+</section>
+<!-- FIN DEL NOTICIERO SABIA  -->
+
+
+<!-- SERVICIOS DE SABIA :: -->
+<!-- Titulo de la seccion  -->
+<div class="row" style="background-color: white;">
+    <div class="col-md-12 heading" style="padding-left: 5%;padding-top: 2%;">
+        <span class="title-icon pull-left responsive"><i class="fas fa-hand-holding-heart"
+                                                         aria-hidden="true"></i></span>
+        <h2 class="title">Servicios <span class="title-desc"> Princiapales acciones del albergue   </span></h2>
+    </div>
+</div><!--fin del titulo  -->
+
+<!-- About Start -->
+<div class="container-fluid py-5 wow fadeInUp containerNoticia" data-wow-delay="0.1s">
+    <div class="container ">
+        <div class="row g-5">
+            <div class="col-lg-7">
+
+                <h4 class="text-body  mb-4">Forma parte de una experiencia Unica , conociendo nuevos lugares y
+                    personas</h4>
+                <p class="mb-4">El Santuario Bienestar Animal , es un refugio en bien de los caninos del sector de
+                    Latacunga </p>
+                <div class="row g-3">
+                    <div class="col-sm-6 wow zoomIn" data-wow-delay="0.3s">
+                        <h5 class="mb-3"><i class=" fas fa-star me-3"></i>Volntariado </h5>
+                        <h5 class="mb-3"><i class=" fas fa-star  me-3"></i>Adopciones</h5>
+                    </div>
+                    <div class="col-sm-6 wow zoomIn" data-wow-delay="0.6s">
+                        <h5 class="mb-3"><i class=" fas fa-star  me-3"></i>Denuncias</h5>
+                        <h5 class="mb-3"><i class=" fas fa-star  me-3"></i>24 /7 Al servicio </h5>
+                    </div>
+                </div>
+                <a href="#" class="btn btn-secundario py-3 px-5 mt-4 wow zoomIn" data-wow-delay="0.6s">Ver mas</a>
+            </div>
+            <div class="col-lg-5" style="min-height: 500px;">
+                <div class="position-relative h-100">
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- About End -->
+
+
+<!-- VOLUNTARIADO :: -->
+<!-- Titulo de la seccion  -->
+<div class="row" style="background-color: white;">
+    <div class="col-md-12 heading" style="padding-left: 5%;padding-top: 2%;">
+        <span class="title-icon pull-left responsive"><i class="fas fa-hand-holding-heart"
+                                                         aria-hidden="true"></i></span>
+        <h2 class="title">Voluntariado <span class="title-desc"> Equipo de Voluntarios     </span></h2>
+    </div>
+</div><!--fin del titulo  -->
+
+
+<div >
+
+
+    <div class="container  ">
+        <div class="row g-5">
+            <div class="col-lg-5">
+                <div class="col pull-left  sm-text-center">
+                    <div class="team-overview">
+                        <h2>Grupo de Voluntariado</h2>
+
+                        <p style="text-align: justify;">El Refugio SABIA , cuenta con programas internacionales de
+                            voluntariado , en donde no solo podras ayudar a mejorar la calidad
+                            de vida de los animales , te inmersaras en un cambio cultural y convivenvia unica .</p>
+                    </div>
+                    <!-- extra -->
+
+                </div><!-- /end col-md-4 -->
+            </div>
+            <div class="col carousel-course-card wow zoomIn" data-wow-delay="0.1s"
+                 data-flickity='{ "freescroll": true, "pageDots": false, "wrapAround": true }'>
+                {% for m in voluntariado %}
+
+                <div class=" carousel-course-card-cell" style="height: 300px;width: 300px;">
+                    <div class="card-cell-thumbnail">
+
+                        {% if m.avatar %}
+
+
+                        <img src="media/{{  m.avatar }}" alt="{{ m.avatar}}" class="img-fluid"
+                             style="max-height: 300px;min-height: max-content;">
+
+
+                        {% else %}
+                        <i class=" fas fa-user-tie " style="color: rgb(30, 37, 28);font-size: 150px;"></i>
+
+                        <!-- <img src="{% static 'adoptame1.png'  %}" class="img-fluid" alt="adoptame" > -->
+
+
+                        {% endif %}
+                    </div>
+                    <div class="card-cell-content" style="margin-bottom: 15%;">
+                        <div class="card-cell-text">
+                            <h2>{{m.User.username}}</h2>
+                        </div>
+                    </div>
+                    <div class="card-cell-button btn-secundario">
+                        <a href="{% url 'pagina_blogs' %}" style="color: #ffffff;">Leer Mas</a>
+                    </div>
+                </div>
+
+
+                {% endfor %}
+
+
+            </div>
+
+
+        </div>
+
+
+    </div>
+    <!--FIN VOLUNTARIADO :: -->
+
+    <!-- Offer Start -->
+    <div class="container ">
+        <div class="row justify-content-center">
+            <div class="col-lg-12 wow zoomIn" data-wow-delay="0.6s">
+                <div class="offer-text text-center rounded p-5">
+                    <h1 class="display-5 text-white">Juntos Podemos Ser mas </h1>
+                    <p class="text-white mb-4">Si quieres poder trabajar con nosotros encaminado en el bien de la
+                        Fundacion </p>
+                    <a href="appointment.html" class="btn btn-secundario py-3 px-5 me-3">Aplicar Ahora</a>
+                    <a href="" class="btn btn-light py-3 px-5">Ver mas </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Offer End -->
+</div>
+
+
+<div class="row" style="background-color: white;">
+    <div class="col-md-12 heading" style="padding-left: 5%;padding-top: 2%;">
+        <span class="title-icon pull-left responsive"><i class="fas fa-hand-holding-heart"
+                                                         aria-hidden="true"></i></span>
+        <h2 class="title">Donaciones <span class="title-desc"> Ayudando a los mas Pequeños </span></h2>
+    </div>
+
+</div><!--fin del titulo  -->
+
+
+<!-- Pricing Start -->
+<div class="container-fluid py-5 wow fadeInUp" data-wow-delay="0.1s">
+    <div class="container">
+        <div class="row g-5">
+            <div class="col-lg-5">
+                <div class="section-title mb-4">
+
+                    <h1 class="display-5 mb-0">Tambien Puedes Ayudarnos en los siguientes Planes </h1>
+                </div>
+                <p class="mb-4" style="text-align: justify;">Sabia encaminada en la proteccion de los Caninos , cuenta
+                    con un albergue de acogida , en donde cada uno
+                    de los canes son desparasitados, vacunados y revisados para poder tenerlos de la mejor forma , este
+                    proceso es un poco costoso , por lo que
+                    acuidmos a diferentes mecanismos de ayuda , como son :
+                </p>
+                <h5 class="text-uppercase  wow fadeInUp" data-wow-delay="0.3s">Contactos Directos : </h5>
+                <h1 class="wow fadeInUp" data-wow-delay="0.6s">+593 0998530277</h1>
+            </div>
+            <div class="col-lg-7">
+                <div class="owl-carousel price-carousel wow zoomIn" data-wow-delay="0.9s">
+                    <div class="price-item pb-4">
+                        <div class="position-relative">
+                            <!-- <img class="img-fluid rounded-top" src="{% static 'img/albergue1.png ' %}" alt=""> -->
+                            <span class="title-icon pull-left" style="font-size: 200px;margin-left: 10%;"><i
+                                    class="fab fa-cc-paypal" aria-hidden="true"></i></span>
+                            <div class="d-flex align-items-center justify-content-center bg-light rounded pt-2 px-3 position-absolute top-100 start-50 translate-middle"
+                                 style="z-index: 2;">
+                                <h2 class="text-primary m-0">$25</h2>
+                            </div>
+                        </div>
+                        <div class="position-relative text-center bg-light border-bottom border-primary py-5 p-4">
+                            <h4>Ayudas </h4>
+                            <hr class="text-primary w-50 mx-auto mt-0">
+                            <div class="d-flex justify-content-between mb-3"><span>Compra de Comida</span><i
+                                    class="fa fa-check text-primary pt-1"></i></div>
+                            <div class="d-flex justify-content-between mb-3"><span>Compra de Medicina </span><i
+                                    class="fa fa-check text-primary pt-1"></i></div>
+                            <div class="d-flex justify-content-between mb-2"><span>Disponibilidad del Sitio </span><i
+                                    class="fa fa-check text-primary pt-1"></i></div>
+                            <a href="appointment.html"
+                               class="btn btn-primary py-2 px-4 position-absolute top-100 start-50 translate-middle">Donar </a>
+                        </div>
+                    </div>
+                    <div class="price-item pb-4">
+                        <div class="position-relative">
+                            <!-- <img class="img-fluid rounded-top" src="{% static 'img/albergue1.png ' %}" alt=""> -->
+                            <span class="title-icon pull-left" style="font-size: 200px;margin-left: 10%;"><i
+                                    class="fab fa-cc-paypal" aria-hidden="true"></i></span>
+
+                            <div class="d-flex align-items-center justify-content-center bg-light rounded pt-2 px-3 position-absolute top-100 start-50 translate-middle"
+                                 style="z-index: 2;">
+                                <h2 class="text-primary m-0">$50</h2>
+                            </div>
+                        </div>
+                        <div class="position-relative text-center bg-light border-bottom border-primary py-5 p-4">
+                            <h4>Medicina </h4>
+                            <hr class="text-primary w-50 mx-auto mt-0">
+                            <div class="d-flex justify-content-between mb-3"><span>Revision Veterinaria</span><i
+                                    class="fa fa-check text-primary pt-1"></i></div>
+                            <div class="d-flex justify-content-between mb-3">
+                                <span>Reparacion de Viviendas de canes</span><i
+                                    class="fa fa-check text-primary pt-1"></i></div>
+                            <div class="d-flex justify-content-between mb-2"><span>Compra de Medicinas </span><i
+                                    class="fa fa-check text-primary pt-1"></i></div>
+                            <a href="appointment.html"
+                               class="btn btn-primary py-2 px-4 position-absolute top-100 start-50 translate-middle">Donar</a>
+                        </div>
+                    </div>
+                    <div class="price-item pb-4">
+                        <div class="position-relative">
+                            <!-- <img class="img-fluid rounded-top" src="{% static 'img/albergue1.png ' %}" alt=""> -->
+                            <span class="title-icon pull-left" style="font-size: 200px;margin-left: 10%;"><i
+                                    class="fab fa-cc-paypal" aria-hidden="true"></i></span>
+
+                            <div class="d-flex align-items-center justify-content-center bg-light rounded pt-2 px-3 position-absolute top-100 start-50 translate-middle"
+                                 style="z-index: 2;">
+                                <h2 class="text-primary m-0">$100</h2>
+                            </div>
+                        </div>
+                        <div class="position-relative text-center bg-light border-bottom border-primary py-5 p-4">
+                            <h4>Albergue </h4>
+                            <hr class="text-primary w-50 mx-auto mt-0">
+                            <div class="d-flex justify-content-between mb-3"><span>Equipacion de Herramientas </span><i
+                                    class="fa fa-check text-primary pt-1"></i></div>
+                            <div class="d-flex justify-content-between mb-3"><span>Contratacion de Personal </span><i
+                                    class="fa fa-check text-primary pt-1"></i></div>
+                            <div class="d-flex justify-content-between mb-2"><span>Cuidado Veterinario </span><i
+                                    class="fa fa-check text-primary pt-1"></i></div>
+                            <a href="appointment.html"
+                               class="btn btn-primary py-2 px-4 position-absolute top-100 start-50 translate-middle">Donar</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Pricing End -->
+<div class="containerDonaciones">
+    <div class="container ">
+        <div class="col-lg-12 wow zoomIn" data-wow-delay="0.1s">
+            <div class=" d-flex flex-column p-5" style="height: 200px;">
+                <i class="fas fa-exclamation-circle "
+                   style="color: black;font-size: 50px;text-align: center;padding-bottom: 2%;">
+                    <h3 class=" mb-3" style="color:black">Donaciones Directas </h3>
+                </i>
+            </div>
+        </div>
+
+        <div class="col carousel-course-card "
+             data-flickity='{ "freescroll": true, "pageDots": false, "wrapAround": true }'>
+            {% for m in donaciones %}
+
+            <div class=" carousel-course-card-cell" style="height: 500px;width: 500px;">
+                <div class="card-cell-thumbnail">
+
+                    {% if m.imagen %}
+
+
+                    <img src="media/{{ m.imagen }}" alt="{{m.imagen}}" class="img-fluid"
+                         style="max-height: 300px;min-height: max-content;">
+
+
+                    {% else %}
+                    <img src="{% static 'adoptame1.png'  %}" class="img-fluid" alt="adoptame">
+
+
+                    {% endif %}
+                </div>
+                <div class="card-cell-content">
+                    <div class="card-cell-text">
+                        <h2>{{m.nombre}}</h2>
+                        <h3>{{m.cantidad}}</h3>
+                        <h3>{{m.descripcion}}</h3>
+                    </div>
+
+
+                </div>
+                <div class="card-cell-button">
+                    <a href="{% url 'pagina_donaciones' %}" style="color: #ffffff;">Leer Mas</a>
+                </div>
+            </div>
+
+
+            {% endfor %}
+
+        </div>
+
+    </div>
+
+
+</div>
+<!-- Titulo de la seccion  -->
+<div class="row" style="background-color: white;">
+    <div class="col-md-12 heading" style="padding-left: 5%;padding-top: 2%;">
+        <span class="title-icon pull-left responsive"><i class="fas fa-hand-holding-heart"
+                                                         aria-hidden="true"></i></span>
+        <h2 class="title">Organizaciones <span class="title-desc">Conexion Internacional :    </span></h2>
+    </div>
+
+</div><!--fin del titulo  -->
+
+<div class="container ">
+
+    <div class="col">
+        <a href="https://www.worldpackers.com/es/positions/36380" target="_blank" style="margin-left:15%">
+            <img class="img-fluid wow zoomIn" data-wow-delay="0.1s" src="{% static 'img/worldpackers.webp' %}"
+                 alt="empresa" style="max-height: 300px;min-height: max-content;"/>
+        </a>
+
+    </div>
+
+
+</div>
+
+
+</html>
+
+{% endblock %}
+
