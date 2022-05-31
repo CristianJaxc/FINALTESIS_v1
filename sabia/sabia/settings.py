@@ -27,7 +27,7 @@ SECRET_KEY = 'j@i7ac0khclyp(n)^um)d(jr^5jxj(l0=5^+4i(t6o@f)u)_pq'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['cristiansabia.pythonanywhere.com']
 
 MESSAGE_STORAGE ="django.contrib.messages.storage.cookie.CookieStorage"
 # Application definition
@@ -98,13 +98,13 @@ DATABASES = {
     'default': {
 
 
-
             'ENGINE': 'django.db.backends.postgresql_psycopg2',
-             'NAME': 'SabiaFinalDB',
-             'USER': 'postgres',
-            'PASSWORD': 'cristian',
-            'HOST': 'localhost',
-             'PORT': 5432,
+            'NAME': 'SabiaFinalDB',
+            'USER': 'super',
+            'PASSWORD': 'Tesis66Universidad',
+            'HOST': 'cristianSabia-2655.postgres.pythonanywhere-services.com',
+            'PORT': 12655,
+
 
     # 'default': {
     #     'ENGINE': 'django.db.backends.sqlite3',
