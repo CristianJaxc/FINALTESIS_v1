@@ -134,36 +134,6 @@ class Registrar_Imagenes(SuccessMessageMixin, generic.CreateView):
             return self.render_to_response(self.get_context_data(form=form))
 
 
-#CATEGORIAS DE PRODUCTOS ::
-class Listado_Categoria(SuccessMessageMixin, ListView):
-    model = Category
-    template_name = 'servicios/cart/listado_categorias.html'
-    def get_queryset(self):
-            return Category.objects.all().order_by('id')
-
-class Registrar_Categoria(generic.CreateView):
-    model = Category
-    form_class = CategoryForm
-    template_name = 'servicios/cart/agregar_categoria.html'
-    success_url = reverse_lazy('pagina_categorias')
-
-    def get_context_data(self, **kwargs):  # pinto el formulario en el html
-        context = super(Registrar_Categoria, self).get_context_data(**kwargs)
-        if 'form' not in context:
-            context['form'] = self.form_class(self.request.GET)
-        return context
-
-    def post(self, request, *args, **kwargs):
-        self.object = self.get_object
-        form = self.form_class(request.POST, request.FILES)
-        if form.is_valid():
-
-            new = form.save(commit=False)
-            form.save()
-
-            return HttpResponseRedirect(self.get_success_url())
-        else:
-            return self.render_to_response(self.get_context_data(form=form))
 
 
 class Editar_Producto(SuccessMessageMixin, UpdateView):
@@ -210,3 +180,79 @@ class Eliminar_Producto(DeleteView):
         context['action']='eliminar'
         context['list_url']=reverse_lazy('listar_productos')
         return context
+
+
+
+#CATEGORIAS DE PRODUCTOS ::
+class Listado_Categoria(SuccessMessageMixin, ListView):
+    model = Category
+    template_name = 'servicios/cart/listado_categorias.html'
+    def get_queryset(self):
+            return Category.objects.all().order_by('id')
+
+class Registrar_Categoria(generic.CreateView):
+    model = Category
+    form_class = CategoryForm
+    template_name = 'servicios/cart/agregar_categoria.html'
+    success_url = reverse_lazy('pagina_categorias')
+
+    def get_context_data(self, **kwargs):  # pinto el formulario en el html
+        context = super(Registrar_Categoria, self).get_context_data(**kwargs)
+        if 'form' not in context:
+            context['form'] = self.form_class(self.request.GET)
+        return context
+
+    def post(self, request, *args, **kwargs):
+        self.object = self.get_object
+        form = self.form_class(request.POST, request.FILES)
+        if form.is_valid():
+
+            new = form.save(commit=False)
+            form.save()
+
+            return HttpResponseRedirect(self.get_success_url())
+        else:
+            return self.render_to_response(self.get_context_data(form=form))
+
+#editar ::
+
+
+class Editar_Categoria(SuccessMessageMixin, UpdateView):
+    model = Category
+    form_class = CategoryForm
+    template_name = 'servicios/cart/editar_categoria.html'
+    def get_context_data(self,**kwargs):
+        context = super(Editar_Categoria, self).get_context_data(**kwargs)
+        pk_editar = self.kwargs.get('pk', 0)
+        #------------------ obtengo id url -------------------
+        categoria_editar = self.model.objects.get(id = pk_editar)
+        #----------------- consulta de datos -----------------
+        if 'form' not in context:
+            context['form'] = self.form_class(instance = categoria_editar)
+        context['id'] = pk_editar
+
+        return context
+
+    def post(self, request, *args, **kwargs):
+        self.object = self.get_object
+        id_editar = kwargs['pk']
+        categoria = self.model.objects.get(id = id_editar)
+        form = self.form_class(request.POST, request.FILES, instance = categoria)
+        if form.is_valid():
+            form.save()
+
+            return HttpResponseRedirect(reverse_lazy('pagina_categorias'))
+        else:
+            return HttpResponseRedirect(reverse_lazy('pagina_categorias'))
+#eliminar :
+class Eliminar_Categoria(DeleteView):
+    model = Category
+    template_name =  'servicios/cart/eliminar_categoria.html'
+    success_url=reverse_lazy('pagina_categorias')
+    def get_context_data(self,**kwargs):
+
+        context = super(Eliminar_Categoria, self).get_context_data(**kwargs)
+        context['action']='eliminar'
+        context['list_url']=reverse_lazy('pagina_categorias')
+        return context
+

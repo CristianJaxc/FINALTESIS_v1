@@ -1,0 +1,50 @@
+
+{% extends "voluntarios/pagina_voluntario.html" %}
+{% load static %}
+{% block tema %}
+Detalles de la Orden
+ {% endblock tema %}
+
+
+{% block contenido %}
+
+
+<body>
+
+    <ul>
+
+        <li><a href="{% url 'pagina_order' %}">listado Ordenes</a></li>
+    </ul>
+
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6 mb-4">
+                    <div class="card shadow mb-4">
+                        <div class="card-header py-3">
+                            <h6 style="text-align: center;">Datos de la Orden </h6>
+                                    </div>
+        <ul>
+            <li style="list-style: none;"><strong>codigo de Orden :</strong> {{Order1.id}}</li>
+             <li style="list-style: none;"><strong>Nombre Solicitante:</strong> {{Order1.first_name }}</li>
+             <li style="list-style: none;"><strong>Email :</strong> {{Order1.email}}</li>
+            <li style="list-style: none;"><strong>Direcion :</strong> {{Order1.address }}</li>
+            <li style="list-style: none;"><strong>Codigo Postal:</strong> {{Order1.postal_code }}</li>
+            <li style="list-style: none;"><strong>Ciudad:</strong> {{Order1.city }}</li>
+              <li style="list-style: none;"><strong>Fecha de Pedido :</strong> {{Order1.created }}</li>
+             <li style="list-style: none;"><strong>Estado de Pedido:</strong> {{Order1.paid }}</li>
+        </ul>
+    </div>
+    <a href="{% url 'editar_order' Order1.id %}" class="btn btn-success btn-icon-split">
+        <span class="icon text-white-50">
+            <i class="fas fa-check"></i>
+        </span>
+        <span class="text">Edicion de Solicitud </span>
+    </a>
+                    </div>
+                </div>
+
+        </div>
+</body>
+
+
+{% endblock contenido %}

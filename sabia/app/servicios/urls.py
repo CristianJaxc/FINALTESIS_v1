@@ -4,7 +4,7 @@ from django.conf.urls import url
 from django.conf import settings
 from django.conf.urls.static import static
 from django.conf.urls import url, include
-from .views import pagina_productos,product_list,product_detail,Registrar_Imagenes,Registrar_Producto,Listado_Productos,Eliminar_Producto,Listado_Categoria,Registrar_Categoria,Editar_Producto
+from .views import pagina_productos,product_list,product_detail,Registrar_Imagenes,Registrar_Producto,Listado_Productos,Eliminar_Producto,Listado_Categoria,Registrar_Categoria,Editar_Producto,Eliminar_Categoria,Editar_Categoria
 
 urlpatterns = [
     #!-------------------------- esterilizacion ----------------------------------------
@@ -19,10 +19,13 @@ urlpatterns = [
 
     # !-------------------------- ELIMINAR PRODUCTO/CATEGORIA  ----------------------------------------
     path('delete_producto/<int:pk>', Eliminar_Producto.as_view(), name='delete_producto'),
+    path('delete_categoria/<int:pk>', Eliminar_Categoria.as_view(), name='delete_categoria'),
 
     # !-------------------------- EDITAR PRODUCTO/CATEGORIA  ----------------------------------------
     path('editar_producto/<int:pk>',Editar_Producto.as_view(), name='editar_producto'),
+    path('editar_categoria/<int:pk>', Editar_Categoria.as_view(), name='editar_categoria'),
 
+    # !--------------------------LISTADOS   PRODUCTO/CATEGORIA  ----------------------------------------
     path('listaar_productos/', Listado_Productos.as_view(), name='listar_productos'),
     url('product_list', views.product_list, name='product_list'),
     url(r'^(?P<category_slug>[-\w]+)/$', views.product_list, name='product_list_by_category'),
