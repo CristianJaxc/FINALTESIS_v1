@@ -4,7 +4,7 @@ from django.shortcuts import render, redirect
 
 from app.cart.cart import Cart
 from django.shortcuts import render
-
+from django.forms.models import inlineformset_factory
 from .forms import OrderCreateForm
 from .models import OrderItem,Order
 from django.shortcuts import redirect, get_object_or_404
@@ -48,22 +48,28 @@ def order_create(request):
 
 
 class Listado_Order(SuccessMessageMixin, ListView):
-    model = OrderItem
+    model = Order
     template_name = 'servicios/orders/listado_order.html'
     def get_queryset(self):
-            return OrderItem.objects.all().order_by('id')
+            return Order.objects.all().order_by('id')
 
 
 #EDITAR / VER MAS DETALLE ORDER :
 
 class OrderDetail(SuccessMessageMixin, TemplateView):
+
     template_name = 'servicios/orders/detalle_order.html'
     def get_context_data(self, **kwargs):
         context = super(OrderDetail, self).get_context_data(**kwargs)
         pk = self.kwargs.get('pk', 0)
         Order1 = Order.objects.get(id = pk)
+        Order2 = OrderItem.objects.get(id= Order1.id)
+
+       # Order2 = Order.objects.filter(id= Order1.id)
+
+
         #print(usuario.username)
-        return {'Order1':Order1}
+        return {'Order1':Order1,'Order2':Order2}
 
 
 

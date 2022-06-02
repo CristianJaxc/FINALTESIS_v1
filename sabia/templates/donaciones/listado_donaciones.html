@@ -21,10 +21,9 @@
       {% endblock tema %}
       {% block title %}Listado de productos existentes  {% endblock title  %} 
      
-      {% block tablas %}
+
       {% block tr %}
                     <th scope="col">#</th>
-               
                     <th scope="col">Imagen</th>
                     <th scope="col">nombre</th>
                     <th scope="col">cantidad</th>
@@ -57,7 +56,7 @@
                         <div class="my-2">
                     
                         </div>
-                        <a href="{% url 'editar_producto' i.id %}"class="btn btn-warning btn-icon-split">
+                        <a href="{% url 'editar_producto1' i.id %}"class="btn btn-warning btn-icon-split">
                             <span class="icon text-white-50">
                                 <i class="fas fa-save"></i>
                             </span>
@@ -90,7 +89,7 @@
                     <span class="text">Registrar Producto</span>
                 </a>
 {% endblock edicion %}
-                {% endblock tablas %}
+
 
               
 </body>

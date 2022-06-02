@@ -55,13 +55,13 @@ class Registrar_Producto(SuccessMessageMixin, generic.CreateView):
         else:
             return self.render_to_response(self.get_context_data(form=form))
 
-class Editar_Producto(SuccessMessageMixin, UpdateView):
+class Editar_Producto1(SuccessMessageMixin, UpdateView):
     model = Productos
     form_class = ProductosForm
     template_name = 'donaciones/editar_donaciones.html'
 
     def get_context_data(self,**kwargs):
-        context = super(Editar_Producto, self).get_context_data(**kwargs)
+        context = super(Editar_Producto1, self).get_context_data(**kwargs)
         pk_editar = self.kwargs.get('pk', 0)
         #------------------ obtengo id url -------------------
         perro_editar = self.model.objects.get(id = pk_editar)

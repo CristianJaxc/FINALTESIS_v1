@@ -1,7 +1,7 @@
 
 {% extends "voluntarios/pagina_voluntario.html" %}
 {% load static %}
-<h2>{% block tema %}</h2>
+{% block tema %}
 Detalles de la Solicitud 
  {% endblock tema %}
 
@@ -44,8 +44,22 @@ Detalles de la Solicitud
         <h6 style="text-align: center;">Datos del Perro</h6>
                 </div>
                 <div class="card-body">
-            <li style="list-style: none;"><strong>codigo de perro:</strong> {{perro.id}}</li>
-            <li style="list-style: none;"><strong>Imagen</strong> {{perro.imagen_mascota}}</li>
+
+            <li style="list-style: none;">
+
+                    {% if perro.imagen_mascota %}
+          <td class="col-lg-4 mb-4 ">
+            <img src="/media/{{perro.imagen_mascota}}" alt="{{perro.imagen_mascota}}"  style="width: 40%;margin-left: 35%;" >
+
+            {% else %}
+            <img class="img-fluid rounded-top" src="{% static 'img/albergue1.png ' %}"    style="width: 40%;" alt="">
+            {% endif %}
+          </td>
+
+
+
+
+            </li>
             <li style="list-style: none;"><strong>Nombre:</strong> {{perro.nombre}}</li>
             <li style="list-style: none;"><strong>Raza:</strong> {{perro.raza}}</li>
             <li style="list-style: none;"><strong>edad</strong> {{perro.edad}}</li>

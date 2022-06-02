@@ -32,7 +32,6 @@ urlpatterns = [
     path('adopciones/',  include('app.adopciones.urls')),
     path('donaciones/',  include('app.donaciones.urls')),
     path('blogs/',  include('app.blogs.urls')),
-    #path('servicios/', include('app.servicios.urls')),
     url(r'paypal/', include('paypal.standard.ipn.urls')),
     url(r'payment/',include('app.payment.urls')),
     url('servicios/', include('app.servicios.urls')),

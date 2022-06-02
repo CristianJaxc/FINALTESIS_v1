@@ -23,11 +23,11 @@
 
 
       {% block tr %}
-                    <th scope="col">#</th>
-                    <th scope="col">Order</th>
-                    <th scope="col">Producto</th>
-                    <th scope="col">Price </th>
-      <th scope="col">Cantidad </th>
+                    <th scope="col">Pedido</th>
+                    <th scope="col">Nombre</th>
+                    <th scope="col">Apellido</th>
+                    <th scope="col">Direccion </th>
+      <th scope="col">Fecha </th>
                <th scope="col">Opciones</th>
                     {% endblock tr %}
 
@@ -35,17 +35,21 @@
 
 
                 {% for i in object_list %}
+
                 <tr>
                     <th scope="row">{{forloop.counter}}</th>
 
                     </td>
-                     <td>{{i.order}}</td>
+
+
+                     <td>{{i.first_name }}</td>
+
                     <td>
-                     {{i.product}}
+                     {{i.last_name}}
 
                     </td>
-                    <td>{{i.price}}</td>
-       <td>{{i.quantity}}</td>
+                    <td>{{i.city}}</td>
+       <td>{{i.created}}</td>
                     <td>
                         <div class="my-2">
 
