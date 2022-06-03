@@ -147,7 +147,26 @@ margin-left: -48px;
 
 
 /* modo vista ceular edicion de fondo y posicionamiento adaptativo  */
+        #menu_movil a{
+        font-size:20px;
+        color:white;
+        padding:6%;
+       text-align:left;
+        }
+        #drop-movil a {
 
+        color:black;
+
+        }
+         #menu_movil a i{
+
+        color:rgba(255,255,255,255,0.2)
+
+        }
+          #menu_movil a:hover{
+        color:#1d281f;
+
+        }
 	.offcanvas-menu-wrapper {
 		position: fixed;
 		left: -300px;
