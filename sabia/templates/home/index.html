@@ -43,7 +43,7 @@
 
     <link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/3.10.1/mdb.min.css" rel="stylesheet"/>
 
-    <!--<link rel="stylesheet" href="{% static 'css/base.css' %}">-->
+    <!--<link rel="stylesheet" href="{% static 'css/base1.css' %}">-->
 
 
     <!-- Estilos staticos : :: -->
@@ -72,6 +72,7 @@
     {% progressive_web_app_meta %}
 
 </head>
+
 <!--REDES SOCIALES -->
 
     <div class="social ">
@@ -183,6 +184,8 @@
     </div>
 </div>
 <!-- Banner Start -->
+
+<!-- Modo celular ::: -->
 
 
 <div class="container " style="margin-top:5%">
@@ -530,38 +533,83 @@
     </div>
 </div><!--fin del titulo  -->
 
-<!-- About Start -->
-<div class="container-fluid py-5 wow fadeInUp containerNoticia" data-wow-delay="0.1s">
-    <div class="container ">
-        <div class="row g-5">
-            <div class="col-lg-7">
-
-                <h4 class="text-body  mb-4">Forma parte de una experiencia Unica , conociendo nuevos lugares y
-                    personas</h4>
-                <p class="mb-4">El Santuario Bienestar Animal , es un refugio en bien de los caninos del sector de
-                    Latacunga </p>
-                <div class="row g-3">
-                    <div class="col-sm-6 wow zoomIn" data-wow-delay="0.3s">
-                        <h5 class="mb-3"><i class=" fas fa-star me-3"></i>Volntariado </h5>
-                        <h5 class="mb-3"><i class=" fas fa-star  me-3"></i>Adopciones</h5>
-                    </div>
-                    <div class="col-sm-6 wow zoomIn" data-wow-delay="0.6s">
-                        <h5 class="mb-3"><i class=" fas fa-star  me-3"></i>Denuncias</h5>
-                        <h5 class="mb-3"><i class=" fas fa-star  me-3"></i>24 /7 Al servicio </h5>
+<div class="container">
+    <div class="row">
+        <div class="col-md-3 col-sm-6 ">
+            <div class="service-box">
+                <div class="service-icon yellow">
+                    <div class="front-content">
+                        <i class="fa fa-trophy"></i>
+                        <h3>Voluntariado</h3>
                     </div>
                 </div>
-                <a href="#" class="btn btn-secundario py-3 px-5 mt-4 wow zoomIn" data-wow-delay="0.6s">Ver mas</a>
+                <div class="service-content">
+                    <h3>Proceso de Voluntariado</h3>
+                    <p>Sabia , cuenta con el proceso de voluntariado , gracias a organizaciones Internacionales como WorkPacker ,
+                    Con la que obtendras , una maravillosa experiencia.
+                      <a href="{% url 'pagina_blogs' %}" class="btn btn-principal " style="">Continuar </a>
+                    </p>
+
+                </div>
             </div>
-            <div class="col-lg-5" style="min-height: 500px;">
-                <div class="position-relative h-100">
+        </div>
+        <div class="col-md-3 col-sm-6 ">
+            <div class="service-box">
+                <div class="service-icon orange">
+                    <div class="front-content">
+                        <i class="fa fa-anchor"></i>
+                        <h3>Adopciones</h3>
+                    </div>
+                </div>
+                <div class="service-content">
+                    <h3>Como Funciona ? </h3>
+                    <p>El proceso de Adopcion , es personal , pero puedes apartar un canino , y poder conocerlos un poco mas , tanto en la pagina como en el Instagram
+
+                    <a href="{% url 'pagina_adopciones' %}" class="btn btn-principal " style="">Continuar </a>
+
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3 col-sm-6">
+            <div class="service-box ">
+                <div class="service-icon red">
+                    <div class="front-content">
+                        <i class="fa fa-trophy"></i>
+                        <h3>Tienda</h3>
+                    </div>
+                </div>
+                <div class="service-content">
+                    <h3>Impulsa nuestra Labor</h3>
+                    <p>SABIA,cuenta con productos, desde articulos de decoracion , hasta peluches de recuerdo con los que puedes llevar un poco de la escencia
+                    de los caninos de nuestro albergue
+
+                        <a href="{% url 'product_list' %}" class="btn btn-principal " style="">Continuar </a>
+
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3 col-sm-6">
+            <div class="service-box">
+                <div class="service-icon grey">
+                    <div class="front-content">
+                        <i class="fa fa-paper-plane-o"></i>
+                        <h3>Donaciones</h3>
+                    </div>
+                </div>
+                <div class="service-content">
+                    <h3>Ayuda a un Perrito </h3>
+                    <p>Puedes Donar los productos , que esta necesitando directamente o apadrinar con un monto a un canino de tu preferencia
+                        <a href="{% url 'pagina_donaciones' %}" class="btn btn-principal " style="">Continuar </a>
+
+                    </p>
 
                 </div>
             </div>
         </div>
     </div>
 </div>
-<!-- About End -->
-
 
 <!-- VOLUNTARIADO :: -->
 <!-- Titulo de la seccion  -->
@@ -599,20 +647,16 @@
                 <div class=" carousel-course-card-cell" style="height: 300px;width: 300px;">
                     <div class="card-cell-thumbnail">
 
-                        {% if m.avatar %}
+                       {% if m.User.perfil.imagen_perfil %}
 
+                <td class="col-lg-4 mb-4 ">
+                  <img src="/media/{{m.User.perfil.imagen_perfil }}" alt="{{m.User.perfil.imagen_perfil }}"    class="img-fluid" >
+                  {% else %}
 
-                        <img src="media/{{  m.avatar }}" alt="{{ m.avatar}}" class="img-fluid"
-                             style="max-height: 300px;min-height: max-content;">
-
-
-                        {% else %}
                         <i class=" fas fa-user-tie " style="color: rgb(30, 37, 28);font-size: 150px;"></i>
+                  {% endif %}
 
-                        <!-- <img src="{% static 'adoptame1.png'  %}" class="img-fluid" alt="adoptame" > -->
 
-
-                        {% endif %}
                     </div>
                     <div class="card-cell-content" style="margin-bottom: 15%;">
                         <div class="card-cell-text">
@@ -645,8 +689,8 @@
                     <h1 class="display-5 text-white">Juntos Podemos Ser mas </h1>
                     <p class="text-white mb-4">Si quieres poder trabajar con nosotros encaminado en el bien de la
                         Fundacion </p>
-                    <a href="appointment.html" class="btn btn-secundario py-3 px-5 me-3">Aplicar Ahora</a>
-                    <a href="" class="btn btn-light py-3 px-5">Ver mas </a>
+                    <a href="https://www.worldpackers.com/es/positions/36380 " target="_blank"  class="btn btn-secundario py-3 px-5 me-3">Aplicar Ahora</a>
+                    <a href="{% url 'pagina_blogs' %}" class="btn btn-light py-3 px-5">Ver mas </a>
                 </div>
             </div>
         </div>

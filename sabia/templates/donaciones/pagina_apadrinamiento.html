@@ -4,7 +4,64 @@
 {% load static %}
 
 {% block contenido %}
+<style>
 
+.fixedsticky h2 {
+		color:white;
+	}
+	.fixedsticky p {
+		color:white;
+			text-align:justify;
+	}
+	.main p{
+	text-align:justify;
+	}
+.sidebar {
+	padding: 2em 1.5em;
+	background-color: #428C47;
+}
+.large-photo {
+	height: 0;
+	padding-top: 61.9%;
+background-image: url('/static/img/banner2.png');
+background-position: center; /* Center the image */
+background-repeat: no-repeat; /* Do not repeat the image */
+ background-size: cover;
+	margin-bottom: 1em;
+}
+@media (min-width:43.75em) {
+
+	/* responsive layout */
+	.candy-wrapper {
+
+		max-width: 60em;
+		margin: 0 auto;
+		position: relative;
+	}
+	.main {
+		display: inline-block;
+		width: 75%;
+		vertical-align: top;
+	}
+	.sidebar {
+		display: inline-block;
+		width: 25%;
+		vertical-align: top;
+	}
+
+
+	.fixedsticky {
+		top: 0;
+
+	}
+
+}
+.linea_sabia{
+color:#71A621;
+border: 5px solid ;
+
+}
+</style>
 <body>
    <!-- Hero Start -->
  <div class="container-fluid colorFondo py-5  mb-5">
@@ -15,10 +72,72 @@
         </div>
     </div>
 </div>
+   <div class="container">
+     <section class="candy-wrapper">
+  <article class="main"><h1>SANTUARIO BIENESTAR ANIMAL </h1>
+      <p>SABIA, con el fin de  mejorar el bienestar de los animales, y acabar con la crueldad y la negligencia hacia ellos, con
+      la cría descontrolada y el abandono de los mismos a través de rescates, rehabilitación y
+       tratamiento veterinario. </p>
+      <p>Siendo la principal fuente de Ingreso , las donaciones , por lo que es muy importante , contar con tu ayuda </p>
 
+      <div class="large-photo"></div><p>Colabora con nuestra labor y ayúdanos a
+cambiar la vida de muchos animalitos sin hogar..</p>
+<hr class="linea_sabia">
+  </article><!-- Leave No Space
+  --><aside class="sidebar fixedsticky"><h2>Tu Donacion </h2><p>Mejorar la calidad de vida de muchos aniamles, puedes conocer , todos nuestros planes de Ayuda y nuestra labor ,  con ella : </p>
+         <a href="#" class="btn btn-secundario">Conocer Labor </a></aside>
+</section>
+   <div class="gap-20">
+
+   </div>
+                          <h3 class="widget-title" style="text-align: center;">Tipos de Donacion </h3>
+                          <div class="row" style="padding-top: 5%;">
+                              <!-- primera seccion  -->
+                              <div class="feature-box col-sm-6 wow fadeInDown" data-wow-delay=".5s">
+                                  <span class="feature-icon pull-left" ><i class="fas fa-piggy-bank" style="font-size: 92px;padding-left: 15%;"></i></span>
+
+                                  <div class="feature-content">
+                                      <h3>Banco Pichincha  </h3>
+                                      <p>Cuenta de Ahorro N:12001010</p>
+                                  </div>
+                              </div><!--/ fin de la seccion  -->
+                              <!--segunda  seccion  -->
+
+                              <div class="feature-box col-sm-6 wow fadeInDown" data-wow-delay=".5s">
+                                  <span class="feature-icon pull-left" ><i class="fas fa-piggy-bank" style="font-size: 92px;padding-left: 15%;"></i></span>
+                                  <div class="feature-content">
+                                      <h3>Banco Internacional </h3>
+                                      <p>Cuenta de Ahorro N:12001010.</p>
+                                  </div>
+                              </div><!--/ fin de la seccion 2  -->
+                          </div>
+
+            <!-- segunda fila de servicios  -->
+                          <div class="row">
+                              <div class="feature-box col-sm-6 wow fadeInDown" data-wow-delay=".5s">
+                                  <span class="feature-icon pull-left" ><i class="fas fa-piggy-bank" style="font-size: 92px;padding-left: 15%;"></i></span>
+                                  <div class="feature-content">
+                                      <h3>Otro Banco </h3>
+                                      <p>Cuenta de Ahorro N:12001010</p>
+                                  </div>
+                              </div><!--/ fin de la seccion 3 -->
+
+                              <div class="feature-box col-sm-6 wow fadeInDown" data-wow-delay=".5s">
+                                  <span class="feature-icon pull-left" ><i class="fas fa-piggy-bank" style="font-size: 92px;padding-left: 15%;"></i></span>
+                                  <div class="feature-content">
+                                      <h3>Otro Banco </h3>
+                                      <p>Cuenta de Ahorro N:12001010</p>
+                                  </div>
+                              </div><!--/fin de la seccion 4  -->
+                          </div>
+       <!-- fin de la segunda fila  -->
+
+                      </div><!--/ fin de l post  -->
+
+                  </div><!--/fin del contenedor -->
+   </div>
 
 
 </body>
-
 
 {% endblock contenido %}

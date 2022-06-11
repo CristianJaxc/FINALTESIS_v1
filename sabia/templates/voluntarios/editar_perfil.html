@@ -14,18 +14,30 @@ Editar Perfil
   <div class="flexbox-per">
         <div class="bloque-avatar">
           <div class="avatar">
-            <img src="{% static 'img/despues1.png'  %}" class="img-fluid" >
+
+
+               {% if perfil.imagen_perfil %}
+
+                <td class="col-lg-4 mb-4 ">
+                  <img src="/media/{{perfil.imagen_perfil }}" alt="{{perfil.imagen_perfil }}"    class="img-fluid" >
+                  {% else %}
+
+                  <img class="img-fluid rounded-top" src="{% static 'img/despues1.png' %}"     class="img-fluid">
+                  {% endif %}
+
+
+
           </div>
         </div>
         <div class="columna3">
           <div class="">
             <div class="">
                 <h5 style="text-align: center;padding: 5%;">Datos de Usuario </h5>
-                <form method="post">
+               <form method="post", enctype="multipart/form-data">
                     {% csrf_token %}
-                    {{ form.as_p  }}
+                    {{ context.form.as_p  }}
                     <hr><br>
-                    {{ form2.as_p  }}
+                    {{ context.form2.as_p  }}
                     <div class="my-2"></div>
                     <a href="{% url 'editar_volunt' user.id %}"class="btn btn-success btn-icon-split" style="margin-left: 25%;">
                         <span class="icon text-white-50">

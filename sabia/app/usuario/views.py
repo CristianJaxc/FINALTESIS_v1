@@ -61,13 +61,13 @@ class volunView(SuccessMessageMixin, generic.CreateView):
     def get_context_data(self, **kwargs): #pinto el formulario en el html
         context = super(volunView, self).get_context_data(**kwargs)
         if 'form' not in context:
-            context['form'] = self.form_class(self.request.GET)
+            context['form'] = self.form_class(self.request.GET,request.FILES)
         return context
     
     def post(self, request, *args, **kwargs):
         self.object = self.get_object
         id_usu = self.request.user.id #usuario logeado
-        form = self.form_class(request.POST)
+        form = self.form_class(request.POST, request.FILES)
         if form.is_valid():
             new = form.save(commit=False)
             new.User_id = id_usu
@@ -118,29 +118,32 @@ class Mi_Usuario_Update(SuccessMessageMixin, UpdateView):
     template_name = 'voluntarios/editar_perfil.html'
     form_class = UpdateUserForm
     second_form_class = PerfilForm
-    
+
     def get_context_data(self,**kwargs):
         context = super(Mi_Usuario_Update, self).get_context_data(**kwargs)
         pk_editar = self.kwargs.get('pk', 0)
+        pk = self.kwargs.get('pk', 0)
+        usuario = User.objects.get(id=pk)
         #------------------ obtengo id url -------------------
         usuario_editar = self.model.objects.get(id = pk_editar)
         usuario_editar_perfil= self.second_model.objects.get(User_id = usuario_editar.id)
+        perfil = Perfil.objects.get(User_id = usuario.id)
         #print(usuario_editar.id,'aca el otro',usuario_editar_perfil.id)
         #----------------- consulta de datos -----------------
         if 'form' not in context:
-            context['form'] = self.form_class(instance = usuario_editar)
+            context['form'] = self.form_class(self.request.FILES,instance = usuario_editar)
         if 'form2' not in context:
-            context['form2'] = self.second_form_class(instance = usuario_editar_perfil)
+            context['form2'] = self.second_form_class(self.request.FILES, instance = usuario_editar_perfil)
         context['id'] = pk_editar
-        return context
+        return {'usuario':usuario, 'perfil':perfil,'context':context}
 
     def post(self, request, *args, **kwargs):
         self.object = self.get_object
         id_user = kwargs['pk']
         user2 = self.model.objects.get(id = id_user)
         usuario2 = self.second_model.objects.get(User_id = user2.id)
-        form = self.form_class(request.POST, instance = user2)
-        form2 = self.second_form_class(request.POST, instance = usuario2)
+        form = self.form_class(request.POST,request.FILES,instance = user2)
+        form2 = self.second_form_class(request.POST,request.FILES,instance = usuario2)
         if form.is_valid() and form2.is_valid():
             form.save()
             form2.save()

@@ -7,12 +7,14 @@ class PerfilForm(forms.ModelForm):
     class Meta:
         model = Perfil
         fields = [
+            'imagen_perfil',
             'cedula',
             'direccion',
             'telefono',
             'nacionalidad',
         ]
         labels = {
+            'imagen_perfil':'imagen_perfil',
             'cedula_perfil': 'Cédula',
             'direccion_perfil': 'Dirección',
             'telefono_perfil': 'Teléfono',

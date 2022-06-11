@@ -16,7 +16,14 @@
      <div class="col-lg-4 mb-4">
  
            <div class="avatar">
-             <img src="{% static 'img/despues1.png'  %}" class="img-fluid" >
+          {% if perfil.imagen_perfil %}
+
+                <td class="col-lg-4 mb-4 ">
+                  <img src="/media/{{perfil.imagen_perfil }}" alt="{{perfil.imagen_perfil }}"    class="img-fluid" >
+                  {% else %}
+
+                  <img class="img-fluid rounded-top" src="{% static 'img/despues1.png' %}"     class="img-fluid">
+                  {% endif %}
            </div>
          </div>
    
