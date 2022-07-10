@@ -58,9 +58,10 @@ def product_list(request, category_slug=None):
 
 def product_detail(request, id, slug):
     product = get_object_or_404(Product, id=id, slug=slug, available=True)
+    product_similar = Product.objects.all().order_by('category')
     cart_product_form = CartAddProductForm()
     return render(request, 'servicios/detalle_productos.html',
-                  {'product': product, 'cart_product_form': cart_product_form})
+                  {'product': product, 'cart_product_form': cart_product_form,'product_similar':product_similar})
 
 
 
@@ -98,40 +99,40 @@ class Registrar_Producto(generic.CreateView):
 
 #PRUEBA DE REGISTRO DE IMAGENES :
 
-class Registrar_Imagenes(SuccessMessageMixin, generic.CreateView):
+#class Registrar_Imagenes(SuccessMessageMixin, generic.CreateView):
 
-    def Imagenes(request):
-        a = request.ImageProducto.id
-        id_usuario = Product.objects.get(id=a)
-        return a,id_usuario
+        #   def Imagenes(request):
+        #a = request.ImageProducto.id
+        #id_usuario = Product.objects.get(id=a)
+        #return a,id_usuario
     # modelos de datos
-    model = ImagenProducto
-    secondo_model = Product
+    #model = ImagenProducto
+    #secondo_model = Product
     # Formularios de datos
-    form_class = ImagenesForm
-    seconf_form = ProductoForm
+    #form_class = ImagenesForm
+    #seconf_form = ProductoForm
     # success forms
-    template_name = 'servicios/cart/añadir_imagenes.html'
-    success_url = reverse_lazy('listar_productos')
+    #template_name = 'servicios/cart/añadir_imagenes.html'
+    # success_url = reverse_lazy('listar_productos')
 
-    def get_context_data(self, **kwargs):  # pinto el formulario en el html
-        context = super(Registrar_Imagenes, self).get_context_data(**kwargs)
-        if 'form' not in context:
-            context['form'] = self.form_class(self.request.GET)
+    #def get_context_data(self, **kwargs):  # pinto el formulario en el html
+        #context = super(Registrar_Imagenes, self).get_context_data(**kwargs)
+            # if 'form' not in context:
+        # context['form'] = self.form_class(self.request.GET)
 
-        return context
+    #  return context
 
-    def post(self, request, *args, **kwargs):
-        self.object = self.get_object
-        id_usu = self.request.user.id  # usuario logeado
-        form = self.form_class(request.POST,request.FILES)
-        if form.is_valid():
-            new = form.save(commit=False)
-            new.User_id = id_usu
-            form.save()
-            return HttpResponseRedirect(self.get_success_url())
-        else:
-            return self.render_to_response(self.get_context_data(form=form))
+    #def post(self, request, *args, **kwargs):
+        #self.object = self.get_object
+        #id_usu = self.request.user.id  # usuario logeado
+        # form = self.form_class(request.POST,request.FILES)
+            # if form.is_valid():
+            # new = form.save(commit=False)
+            #new.User_id = id_usu
+            # form.save()
+        # return HttpResponseRedirect(self.get_success_url())
+            # else:
+# return self.render_to_response(self.get_context_data(form=form))
 
 
 
@@ -148,24 +149,23 @@ class Editar_Producto(SuccessMessageMixin, UpdateView):
         pk_editar = self.kwargs.get('pk', 0)
         #------------------ obtengo id url -------------------
         producto_editar = self.model.objects.get(id = pk_editar)
-
         #----------------- consulta de datos -----------------
         if 'form' not in context:
             context['form'] = self.form_class(instance = producto_editar)
         context['id'] = pk_editar
-
         return context
+
 
     def post(self, request, *args, **kwargs):
         self.object = self.get_object
         id_editar = kwargs['pk']
         producto = self.model.objects.get(id = id_editar)
-        imagenes = self.second_model.objects.get(Image_id=producto.id)
+        #imagenes = self.second_model.objects.get(Image_id=producto.id)
         form = self.form_class(request.POST, request.FILES, instance = producto)
-        form2 = self.form_class2(request.POST, instance = imagenes)
-        if form.is_valid() and form2.is_valid():
+        #form2 = self.form_class2(request.POST, instance = imagenes)
+        if form.is_valid() :
             form.save()
-            form2.open()
+
             return HttpResponseRedirect(reverse_lazy('listar_productos'))
         else:
             return HttpResponseRedirect(reverse_lazy('listar_productos'))

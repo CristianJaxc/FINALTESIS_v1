@@ -3,7 +3,7 @@
 {% load static %}
 {% block contenido %}
 
-<link rel="stylesheet" href="{% static 'css/denuncia.css' %}">
+<link rel="stylesheet" href="{% static 'css/denuncia1.css' %}">
 
 <body>
    
@@ -49,7 +49,7 @@
                         </a>
                         </div>
                         <div class="position-relative color1 rounded-bottom text-center p-4" style="margin-top: 5%;">
-                            <h5 class="m-0 " style="color:white">Ordenaza Municpales </h5>
+                            <h5 class="m-0 " style="color:white">Ordenanza Municipales </h5>
                         </div>
                     </div>
                     <div class="col-md-5 service-item wow zoomIn" data-wow-delay="0.9s">
@@ -76,8 +76,8 @@
 </div>
 <!-- Service End -->
 <div id='whastseven'>
-<div id="msg"><button onclick="fecharwhastb()">X</button>
-  Reportanos . <br> envianos un mensaje directo
+<div id="msg"><button onclick="fecharwhastb()" style="background-color:rgb(203,235,164)"><i class="fas fa-window-close " aria-hidden="true" style="color:red;"></i></button>
+ Reportadnos. <br> enviadnos un mensaje directo
 
 </div>
 
@@ -94,7 +94,7 @@
 <div class="row " style="background-color: white;">
     <div class="col-md-12 heading" style="padding-left: 5%;padding-top: 2%;">
         <span class="title-icon pull-left responsive"><i class="fas fa-hand-holding-heart" aria-hidden="true"></i></span>
-        <h2 class="title">Como Denunciar el Maltrato Animal   <span class="title-desc"> Aqui algunas recomendaciones  </span></h2>
+        <h2 class="title">Como Denunciar el Maltrato Animal   <span class="title-desc"> Aquí algunas recomendaciones  </span></h2>
     </div>
   </div><!--fin del titulo  -->  
   
@@ -110,7 +110,7 @@
             
             </div>
             <div class="ps-bot  ">
-              <p class="responsiveDenuncia">Presencias un  caso de violencia Animal </p>
+              <p class="responsiveDenuncia">Presencias, un  caso de violencia Animal </p>
             </div>
             <span class="ps-sp-top">01</span>
           </li>
@@ -128,7 +128,7 @@
                 <i class="fas fa-camera  " aria-hidden="true" style="font-size: 125px;color: #43914E;"></i>
             </div>
             <div class="ps-bot">
-              <p class="responsiveDenuncia">Tomas fotografias  o material de video </p>
+              <p class="responsiveDenuncia">Tomas fotografías  o material de video </p>
             </div>
             <span class="ps-sp-top">03</span>
           </li>
@@ -137,7 +137,7 @@
                 <i class="fas fa-phone-volume " aria-hidden="true" style="font-size: 125px;color: #43914E;"></i>
             </div>
             <div class="ps-top">
-              <p class="responsiveDenuncia"> Acudes al departamento de policia mas sercano </p>
+              <p class="responsiveDenuncia"> Acudes al departamento de policía más cercano </p>
             </div>
             <span class="ps-sp-bot">04</span>
           </li>
@@ -146,7 +146,7 @@
                 <i class="fas fa-laptop-medical" aria-hidden="true" style="font-size: 125px;color: #43914E;"></i>
             </div>
             <div class="ps-bot">
-              <p class="responsiveDenuncia">Contactas a entes encargados de proteccion </p>
+              <p class="responsiveDenuncia">Contactas a entes encargados de protección </p>
             </div>
             <span class="ps-sp-top">05</span>
           </li>
@@ -205,8 +205,8 @@
       <!-- Thumbnail-->
       <div class="thumbnail">
         <div class="date">
-          <div class="day">27</div>
-          <div class="month">Mar</div>
+          <div class="day"><i class="fas fa-exclamation" style="font-size:30px"></i></div>
+
         </div>
           {% if i.imagen %}
             <img src="/media/{{i.imagen}}" alt="{{i.imagen}}"  >
@@ -216,21 +216,22 @@
       </div>
       <!-- Post Content-->
       <div class="post-content">
-        <div class="category">{{i.nombres }}</div>
-        <h1 class="title">{{i.descripcion}}</h1>
+        <div class="category">{{i.fecha_creacion}}</div>
+        <h1 class="title" style="border-style:none">{{i.descripcion}}</h1>
         <h2 class="sub_title">{{i.direccion}}</h2>
-        <p class="description">New York, the largest city in the U.S., is an architectural marvel with plenty of historic monuments, magnificent buildings and countless dazzling skyscrapers.</p>
-        <div class="post-meta"><span class="timestamp"><i class="fa fa-clock-">o</i> </span><span class="comments"><i class="fa fa-comments"></i><a href="#"> </a></span></div>
       </div>
     </div>
      </div>
     {% endfor %}
-
-
-
 </div>
- <div style="margin:25px;">
 
+ <div style="margin:25px;" class="container">
+   {% if user.is_superuser %}
+            <a href="{% url 'denuncias_listado' %} " class="btn btn-admin"><i class=" fas fa-tools" style="padding-right:5px;border-right:solid;"></i> Revisar Denuncia </a>
+
+
+                {% else %}
+                {% endif %}
  </div>
  <script>
  $(window).load(function() {

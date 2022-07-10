@@ -60,16 +60,17 @@ class OrderDetail(SuccessMessageMixin, TemplateView):
 
     template_name = 'servicios/orders/detalle_order.html'
     def get_context_data(self, **kwargs):
+
+        model = OrderItem
         context = super(OrderDetail, self).get_context_data(**kwargs)
         pk = self.kwargs.get('pk', 0)
         Order1 = Order.objects.get(id = pk)
         Order2 = OrderItem.objects.get(id= Order1.id)
-
-       # Order2 = Order.objects.filter(id= Order1.id)
-
+        #Order2 = Order.objects.filter(id=Order1.id)
+        Order3= OrderItem.objects.all().order_by('id')
 
         #print(usuario.username)
-        return {'Order1':Order1,'Order2':Order2}
+        return {'Order1':Order1,'Order2':Order2,'Order3':Order3}
 
 
 

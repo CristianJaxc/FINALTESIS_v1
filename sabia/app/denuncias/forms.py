@@ -11,6 +11,7 @@ class DenunciasForm(forms.ModelForm):
     #estado = forms.BooleanField(required=True,widget=forms.TextInput(attrs={'class': 'form-control'}),label='Estado')
     descripcion = forms.CharField(required=True,widget=forms.Textarea(attrs={'class': 'form-control'}),label='Descripccion')
     imagen=forms.ImageField(required=False,label='Foto Denuncia')
+
     class Meta:
         model = Denuncias
         fields = ['nombres', 'apellidos','cedula','telefono','direccion','descripcion','imagen']

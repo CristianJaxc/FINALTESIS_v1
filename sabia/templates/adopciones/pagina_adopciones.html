@@ -197,9 +197,26 @@
 
     </div>
   </div>
+   <div class="container">
+                          {% if user.is_superuser %}
+<div class="row">
+
+      <div class="col-md-3 col-sm-12 col-lg-4 wow fadeIn" data-wow-delay="0.2s">
+            <a href="{% url 'listado_perro' %}" class="btn btn-admin"><i class=" fas fa-tools" style="padding-right:5px;border-right:solid;"></i> Editar Mascotas</a>
 
 
+      </div>
+      <div class="col-md-3 col-sm-12 col-lg-4 wow fadeIn" data-wow-delay="0.2s">
+            <a href="{% url 'adopciones_listado' %}" class="btn btn-admin"><i class=" fas fa-tools" style="padding-right:5px;border-right:solid;"></i>Revisar solicitudes </a>
+
+
+      </div>
+</div>
+                {% endif %}
+   </div>
 
 {% endblock contenido %}
+
+
 
 

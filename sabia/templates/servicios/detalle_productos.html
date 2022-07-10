@@ -354,7 +354,7 @@ section {
                <div class="zoom-thumb">
                   <ul class="piclist">
 
-                        {% for p in product.imagenes.all %}
+                      <!--  {% for p in product.imagenes.all %}
 
                    <li><img
                              src="{% if p.image %}
@@ -367,7 +367,7 @@ section {
 
 
 
-  {% endfor %}
+  {% endfor %}-->
 
 
                   </ul>
@@ -446,19 +446,45 @@ section {
 
       </div>
    </section>
-<section class="sec bg-light">
+<section class="sec">
    <div class="container">
       <div class="row">
          <div class="col-sm-12 title_bx">
             <h3 class="title"> Productos Relacionados   </h3>
          </div>
       </div>
+   <div class="col-lg-9">
 
 
+                <div class="owl-carousel price-carousel wow zoomIn" data-wow-delay="0.9s">
+        {% for m in product_similar %}
+                            {% ifequal m.category  product.category %}
+                    <div class="price-item pb-4">
+                       {% ifequal m.category  product.category %}
+                        <div class="position-relative">
+                               <p class=" m-0" style="background-color:yellow;text-align:center"> {{ m.name }}</p>
+
+
+                        </div>
+            {% if  m.image %}
+            <img class="img-fluid wow zoomIn" data-wow-delay="0.1s" src="/media/{{m.image}}" alt="{{m.image}}"
+                 alt="empresa" style="max-height: 200px;min-height: 200px;"/>
+              {% else %}
+                <img src="{% static 'imagenes/adopciones/adop1.jpg'  %}" class="news-card__image">
+
+    {% endif %}
+      <p class=" m-0 " style="background-color:yellow;text-align:center">  ${{ m.price }}</p>
+
+
+                                  {% endifequal %}
+                    </div>
+                       {% endifequal %}
+       {% endfor %}
+                </div>
+            </div>
    </div>
+
 </section>
-
-
 
 <!--
 <div class="product-detail">

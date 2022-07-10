@@ -35,7 +35,7 @@
     </div>
   </div><!--fin del titulo  -->  
   
-                    <p class="mb-4" style="text-align: justify;">El equipo de SABIA , se financia , mediante eventos de solidaridad  con lo cual impulsan , el crecimiento del albergue , si quieres impulsar nuestro labor social puedes colaborarnos en nuestras cuentas de ahorros </p>
+                    <p class="mb-4" style="text-align: justify;">El equipo de SABIA, se financia, mediante eventos de solidaridad  con lo cual impulsan, el crecimiento del albergue, si quieres impulsar nuestra labor social puedes colaborarnos en nuestras cuentas de ahorros </p>
                    
                     <h5 class="text-uppercase text-primary wow fadeInUp" data-wow-delay="0.3s" style="text-align: center;">Cuenta de Ahorros </h5>
                   
@@ -93,13 +93,31 @@
                     </div>
                
                 </div>
-                {% if user.is_superuser %}
-                <a href="{% url 'registrar_producto' %} " class="btn btn-secundario">Agregar Productos </a>
-                {% else %}
-                {% endif %}
+
+
             </div>
+
         </div>
+
     </div>
+   <div class="container">
+                          {% if user.is_superuser %}
+<div class="row">
+
+      <div class="col-md-3 col-sm-12 col-lg-4 wow fadeIn" data-wow-delay="0.2s">
+            <a href="{% url 'listado_solicitudes_donaciones' %}" class="btn btn-admin"><i class=" fas fa-tools" style="padding-right:5px;border-right:solid;"></i> Revisar Donaciones </a>
+
+
+      </div>
+      <div class="col-md-3 col-sm-12 col-lg-4 wow fadeIn" data-wow-delay="0.2s">
+            <a href="{% url 'listado_donaciones' %}" class="btn btn-admin"><i class=" fas fa-tools" style="padding-right:5px;border-right:solid;"></i> Editar Productos </a>
+
+
+      </div>
+</div>
+                {% endif %}
+   </div>
+
     <!-- Pricing End -->
 
 <!-- Hero End -->

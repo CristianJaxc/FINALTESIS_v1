@@ -278,7 +278,8 @@
     transform: scale(1.1);
  }
 #whastseven #msg{
-    background-color: #FFF !important;
+  /*  background-color: #FFF !important;*/
+    background-color:rgb(203,235,164)!important;
     border-radius: 5px !important;
     box-shadow: rgba(0, 0, 0, 0.342) 0px 2.5px 10px !important;
     color: #000;
@@ -292,13 +293,14 @@
 #whastseven #msg button{
     float: right;
     border: 0px;
-    background-color: rgba(255,255,255,0.8);
+    style-color:none;
+/*   background-color: rgba(255,255,255,0.8);*/
     top: -6px;
     position: relative;
     right: -4px;
 }
 #whastseven #msg button:hover{
-  color:red;
+  color:#BF5858;
 }
 
 

@@ -12,7 +12,8 @@ from django.contrib.messages.views import SuccessMessageMixin
 from app import blogs
 # ---------- Para modelos -------------
 from django.contrib.auth.models import User
-from app.blogs.models import Blogs
+from django.core.paginator import Paginator
+from app.blogs.models import Blogs, Noticia
 from app.blogs.forms import BlogsForm, BlogsForm2
 from app.usuario.models import Perfil
 from app.denuncias.models import Denuncias
@@ -23,6 +24,15 @@ from app.denuncias.forms import DenunciasForm, DenunciasForm2
 from django.utils.decorators import method_decorator
 
 # Create your views here.
+
+def Pagina_Noticia(request):
+    Noti = Noticia.objects.filter(estado=True).order_by('fecha_creacion')
+    contact_list =Noticia.objects.all()
+    paginator = Paginator(contact_list, 1)  # Show 25 contacts per page.
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+    return render(request, 'administracion/usuarios/quienesSomos.html',{'Noti':Noti,'page_obj': page_obj})
+
 
 def Pagina_blogs(request):
     blogs = Blogs.objects.filter(estado=True)

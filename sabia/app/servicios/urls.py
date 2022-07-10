@@ -4,7 +4,7 @@ from django.conf.urls import url
 from django.conf import settings
 from django.conf.urls.static import static
 from django.conf.urls import url, include
-from .views import pagina_productos,product_list,product_detail,Registrar_Imagenes,Registrar_Producto,Listado_Productos,Eliminar_Producto,Listado_Categoria,Registrar_Categoria,Editar_Producto,Eliminar_Categoria,Editar_Categoria
+from .views import pagina_productos,product_list,product_detail,Registrar_Producto,Listado_Productos,Eliminar_Producto,Listado_Categoria,Registrar_Categoria,Editar_Producto,Eliminar_Categoria,Editar_Categoria
 
 urlpatterns = [
     #!-------------------------- esterilizacion ----------------------------------------
@@ -15,7 +15,7 @@ urlpatterns = [
     # !-------------------------- Añadir PRODUCTO/CATEGORIA  ----------------------------------------
     path('add_categoria/', Registrar_Categoria.as_view(), name='add_categoria'),
     path('add_productos/',Registrar_Producto.as_view(), name='add_productos'),
-    path('add_imagenes/<int:pk>',Registrar_Imagenes.as_view(), name='add_imagenes'),
+   # path('add_imagenes/<int:pk>',Registrar_Imagenes.as_view(), name='add_imagenes'),
 
     # !-------------------------- ELIMINAR PRODUCTO/CATEGORIA  ----------------------------------------
     path('delete_producto/<int:pk>', Eliminar_Producto.as_view(), name='delete_producto'),

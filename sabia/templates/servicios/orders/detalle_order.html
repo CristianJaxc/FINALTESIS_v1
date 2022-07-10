@@ -31,7 +31,14 @@ Detalles de la Orden
             <li style="list-style: none;"><strong>Codigo Postal:</strong> {{Order1.postal_code }}</li>
             <li style="list-style: none;"><strong>Ciudad:</strong> {{Order1.city }}</li>
               <li style="list-style: none;"><strong>Fecha de Pedido :</strong> {{Order1.created }}</li>
-             <li style="list-style: none;"><strong>Estado de Pedido:</strong> {{Order1.paid }}</li>
+             <li style="list-style: none;"><strong>Estado de Pedido:</strong>
+
+                 {% ifequal Order1.paid True %}
+                 Pagado
+                  {% else %}
+                 No cancelado
+                 {% endifequal %}
+             </li>
 
         </ul>
     </div>
@@ -46,15 +53,18 @@ Detalles de la Orden
                        <div class="col-lg-6 mb-4">
                     <div class="card shadow mb-4">
                         <div class="card-header py-3">
-                            <h6 style="text-align: center;">Datos del Producto </h6>
+                            <h6 style="text-align: center;">Productos Seleccionados </h6>
                                     </div>
 
 
         <ul>
-                {% if Order2.product.image %}
+
+            {% for m in Order3 %}
+     {% ifequal m.order Order1 %}
+    {% if m.product.image %}
 
           <li style="list-style: none;">
-            <img src="/media/{{Order2.product.image }}" alt="{{Order2.product.Product.image }}"  style="width: 40%;margin-left: 35%;" >
+            <img src="/media/{{m.product.image }}" alt="{{m.product.Product.image }}"  style="width: 40%;margin-left: 35%;" >
 
             {% else %}
             <img class="img-fluid rounded-top" src="{% static 'img/albergue1.png ' %}"    style="width: 40%;" alt="">
@@ -64,16 +74,19 @@ Detalles de la Orden
 
           </li>
 
-         <li style="list-style: none;"><strong>codigo de Orden :</strong> {{Order2.id}}</li>
-                     <li style="list-style: none;"><strong>codigo de Orden :</strong> </li>
-
-             <li style="list-style: none;"><strong>Nombre Producto:</strong> {{Order2.product }}</li>
-              <li style="list-style: none;"><strong>Precio Producto:</strong> {{Order2.price }}</li>
-                  <li style="list-style: none;"><strong>Cantidad del Producto:</strong> {{Order2.quantity }}</li>
+         <li style="list-style: none;"><strong>codigo de Orden :</strong> {{m.id}}</li>
+             <li style="list-style: none;"><strong>Nombre Producto:</strong> {{m.product }}</li>
+              <li style="list-style: none;"><strong>Precio Producto:</strong> {{m.price }}</li>
+                  <li style="list-style: none;"><strong>Cantidad del Producto:</strong> {{m.quantity }}</li>
 
 
 
         </ul>
+
+{% endifequal %}
+
+            {% endfor %}
+
     </div>
 
                     </div>

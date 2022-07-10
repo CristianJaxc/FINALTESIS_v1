@@ -19,7 +19,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Administracion </title>
+    <title>Administración </title>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.15/dist/sweetalert2.all.min.js"></script>
     <!--DATATABLE-->
 
@@ -107,7 +107,7 @@
 
             <!-- Heading -->
             <div class="sidebar-heading tuto">
-                Gestion de Usuarios
+                Gestión de Usuarios
             </div>
 
             <!-- Nav Item - Pages Collapse Menu -->
@@ -115,7 +115,7 @@
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
                     aria-expanded="true" aria-controls="collapseTwo">
                     <i class="fas fa-fw fa-cog"></i>
-                    <span>Gestion </span>
+                    <span>Gestión </span>
                 </a>
                 <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
@@ -125,8 +125,8 @@
                  
                      
 
-                        <a class="collapse-item "  href="{% url 'listado_usuarios' %}">Gestion de Usuarios </a>
-                        <a class="collapse-item" href="{% url 'listado_blogs' %}">Gestion de blog</a>
+                        <a class="collapse-item "  href="{% url 'listado_usuarios' %}">Gestión de Usuarios </a>
+                        <a class="collapse-item" href="{% url 'listado_blogs' %}">Gestión de blog</a>
                         {% endif %}
 
                     </div>
@@ -143,7 +143,7 @@
                 <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities"
                     data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <h6 class="collapse-header ">Edicion / Creacion </h6>
+                        <h6 class="collapse-header ">Editar / Crear </h6>
 
 
                         {% if user.is_superuser %}
@@ -174,7 +174,7 @@
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages"
                     aria-expanded="true" aria-controls="collapsePages">
                     <i class="fas fa-fw fa-folder"></i>
-                    <span>Edicion / Crear  </span>
+                    <span>Editar / Crear  </span>
                 </a>
                 <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
@@ -184,19 +184,19 @@
 
 
                         <h6 class="collapse-header">Gestiones </h6>
-                        <a class="collapse-item tutoGes  "data-title="Hey" data-intro="This is a login button" href="{% url 'denuncias_listado' %}">Gestion denuncias</a>
-                        <a class="collapse-item" href="{% url 'contacto_listado' %}">Gestion Contactos</a>
+                        <a class="collapse-item tutoGes  "data-title="Hey" data-intro="This is a login button" href="{% url 'denuncias_listado' %}">Gestión denuncias</a>
+                        <a class="collapse-item" href="{% url 'contacto_listado' %}">Gestión Contactos</a>
                  
         
                         <div class="collapse-divider"></div>
                         <h6 class="collapse-header ">Albergue </h6>
-                        <a class="collapse-item" href="{% url 'adopciones_listado' %}">Gestion adopciones</a>
-                        <a class="collapse-item" href="{% url 'listado_perro' %}">Gestion de Perros</a>
+                        <a class="collapse-item" href="{% url 'adopciones_listado' %}">Gestión adopciones</a>
+                        <a class="collapse-item" href="{% url 'listado_perro' %}">Gestión de Perros</a>
                      
 
                         <div class="collapse-divider"></div>
                         <h6 class="collapse-header">Ayudas </h6>
-                        <a class="collapse-item" href="{% url 'listado_donaciones' %}">Gestion donaciones</a>
+                        <a class="collapse-item" href="{% url 'listado_donaciones' %}">Gestión donaciones</a>
                         <a class="collapse-item" href="{% url 'listado_solicitudes_donaciones' %}">Solicitudes donaciones</a>
                     </div>
                 </div>
@@ -213,7 +213,7 @@
 
      <!-- PARA TIENDA -->
               <div class="sidebar-heading tuto">
-                Gestion de Tienda
+                Gestión de Tienda
             </div>
 
             <!-- Nav Item - Pages Collapse Menu -->
@@ -228,8 +228,8 @@
                         <h6 class="collapse-header">Editar / Publicar  </h6>
 
                         {% if user.is_superuser %}
-                        <a class="collapse-item "  href="{% url 'listar_productos' %}">Gestion de Productos </a>
-                        <a class="collapse-item" href="{% url 'pagina_categorias' %}">Gestion de Categorias</a>
+                        <a class="collapse-item "  href="{% url 'listar_productos' %}">Gestión de Productos </a>
+                        <a class="collapse-item" href="{% url 'pagina_categorias' %}">Gestión de Categorias</a>
                         {% endif %}
 
                     </div>
@@ -246,7 +246,7 @@
                 <div id="collapseVentas2" class="collapse" aria-labelledby="headingUtilities"
                     data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <h6 class="collapse-header ">Edicion / Creacion </h6>
+                        <h6 class="collapse-header ">Editar / Crear </h6>
                         <a class="collapse-item" href="#">Perfiles de Compradores</a>
                         <a class="collapse-item" href="{% url 'pagina_order'  %}">Orden de Pedidos </a>
                     </div>
@@ -302,7 +302,7 @@ data-layout="button_count">Compartir Sitio </a>
 <h3 style="margin-left:5%;color:white">
     {% block tema %}
 
-Administracion
+Administración
 {% endblock tema %}
 </h3>
 
@@ -318,7 +318,12 @@ Administracion
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <i class="fas fa-bell fa-fw"></i>
                                 <!-- Counter - Alerts -->
-                                <span class="badge badge-danger badge-counter">3+</span>
+                                <span class="badge badge-danger badge-counter">
+
+
+                                    3+
+
+                                </span>
                             </a>
                             <!-- Dropdown - Alerts -->
                             <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in"

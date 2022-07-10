@@ -463,8 +463,11 @@
 
                                 <div class="col carousel-course-card wow zoomIn" data-wow-delay="0.1s"
                                      data-flickity='{ "freescroll": true, "pageDots": false, "wrapAround": true }'>
+
                                     {% for m in Ventas %}
-                                    <div class=" carousel-course-card-cell" style="height: 400px;width: 400px;">
+
+                                    <div class=" carousel-course-card-cell" style="height: 400px;width: 400px;border-style:solid;border-color:orange">
+                                              <h2 style="background-color:orange;width:100%;color:white">{{m.category }}</h2>
                                         <div class="card-cell-thumbnail">
 
                                             {% if m.image %}
@@ -484,11 +487,11 @@
                                             <div class="card-cell-text">
 
                                                 <h3>{{m.name}}</h3>
-                                                <p style="text-align:justify">{{m.description }}</p>
+                                                <p style="text-align:justify">${{m.price }}</p>
                                             </div>
                                         </div>
-                                        <div class="card-cell-button btn-secundario">
-                                            <a href="{% url 'product_list' %}" style="color: #ffffff;">Ver más </a>
+                                        <div class="card-cell-button ">
+                                            <a href="{% url 'product_list' %}" style="color: #ffffff;"><i class="fas fa-shopping-cart" style="color:white;">Ver más </i> </a>
                                         </div>
                                     </div>
 
@@ -496,7 +499,10 @@
                                     {% endfor %}
 
                                 </div>
-
+   {% if user.is_superuser %}
+                <a href="{% url 'listar_productos' %} " class="btn btn-admin"><i class=" fas fa-tools" style="padding-right:5px;border-right:solid;"></i> Editar </a>
+                {% else %}
+                {% endif %}
                                 <!-- Pricing End -->
                             </div>
 
@@ -570,8 +576,7 @@
                 </div>
                 <div class="service-content">
                     <h3>Proceso de Voluntariado</h3>
-                    <p>Sabia , cuenta con el proceso de voluntariado , gracias a organizaciones Internacionales como WorkPacker ,
-                    Con la que obtendras , una maravillosa experiencia.
+                    <p>Sabia, cuenta con el proceso de voluntariado, gracias a organizaciones Internacionales como WorkPacker, Con la que obtendrás, una maravillosa experiencia
                       <a href="{% url 'pagina_blogs' %}" class="btn btn-principal " style="">Continuar </a>
                     </p>
 
@@ -587,8 +592,8 @@
                     </div>
                 </div>
                 <div class="service-content">
-                    <h3>Como Funciona ? </h3>
-                    <p>El proceso de Adopcion , es personal , pero puedes apartar un canino , y poder conocerlos un poco mas , tanto en la pagina como en el Instagram
+                    <h3>¿Cómo Funciona ? </h3>
+                    <p>El proceso de Adopción, es personal, pero puedes apartar un canino, y poder conocerlos un poco más, tanto en la página como en el Instagram
 
                     <a href="{% url 'pagina_adopciones' %}" class="btn btn-principal " style="">Continuar </a>
 
@@ -606,8 +611,7 @@
                 </div>
                 <div class="service-content">
                     <h3>Impulsa nuestra Labor</h3>
-                    <p>SABIA,cuenta con productos, desde articulos de decoracion , hasta peluches de recuerdo con los que puedes llevar un poco de la escencia
-                    de los caninos de nuestro albergue
+                    <p>SABIA, cuenta con productos, desde artículos de decoración, hasta peluches de recuerdo con los que puedes llevar un poco de la esencia de los caninos de nuestro albergue
 
                         <a href="{% url 'product_list' %}" class="btn btn-principal " style="">Continuar </a>
 
@@ -625,7 +629,7 @@
                 </div>
                 <div class="service-content">
                     <h3>Ayuda a un Perrito </h3>
-                    <p>Puedes Donar los productos , que esta necesitando directamente o apadrinar con un monto a un canino de tu preferencia
+                    <p>Puedes Donar los productos, que está necesitando directamente o apadrinar con un monto a un canino de tu preferencia
                         <a href="{% url 'pagina_donaciones' %}" class="btn btn-principal " style="">Continuar </a>
 
                     </p>
@@ -662,14 +666,19 @@
                             de vida de los animales,todo esto  en un cambio cultural y convivencia única.</p>
                     </div>
                     <!-- extra -->
-
+   {% if user.is_superuser %}
+                <a href="{% url 'listado_usuarios' %} " class="btn btn-admin"><i class=" fas fa-tools" style="padding-right:5px;border-right:solid;"></i> Revisar </a>
+                {% else %}
+                {% endif %}
                 </div><!-- /end col-md-4 -->
             </div>
             <div class="col carousel-course-card wow zoomIn" data-wow-delay="0.1s"
                  data-flickity='{ "freescroll": true, "pageDots": false, "wrapAround": true }'>
                 {% for m in voluntariado %}
 
-                <div class=" carousel-course-card-cell" style="height: 300px;width: 300px;">
+                <div class=" carousel-course-card-cell" style="height: 300px;width: 300px;border-style:solid;border-color:green">
+                                              <h2 style="background-color:green;width:100%;color:white"> Voluntarios</h2>
+
                     <div class="card-cell-thumbnail">
 
                        {% if m.User.perfil.imagen_perfil %}
@@ -689,7 +698,7 @@
                         </div>
                     </div>
                     <div class="card-cell-button btn-secundario">
-                        <a href="{% url 'pagina_blogs' %}" style="color: #ffffff;">Leer Más</a>
+                        <a href="{% url 'pagina_blogs' %}" style="border-style:none;color: #ffffff;">Leer Más</a>
                     </div>
                 </div>
 
@@ -752,10 +761,36 @@
                 </p>
                 <h5 class="text-uppercase  wow fadeInUp" data-wow-delay="0.3s">Contactos Directos: </h5>
                 <h1 class="wow fadeInUp" data-wow-delay="0.6s">+593 0998530277</h1>
+                   {% if user.is_superuser %}
+                <a href="{% url 'listado_donaciones' %} " class="btn btn-admin"><i class=" fas fa-tools" style="padding-right:5px;border-right:solid;"></i> Editar Donaciones </a>
+
+                {% else %}
+                {% endif %}
             </div>
             <div class="col-lg-7">
                 <div class="owl-carousel price-carousel wow zoomIn" data-wow-delay="0.9s">
                     <div class="price-item pb-4">
+                        <div class="position-relative">
+                            <!-- <img class="img-fluid rounded-top" src="{% static 'img/albergue1.png ' %}" alt=""> -->
+                            <span class="title-icon pull-left" style="font-size: 200px;margin-left: 10%;"><i
+                                    class="fas fa-money-check-alt" aria-hidden="true"></i></span>
+                            <div class="d-flex align-items-center justify-content-center bg-light rounded pt-2 px-3 position-absolute top-100 start-50 translate-middle"
+                                 style="z-index: 2;">
+                                <h2 class="text-primary m-0">$</h2>
+                            </div>
+                        </div>
+                        <div class="position-relative text-center bg-light border-bottom border-primary py-5 p-4">
+                            <h4>Cuentas</h4>
+                            <hr class="text-primary w-50 mx-auto mt-0">
+                            <div class="d-flex justify-content-between mb-2"><p>Banco Pichincha  <span>26461313216841</span></p>
+                            </div>
+                            <div class="d-flex justify-content-between mb-2"><p>Banco General <span>26461313216841</span></p>
+                            </div>
+                            <a href="{% url 'pagina_apadrinamiento' %}"
+                               class="btn btn-primary py-2 px-4 position-absolute top-100 start-50 translate-middle">Ver Más </a>
+                        </div>
+                    </div>
+ <div class="price-item pb-4">
                         <div class="position-relative">
                             <!-- <img class="img-fluid rounded-top" src="{% static 'img/albergue1.png ' %}" alt=""> -->
                             <span class="title-icon pull-left" style="font-size: 200px;margin-left: 10%;"><i
@@ -772,68 +807,30 @@
                                     class="fa fa-check text-primary pt-1"></i></div>
                             <div class="d-flex justify-content-between mb-3"><span>Compra de Medicina </span><i
                                     class="fa fa-check text-primary pt-1"></i></div>
-                            <div class="d-flex justify-content-between mb-2"><span>Disponibilidad del Sitio </span><i
+                            <div class="d-flex justify-content-between mb-2"><span>Cuidados de Canes </span><i
                                     class="fa fa-check text-primary pt-1"></i></div>
-                            <a href="appointment.html"
+                                  <div class="d-flex justify-content-between mb-2"><span>Disponibilidad del Sitio </span><i
+                                    class="fa fa-check text-primary pt-1"></i></div>
+                            <a href="{% url 'pagina_apadrinamiento' %}"
                                class="btn btn-primary py-2 px-4 position-absolute top-100 start-50 translate-middle">Donar </a>
                         </div>
                     </div>
-                    <div class="price-item pb-4">
-                        <div class="position-relative">
-                            <!-- <img class="img-fluid rounded-top" src="{% static 'img/albergue1.png ' %}" alt=""> -->
-                            <span class="title-icon pull-left" style="font-size: 200px;margin-left: 10%;"><i
-                                    class="fab fa-cc-paypal" aria-hidden="true"></i></span>
-
-                            <div class="d-flex align-items-center justify-content-center bg-light rounded pt-2 px-3 position-absolute top-100 start-50 translate-middle"
-                                 style="z-index: 2;">
-                                <h2 class="text-primary m-0">$50</h2>
-                            </div>
-                        </div>
-                        <div class="position-relative text-center bg-light border-bottom border-primary py-5 p-4">
-                            <h4>Medicina </h4>
-                            <hr class="text-primary w-50 mx-auto mt-0">
-                            <div class="d-flex justify-content-between mb-3"><span>Revision Veterinaria</span><i
-                                    class="fa fa-check text-primary pt-1"></i></div>
-                            <div class="d-flex justify-content-between mb-3">
-                                <span>Reparacion de Viviendas de canes</span><i
-                                    class="fa fa-check text-primary pt-1"></i></div>
-                            <div class="d-flex justify-content-between mb-2"><span>Compra de Medicinas </span><i
-                                    class="fa fa-check text-primary pt-1"></i></div>
-                            <a href="appointment.html"
-                               class="btn btn-primary py-2 px-4 position-absolute top-100 start-50 translate-middle">Donar</a>
-                        </div>
-                    </div>
-                    <div class="price-item pb-4">
-                        <div class="position-relative">
-                            <!-- <img class="img-fluid rounded-top" src="{% static 'img/albergue1.png ' %}" alt=""> -->
-                            <span class="title-icon pull-left" style="font-size: 200px;margin-left: 10%;"><i
-                                    class="fab fa-cc-paypal" aria-hidden="true"></i></span>
-
-                            <div class="d-flex align-items-center justify-content-center bg-light rounded pt-2 px-3 position-absolute top-100 start-50 translate-middle"
-                                 style="z-index: 2;">
-                                <h2 class="text-primary m-0">$100</h2>
-                            </div>
-                        </div>
-                        <div class="position-relative text-center bg-light border-bottom border-primary py-5 p-4">
-                            <h4>Albergue </h4>
-                            <hr class="text-primary w-50 mx-auto mt-0">
-                            <div class="d-flex justify-content-between mb-3"><span>Equipacion de Herramientas </span><i
-                                    class="fa fa-check text-primary pt-1"></i></div>
-                            <div class="d-flex justify-content-between mb-3"><span>Contratacion de Personal </span><i
-                                    class="fa fa-check text-primary pt-1"></i></div>
-                            <div class="d-flex justify-content-between mb-2"><span>Cuidado Veterinario </span><i
-                                    class="fa fa-check text-primary pt-1"></i></div>
-                            <a href="appointment.html"
-                               class="btn btn-primary py-2 px-4 position-absolute top-100 start-50 translate-middle">Donar</a>
-                        </div>
-                    </div>
                 </div>
+
+                 {% if user.is_superuser %}
+                 <a href="{% url 'listado_solicitudes_donaciones' %} " class="btn btn-admin"><i class=" fas fa-tools" style="padding-right:5px;border-right:solid;"></i> Revisar Donaciones </a>
+
+                {% else %}
+                {% endif %}
+
+
             </div>
+
         </div>
     </div>
 </div>
 <!-- Pricing End -->
-<div class="containerDonaciones">
+<div class="container containerDonaciones">
     <div class="container ">
         <div class="col-lg-12 wow zoomIn" data-wow-delay="0.1s">
             <div class=" d-flex flex-column p-5" style="height: 200px;">
@@ -855,7 +852,7 @@
 
 
                     <img src="media/{{ m.imagen }}" alt="{{m.imagen}}" class="img-fluid"
-                         style="max-height: 300px;min-height: max-content;">
+                         style="max-height: 150px;min-height:150px;max-width:150px;min-width:150px">
 
 
                     {% else %}
@@ -883,10 +880,12 @@
 
         </div>
 
+
     </div>
 
 
 </div>
+
 <!-- Titulo de la seccion  -->
 <div class="row" style="background-color: white;">
     <div class="col-md-12 heading" style="padding-left: 5%;padding-top: 2%;">
@@ -898,14 +897,22 @@
 </div><!--fin del titulo  -->
 
 <div class="container ">
-
-    <div class="col">
+<div class="row">
+      <div class="col-md-3 col-sm-12 col-lg-4 wow fadeIn" data-wow-delay="0.2s">
         <a href="https://www.worldpackers.com/es/positions/36380" target="_blank" style="margin-left:15%">
             <img class="img-fluid wow zoomIn" data-wow-delay="0.1s" src="{% static 'img/worldpackers.webp' %}"
                  alt="empresa" style="max-height: 300px;min-height: max-content;"/>
         </a>
 
     </div>
+  <div class="col-md-3 col-sm-12 col-lg-4 wow fadeIn" data-wow-delay="0.2s">
+        <a href="https://www.workaway.info/en/host/114368541237" target="_blank" style="margin-left:15%;">
+            <img class="img-fluid wow zoomIn" data-wow-delay="0.1s" src="{% static 'img/fondos/workawayinfo.png' %}"
+                 alt="empresa" style="max-height: 300px;min-height: max-content;"/>
+        </a>
+
+    </div>
+</div>
 
 
 </div>
