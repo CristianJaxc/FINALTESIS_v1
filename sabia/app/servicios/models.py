@@ -10,7 +10,6 @@ class Category(models.Model):
     name = models.CharField(max_length=200, db_index=True)
     featured = models.BooleanField(default=False)
     slug = models.SlugField(max_length=200, db_index=True, unique=True)
-
     class Meta:
         ordering = ('name',)
         verbose_name = 'category'

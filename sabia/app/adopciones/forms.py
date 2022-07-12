@@ -1,6 +1,6 @@
 
 from django import forms
-from app.adopciones.models import Perros, Solicitudes
+from app.adopciones.models import Perros, Solicitudes, Categorias_Perros
 
 class PerroForm(forms.ModelForm):
     nombre = forms.CharField(max_length=100,required=True,widget=forms.TextInput(attrs={'class': 'form-control'}),label='Nombre')
@@ -10,11 +10,17 @@ class PerroForm(forms.ModelForm):
     enfermedades = forms.CharField(max_length=100,required=True,widget=forms.TextInput(attrs={'class': 'form-control'}),label='Enfermedades')
     estado = forms.BooleanField(required=False,label='Estado del perro')
     descripcion = forms.CharField(required=True,widget=forms.Textarea(attrs={'class': 'form-control'}),label='Descripccion')
+    link = forms.URLField(required=False,label='link social ')
     imagen_mascota=forms.ImageField(required=False,label='Foto Perro')
+
     class Meta:
         model = Perros
-        fields = ['nombre','raza','edad','vacunas','enfermedades','estado','descripcion','imagen_mascota']
+        fields = '__all__'
 
+class  Categorias_PerrosForm(forms.ModelForm):
+    class Meta:
+        model = Categorias_Perros
+        fields = '__all__'
 
 class SolicitudesForm(forms.ModelForm):
     nombre = forms.CharField(max_length=100,required=True,widget=forms.TextInput(attrs={'class': 'form-control'}),label='Nombres Completos')

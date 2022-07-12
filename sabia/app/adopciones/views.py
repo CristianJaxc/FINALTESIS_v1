@@ -4,6 +4,7 @@ from urllib import request
 from django.shortcuts import render, redirect
 from django.contrib.auth import login, authenticate
 from django.shortcuts import render, HttpResponseRedirect
+from django.shortcuts import redirect, get_object_or_404
 from django.contrib.auth.forms import UserCreationForm
 from django.urls import reverse_lazy
 from django.views import generic
@@ -15,7 +16,7 @@ from django.contrib.messages.views import SuccessMessageMixin
 # ---------- Para modelos -------------
 from django.contrib.auth.models import User
 from app.adopciones.forms import PerroForm, SolicitudesForm, SolicitudesForm2
-from app.adopciones.models import Perros, Solicitudes
+from app.adopciones.models import Perros, Solicitudes,Categorias_Perros
 
 from app.usuario.models import Perfil
 from app.denuncias.models import Denuncias
@@ -34,25 +35,25 @@ def Pagina_adopciones(request):
 
      perros = Perros.objects.filter(estado = True).order_by('id')
      queryset=request.GET.get("buscar")
-     page = request.GET.get("page") or 1
+     #page = request.GET.get("page") or 1
+     page_number = request.GET.get('page')
+
      if queryset:
       perros=Perros.objects.filter(
           Q(nombre__icontains=queryset)
      ).distinct()
-
      try :
-
-        paginator = Paginator(perros,6)
-        perros = paginator.page(page)
-     except:
-            raise Http404
-
-    
-
+         paginator = Paginator(perros,6)
+         page_obj = paginator.get_page(page_number)
+         perros = paginator.page(page_number)
+        #paginator = Paginator(perros,6)
+        #perros = paginator.page(page)
+     except Exception as e:
+         print(e)
     #  paginate_by=1
     #  queryset= Perros.objects.filter(estado = True).order_by('id')
     #  paginate_by=1
-     return render(request, 'adopciones/pagina_adopciones.html',{'perros':perros,'paginator':paginator,})
+     return render(request, 'adopciones/pagina_adopciones.html',{'perros':perros,'page_obj':page_obj})
 
 
 
@@ -63,6 +64,37 @@ def get_queryset(self):
       return Perros.objects.filter(estado = True).order_by('id')
 
 
+#Clasificacion mascotas , sexo , tamaño .:
+def perro_list(request, category_slug=None):
+    category = None
+    categories = Categorias_Perros.objects.all()
+    perros = Perros.objects.filter(estado=True).order_by('id')
+    queryset = request.GET.get("buscar")
+    # page = request.GET.get("page") or 1
+    page_number = request.GET.get('page')
+
+    if queryset:
+        perros = Perros.objects.filter(
+            Q(nombre__icontains=queryset)
+        ).distinct()
+    try:
+        paginator = Paginator(perros, 6)
+        page_obj = paginator.get_page(page_number)
+        perros = paginator.page(page_number)
+    # paginator = Paginator(perros,6)
+    # perros = paginator.page(page)
+    except Exception as e:
+        print(e)
+
+
+
+    if category_slug:
+        category = get_object_or_404(Categorias_Perros, slug=category_slug)
+        perros = perros.filter(category=category)
+
+    return render(request, 'adopciones/pagina_adopciones2.html',
+                  {'category': category, 'categories': categories,
+                   'perros': perros,'page_obj':page_obj})
 
 # class pagina_adopciones(ListView):
 #      template_name='adopciones/pagina_adopciones.html'

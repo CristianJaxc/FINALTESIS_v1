@@ -35,7 +35,7 @@
 </style>
 
 <!-- <body>
-    
+
     <center>
         <h1>Pagina de adopciones</h1>
         <h3>carrusel de imagenes</h3>
@@ -53,7 +53,7 @@
                 {% if i.imagen_mascota %}
                 <br/>
                 <img src="/media/{{i.imagen_mascota}}" alt="{{i.imagen_mascota}}" class="img-fluid"  style="max-height: 300px;min-height: max-content;" >
-                 
+
                 {% else %}
                 <img src="{% static 'imagenes/adopciones/adop1.jpg'  %}" class="img-fluid">
                 {% endif %}
@@ -62,8 +62,8 @@
                     <p class="card-text">
                         <ul>
                             <li><strong>nombre: </strong>{{i.nombre}}</li>
-                          
-                            
+
+
                             <li><strong>edad: </strong>{{i.edad}}</li>
                             <li><strong>vacunas: </strong>{{i.vacunas}}</li>
                             <li><strong>descricion: </strong>{{i.descripcion}}</li>
@@ -88,7 +88,7 @@
     <div class="row py-3" >
         <div class="col-12 text-center">
             <h1 class="display-3 text-white animated zoomIn">Adopciones </h1>
-          
+
         </div>
     </div>
 </div>
@@ -101,7 +101,7 @@
                     <div class="input-group.col-md-12">
                       <i class="fas fa-search" style="font-size: 1px;" >
                             <input type="text" class="form-control" placeholder="Buscar" name="buscar">
-                          
+
                         </i>
                         <button type="submit" class="btn btn-success">Buscar</button>
                         <span class="input-group-list">
@@ -116,46 +116,21 @@
 <!-- Hero End -->
 
 <!-- para la busqueda  !-->
-<nav class="container mainMenu">
-  <ul>
-    <li class="active"><a href="/">all</a></li>
-    {% for c in   category %}
-      <li>sadsa</li>
-  		<li><a class="btn" href="{{c.get_absolute_url}}">{{c.tamaño}}</a></li>
-  	{% empty %}
-  		<li>No existen categorias creadas.</li>
-  	{% endfor %}
-  </ul>
-</nav>
-<button>
-    <a href="{% url 'Pagina_adopciones1' %}">
-        bvamos
-    </a>
-</button>
-
-    <div class="col-md-3 col-sm-12 col-lg-4 wow fadeIn" data-wow-delay="0.2s">
+<div class="col-md-3 col-sm-12 container" >
+        <div class="col-md-3 col-sm-12 col-lg-4 wow fadeIn" data-wow-delay="0.2s">
                  <div class="row">
         <div class="widget-wrapper">
-          <h4>Categorias</h4>
-          <br>
-
           <div class="list-group">
-
-<ul>
-
-
+<ul style="display:flex">
             <li {% if not category %}class="selected"{% endif %} style="list-style:none;padding:2%">
-                <a href="{% url 'product_list' %}"  class="list-group-item  btn btn-secundario">All</a>
-
-
+                <a href="{% url 'Pagina_adopciones1' %}"  class="list-group-item  btn btn-warning">All</a>
             </li>
-            {% for c in perros %}
+            {% for c in categories %}
 
                 <li {% if category.slug == c.slug %}class="selected"{% endif %} style="list-style:none;padding:2%">
-                    <a href="{{ c.get_absolute_url }}" class="list-group-item  btn btn-secundario">{{ c.category }}</a>
+                    <a href="{{ c.get_absolute_url }}" class="list-group-item  btn btn-secundario">{{ c.name }}</a>
                 </li>
             {% endfor %}
-
 </ul>
 
           </div>
@@ -164,11 +139,12 @@
 </div>
       </div>
 
+</div>
+
 
 <ul class="cards">
         {% for m in perros %}
-
-
+    {% if forloop.counter < 7 %}
     <li >
     <div href="" class="card">
 
@@ -181,7 +157,7 @@
       <div class="card__overlay">
         <div class="card__header">
           <svg class="card__arc" xmlns="http://www.w3.org/2000/svg"><path /></svg>
-<a href="{{m.link}}">
+<a href="{{m.link}}" target="_blank">
     <div class="icon">
 	<i class=" fab fa-instagram" style="color: #fff;
     	font-size: 50px;
@@ -210,8 +186,7 @@
     </div>
 
   </li>
-
-
+    {% endif %}
       {% endfor %}
 
 

@@ -44,6 +44,12 @@
 												Edad : {{perro.edad}}
 								<hr>
 												Sexo :
+                                {% ifequal  perro.sexo 0 %}
+                                macho
+                                {% else %}
+                                hembra
+                          {% endifequal %}
+
 
 
 
