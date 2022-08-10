@@ -27,7 +27,7 @@ SECRET_KEY = 'j@i7ac0khclyp(n)^um)d(jr^5jxj(l0=5^+4i(t6o@f)u)_pq'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['cristiansabia.pythonanywhere.com']
 
 MESSAGE_STORAGE ="django.contrib.messages.storage.cookie.CookieStorage"
 # Application definition
