@@ -18,10 +18,14 @@ class Noticia(models.Model):
     titulo = models.CharField(max_length=200, blank=True, verbose_name='Titulo de la publicacion')
     contenido_noticia = models.TextField(blank=True, verbose_name='Contenido de la publicacion')
     link = models.URLField(null=True, blank=True,verbose_name="Dirección Web")
+    nombre_mascota = models.CharField(max_length=200, blank=True, verbose_name='Nombre Mascota')
     fecha_creacion = models.DateField(auto_now_add=True, verbose_name='Fecha de creacion')
     estado = models.BooleanField(default=False, verbose_name='Estado de la publicacion')
     descripcion = models.TextField(blank=True, verbose_name='Descripcion de la publicacion')
-    imagen_noticia=models.ImageField(upload_to='photos',verbose_name="imagenes",default='photos/perro1.jpg')
+    imagen_antes = models.ImageField(upload_to='photos', verbose_name='PosterAntes', blank=True, null=True,
+                                     default='photos/perro1.jpg')
+    imagen_despues = models.ImageField(upload_to='photos', verbose_name='PosterDespues', blank=True, null=True,
+                                       default='photos/perro1.jpg')
 
     class Meta:
             verbose_name = "noticia"
@@ -30,4 +34,24 @@ class Noticia(models.Model):
 
             def __str__(self):
                 return self.title
+
+
+class NotiInfo(models.Model):
+    nname = models.CharField(max_length=255, verbose_name="nombre del recurso")
+    imagen_noticia=models.ImageField(upload_to='photos',verbose_name="imagenes",default='photos/perro1.jpg')
+    ndescripcion = models.TextField(blank=True, verbose_name='Contenido ')
+    time = models.DateField(auto_now_add=True,verbose_name="Showtime")
+    nurl = models.CharField(max_length=255, verbose_name="play address")
+
+    class Meta:
+            verbose_name = "BlogNoti"
+            verbose_name_plural = "BlogNoticias"
+            ordering = ["-time"]
+
+            def __str__(self):
+                return self.nname
+
+
+
+
 

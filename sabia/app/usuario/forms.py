@@ -8,6 +8,32 @@ class PerfilForm(forms.ModelForm):
         model = Perfil
         fields = [
             'imagen_perfil',
+            'role',
+            'cedula',
+            'direccion',
+            'telefono',
+            'nacionalidad',
+        ]
+        labels = {
+            'imagen_perfil':'imagen_perfil',
+            'role':'role',
+            'cedula_perfil': 'Cédula',
+            'direccion_perfil': 'Dirección',
+            'telefono_perfil': 'Teléfono',
+            'nacionalidad': 'Nacionalidad',
+        }
+        widgets = {
+            'cedula_perfil': forms.TextInput(attrs={'class': 'form-control'}),
+            'direccion_perfil': forms.TextInput(attrs={'class': 'form-control'}),
+            'telefono_perfil': forms.TextInput(attrs={'class': 'form-control'}),
+            'nacionalidad': forms.TextInput(attrs={'class': 'form-control'})
+        }
+
+class PerfilFormVoluntario(forms.ModelForm):
+    class Meta:
+        model = Perfil
+        fields = [
+            'imagen_perfil',
             'cedula',
             'direccion',
             'telefono',

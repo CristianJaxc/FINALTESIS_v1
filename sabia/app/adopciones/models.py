@@ -2,8 +2,9 @@ from pyexpat import model
 from django.db import models
 from django.contrib.auth.models import User
 # Create your models here.
+from django.forms import model_to_dict
 from django.urls import reverse
-
+from datetime import datetime
 
 from django.utils.text import slugify
 class Categorias_Perros(models.Model):
@@ -41,7 +42,12 @@ class Perros(models.Model):
     link = models.URLField(null=True, blank=True, verbose_name="Red Social")
     imagen_mascota=models.ImageField(upload_to='photos',verbose_name="imagenes",default='photos/perro1.jpg')
 
+    def toJSON(self):
+            item = model_to_dict(self)
+            return item
 
+    class Meta:
+        ordering = ['id']
 
 class Solicitudes(models.Model):
     nombre = models.CharField(max_length=50, blank=True, verbose_name='Nombres')
@@ -50,6 +56,13 @@ class Solicitudes(models.Model):
     telefono = models.CharField(max_length=10,blank=True, verbose_name="Telefono" )
     direccion = models.CharField(max_length=100,blank=True, verbose_name="Direccion")
     estado = models.BooleanField(default=False, verbose_name='Estado')
+    date_joined = models.DateField(default=datetime.now)
     descripcion = models.TextField(blank=True, verbose_name='Descripcion')
     perros = models.ForeignKey(Perros,verbose_name='Perros', on_delete=models.CASCADE)
 
+    def toJSON(self):
+            item = model_to_dict(self,exclude='estado')
+
+            return item
+    class Meta:
+        ordering = ['id']

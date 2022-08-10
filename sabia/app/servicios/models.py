@@ -1,4 +1,7 @@
+
+
 from django.db import models
+from django.forms import model_to_dict
 
 from django.urls import reverse
 
@@ -6,6 +9,9 @@ from django.urls import reverse
 from django.utils.text import slugify
 
 # Create your models here.
+
+
+
 class Category(models.Model):
     name = models.CharField(max_length=200, db_index=True)
     featured = models.BooleanField(default=False)
@@ -39,12 +45,27 @@ class Product(models.Model):
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
 
-    class Meta:
-        ordering = ('name',)
-        index_together = (('id', 'slug'),)
+
 
     def __str__(self):
         return self.name
+
+    def toJSON(self):
+        item = model_to_dict(self,exclude='image')
+        #item['category'] = self.category.toJSON()
+        #item['name'] = self.name.toJSON()
+        #item['slug'] = self.slug.toJSON()
+        #item['description'] = self.description.toJSON()
+        #item['price'] = self.price.toJSON()
+        # item['stock'] = self.stock.toJSON()
+        # item['available'] = self.available.toJSON()
+        #item['created'] = self.created.toJSON()
+        #item['updated'] = self.updated.toJSON()
+        return item
+
+    class Meta:
+        ordering = ('name',)
+        index_together = (('id', 'slug'),)
 
     def save(self, *args, **kwargs):
         if not self.slug:
@@ -53,6 +74,7 @@ class Product(models.Model):
 
     def get_absolute_url(self):
         return reverse('product_detail', args=[self.id, self.slug])
+
 
 
 

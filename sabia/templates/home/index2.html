@@ -19,14 +19,16 @@
     <!-- creando el titulo que llevara la plantilla donde se herede el bloque de contenido "TITULO" -->
     <title>{% block titulo %} Fundación SABIA{% endblock %}</title>
     <!-- ARCHIVOS CDN REFERENCIA  -->
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <!-- referencia a los archivos de tipo javascript propios para Boostrap 5 tanto para la funcionalidad como para el diseño  -->
  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   <!-- Instalacion de appweb-->
 
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
     crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.min.js"></script>
 
 
     <link rel="manifest" href="/manifest.json">
@@ -50,7 +52,7 @@
 
     <link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/3.10.1/mdb.min.css" rel="stylesheet" />
 
-    <link rel="stylesheet" href="{% static 'css/base.css' %}">
+    <link rel="stylesheet" href="{% static 'css/base1.css' %}">
     <link rel="stylesheet" href="{% static 'css/adaptativo1.css' %}">
 
 <!-- Estilos staticos : :: -->
@@ -80,34 +82,71 @@
     {% load pwa %}
     {% progressive_web_app_meta %}
 
+    <!-- firebase !-->
+<!--
+<script src="https://www.gstatic.com/firebasejs/3.9.0/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/3.9.0/firebase-messaging.js"></script>
+-->
 
+<!--
+<script type="module">
+  // Import the functions you need from the SDKs you need
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/9.9.0/firebase-app.js";
+  // TODO: Add SDKs for Firebase products that you want to use
+  // https://firebase.google.com/docs/web/setup#available-libraries
 
+  // Your web app's Firebase configuration
+  const firebaseConfig = {
+    apiKey: "AIzaSyAyrNXdN-lSog7PM45yplrLBNp9GwU4ppI",
+    authDomain: "sabiaweb.firebaseapp.com",
+    projectId: "sabiaweb",
+    storageBucket: "sabiaweb.appspot.com",
+    messagingSenderId: "184723979317",
+    appId: "1:184723979317:web:967bd4a3be2ee1d6f4457c"
+  };
+
+  // Initialize Firebase
+  const app = initializeApp(firebaseConfig);
+</script>-->
 </head>
 
 
+<style>
+
+    .dropdown-menu li {
+position: relative;
+}
+.dropdown-menu .dropdown-submenu {
+display: none;
+position: absolute;
+left: 100%;
+top: -7px;
+}
+.dropdown-menu .dropdown-submenu-left {
+right: 100%;
+left: auto;
+}
+.dropdown-menu > li:hover > .dropdown-submenu {
+display: block;
+}
+</style>
 <body >
 
 
-    <!-- Spinner Start -->
-    <div id="spinner" class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
-      <div class="spinner-grow color m-1" role="status">
-          <span class="sr-only">Loading...</span>
-      </div>
-      <div class="spinner-grow color m-1" role="status">
-          <span class="sr-only">Loading...</span>
-      </div>
-      <div class="spinner-grow color  m-1" role="status">
-          <span class="sr-only">Loading...</span>
-      </div>
-  </div>
-  <!-- Spinner End -->
-<!-- <div class="centrado" id="onload">
-
-    <div class="lds-ripple"><div></div><div></div></div>
 
 
-
-</div> -->
+    <!-- Preloader Start -->
+<div id="preloader-active">
+    <div class="preloader d-flex align-items-center justify-content-center">
+        <div class="preloader-inner position-relative">
+            <div class="preloader-circle"></div>
+            <div class="preloader-img pere-text">
+               <img src="{% static 'img/logosabia.webp' %}" style="width: 100%;" alt="logo">
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Preloader Start -->
 
 
 
@@ -116,12 +155,12 @@
     <div class="row gx-0">
         <div class="col-md-6 text-center text-lg-start mb-2 mb-lg-0">
             <div class="d-inline-flex align-items-center">
-                <small class="py-2"><i class="far fa-clock text-primary me-2"></i>Abierto desde : Lunes - Domingo  : 8.00 am - 8.00 pm </small>
+                <small class="py-2"><i class="far fa-clock text-primary me-2"></i>Abierto desde: Lunes - Domingo: 8.00 am - 8.00 pm </small>
             </div>
         </div>
         <div class="col-md-6 text-center text-lg-end">
             <div class="position-relative d-inline-flex align-items-center bg-primary1 text-white top-shape px-5">
-                <div class="me-3 pe-3 border-end py-2">
+                <div class="me-3 pe-3 border-end ">
                     <p class="m-0"><i class="fa fa-envelope-open me-2"></i>Sabia@gmail.com</p>
                 </div>
                 <div class="pe-3 border-end " >
@@ -134,10 +173,15 @@
                 {% if user.is_authenticated %}
 
                 <div class="dropdown  perfil ">
-                  <a href="#" class="dropdown-toggle" data-bs-toggle="dropdown">{{user.username}} </a>
+                  <a href="#" class="dropdown-toggle" data-bs-toggle="dropdown">{{request.user.username}} </a>
 
                   <div class="dropdown-menu m-0">
-                    <a href="{% url 'pagina' %}" class="dropdown-item">Perfil </a>
+                         {% ifequal user.perfil.role 'usuario' %}
+                              <a class="dropdown-item" href="{% url 'pagina_cliente' %}">Información</a>
+
+                    {% else %}
+  <a class="dropdown-item" href="{% url 'pagina' %}">Perfil</a>
+                {% endifequal %}
                     <a href="{% url 'logout' %}" class="dropdown-item">Cerrar Sesion</a>
 
                 </div>
@@ -176,82 +220,87 @@
         <span class="visually-hidden">Opciones</span>
     </button> -->
 
-    <H2 class="navbar-toggler" >
+    <h2 class="navbar-toggler" >
 <div class="row">
     <div class="col-md-8" >
             <img src="{% static 'img/logosabia.webp' %}" style="width: 35%; margin-left: -20px;" alt="logo">
-
     </div>
     <hr>
-    <div class="col-xs-12 col-md-8">
-                   <small class="py-2"><i class="far fa-clock text-primary me-2"></i>Abierto: 8.00 am - 8.00 pm </small>
-
-    </div>
-
-
 </div>
 
 
 
-    </H2>
+    </h2>
     <div class="collapse navbar-collapse" id="navbarCollapse" >
       <a href="{% url 'home' %}" class="navbar-brand p-0">
         <img src="{% static 'img/logosabia.webp' %}" style="width: 40%; margin-left: -20px;" alt="logo">
       </a>
         <div class="navbar-nav ms-auto py-0">
+
             <a href="{% url 'home' %}" class="nav-item nav-link active ">Home</a>
                  <div class="nav-item dropdown">
-                <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">About</a>
+                <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Sobre Nosotros</a>
                 <div class="dropdown-menu m-0">
-                    <a href="{% url 'quienes_somos' %}" class="dropdown-item">Labor Diario  </a>
-                    <a href="{% url 'contacto_registrar' %}" class="dropdown-item">Quienes Somos </a>
+                    <a href="{% url 'pagina_noticia' %}" class="dropdown-item">Labor Diario  </a>
+                    <a href="{% url 'quienes_somos_contacto' %}" class="dropdown-item">Quienes Somos </a>
+
 
                 </div>
             </div>
+              <div class="nav-item nav-link dropdown " >
+  <a class=" dropdown-toggle" type="button" id="dropdownMenuButton"
+    data-mdb-toggle="dropdown" aria-expanded="false" style="color:#091E3E;" >
+  Servicios
+  </a>
+  <ul class="dropdown-menu m-0" aria-labelledby="dropdownMenuButton">
+    <li>        <a href="{% url 'product_list' %}"class="dropdown-item">Tienda SABIA </a></li>
+          <li>
+
+                    <a href="{% url 'pagina_esterilizacion' %}" class="dropdown-item">Esterilización</a>
+      </li>
+
+    <li>
+      <a class="dropdown-item" href="#">
+         Adopciones &raquo;
+      </a>
+      <ul class="dropdown-menu dropdown-submenu">
+        <li>
+         <a href="{% url 'Pagina_adopciones1' %}" class="dropdown-item">Adoptar</a>
+        </li>
+        <li>
+      <a href="{% url 'terminos_adopcion' %}" class="dropdown-item">Condiciones de Adopción </a>
+        </li>
+      </ul>
+    </li>
+
+       <li>
+      <a class="dropdown-item" href="#">
+        Donaciones &raquo;
+      </a>
+      <ul class="dropdown-menu dropdown-submenu">
+           <li>  <a href="{% url 'pagina_apadrinamiento' %}"class="dropdown-item">Apadrinamiento </a></li>
+    <li>  <a href="{% url 'pagina_donaciones' %}" class="dropdown-item">Donaciones Directas</a></li>
+      </ul>
+    </li>
+  </ul>
+</div>
+
             <a href="{% url 'pagina_denuncias' %}" class="nav-item nav-link">Denuncias </a>
 
 
 
-    <div class="nav-item dropdown">
-                <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Servicios</a>
-                <div class="dropdown-menu m-0">
-<!--
-                    <a href="{% url 'pagina_productos' %}"class="dropdown-item">Tienda SABIA </a>
--->
-                      <a href="{% url 'product_list' %}"class="dropdown-item">Tienda SABIA </a>
 
-                    <a href="{% url 'pagina_esterilizacion' %}" class="dropdown-item">Esterilizacion</a>
-
-                </div>
-            </div>
-
-
-
-
-                  <div class="nav-item dropdown">
-                <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Donaciones</a>
-                <div class="dropdown-menu m-0">
-                    <a href="{% url 'pagina_apadrinamiento' %}"class="dropdown-item">Apadrinamiento </a>
-                    <a href="{% url 'pagina_donaciones' %}" class="dropdown-item">Donaciones Directas</a>
-
-                </div>
-            </div>
-
-
-
-
-            <a href="{% url 'pagina_adopciones' %}" class="nav-item nav-link">Adopciones</a>
             <a href="{% url 'pagina_blogs' %}" class="nav-item nav-link">Voluntariado</a>
+               <a href="{% url 'contacto_registrar' %}" class="nav-item nav-link">Contactos</a>
+
         </div>
     </div>
 </nav>
+
 <!-- Navbar End -->
   {% if cart|length <= 0 %}
-
    {% else %}
     <div class="" style="padding:1%;background-color:yellow;text-align:center">
-
-
       {% with total_items=cart|length %}
         {% if cart|length > 0 %}
             Revisa tu carrito de Compra , tienes :
@@ -259,37 +308,32 @@
              <a href="{% url 'cart_detail' %}" style="color:black">
                 {{ total_items }} Producto{{ total_items|pluralize }},
                 ${{ cart.get_total_price }}
-
             </a>
-
         </li>
-
         {% else %}
           No tiene Datos
         {% endif %}
     {% endwith %}
-
-
-                </div>
-
-
+    </div>
         {% endif %}
-
-
 
   <div class="offcanvas-menu-overlay">
 
-
   </div>
 
-  <div class="canvas-open"   >
+  <div class="canvas-open">
+
     <i class="fa fa-bars">
 
     </i>
 
   </div>
+
+
+
   <!-- inicio de la navegacion modo celular  -->
-  <div class="offcanvas-menu-wrapper"   style="  background: #43914E" >
+  <div class="offcanvas-menu-wrapper" style=" background: linear-gradient(rgba(67,145,78), rgba(131,206,142)),center center no-repeat;
+   background-size: cover;">
 
     <div class="canvas-close">
       <i class="fas fa-times-circle" style="color: white;">
@@ -298,66 +342,96 @@
 
     </div>
  <!-- PERFIL VOLUNTARIADO - Y PERFIL USUARIO ADMIN .:: -->
-    <div class="row" >
-      <!-- inicio para perfil registrado -->
-      <div class="col-md-12 heading">
-
-        <!-- verificamos que exista un usuario  -->
-        {% if user.is_authenticated %}
-
-        <span class=" pull-left">
-
-          <!-- <img src="https://i.imgur.com/CeVfZyY.jpg" width="50" class="rounded-circle"> -->
-              <ul style="list-style:none">
-
-
-          <li class="nav-item dropdown">
+      <!-- Titulo de la seccion  -->
+      <div class="container">
+          <div class="row">
+    <div class="col-md-12 " style="">
+   {% if user.is_authenticated %}
+ <li class="nav-item dropdown" style="list-style:none;">
+        <img src="{% static 'img/dueño.jpg' %}" width="50%" height="50%" alt="" class="img-fluid rounded-circle" >
 
             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button"
               data-bs-toggle="dropdown" aria-expanded="false">
-              <h2 class="title" style="font-size:15px;color: white;">{{user.username}}
+
+              <h2 class="title" style="font-size:15px;color: white;">
+
+
                   <span class="title-desc"
-                  style="font-size:15px;color: rgb(226, 223, 223);">Voluntario </span></h2>
+                  style="font-size:15px;color: rgb(225, 225, 225);">  {{request.user.username}}</span></h2>
 
             </a>
 
             <ul class="dropdown-menu"  style="">
               <!-- redireccion al perfil  -->
-              <li><a class="dropdown-item" href="">Perfil</a></li>
+
+                {% ifequal user.perfil.role 'usuario' %}
+                              <li><a class="dropdown-item" href="{% url 'pagina_cliente' %}">Información</a></li>
+
+                    {% else %}
+  <li><a class="dropdown-item" href="{% url 'pagina' %}">Perfil</a></li>
+                {% endifequal %}
               <li>
                 <!-- cerrar la sesion  -->
                 <a class="dropdown-item" href="{% url 'logout' %}">Cerrar Sesion</a>
               </li>
             </ul>
           </li>
-        </ul>
-        </span>
-        <!-- para cerrar la secion de usuario  -->
-
-        <!-- si no existe un usuario registrado  -->
         {% else %}
         <a class="login-panel" href="{% url 'login' %}" style="padding-left: 10px;">
           <i class="fas fa-users" style="padding: 2%; color: rgb(255, 255, 255); font-size: 15px; display: flex;"
             id="color"> Sesion</i>
         </a>
         {% endif %}
+    </div>
+</div><!--fin del titulo  -->
+   <hr style="background-color:rgba(131,206,142)">
       </div>
-      <!-- fin de la condicion  -->
-    </div><!-- fin de la seccion de perfil registrado-->
-
     <!-- inicio del menu modo celular -->
-    <nav class="main-menu" id="menu1">
-      <ul>
-        <li><a href="{% url 'home' %}"><i class="fas fa-home" style="font-size: 30px;"></i> Inicio</a></li>
-           {% if user.is_authenticated %}
-          <li><a href="{% url 'pagina' %}"><i class="fas fa-sign-out-alt" style="font-size: 30px;"></i>Pefil</a></li>
-           {% endif %}
-        <li><a href="{% url 'pagina_denuncias' %}"><i class="fas fa-home" style="font-size: 30px;"></i> denucias</a></li>
-        <li><a href="{% url 'pagina_donaciones' %}"><i class="fas fa-paw" style="font-size: 30px;"></i>donaciones</a></li>
-        <li><a href="{% url 'pagina_adopciones' %}"><i class="fas fa-hands-helping" style="font-size: 30px;"></i>adopciones</a></li>
-        <li><a href="{% url 'contacto_registrar' %}"><i class="fas fa-phone-volume" style="font-size: 30px;"></i>contactos</a></li>
-        <li><a href="{% url 'pagina_blogs' %}"><i class="fas fa-hands-helping" style="font-size: 30px;"></i>Voluntariado</a></li>
-      </ul>
+    <nav class="main-menu " id="menu_movil" >
+      <a href="{% url 'home' %}" >  <i class="fas fa-home" >
+</i> Inicio</a>
+             <hr style="background-color:rgba(131,206,142)">
+              <div class="nav-item dropdown" >
+               <a href="#" class="nav-link dropdown-toggle"  data-bs-toggle="dropdown"> <i class="far fa-address-card">
+</i> Sobre Nosotros</a>
+                <div class="dropdown-menu m-0" id="drop-movil">
+                    <a href="{% url 'quienes_somos' %}" class="dropdown-item">Labor Diario  </a>
+                    <a href="{% url 'contacto_registrar' %}" class="dropdown-item">Quienes Somos </a>
+                </div>
+            </div>
+           <hr style="background-color:rgba(131,206,142)">
+        <a href="{% url 'pagina_denuncias' %}" > <i class="fas fa-phone-alt" >
+</i> Denuncias</a>
+           <hr style="background-color:rgba(131,206,142)">
+          <div class="nav-item dropdown">
+                <a href="#" class="nav-link dropdown-toggle"  data-bs-toggle="dropdown"> <i class="	fas fa-shopping-cart">
+</i> Servicios</a>
+                <div class="dropdown-menu m-0" id="drop-movil">
+<!--
+                    <a href="{% url 'pagina_productos' %}"class="dropdown-item">Tienda SABIA </a>
+-->
+                      <a href="{% url 'product_list' %}"class="dropdown-item">Tienda SABIA </a>
+
+                    <a href="{% url 'pagina_esterilizacion' %}" class="dropdown-item">Esterilización</a>
+                </div>
+            </div>
+       <hr style="background-color:rgba(131,206,142)">
+                <div class="nav-item dropdown">
+                <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"> <i class="fas fa-handshake" >
+</i> Donaciones</a>
+                <div class="dropdown-menu m-0" id="drop-movil">
+                    <a href="{% url 'pagina_apadrinamiento' %}"class="dropdown-item">Apadrinamiento </a>
+                    <a href="{% url 'pagina_donaciones' %}" class="dropdown-item">Donaciones </a>
+
+                </div>
+            </div>
+       <hr style="background-color:rgba(131,206,142)">
+        <a href="{% url 'Pagina_adopciones1' %}" > <i class="fas fa-dog" >
+</i> Adopciones  </a>
+   <hr style="background-color:rgba(131,206,142)">
+<a href="{% url 'pagina_blogs' %}" > <i class="fas fa-people-carry">
+</i> Voluntariado</a>
+
     </nav>
     <!-- fin del menu modo celular  -->
 
@@ -429,14 +503,21 @@
       <div class="container pt-5">
           <div class="row g-5 pt-4">
               <div class="col-lg-3 col-md-6">
-                  <h3 class="text-white mb-4">Secciones de Pagina </h3>
+                  <h3 class="text-white mb-4">Secciones de Página </h3>
                   <div class="d-flex flex-column justify-content-start">
-                      <a class="text-light mb-2" href="#"><i class="bi bi-arrow-right  me-2"></i>Inicio </a>
-                      <a class="text-light mb-2" href="#"><i class="bi bi-arrow-right  me-2"></i>Sobre Nossotros </a>
-                      <a class="text-light mb-2" href="#"><i class="bi bi-arrow-right  me-2"></i>Adopciones</a>
-                      <a class="text-light mb-2" href="#"><i class="bi bi-arrow-right me-2"></i>Donaciones</a>
-                      <a class="text-light" href="#"><i class="bi bi-arrow-right  me-2"></i>Denuncias</a>
+                      <a class="text-light mb-2" href="{% url 'home' %}"><i class="bi bi-arrow-right  me-2"></i>Inicio </a>
+                      <a class="text-light mb-2" href="{% url 'pagina_noticia' %}"><i class="bi bi-arrow-right  me-2"></i>Sobre Nosotros </a>
+                      <a class="text-light mb-2" href="{% url 'Pagina_adopciones1' %}"><i class="bi bi-arrow-right  me-2"></i>Adopciones</a>
+                      <a class="text-light mb-2" href="{% url 'pagina_donaciones' %}"><i class="bi bi-arrow-right me-2"></i>Donaciones</a>
+                      <a class="text-light" href="{% url 'pagina_denuncias' %}"><i class="bi bi-arrow-right  me-2"></i>Denuncias</a>
+
+
+
+
                   </div>
+
+
+
               </div>
               <div class="col-lg-3 col-md-6" data-wow-delay="0.6s">
                 <h3 class="text-white ">Mapa</h3>
@@ -450,7 +531,7 @@
 
               </div>
               <div class="col-lg-3 col-md-6">
-                  <h3 class="text-white mb-4">Ubicacion </h3>
+                  <h3 class="text-white mb-4">Ubicación </h3>
                   <p class="mb-2"><i class="bi bi-geo-alt  me-2"></i>Latacunga, Mulalo </p>
                   <p class="mb-2"><i class="bi bi-envelope-open  me-2"></i>sabia@gmail.com</p>
                   <p class="mb-0"><i class="bi bi-telephone  me-2"></i>+593 0998530277</p>
@@ -471,10 +552,10 @@
       <div class="container">
           <div class="row g-0">
               <div class="col-md-6 text-center text-md-start">
-                  <p class="mb-md-0">&copy; <a class="text-white border-bottom" href="#">Santuario Bienestar Animal </a>.Latacunga, Ecuador 2022.</p>
+                  <p class="mb-md-0">&copy; <a class="text-white border-bottom" href="#">Santuario Bienestar Animal. </a>Latacunga, Ecuador, 2022.</p>
               </div>
               <div class="col-md-6 text-center text-md-end">
-                  <p class="mb-0">Desarrollado por : <a class="text-white border-bottom" href="https://htmlcodex.com">Cristian Acosta</a><br>
+                  <p class="mb-0">Desarrollado por: <a class="text-white border-bottom" href="https://htmlcodex.com">Cristian Acosta</a><br>
 
                   </p>
               </div>
@@ -486,9 +567,31 @@
     </section>
    <a href="#" class="btn btn-lg btn-principal btn-lg-square rounded back-to-top"><i class="bi bi-arrow-up"></i></a>
 
+<!--
+{% if messages %}
+    {% for m in messages %}
+        <script>
+            Swal.fire({
+              title: 'Error!',
+              text: '{{m}}',
+              icon: 'error',
+              confirmButtonText: 'Ok'
+})
+        </script>
+    {% endfor %}
+{% endif %}-->
 </body>
-<!-- FIN DE SECCION BODY  -->
+<script>
+    $(window).on('load', function () {
+      $('#preloader-active').delay(450).fadeOut('slow');
+      $('body').delay(450).css({
+        'overflow': 'visible'
+      });
+    });
 
+
+</script>
+<!-- FIN DE SECCION BODY  -->
 
 <!-- INICIO DE SECCION FOOTER O PIE DE PAGINA  -->
 <!-- End of .container -->

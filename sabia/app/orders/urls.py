@@ -3,7 +3,7 @@ from django.conf.urls.static import static
 from django.urls import path
 from django.conf.urls import url, include
 from . import views
-from .views import Listado_Order,OrderDetail,OrderUpdate,Eliminar_Order
+from .views import Listado_Order,OrderDetail,OrderUpdate,Eliminar_Order,Order_create5
 urlpatterns = [
     # !-------------------------- PAGINA  ----------------------------------------
 
@@ -19,4 +19,7 @@ urlpatterns = [
 
     # !-------------------------- DETALLE ORDER  ----------------------------------------
     path('detalle_order/<int:pk>', OrderDetail.as_view(), name='detalle_order'),
+    path('detalle_order5/<int:pk>',    Order_create5.as_view(), name='detalle_order5'),
+
+
 ]

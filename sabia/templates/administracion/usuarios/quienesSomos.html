@@ -97,7 +97,7 @@ main.concord {
   display: table-cell;
   position: relative;
   width: 100%;
-  height: 100%;
+  height: 290px;
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat;
@@ -352,12 +352,10 @@ input[type="button"].concord-exit:active{
 }
 </style>
 <!DOCTYPE html>
-<html lang="en">
-
+<body lang="en">
 <head>
     <link rel="stylesheet" href="{% static 'css/labor/labor1.css' %}">
 </head>
-<body>
          <!-- Hero Start -->
  <div class="container-fluid colorFondo2 py-5  mb-5">
     <div class="row py-3" >
@@ -370,62 +368,30 @@ input[type="button"].concord-exit:active{
 
 
 
-
-<!-- Appointment Start -->
-<div class="container-fluid containerDonaciones my-5 wow fadeInUp" data-wow-delay="0.1s" style="padding:5%;">
-    <div class="container">
-        <div class="row gx-5">
-            <div class="col-lg-6 py-5">
-                <div class="py-5">
-                    <h1 class="display-5 text-white mb-4">Conoce como es Sabia por dentro </h1>
-                    <p class="text-white mb-0">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Alias aut consectetur eligendi est excepturi ipsam, iusto maiores minus nemo neque odio porro praesentium quidem saepe, similique sit sunt voluptatem. Totam.</p>
-                </div>
-            </div>
-            <div class="col-lg-6">
-                <div class="appointment-form h-100  wow zoomIn"
-                     data-wow-delay="0.6s">
-                    <div class="video-wrapper">
-                        <!-- Button trigger modal -->
-                        <button type="button" class="play-button">
-                            <i class="fa fal fa-play-circle"></i>
-                        </button>
-
-                        <!-- Modal -->
-                        <div class="modal fade" id="video">
-                            <div class="modal-dialog">
-                                <div class="modal-content">
-                                    <div class="modal-body">
-
-
-                                        <!-- Video by Ricardo Esquivel from Pexels -->
-                                        <iframe allowfullscreen="" frameborder="0" mozallowfullscreen=""
-                                                src="//player.vimeo.com/video/324179796?title=0&amp;portrait=0&amp;byline=0&amp;autoplay=1"
-                                                webkitallowfullscreen=""></iframe>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="modal-backdrop fade"></div>
-                    </div>
-
-
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-<!-- Appointment End -->
-
-
 <!-- Service Start -->
 <div class="container-fluid py-5 wow fadeInUp" data-wow-delay="0.1s">
     <div class="container">
         <div class="row g-5 mb-5">
             <div class="col-lg-5 wow zoomIn" data-wow-delay="0.3s" style="min-height: 400px;">
                 <div class="twentytwenty-container position-relative h-100 rounded overflow-hidden">
+                              {% for Noti in page_obj %}
+                        {% if Noti.imagen_antes %}
+<!--
                     <img class="position-absolute w-100 h-100" src="{% static 'img/Fondo_voluntariado.webp' %}" style="object-fit: cover;">
+-->
+  <img class="position-absolute w-100 h-100" src="/media/{{Noti.imagen_antes  }}" alt="{{NotiInforma.imagen_antes}}"  style="object-fit: cover;">
+ {% endif %}
+                      {% if Noti.imagen_despues %}
+<!--
                     <img class="position-absolute w-100 h-100" src="{% static 'img/Fondo_casaSabia.webp' %}"style="object-fit: cover;">
+-->
+                     <img class="position-absolute w-100 h-100" src="/media/{{Noti.imagen_despues }}" alt="{{Noti.imagen_despues}}"  style="object-fit: cover;">
+
+                    {% endif %}
+                            {% endfor %}
                 </div>
+
+
             </div>
             <div class="col-lg-7">
                 <div class="section-title mb-5">
@@ -435,7 +401,7 @@ input[type="button"].concord-exit:active{
                 <div class="row g-5">
                     {% for Noti in page_obj %}
 
-  <div class="col-md-6 service-item wow zoomIn" data-wow-delay="0.6s" >
+  <div class="col-md-6 service-item"  >
 
 
   <main class="concord" id="concord-cards">
@@ -448,10 +414,10 @@ Card V = Card with video-->
       <input type="button" class="concord exit" value="×"/>
       <section class="wrapper">
 
-       {% if Noti.imagen_noticia %}
+       {% if Noti.imagen_despues %}
 
                 <td class="col-lg-4 mb-4 ">
-                  <img src="/media/{{Noti.imagen_noticia }}" alt="{{Noti.imagen_noticia }}"    class="img-fluid" >
+                  <img src="/media/{{Noti.imagen_despues }}" alt="{{Noti.imagen_despues }}"    class="img-fluid" >
                   {% else %}
 
                   <img class="img-fluid rounded-top" src="{% static 'img/despues1.png' %}"     class="img-fluid">
@@ -468,7 +434,7 @@ Card V = Card with video-->
          {{ Noti.contenido_noticia}}
         </p>
 
-            <a  href=" {{ Noti.link }}" > Visita Link </a>
+            <a  class="btn btn-warning "style="margin-left:25%"  href=" {{ Noti.link }}" > Visita Link </a>
 
 
     </div>
@@ -482,26 +448,59 @@ Card V = Card with video-->
   {% endfor %}
 
                 </div>
-            </div>
-        </div>
 
-<div class="pagination">
-    <span class="step-links">
+ <div class="mt-2 container">
+<ul class="pagination">
+    <span>
         {% if page_obj.has_previous %}
-            <a href="?page=1">&laquo; first</a>
-            <a href="?page={{ page_obj.previous_page_number }}">previous</a>
+               <button class="btn btn btn-success">
+                      <a href="?page=1" style="color:white">&laquo;</a>
+               </button>
+       <button class="btn btn btn-success" >
+
+                       <a href="?page={{ page_obj.previous_page_number }}" style="color:white">Atras</a>
+        </button>
         {% endif %}
-
-        <span class="current">
-            Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+        <span class="current responsive" >
+            Página {{ page_obj.number }} de {{ page_obj.paginator.num_pages }}.
         </span>
-
         {% if page_obj.has_next %}
-            <a href="?page={{ page_obj.next_page_number }}">next</a>
-            <a href="?page={{ page_obj.paginator.num_pages }}">last &raquo;</a>
+        <button class="btn btn btn-success">
+              <a href="?page={{ page_obj.next_page_number }}" style="color:white">Siguiente</a>
+
+        </button>
+           <button class="btn btn btn-success">
+ <a href="?page={{ page_obj.paginator.num_pages }}" style="color:white"> &raquo;</a>
+                     </button>
         {% endif %}
     </span>
+
+</ul>
+
+  </div>
+
+            </div>
+
+               <div class="container">
+                          {% if user.is_superuser %}
+<div class="row" style="padding:5%;">
+
+
+      <div class="col-md-3 col-sm-12 col-lg-4 wow fadeIn" data-wow-delay="0.2s " style="padding:2%;">
+            <a href="{% url 'listado_noticia' %}" class="btn btn-admin"><i class=" fas fa-tools" style="padding-right:5px;border-right:solid;"></i>Actualizar Noticias  </a>
+
+
+      </div>
 </div>
+                {% endif %}
+   </div>
+
+
+
+        </div>
+
+
+
         <div class="row g-5 wow fadeInUp" data-wow-delay="0.1s">
             <div class="col-lg-12 service-item wow zoomIn" data-wow-delay="0.9s">
                 <div class="position-relative bg-primary rounded h-100 d-flex flex-column align-items-center justify-content-center text-center p-4">
@@ -516,90 +515,144 @@ Card V = Card with video-->
 <!-- Service End -->
 
 
+<!-- Appointment Start -->
+<!--
+<div class="container-fluid containerDonaciones my-5 wow fadeInUp" data-wow-delay="0.1s" style="padding:5%;">
+     {% for NotiInforma in NotiInforma %}
+    <div class="container">
+        <div class="row gx-5">
+
+            <div class="col-lg-6 py-5">
+                <div class="py-5">
+                    <h1 class="display-5 text-white mb-4">{{ NotiInforma.nname}}</h1>
+                    <p class="text-white mb-0">{{ NotiInforma.nname}}</p>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="appointment-form h-100  wow zoomIn"
+                     data-wow-delay="0.6s">
+                    <div class="video-wrapper">
+                        &lt;!&ndash; Button trigger modal &ndash;&gt;
+                        <button type="button" class="play-button">
+                            <i class="fa fal fa-play-circle"></i>
+                        </button>
+
+                        &lt;!&ndash; Modal &ndash;&gt;
+                        <div class="modal fade" id="video">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-body">
+                                    <iframe width="560" height="315" src="{{ NotiInforma.nurl }}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 
 
+                                        &lt;!&ndash; Video by Ricardo Esquivel from Pexels &ndash;&gt;
+                                     &lt;!&ndash;  <iframe allowfullscreen="" frameborder="0" mozallowfullscreen=""
+                                                src="{{ NotiInforma.nurl}};portrait=0&amp;byline=0&amp;autoplay=1"
+                                                webkitallowfullscreen=""></iframe>&ndash;&gt;
+
+                                       &lt;!&ndash; <iframe allowfullscreen="" frameborder="0" mozallowfullscreen=""
+                                                src="//player.vimeo.com/video/324179796?title=0&amp;portrait=0&amp;byline=0&amp;autoplay=1"
+                                                webkitallowfullscreen=""></iframe>&ndash;&gt;
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-backdrop fade"></div>
+                    </div>
 
 
-
-
-
-
-<!-- Vertical Timeline -->
-  <section id="conference-timeline">
-    <div class="timeline-start">Inicio </div>
-    <div class="conference-center-line"></div>
-    <div class="conference-timeline-content">
-      <!-- Article -->
-      <div class="timeline-article">
-        <div class="content-left-container">
-          <div class="content-left">
-            <p>Procedemos a preparar el alimento a las 5.30 de la mañana  <span class="article-number">01</span></p>
-          </div>
+                </div>
+            </div>
 
         </div>
-        <div class="content-right-container">
-          <div class="content-right">
-            <p>Cuando verificamos que este todo de acorde pasamos a la distribucion  <span class="article-number">02</span></p>
-          </div>
+                             <div class="container">
+                          {% if user.is_superuser %}
+<div class="row" style="padding:5%;">
 
-        </div>
-        <div class="meta-date">
-          <span class="date"><li class="fas fa-bone" style="margin-top:25%;"></li></span>
+      <div class="col-md-3 col-sm-12 col-lg-4 wow fadeIn" data-wow-delay="0.2s" style="padding:2%;">
+            <a href="{% url 'editar_noticia_blog' NotiInforma.id %}" class="btn btn-admin"><i class=" fas fa-tools" style="padding-right:5px;border-right:solid;"></i>Actualizar Video</a>
 
-        </div>
+
       </div>
-      <!-- // Article -->
 
-      <!-- Article -->
-      <div class="timeline-article">
-        <div class="content-left-container">
-          <div class="content-left">
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Autem commodi enim, eveniet excepturi fugit harum incidunt laborum nobis numquam odit optio pariatur perferendis quos reprehenderit sequi soluta vitae. Doloremque, earum. <span class="article-number">03</span></p>
-          </div>
 
-        </div>
-        <div class="content-right-container">
-          <div class="content-right">
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium autem consectetur expedita, ipsum libero quisquam saepe voluptatem. Accusamus accusantium, aspernatur, deleniti dolor ducimus harum nemo quae quod repellat reprehenderit ut! <span class="article-number">04</span></p>
-          </div>
-
-        </div>
-        <div class="meta-date">
-          <span class="date"><li class="fas fa-bone" style="margin-top:25%;"></li></span>
-
-        </div>
-      </div>
-      <!-- // Article -->
-
-      <!-- Article -->
-      <div class="timeline-article">
-        <div class="content-left-container">
-          <div class="content-left">
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Architecto at consequatur corporis delectus ea eius expedita impedit ipsa ipsum itaque laudantium natus neque obcaecati praesentium quam, quidem repellendus reprehenderit repudiandae? <span class="article-number">05</span></p>
-          </div>
-
-        </div>
-        <div class="content-right-container">
-          <div class="content-right">
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Est mollitia quisquam tenetur voluptates? Odio, reprehenderit voluptatem. Dicta esse eum, iure labore mollitia neque nulla optio quibusdam quo, sed similique voluptatum? <span class="article-number">06</span></p>
-          </div>
-
-        </div>
-        <div class="meta-date">
-          <span class="date"><li class="fas fa-bone" style="margin-top:25%;"></li></span>
-
-        </div>
-      </div>
-      <!-- // Article -->
+</div>
+                {% endif %}
+   </div>
     </div>
-    <div class="timeline-end">Fin</div>
-  </section>
-  <!-- // Vertical Timeline -->
+
+       {% endfor %}
+
+</div>
+-->
+<!-- Appointment End -->
+
+       <section id="main-container">
+          <div class="container">
+                   {% for NotiInforma in NotiInforma %}
+              <div class="row">
+                  <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12">
+                      <div class="post-content">
+                          <!-- imagen principal  -->
+                          <div class="post-image-wrapper">
+                                {% if NotiInforma.imagen_noticia %}
+
+<!--
+                              <img   src="{% static 'img/Fondo_casaSabia.webp' %}" data-toggle="modal" data-target="#largeModal" style="cursor: pointer;width: 100%;" >
+-->
+                      <img src="/media/{{NotiInforma.imagen_noticia}}" alt="{{NotiInforma.imagen_noticia }}"   style="cursor: pointer;width: 100%;"   >
+                  {% else %}
+
+                  <img class="img-fluid rounded-top" src="{% static 'img/despues1.png' %}"     class="img-fluid">
+                  {% endif %}
+
+
+                          </div><!-- fin de la imagen  -->
+                      <p style="text-align: justify;padding-top: 5%;">
+{{NotiInforma.ndescripcion}}
+                       </p>
+                          <div class="gap-20"></div>
+                      </div><!--/ fin de l post  -->
+                  </div><!--/fin del contenedor -->
+
+                  <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+                      <div class="sidebar sidebar-right">
+                          <!-- inicio de los tags -->
+                          <div class="widget widget-tags">
+                              <h3 class="widget-title">{{NotiInforma.nname}} </h3>
+                              <ul class="unstyled clearfix" id="forma">
+                                    <li class="redondo" style="list-style: none;padding: 2%;" ><a href="{{NotiInforma.nurl}" style="color: rgb(41, 44, 40);width: 300px;" ><i class="fas fa-star" style="color:yellow"></i> Conoce más en nuestras redes sociales </a></li>
 
 
 
-</body>
+                              </ul>
+                          </div><!-- fin del tags  -->
+
+
+                      </div><!--/ fin de la seccion de slider -->
+                  </div><!--/ fin de la columna de slider  -->
+              </div><!--/fin de la columna general -->
+
+       {% endfor %}
+
+
+          </div><!--/ fin del contenedor  -->
+                        <div class="container">
+                          {% if user.is_superuser %}
+<div class="row" style="padding:5%;">
+
+
+      <div class="col-md-3 col-sm-12 col-lg-4 wow fadeIn" data-wow-delay="0.2s " style="padding:2%;">
+            <a href="{% url 'listado_noticia_blogs' %}" class="btn btn-admin"><i class=" fas fa-tools" style="padding-right:5px;border-right:solid;"></i>Actualizar Información </a>
+
+
+      </div>
+</div>
+                {% endif %}
+   </div>
+       </section><!--/ fin de la seccion del voluntariado  -->
+
 <script>
  (function($) {
   var $concord = $('#concord-cards'),
@@ -721,5 +774,79 @@ modalClass.children[0].addEventListener("click", function (e) {
 
 
 </script>
+<script>
+    $(document).ready(function(){
+
+
+  /* Toggle Video Modal
+  -----------------------------------------*/
+  function toggle_video_modal() {
+
+      // Click on video thumbnail or link
+      $(".js-trigger-video-modal").on("click", function(e){
+
+          // prevent default behavior for a-tags, button tags, etc.
+          e.preventDefault();
+
+          // Grab the video ID from the element clicked
+          var id = $(this).attr('data-youtube-id');
+
+          // Autoplay when the modal appears
+          // Note: this is intetnionally disabled on most mobile devices
+          // If critical on mobile, then some alternate method is needed
+          var autoplay = '?autoplay=1';
+
+          // Don't show the 'Related Videos' view when the video ends
+          var related_no = '&rel=0';
+
+          // String the ID and param variables together
+          var src = '//www.youtube.com/embed/'+id+autoplay+related_no;
+
+          // Pass the YouTube video ID into the iframe template...
+          // Set the source on the iframe to match the video ID
+          $("#youtube").attr('src', src);
+
+          // Add class to the body to visually reveal the modal
+          $("body").addClass("show-video-modal noscroll");
+
+      });
+
+      // Close and Reset the Video Modal
+      function close_video_modal() {
+
+        event.preventDefault();
+
+        // re-hide the video modal
+        $("body").removeClass("show-video-modal noscroll");
+
+        // reset the source attribute for the iframe template, kills the video
+        $("#youtube").attr('src', '');
+
+      }
+      // if the 'close' button/element, or the overlay are clicked
+      $('body').on('click', '.close-video-modal, .video-modal .overlay', function(event) {
+
+          // call the close and reset function
+          close_video_modal();
+
+      });
+      // if the ESC key is tapped
+      $('body').keyup(function(e) {
+          // ESC key maps to keycode `27`
+          if (e.keyCode == 27) {
+
+            // call the close and reset function
+            close_video_modal();
+
+          }
+      });
+  }
+  toggle_video_modal();
+
+
+
+});
+</script>
+  </body>
 </html>
 {% endblock contenido %}

@@ -28,7 +28,7 @@ Usuarios Registrados
             <thead class="thead-dark">
                 <tr>
                     <th scope="col">#</th>
-                    <th scope="col">Codigo</th>
+                    <th scope="col">Roles</th>
                     <th scope="col">nombres</th>
                     <th scope="col">email</th>
                     <th scope="col">username</th>
@@ -39,7 +39,7 @@ Usuarios Registrados
                 {% for i in object_list %}
                 <tr>
                     <th scope="row">{{forloop.counter}}</th>
-                    <td>{{i.id}}</td>
+                    <td>{{i.perfil.role}}</td>
                     <td>{{i.first_name}} {{i.last_name}}</td>
                     <td>{{i.email}}</td>
                     <td>{{i.username}}</td>

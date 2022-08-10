@@ -1,0 +1,227 @@
+#Tail {
+  transform-origin:left;
+  animation: wag 300ms linear alternate infinite;
+
+}
+
+#Head, #left-ear {
+
+  transform-origin:center;
+  animation: tilt 20s linear alternate infinite;
+}
+
+#pupils {
+
+  animation: follow 8s linear alternate infinite;
+}
+
+@keyframes wag {
+  to {
+    transform: translate(20px, -10px) rotateY(170deg);
+  }
+}
+
+@keyframes tilt {
+  0%, 70% {
+    transform: rotate(0deg);
+  }
+  71%, 100% {
+    transform: translate(-5px, -5px) rotate(20deg);
+  }
+}
+
+@keyframes follow {
+  0%, 79% {
+    transform: translate(6px, 9px);
+  }
+  80%, 100% {
+    transform:translate(0);
+  }
+}
+.dairy-position {
+  position: fixed;
+  bottom: 100px;
+  right: 0;
+}
+
+.dairy-container {
+
+  position: relative;
+  width: 360px;
+  height: 170px;
+  overflow: hidden;
+}
+
+.dairy-phil {
+  position: absolute;
+  top: 15px;
+  right: 0;
+  animation-name: phil-enterance;
+  animation-duration: 0.7s;
+  animation-fill-mode: forwards;
+}
+
+@keyframes phil-enterance {
+  from {
+    transform: translateX(100%);
+  }
+  to {
+    transform: translateX(30%) rotate(-30deg);
+  }
+}
+
+.dairy-phil-exit {
+  animation-name: phil-exit;
+  animation-duration: 0.7s;
+  animation-delay: 0.4s;
+  animation-fill-mode: forwards;
+  transform: translateX(30%) rotate(-30deg);
+}
+
+@keyframes phil-exit {
+  from {
+    transform: translateX(30%) rotate(-30deg);
+  }
+  to {
+    transform: translateX(100%);
+  }
+}
+
+.phil-leg-left {
+  transform-box: fill-box;
+  transform-origin: top right;
+  animation-name: phil-leg;
+  animation-duration: 0.4s;
+  animation-delay: 0.3s;
+  animation-fill-mode: forwards;
+  transform: rotate(-70deg);
+}
+
+@keyframes phil-leg {
+  from {
+    transform: rotate(-70deg);
+  }
+  to {
+    transform: rotate(0deg);
+  }
+}
+
+.phil-arm-left {
+  transform-box: fill-box;
+  transform-origin: bottom right;
+  animation-name: phil-wave;
+  animation-duration: 0.2s;
+  animation-delay: 0.5s;
+  animation-iteration-count: 4;
+  animation-timing-function: ease-in-out;
+  animation-fill-mode: forwards;
+}
+
+@keyframes phil-wave {
+  0% {
+    transform: rotate(0deg);
+  }
+  50% {
+    transform: rotate(10deg);
+  }
+  100% {
+    transform: rotate(0deg);
+  }
+}
+
+.exit-wave {
+  animation-name: phil-wave-exit;
+  animation-delay: 0s;
+}
+
+@keyframes phil-wave-exit {
+  0% {
+    transform: rotate(0deg);
+  }
+  50% {
+    transform: rotate(10deg);
+  }
+  100% {
+    transform: rotate(0deg);
+  }
+}
+
+.dairy-message {
+  position: absolute;
+  right: 120px;
+  display: inline-block;
+  max-width: 200px;
+  margin-top: 20px;
+  padding: 10px 15px;
+  border: solid 2px green;
+  border-radius: 15px;
+  font-family: sans-serif;
+  font-size: 13px;
+  line-height: 1.5;
+  background: white;
+  transform-origin: right;
+  animation-name: phil-message;
+  animation-timing-function: ease-in-out;
+  animation-duration: 0.2s;
+  animation-delay: 0.5s;
+  animation-fill-mode: forwards;
+  transform: scale(0);
+}
+
+@keyframes phil-message {
+  from {
+    transform: scale(0);
+  }
+  to {
+    transform: scale(1);
+  }
+}
+
+.dairy-link {
+  color: #039cdb;
+  font-weight: bold;
+
+  &:hover {
+    color: #039cdb;
+    text-decoration: underline;
+  }
+}
+
+.dairy-close {
+  position: absolute;
+  top: -10px;
+  right: -10px;
+  width: 20px;
+  height: 20px;
+  border: solid 2px green;
+  border-radius: 50%;
+  background: white;
+  transition: width 0.3s;
+
+  &:hover:before,
+  &:hover:after {
+    width: 10px;
+  }
+
+  &:before,
+  &:after {
+    position: absolute;
+    top: 8px;
+    right: 10px;
+    content: "";
+    display: block;
+    width: 8px;
+    height: 2px;
+    border-radius: 1px;
+    background: black;
+  }
+
+  &:before {
+    transform: translate(50%, 50%) rotate(45deg);
+  }
+
+  &:after {
+    transform: translate(50%, 50%) rotate(-45deg);
+  }
+}
+

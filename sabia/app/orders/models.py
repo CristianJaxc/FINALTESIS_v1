@@ -2,6 +2,9 @@ from django.db import models
 from app.servicios.models import Product
 
 # Create your models here.
+from django.forms import model_to_dict
+
+
 class Order(models.Model):
     first_name = models.CharField(max_length=50)
     last_name = models.CharField(max_length=50)
@@ -34,3 +37,15 @@ class OrderItem(models.Model):
 
     def get_cost(self):
         return self.price * self.quantity
+    def toJSON(self):
+        item=model_to_dict(self)
+        item['order']=self.order.toJSON()
+        item['product']=self.product.toJSON()
+        item['price']=self.product.toJSON()
+        item['quantity']=self.quantity.toJSON()
+        return item
+
+    class Meta:
+        verbose_name = 'Detalle de Venta'
+        verbose_name_plural = 'Detalle de Ventas'
+        ordering = ['id']

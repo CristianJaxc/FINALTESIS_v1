@@ -26,7 +26,7 @@ from app.usuario.models import Perfil
 
 
 # ---------- Para Formularios -------------
-from app.usuario.forms import PerfilForm, UpdateUserForm
+from app.usuario.forms import PerfilForm, UpdateUserForm,PerfilFormVoluntario
 from django.utils.decorators import method_decorator
 from app.blogs.forms import BlogsForm, BlogsForm2
 
@@ -188,5 +188,78 @@ class Eliminar_usuario(DeleteView):
         context = super(Eliminar_usuario, self).get_context_data(**kwargs)
         context['action']='eliminar'
         context['list_url']=reverse_lazy('listado_usuarios')
-        return context 
+        return context
 
+
+class Detalle_voluntario(SuccessMessageMixin, TemplateView):
+
+    template_name = 'voluntarios/informacion_usuario.html'
+
+
+    def get_context_data(self, **kwargs):
+        context = super(Detalle_voluntario, self).get_context_data(**kwargs)
+        pk = self.kwargs.get('pk', 0)
+        blogs = Blogs.objects.filter(estado=True)
+        usuario = User.objects.get(id=pk)
+        perfil = Perfil.objects.get(User_id=usuario.id)
+        return {'usuario': usuario, 'perfil': perfil,'blogs':blogs}
+
+    # PARA ADMINISTRAR LOS VOLUNTARIOS  USUARIOS , COMPRADORES ::
+
+
+@login_required(login_url='/accounts/login')
+def clientes_sabia(request):
+    usuario = request.user.id
+    datos = User.objects.get(id=usuario)
+
+    return render(request, 'cliente/pagina_cliente.html')
+
+class Usuarios_Sabia(SuccessMessageMixin, generic.CreateView):
+
+    def userlog(request):
+
+        a = request.user.id
+        id_usuario = User.objects.get(id=a)
+        print(id_usuario.id)
+        a = UserLogeado_u = id_usuario.username
+        b = UserLogeado_p = id_usuario.password
+        return a, b
+
+    # modelos de datos
+    model = Perfil
+
+    # Formularios de datos
+    form_class = PerfilFormVoluntario
+    # success forms
+    template_name = 'cliente/perfil_cliente.html'
+    success_url = reverse_lazy('pagina_cliente')
+
+    def get_context_data(self, **kwargs):  # pinto el formulario en el html
+        context = super(Usuarios_Sabia, self).get_context_data(**kwargs)
+        if 'form' not in context:
+            context['form'] = self.form_class(self.request.GET, request.FILES)
+        return context
+
+    def post(self, request, *args, **kwargs):
+        self.object = self.get_object
+        id_usu = self.request.user.id  # usuario logeado
+        form = self.form_class(request.POST, request.FILES)
+        if form.is_valid():
+            new = form.save(commit=False)
+            new.User_id = id_usu
+            form.save()
+            print(new.User_id)
+            return HttpResponseRedirect(self.get_success_url())
+        else:
+            return self.render_to_response(self.get_context_data(form=form))
+
+def signup_view_voluntario(request):
+    form = UserCreationForm(request.POST)
+    if form.is_valid():
+        form.save()
+        username = form.cleaned_data.get('username')
+        password = form.cleaned_data.get('password1')
+        user = authenticate(username=username, password=password)
+        login(request, user)
+        return redirect('perfil_sabia')
+    return render(request, 'cliente/register.html', {'form': form})

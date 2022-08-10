@@ -1,0 +1,93 @@
+
+{% extends "administracion/usuarios/plantilla_tablas.html" %}
+
+{% load static %}
+<body>
+    <!-- <h1>Pagina de listado de Perros</h1>
+    <hr>
+    <li><a href="{% url 'registrar_perro' %}">Registrar Perros</a></li>
+    <li><a href="{% url 'pagina' %}">dashboard</a></li>
+    <br>
+    <hr>
+    <div class="container">
+        <table class="table">
+            <thead class="thead-dark">
+                <tr> -->
+                    {% block tema %}
+                    Pagina de listado de Noticias SABIA
+                      {% endblock tema %}
+                      {% block title %}Noticias Registradas  {% endblock title  %}
+                      {% block tr %}
+
+                    <th scope="col">#</th>
+                    <th scope="col " style="text-align: center;">Imagen</th>
+                    <th scope="col">Titulo</th>
+                    <th scope="col">Contenido</th>
+                    <th scope="col">Descripcion</th>
+                    <th scope="col">Fecha de Creacion</th>
+                    <th scope="col">Publicada </th>
+        <th scope="col">Opciones</th>
+                    {% endblock tr %}
+
+                    {% block tbody %}
+
+
+                {% for i in object_list %}
+                <tr>
+                    <th scope="row">{{forloop.counter}}</th>
+                    {% if i.imagen_noticia %}
+          <td class="col-lg-4 mb-4 ">
+            <img src="/media/{{i.imagen_noticia}}" alt="{{i.imagen_noticia}}"  style="width: 40%;margin-left: 35%;" >
+
+            {% else %}
+            <img class="img-fluid rounded-top" src="{% static 'img/albergue1.png ' %}"    style="width: 40%;" alt="">
+            {% endif %}
+          </td>
+
+                    <td>{{i.titulo}}</td>
+                    <td>{{i.contenido_noticia}}</td>
+                    <td>{{i.descripcion}}</td>
+                    <td>{{i.fecha_creacion}}</td>
+                    <td>{{i.estado}}</td>
+
+
+
+
+
+                    <td>
+
+                        <a href="{% url 'editar_noticia' i.id %}" class="btn btn-warning btn-icon-split">
+                            <span class="icon text-white-50">
+                                <i class="fas fa-check"></i>
+                            </span>
+                            <span class="text">Actualizar </span>
+                        </a>
+
+
+                        <a href="{% url 'eliminar_noticia' i.id %}" class="btn btn-danger btn-icon-split">
+                            <span class="icon text-white-50">
+                                <i class="fas fa-trash"></i>
+                            </span>
+                            <span class="text">Eliminar</span>
+                        </a>
+
+
+
+                    </td>
+
+                </tr>
+                {% endfor %}
+
+                {% endblock tbody  %}
+                {% block edicion %}
+                <a href="{% url 'registrar_noticia' %}" class="btn btn-success btn-icon-split">
+                    <span class="icon text-white-50">
+                        <i class="fas fa-check"></i>
+                    </span>
+                    <span class="text">Registrar Noticia</span>
+                </a>
+
+                    {% endblock edicion %}
+</body>
+
+

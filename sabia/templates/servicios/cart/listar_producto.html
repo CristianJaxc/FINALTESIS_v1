@@ -20,9 +20,9 @@
       {% endblock tema %}
       {% block title %}Listado de productos existentes  {% endblock title  %}
 
-
       {% block tr %}
                     <th scope="col">#</th>
+    <th scrope="col">ID</th>
                     <th scope="col">Imagen</th>
                     <th scope="col">Categoria</th>
                     <th scope="col">Nombre</th>
@@ -37,8 +37,10 @@
 
 
                 {% for i in object_list %}
+
                 <tr>
                     <th scope="row">{{forloop.counter}}</th>
+                   <th scope="row">{{ i.id }}</th>
 
                 {% if i.image %}
                 <td class="col-lg-4 mb-4 ">

@@ -12,21 +12,86 @@ from django.urls import reverse_lazy
 from django.views import generic
 from django.contrib.messages.views import SuccessMessageMixin
 from django.shortcuts import render, HttpResponseRedirect
+from app.usuario.forms import PerfilFormVoluntario
+from django.contrib.auth.models import User
+from app.blogs.models import Blogs
+from app import usuario
+from app.usuario.models import Perfil
+# ---------- Para Formularios -------------
+from app.usuario.forms import PerfilForm, UpdateUserForm,PerfilFormVoluntario
+from django.utils.decorators import method_decorator
+from django.contrib.auth.forms import UserCreationForm
 #MENSAJERIA ::
 from django.views.generic import ListView, DetailView, UpdateView, TemplateView, DeleteView
 
 
+class Order_create5(SuccessMessageMixin, TemplateView):
+
+    model = User
+    second_model = Perfil
+    template_name = 'servicios/orders/order_create.html'
+    form_class = UpdateUserForm
+    second_form_class = PerfilFormVoluntario
+    def get_context_data(self, **kwargs):
+        context = super(Order_create5, self).get_context_data(**kwargs)
+        pk_editar = self.kwargs.get('pk', 0)
+        pk = self.kwargs.get('pk', 0)
+        usuario = User.objects.get(id=pk)
+        # ------------------ obtengo id url -------------------
+        usuario_editar = self.model.objects.get(id=pk_editar)
+        usuario_editar_perfil = self.second_model.objects.get(User_id=usuario_editar.id)
+        perfil = Perfil.objects.get(User_id=usuario.id)
+        # print(usuario_editar.id,'aca el otro',usuario_editar_perfil.id)
+        # ----------------- consulta de datos -----------------
+        if 'form' not in context:
+            context['form'] = self.form_class(self.request.FILES, instance=usuario_editar)
+        if 'form2' not in context:
+            context['form2'] = self.second_form_class(self.request.FILES, instance=usuario_editar_perfil)
+        context['id'] = pk_editar
+        return {'usuario': usuario, 'perfil': perfil, 'context': context}
+
+    def post(self, request, *args, **kwargs):
+            cart = Cart(request)
+
+            id_user = kwargs['pk']
+            user2 = self.model.objects.get(id=id_user)
+            usuario2 = self.second_model.objects.get(User_id=user2.id)
+            form = self.form_class(request.POST, request.FILES, instance=user2)
+            form2 = self.second_form_class(request.POST, request.FILES, instance=usuario2)
+            if form.is_valid() and form2.is_valid():
+                form.save()
+                form2.save()
+                for item in cart:
+                        order = form2.save()
+                        OrderItem.objects.create(order=order, product=item['product'],
+                                                 price=item['price'],
+                                                 quantity=item['quantity'])
+
+                # clear the cart
+                cart.clear()
+                # return render(request, 'servicios/orders/order_created.html',
+                #    {'order': order})
+                # launch asynchronous task
+
+                # set the order in the session
+                request.session['order_id'] = order.id
+                # redirect to the payment
+                return redirect(reverse('process'))
+
+            return render(request, 'servicios/orders/order_create.html',
+                          {'cart': cart, 'form': form,',form2': form2})
+
 # Create your views here.
-
-
 def order_create(request):
     cart = Cart(request)
+    model= Perfil
     if request.method == 'POST':
+        voluntario3 = request.user.perfil.role
         form = OrderCreateForm(request.POST)
         if form.is_valid():
             order = form.save()
             for item in cart:
-                OrderItem.objects.create(order=order, product=item['product'],
+                    OrderItem.objects.create(order=order, product=item['product'],
                                          price=item['price'],
                                          quantity=item['quantity'])
                 # clear the cart
@@ -45,6 +110,8 @@ def order_create(request):
 
     return render(request, 'servicios/orders/order_create.html',
                   {'cart': cart, 'form': form})
+
+
 
 
 class Listado_Order(SuccessMessageMixin, ListView):

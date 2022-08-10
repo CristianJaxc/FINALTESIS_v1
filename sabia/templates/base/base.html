@@ -82,11 +82,54 @@
     {% load pwa %}
     {% progressive_web_app_meta %}
 
+    <!-- firebase !-->
+<!--
+<script src="https://www.gstatic.com/firebasejs/3.9.0/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/3.9.0/firebase-messaging.js"></script>
+-->
 
+<!--
+<script type="module">
+  // Import the functions you need from the SDKs you need
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/9.9.0/firebase-app.js";
+  // TODO: Add SDKs for Firebase products that you want to use
+  // https://firebase.google.com/docs/web/setup#available-libraries
 
+  // Your web app's Firebase configuration
+  const firebaseConfig = {
+    apiKey: "AIzaSyAyrNXdN-lSog7PM45yplrLBNp9GwU4ppI",
+    authDomain: "sabiaweb.firebaseapp.com",
+    projectId: "sabiaweb",
+    storageBucket: "sabiaweb.appspot.com",
+    messagingSenderId: "184723979317",
+    appId: "1:184723979317:web:967bd4a3be2ee1d6f4457c"
+  };
+
+  // Initialize Firebase
+  const app = initializeApp(firebaseConfig);
+</script>-->
 </head>
 
 
+<style>
+
+    .dropdown-menu li {
+position: relative;
+}
+.dropdown-menu .dropdown-submenu {
+display: none;
+position: absolute;
+left: 100%;
+top: -7px;
+}
+.dropdown-menu .dropdown-submenu-left {
+right: 100%;
+left: auto;
+}
+.dropdown-menu > li:hover > .dropdown-submenu {
+display: block;
+}
+</style>
 <body >
 
 
@@ -130,10 +173,15 @@
                 {% if user.is_authenticated %}
 
                 <div class="dropdown  perfil ">
-                  <a href="#" class="dropdown-toggle" data-bs-toggle="dropdown">{{user.username}} </a>
+                  <a href="#" class="dropdown-toggle" data-bs-toggle="dropdown">{{request.user.username}} </a>
 
                   <div class="dropdown-menu m-0">
-                    <a href="{% url 'pagina' %}" class="dropdown-item">Perfil </a>
+                         {% ifequal user.perfil.role 'usuario' %}
+                              <a class="dropdown-item" href="{% url 'pagina_cliente' %}">Información</a>
+
+                    {% else %}
+  <a class="dropdown-item" href="{% url 'pagina' %}">Perfil</a>
+                {% endifequal %}
                     <a href="{% url 'logout' %}" class="dropdown-item">Cerrar Sesion</a>
 
                 </div>
@@ -188,44 +236,70 @@
         <img src="{% static 'img/logosabia.webp' %}" style="width: 40%; margin-left: -20px;" alt="logo">
       </a>
         <div class="navbar-nav ms-auto py-0">
-            <a href="{% url 'home' %}" class="nav-item nav-link active ">Inicio</a>
+
+
+
+  <a href="{% url 'home' %}" class="nav-item nav-link active " >Inicio</a>
+
                  <div class="nav-item dropdown">
                 <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Sobre Nosotros</a>
                 <div class="dropdown-menu m-0">
                     <a href="{% url 'pagina_noticia' %}" class="dropdown-item">Labor Diario  </a>
-                    <a href="{% url 'contacto_registrar' %}" class="dropdown-item">Quienes Somos </a>
+                    <a href="{% url 'quienes_somos_contacto' %}" class="dropdown-item">Quienes Somos </a>
+
 
                 </div>
             </div>
+              <div class="nav-item nav-link dropdown " >
+  <a class=" dropdown-toggle" type="button" id="dropdownMenuButton"
+    data-mdb-toggle="dropdown" aria-expanded="false" style="color:#091E3E;" >
+  Servicios
+  </a>
+  <ul class="dropdown-menu m-0" aria-labelledby="dropdownMenuButton">
+    <li>        <a href="{% url 'product_list' %}"class="dropdown-item">Tienda SABIA </a></li>
+          <li>
+
+                    <a href="{% url 'pagina_esterilizacion' %}" class="dropdown-item">Esterilización</a>
+      </li>
+
+    <li>
+      <a class="dropdown-item" href="#">
+         Adopciones &raquo;
+      </a>
+      <ul class="dropdown-menu dropdown-submenu">
+        <li>
+         <a href="{% url 'Pagina_adopciones1' %}" class="dropdown-item">Adoptar</a>
+        </li>
+        <li>
+      <a href="{% url 'terminos_adopcion' %}" class="dropdown-item">Condiciones de Adopción </a>
+        </li>
+      </ul>
+    </li>
+
+       <li>
+      <a class="dropdown-item" href="#">
+        Donaciones &raquo;
+      </a>
+      <ul class="dropdown-menu dropdown-submenu">
+           <li>  <a href="{% url 'pagina_apadrinamiento' %}"class="dropdown-item">Apadrinamiento </a></li>
+    <li>  <a href="{% url 'pagina_donaciones' %}" class="dropdown-item">Donaciones Directas</a></li>
+      </ul>
+    </li>
+  </ul>
+</div>
+
             <a href="{% url 'pagina_denuncias' %}" class="nav-item nav-link">Denuncias </a>
 
 
 
-    <div class="nav-item dropdown">
-                <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Servicios</a>
-                <div class="dropdown-menu m-0">
-<!--
-                    <a href="{% url 'pagina_productos' %}"class="dropdown-item">Tienda SABIA </a>
--->
-                      <a href="{% url 'product_list' %}"class="dropdown-item">Tienda SABIA </a>
 
-                    <a href="{% url 'pagina_esterilizacion' %}" class="dropdown-item">Esterilización</a>
-
-                </div>
-            </div>
-                  <div class="nav-item dropdown">
-                <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Donaciones</a>
-                <div class="dropdown-menu m-0">
-                    <a href="{% url 'pagina_apadrinamiento' %}"class="dropdown-item">Apadrinamiento </a>
-                    <a href="{% url 'pagina_donaciones' %}" class="dropdown-item">Donaciones Directas</a>
-
-                </div>
-            </div>
-            <a href="{% url 'Pagina_adopciones1' %}" class="nav-item nav-link">Adopciones</a>
             <a href="{% url 'pagina_blogs' %}" class="nav-item nav-link">Voluntariado</a>
+               <a href="{% url 'contacto_registrar' %}" class="nav-item nav-link">Contactos</a>
+
         </div>
     </div>
 </nav>
+
 <!-- Navbar End -->
   {% if cart|length <= 0 %}
    {% else %}
@@ -286,13 +360,19 @@
 
 
                   <span class="title-desc"
-                  style="font-size:15px;color: rgb(225, 225, 225);">  {{user.username}}</span></h2>
+                  style="font-size:15px;color: rgb(225, 225, 225);">  {{request.user.username}}</span></h2>
 
             </a>
 
             <ul class="dropdown-menu"  style="">
               <!-- redireccion al perfil  -->
-              <li><a class="dropdown-item" href="{% url 'pagina' %}">Perfil</a></li>
+
+                {% ifequal user.perfil.role 'usuario' %}
+                              <li><a class="dropdown-item" href="{% url 'pagina_cliente' %}">Información</a></li>
+
+                    {% else %}
+  <li><a class="dropdown-item" href="{% url 'pagina' %}">Perfil</a></li>
+                {% endifequal %}
               <li>
                 <!-- cerrar la sesion  -->
                 <a class="dropdown-item" href="{% url 'logout' %}">Cerrar Sesion</a>
@@ -368,7 +448,7 @@
 {% get_available_languages as LANGUAGES %}
 {% get_language_info_list for LANGUAGES as languages %}
 <!-- Style switcher start -->
-<div class="style-switch-wrapper"   style="background-color:#469150d2;">
+<!--<div class="style-switch-wrapper"   style="background-color:#469150d2;">
   <div class="style-switch-button" style="background-color:#469150;border-style: solid;border-color: white;">
     <i class="fa fa-globe" aria-hidden="true"  type="submit" value="{{language.code}}" name="language"></i>
   </div>
@@ -406,7 +486,7 @@
 
 
 
-</div>
+</div>-->
 <!-- Style switcher end -->
   <!-- Inicio del contenido de las paginas y de las demas secciones o modulos dentro del bloque heredado de la plantilla -->
 

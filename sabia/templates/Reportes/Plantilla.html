@@ -1,0 +1,560 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+   <!-- Compartir sitio a Facebook-->
+    <meta property="og:url"           content="http://cristiansabia.pythonanywhere.com/" />
+    <meta property="og:type"          content="website" />
+    <meta property="og:title"         content="Santuario Bienestar Animal " />
+    <meta property="og:description"   content="Fundacion en bien de la proteccion canina " />
+    <meta property="og:image"         content="http://cristiansabia.pythonanywhere.com/" />
+   <!-- FIN DE COMPARTIR-->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>Administración / Reportes  </title>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.15/dist/sweetalert2.all.min.js"></script>
+    <!--DATATABLE-->
+
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.1.3/css/bootstrap.min.css"/>
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs5/dt-1.12.0/af-2.4.0/b-2.2.3/b-html5-2.2.3/b-print-2.2.3/date-1.1.2/r-2.3.0/rr-1.2.8/sc-2.0.6/sp-2.0.1/datatables.min.css"/>
+   <!-- FINDATATABLE-->
+    <!-- Custom fonts for this template-->
+    <link href="{% static 'lib/vendor/fontawesome-free/css/all.min.css' %}" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+        rel="stylesheet">
+    <!-- Custom styles for this template-->
+    <link href="{% static 'css/sb-admin-2.min.css' %}" rel="stylesheet">
+<!--    <link href="{% static 'css/dash1.css' %}" rel="stylesheet">-->
+    {% block head %}
+
+    {% endblock head %}
+</head>
+
+
+ <body id="page-top" style="background-color:#43914E;" >
+       <!-- Page Wrapper -->
+    <div id="wrapper">
+        <!-- Sidebar -->
+        <ul class="navbar-nav color   sidebar sidebar-dark accordion" id="accordionSidebar" >
+            <!-- Sidebar - Brand -->
+            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="{% url 'pagina' %}">
+                <div class="sidebar-brand-icon rotate-n-15">
+                    <i class=" fas fa-tools "></i>
+                </div>
+                <div class="sidebar-brand-text mx-3">
+                    {% if user.is_superuser %}
+                    {{user.username}}
+                    {% else %}
+                   voluntariado
+                    {% endif %}
+                 </div>
+            </a>
+
+            <!-- Divider -->
+            <hr class="sidebar-divider my-0">
+            <!-- Nav Item - Dashboard -->
+            <li class="nav-item active">
+                <a class="nav-link">
+                    <i class="fas fa-fw fa-tachometer-alt"></i>
+                    <span class="">Listado de Opciones</span></a>
+            </li>
+
+            <!-- Divider -->
+            <hr class="sidebar-divider">
+
+            <!-- Heading -->
+            <div class="sidebar-heading tuto">
+                Gestión de Usuarios
+            </div>
+
+            <!-- Nav Item - Pages Collapse Menu -->
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
+                    aria-expanded="true" aria-controls="collapseTwo">
+                    <i class="fas fa-fw fa-cog"></i>
+                    <span>Gestión </span>
+                </a>
+                <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <h6 class="collapse-header">Editar / Publicar  </h6>
+
+                        {% if user.is_superuser %}
+
+
+
+                        <a class="collapse-item "  href="{% url 'listado_usuarios' %}">Gestión de Usuarios </a>
+                        <a class="collapse-item" href="{% url 'listado_blogs' %}">Gestión de blog</a>
+                        {% endif %}
+
+                    </div>
+                </div>
+            </li>
+
+            <!-- Nav Item - Utilities Collapse Menu -->
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities"
+                    aria-expanded="true" aria-controls="collapseUtilities">
+                    <i class="fas fa-fw fa-wrench"></i>
+                    <span>Perfiles</span>
+                </a>
+                <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities"
+                    data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <h6 class="collapse-header ">Editar / Crear </h6>
+
+
+                        {% if user.is_superuser %}
+                        <!-- <a class="collapse-item" href="{% url 'perfil' %}">registrar perfil</a> -->
+                        <a class="collapse-item" href="{% url 'detalle_perfil' user.id %}">ver perfil</a>
+                        <a class="collapse-item" href="{% url 'editar_volunt' user.id %}">editar perfil</a>
+                        {% else %}
+                        <a class="collapse-item" href="{% url 'detalle_perfil' user.id %}">ver perfil</a>
+                        <a class="collapse-item" href="{% url 'editar_volunt' user.id %}">editar perfil</a>
+                        {% endif %}
+
+
+
+                    </div>
+                </div>
+            </li>
+
+            <!-- Divider -->
+            <hr class="sidebar-divider">
+
+            <!-- Heading -->
+            <div class="sidebar-heading tuto2">
+            Gestiones del Sitio Web
+            </div>
+
+            <!-- Nav Item - Pages Collapse Menu -->
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages"
+                    aria-expanded="true" aria-controls="collapsePages">
+                    <i class="fas fa-fw fa-folder"></i>
+                    <span>Editar / Crear  </span>
+                </a>
+                <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+
+
+
+
+
+                        <h6 class="collapse-header">Gestiones </h6>
+
+                          <div class="collapse-divider"></div>
+                        <h6 class="collapse-header ">Noticias </h6>
+                        <a class="collapse-item" href="{% url 'listado_noticia' %}">Gestión Noticia</a>
+
+
+                         <h6 class="collapse-header ">Blog Noticia </h6>
+                      <a class="collapse-item" href="{% url 'listado_noticia_blogs' %}">Gestión de Blog Noticia </a>
+
+                        <h6 class="collapse-header ">Contactos </h6>
+                        <a class="collapse-item tutoGes  "data-title="Hey" data-intro="This is a login button" href="{% url 'denuncias_listado' %}">Gestión denuncias</a>
+                        <a class="collapse-item" href="{% url 'contacto_listado' %}">Gestión Contactos</a>
+
+
+                        <div class="collapse-divider"></div>
+                        <h6 class="collapse-header ">Albergue </h6>
+                        <a class="collapse-item" href="{% url 'adopciones_listado' %}">Gestión adopciones</a>
+                        <a class="collapse-item" href="{% url 'listado_perro' %}">Gestión de Perros</a>
+
+
+                        <div class="collapse-divider"></div>
+                        <h6 class="collapse-header">Ayudas </h6>
+                        <a class="collapse-item" href="{% url 'listado_donaciones' %}">Gestión donaciones</a>
+                        <a class="collapse-item" href="{% url 'listado_solicitudes_donaciones' %}">Solicitudes donaciones</a>
+                    </div>
+                </div>
+            </li>
+
+            <!-- Nav Item - Charts -->
+            <li class="nav-item tuto3">
+                <a class="nav-link" href="{% url 'registrar_blogs' %}">
+                    <i class="fas fa-fw fa-chart-area"></i>
+                    <span>Registrar blogs</span></a>
+
+
+            </li>
+
+     <!-- PARA TIENDA -->
+              <div class="sidebar-heading tuto">
+                Gestión de Tienda
+            </div>
+
+            <!-- Nav Item - Pages Collapse Menu -->
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseVentas"
+                    aria-expanded="true" aria-controls="collapseVentas">
+                    <i class="fas fa-fw fa-cog"></i>
+                    <span>Productos </span>
+                </a>
+                <div id="collapseVentas" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <h6 class="collapse-header">Editar / Publicar  </h6>
+
+                        {% if user.is_superuser %}
+                        <a class="collapse-item "  href="{% url 'listar_productos' %}">Gestión de Productos </a>
+                        <a class="collapse-item" href="{% url 'pagina_categorias' %}">Gestión de Categorias</a>
+                        {% endif %}
+
+                    </div>
+                </div>
+            </li>
+
+            <!-- Nav Item - Utilities Collapse Menu -->
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseVentas2"
+                    aria-expanded="true" aria-controls="collapseVentas2">
+                    <i class="fas fa-fw fa-wrench"></i>
+                    <span>Ventas</span>
+                </a>
+                <div id="collapseVentas2" class="collapse" aria-labelledby="headingUtilities"
+                    data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <h6 class="collapse-header ">Editar / Crear </h6>
+                        <a class="collapse-item" href="#">Perfiles de Compradores</a>
+                        <a class="collapse-item" href="{% url 'pagina_order'  %}">Orden de Pedidos </a>
+                    </div>
+                </div>
+            </li>
+
+
+
+
+
+
+
+            <!-- Divider -->
+            <hr class="sidebar-divider d-none d-md-block">
+
+            <!-- Sidebar Toggler (Sidebar) -->
+            <div class="text-center d-none d-md-inline">
+                <button class="rounded-circle border-0" id="sidebarToggle"></button>
+            </div>
+
+
+
+
+
+
+
+            <!-- Sidebar Message -->
+            <div class="sidebar-card d-none d-lg-flex">
+                <img class="sidebar-card-illustration mb-2" src="{% static 'img/albergue1.png ' %}"  alt="SABIA">
+                <p class="text-center mb-2"><strong>En bien de los caninos de Latacunga </strong> SABIA -2022</p>
+                <a class="btn btn-success btn-sm fb-share-button " data-href="http://cristiansabia.pythonanywhere.com/"
+data-layout="button_count">Compartir Sitio </a>
+            </div>
+
+        </ul>
+        <!-- End of Sidebar -->
+
+        <!-- Content Wrapper -->
+        <div id="content-wrapper" class="d-flex flex-column">
+
+            <!-- Main Content -->
+            <div id="content" style="background-color:white;">
+
+                <!-- Topbar -->
+                <nav class=" navbar navbar-expand navbar-light  topbar mb-4 static-top shadow" style="background-color:#72CF7F;">
+
+                    <!-- Sidebar Toggle (Topbar) -->
+                    <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
+                        <i class="fa fa-bars" style="color:white;"></i>
+                    </button>
+
+
+<h3 style="margin-left:5%;color:white">
+
+{% block tema %}
+
+
+{% endblock tema %}
+</h3>
+
+                    <!-- Topbar Navbar -->
+                    <ul class="navbar-nav ml-auto  ">
+
+                        <!-- Nav Item - Search Dropdown (Visible Only XS) -->
+
+
+                        <!-- Nav Item - Alerts -->
+                            <li class="nav-item dropdown no-arrow mx-1">
+                            <a class="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button"
+                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                         <i class="fas fa-poll" style="color:white"></i>
+                                <!-- Counter - Alerts -->
+                                <span class="badge badge-danger badge-counter">
+
+
+                                Reportes
+
+                                </span>
+                            </a>
+                            <!-- Dropdown - Alerts -->
+                            <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in"
+                                aria-labelledby="alertsDropdown">
+                                <h6 class="dropdown-header" style="text-align:center;background-color:#43914E;border-color:white;">
+                                 Panle de  Reportes
+                                </h6>
+                                <a class="dropdown-item d-flex align-items-center" href="{% url 'reporte_denuncia' %}">
+                                    <div class="mr-3">
+                                        <div class="icon-circle bg-primary">
+                                            <i class="fas fa-file-alt text-white"></i>
+                                        </div>
+                                    </div>
+                                    <div>
+                                  <!--      <div class="small text-gray-500">Abril, 22, 2022</div>-->
+                                        <span class="font-weight-bold">Reporte de Denuncias</span>
+                                    </div>
+                                </a>
+     <a class="dropdown-item d-flex align-items-center" href="{% url 'reporte_adopciones' %}">
+                                    <div class="mr-3">
+                                        <div class="icon-circle bg-success">
+                                            <i class="fas fa-file-alt text-white"></i>
+                                        </div>
+                                    </div>
+                                    <div>
+
+                                        <span class="font-weight-bold">Reporte de Adopciones</span>
+                                    </div>
+                                </a>
+     <a class="dropdown-item d-flex align-items-center" href="{% url 'reporte_donaciones' %}">
+                                    <div class="mr-3">
+                                        <div class="icon-circle bg-info ">
+                                            <i class="fas fa-file-alt text-white"></i>
+                                        </div>
+                                    </div>
+                                    <div>
+
+                                        <span class="font-weight-bold">Reporte de Donaciones</span>
+                                    </div>
+                                </a>
+
+     <a class="dropdown-item d-flex align-items-center" href="{% url 'reportes_productos' %}">
+                                    <div class="mr-3">
+                                        <div class="icon-circle bg-warning">
+                                            <i class="fas fa-file-alt text-white"></i>
+                                        </div>
+                                    </div>
+                                    <div>
+
+                                        <span class="font-weight-bold">Reporte de Ventas</span>
+                                    </div>
+                                </a>
+
+                                <a class="dropdown-item text-center small text-gray-500" href="#">Reportes obtenidos 2022</a>
+                            </div>
+                        </li>
+
+                        <!-- Nav Item - Messages -->
+
+
+                        <div class="topbar-divider d-none d-sm-block"></div>
+
+                        <!-- Nav Item - User Information -->
+                          <!-- Nav Item - User Information -->
+                          <li class="nav-item dropdown no-arrow">
+                            <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
+                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <span class="mr-2 d-none d-lg-inline  small" style="color:white;">
+                                    {{user.username}}
+                                </span>
+                                <i class="fas fa-user fa-sm fa-fw mr-2 " style="color:white;"></i>
+                            </a>
+                            <!-- Dropdown - User Information -->
+                            <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
+                                aria-labelledby="userDropdown">
+                                <a class="dropdown-item" href="{% url 'home' %}">
+                                    <i class="fas fa-house-user fa-sm fa-fw mr-2 text-gray-400"></i>
+                                 Inicio
+                                </a>
+                                <div class="dropdown-divider"></div>
+                                <a href="{% url 'logout' %}"  class="dropdown-item"  >
+                                    <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400">
+                                    </i>
+                               Cerrar Sesion
+                                </a>
+                            </div>
+                        </li>
+                    </ul>
+                </nav>
+                <!-- End of Topbar -->
+
+                <!-- Begin Page Content -->
+    {% block contenido %}
+
+    {% endblock contenido %}
+                <!-- /.container-fluid -->
+            </div>
+            <!-- End of Main Content -->
+        </div>
+        <!-- End of Content Wrapper -->
+    </div>
+    <!-- End of Page Wrapper -->
+
+    <!-- <center>
+
+        {% if user.is_superuser %}
+        <h1>pagina Administrador dashboard</h1>
+        <h3>{{user.username}}</h3>
+        {% else %}
+        <h1>pagina voluntario dashboard</h1>
+        <h3>{{user.username}}</h3>
+        {% endif %}
+
+    </center> -->
+
+    <!-- {% block sidebar %} -->
+
+    <!-- <div class="container">
+        <ul>
+            <li><a href="{% url 'home' %}">home</a></li>
+
+            {% if user.is_superuser %}
+            <li><a href="{% url 'listado_usuarios' %}">Gestion de Usuarios</a></li>
+            <li><a href="{% url 'listado_blogs' %}">Gestion de blogs</a></li>
+            {% endif %}
+
+            <ul>
+
+                {% if user.is_superuser %}
+                <li><a href="{% url 'perfil' %}">registrar perfil</a></li>
+                {% else %}
+
+                <li><a href="{% url 'detalle_perfil' user.id %}">ver perfil</a></li>
+                <li><a href="{% url 'editar_volunt' user.id %}">editar perfil</a></li>
+                {% endif %}
+
+                <li><a href="{% url 'logout' %}">Cerrar sesion</a></li>
+            </ul>
+            <li><a href="{% url 'denuncias_listado' %}">Gestion denuncias</a></li>
+            <li><a href="{% url 'contacto_listado' %}">Gestion Contactos</a></li>
+            <li><a href="{% url 'adopciones_listado' %}">Gestion adopciones</a></li>
+            <ul>
+                <li><a href="{% url 'listado_perro' %}">Gestion de Perros</a></li>
+            </ul>
+            <li><a href="{% url 'listado_donaciones' %}">Gestion donaciones</a></li>
+            <ul>
+                <li><a href="{% url 'listado_solicitudes_donaciones' %}">Solicitudes donaciones</a></li>
+            </ul>
+            <li><a href="{% url 'registrar_blogs' %}">Registrar blogs</a></li>
+        </ul>
+    </div> -->
+    <!-- {% endblock sidebar %} -->
+ <!-- Scroll to Top Button-->
+ <a class="scroll-to-top rounded" href="#page-top">
+    <i class="fas fa-angle-up"></i>
+</a>
+</body>
+
+<!-- Load Facebook SDK for JavaScript -->
+<div id="fb-root"></div>
+
+<script>(function(d, s, id) {
+var js, fjs = d.getElementsByTagName(s)[0];
+if (d.getElementById(id)) return;
+js = d.createElement(s); js.id = id;
+js.src = "https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v3.0";
+fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+<!-- Your share button code -->
+<!--fin datatable-->
+<script src="{% static 'lib/vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+<!-- Core plugin JavaScript-->
+<script src="{% static 'lib/vendor/jquery-easing/jquery.easing.min.js' %}"></script>
+<!-- Custom scripts for all pages-->
+<script type="text/javascript" src="{% static 'js/sb-admin-2.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/sb-admin-2.js' %}"></script>
+  <!-- Page level plugins -->
+  <script src="{% static 'lib/vendor/chart.js/Chart.min.js' %}"></script>
+<!-- Page level custom scripts -->
+<script src="{% static 'lib/demo/chart-area-demo.js' %}"></script>
+<script src="{% static 'lib/demo/chart-pie-demo.js' %}"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+    <script type="text/javascript" src="{% static 'lib/daterangepicker3/spanish.js' %}"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
+{% block script %}
+
+{% endblock script %}
+</html>
+<!--
+
+    def post(self, request, *args, **kwargs):
+        data = {}
+        try:
+            action =request.POST['action']
+            if action =='searchdata':
+                data=[]
+                for i in Product.objects.all():
+                    data.append(i.toJSON())
+            else:
+                data['error']='ha ocurrido un error'
+            #data = Product.objects.get(pk=request.POST['id']).toJSON()
+            #data['name'] = data
+            #print(Product.objects.get(pk=request.POST['id']))
+            #print(request.POST)
+        except Exception as e:
+            data['error']=str(e)
+        return JsonResponse(data,safe=False)-->
+
+<!--
+
+
+ def post(self, request, *args, **kwargs):
+        data = {}
+        try:
+            action = request.POST['action']
+            if action == 'searchdata':
+                data = []
+                start_date = request.POST.get('start_date', '')
+                end_date = request.POST.get('end_date', '')
+                search = Product.objects.all()
+                if len(start_date) and len(end_date):
+                    search = search.filter(date_joined_range=[start_date, end_date])
+                for s in search:
+                    data.append([
+                        s.id,
+                        s.name,
+                        s.category,
+                        s.slug,
+                        s.description,
+                        s.price,
+                        s.stock,
+                    ])
+            else:
+                data['error'] = 'Ha ocurrido un error'
+        except Exception as e:
+            return JsonResponse(data, safe=False)-->
+
+ <!--   def get_grafico(self):
+        data = []
+        try:
+            year = datetime.now().year
+            for p in Product.objects.all():
+                # Order2 = Order.objects.filter(id=Order1.id)
+                data.append({
+                    'name': p.name,
+                    'y': float(p.stock),
+                }
+                )
+        except:
+            pass
+        return data
+-->
+
+  <!--  if action == 'get_grafico':
+                data = {
+                    'name': 'Cantidad',
+                    'colorByPoint': True,
+                    'data': self.get_grafico(),
+                }-->
+

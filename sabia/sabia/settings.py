@@ -27,7 +27,7 @@ SECRET_KEY = 'j@i7ac0khclyp(n)^um)d(jr^5jxj(l0=5^+4i(t6o@f)u)_pq'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['cristiansabia.pythonanywhere.com']
+ALLOWED_HOSTS = []
 
 MESSAGE_STORAGE ="django.contrib.messages.storage.cookie.CookieStorage"
 # Application definition
@@ -49,6 +49,7 @@ INSTALLED_APPS = [
     'app.cart',
     'app.orders',
     'app.cliente',
+    'app.reports',
     #'app.payment',
     'crispy_forms',
     'paypal.standard.ipn',
@@ -182,6 +183,7 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 # <----------- Redireccion Login & LogOut ------------->
 
+#LOGIN_REDIRECT_URL = '/'
 LOGIN_REDIRECT_URL = 'pagina'
 LOGOUT_REDIRECT_URL = '/'
 

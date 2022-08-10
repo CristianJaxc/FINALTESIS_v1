@@ -9,6 +9,7 @@ from django.contrib.auth.forms import UserCreationForm
 from django.urls import reverse_lazy
 from django.views import generic
 from django.contrib.auth.decorators import login_required
+from django.views.decorators.csrf import csrf_exempt
 from django.views.generic import ListView, DetailView, UpdateView, TemplateView, DeleteView
 # ----------- Para Mesnsajes -------------
 from django.contrib import messages
@@ -25,11 +26,15 @@ from app.denuncias.forms import DenunciasForm, DenunciasForm2
 from django.utils.decorators import method_decorator
 
 #-----------paginacion 
-from django.http import Http404
+from django.http import Http404, JsonResponse
 from django.core.paginator import Paginator
 from django.db.models import Q
 
 # Create your views here.
+
+def Pagina_adopciones_terminos(request):
+
+     return render(request, 'adopciones/perros/terminos_adopcion.html')
 
 def Pagina_adopciones(request):
 
@@ -136,7 +141,7 @@ class SolicitudCreate(SuccessMessageMixin, generic.CreateView):
     model = Solicitudes
     form_class = SolicitudesForm
     template_name = 'adopciones/solicitudes/registrar_solicitud.html'
-    success_url = reverse_lazy('pagina_adopciones')
+    success_url = reverse_lazy('pagina_adopciones2')
 
     def get_context_data(self, **kwargs):
         context = super(SolicitudCreate, self).get_context_data(**kwargs)
@@ -234,13 +239,51 @@ class Perro_Listado(SuccessMessageMixin, ListView):
             return Perros.objects.all().order_by('id')
 
 class PerroDetail(SuccessMessageMixin, TemplateView):
+    model = Solicitudes
+    form_class = SolicitudesForm
     template_name = 'adopciones/perros/detalle_perro.html'
+    success_url = reverse_lazy('listado_perro')
+
+    @method_decorator(csrf_exempt)
+    def dispatch(self, request, *args, **kwargs):
+        return super().dispatch(request, *args, **kwargs)
+
+    def post(self, request, *args, **kwargs):
+        data = {}
+
+        try:
+            action = request.POST['action']
+            if action == 'add':
+
+                con = Solicitudes()
+                con.nombre= request.POST['nombre']
+                con.apellido = request.POST['apellido']
+                con.cedula = request.POST['cedula']
+                con.telefono = request.POST['telefono']
+                con.direccion = request.POST['direccion']
+                con.descripcion = request.POST['descripcion']
+                con.perros = request.POST['perros']
+                con.save()
+
+
+            else:
+                data['error'] = 'ha ocurrido un error'
+            # data = Product.objects.get(pk=request.POST['id']).toJSON()
+            # data['name'] = data
+            # print(Product.objects.get(pk=request.POST['id']))
+            # print(request.POST)
+        except Exception as e:
+            data['error'] = str(e)
+        return JsonResponse(data, safe=False)
     def get_context_data(self, **kwargs):
         context = super(PerroDetail, self).get_context_data(**kwargs)
+        context['list_url'] = reverse_lazy('pagina_blogs')
+        context['form'] = SolicitudesForm()
+        context['action'] = 'add'
         pk = self.kwargs.get('pk', 0)
-        perro = Perros.objects.get(id = pk)
+        context['perro']  = Perros.objects.get(id = pk)
         
-        return {'perro':perro}
+        return context
 
 class PerroUpdate(SuccessMessageMixin, UpdateView):
     model = Perros

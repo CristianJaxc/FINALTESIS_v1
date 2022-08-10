@@ -5,11 +5,11 @@
 
 
 {% block contenido %}
-<div class="container">
 
+<div class="container "  style="margin-bottom :10%;">
+        <div class="table-responsive">
+            <table class="table table-bordered   table-striped" style="margin-top:100px">
 
-
-<table class="table table-bordered" style="margin-top:5%;">
   <thead class="thead-dark">
         <tr>
             <th>Image</th>
@@ -24,7 +24,7 @@
         {% for item in cart %}
             {% with product=item.product %}
                 <tr>
-                    <td class="col-lg-4 mb-4 ">
+                    <td class="col-md-3 col-sm-12 col-lg-4 ">
                         <a href="{{ product.get_absolute_url }}">
                             <img class="img-fluid" src="
                                     {% if product.image %}{{ product.image.url }}{% else %}{% static 'denun.png' %}{% endif %}" style="width: 40%;margin-left: 35%;">
@@ -38,6 +38,7 @@
         {{ item.update_quantity_form.quantity }}
         {{ item.update_quantity_form.update }}
         <input type="submit" class="btn btn-warning"  value="Actualizar">
+
         {% csrf_token %}
     </form>
 </td>
@@ -45,8 +46,15 @@
                      <!--   {% url 'cart_remove' product.id %}-->
                         <button href="#"  onclick="EliminarProducto({{ product.id }})"  class="btn btn-danger" >Eliminar</button>
                     </td>
-                    <td class="num">${{ item.price }}</td>
+                    <td class="num">${{ item.price }}</td><!--
+   <td class="num">{{product.stock}}-{{ item.quantity_unitario }}={{ item.product.stock }}total: {{ item.total }}
+   el estock es : {{ item.product }}
+   </td>-->
                     <td class="num">${{ item.total_price }}</td>
+
+<!--       <td class="num">{{product.stock}}-{{ item.quantity_unitario }}={{ item.total }}-->
+   </td>
+
                 </tr>
             {% endwith %}
         {% endfor %}
@@ -64,13 +72,18 @@
          <a href="{% url 'product_list' %}" class="button light btn btn-principal">Volver a la Tienda </a>
     </div>
  <div class="col">
+<!--
+       <a href="{% url 'detalle_order5' user.id %}" class="button btn btn-success">Comprar </a>
+-->
+
 
        <a href="{% url 'order_create' %}" class="button btn btn-success">Comprar </a>
+
  </div>
 </div>
 
     </p>
-
+</div>
 </div>
 
 <script>

@@ -2,6 +2,8 @@ from pyexpat import model
 from django.db import models
 from django.contrib.auth.models import User
 # Create your models here.
+from django.forms import model_to_dict
+
 
 class Denuncias(models.Model):
     nombres = models.CharField(max_length=50, blank=True, verbose_name='Nombres')
@@ -13,4 +15,14 @@ class Denuncias(models.Model):
     fecha_creacion = models.DateField(auto_now_add=True, verbose_name='Fecha de creacion')
     descripcion = models.TextField(blank=True, verbose_name='Descripcion')
     imagen=models.ImageField(upload_to='photos',verbose_name="imagenes",default='photos/denuncia1.jpg')
- 
+
+
+    def __str__(self):
+        return self.nombres
+
+    def toJSON(self):
+            item = model_to_dict(self,exclude='imagen')
+            return item
+
+    class Meta:
+        ordering = ['id']

@@ -2,18 +2,6 @@
 {% extends "voluntarios/pagina_voluntario.html" %}
 {% load static %}
 {% block contenido %}
-<style>
-
-.containerNoticia{
-/* background-image: url('/static/img/banner2.png');
-background-position: center; /* Center the image */
-/* background-repeat: no-repeat; /* Do not repeat the image */
-/* background-size: cover;  */
-   background: linear-gradient(rgba(255,255,255,255), rgba(255,255,255,0.1)), url('/static/img/Fondo_casaSabia.webp') center center no-repeat;
-    background-size: cover;
-}
-</style>
-
 <!--
 <div class="login-div" data-title="Hello" data=intro="This is a login form">
 
@@ -27,20 +15,143 @@ background-position: center; /* Center the image */
           <!--intro-->
 <link href="https://unpkg.com/intro.js/minified/introjs.min.css" rel="stylesheet">
 <link href="https://unpkg.com/intro.js/themes/introjs-modern.css" rel="stylesheet">
-
-
-
     <!--fin intro-->
 </head>
-</div>
-<div class="container containerNoticia">
-<h1 style="width:100%;height:500px;text-align:center;">En bien de la protección canina  </h1>
+<style>
+
+.hover_links:hover{
+cursor:pointer;
+     transform: rotate(2deg);
+  transition: width 2s
+
+   }
+</style>
+<div class="container " style="background: linear-gradient(rgba(255,255,255,255), rgba(255,255,255,0.1)), url('/static/img/Fondo_casaSabia.webp') center center no-repeat;
+   background-size: cover;width:100%;height:700px;" >
+              <div class="row" >
+
+          <a href="{% url 'listado_donaciones' %}">
+
+                        <div class="col-xl-3 col-md-6 mb-4 " >
+
+                            <div class="card border-left-primary shadow h-100 py-2 hover_links">
+
+                                         <div class="card-body">
+                                    <div class="row no-gutters align-items-center">
+
+                                        <div class="col mr-2">
+          <a href="{% url 'reporte_denuncia' %}" >
+                                            <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+                                                Reportes de Denuncias</div>
+                                            <div class="h5 mb-0 font-weight-bold text-gray-800">
+
+                                            </div>
+                     </a>
+                                        </div>
+
+
+                                        <div class="col-auto  ">
+
+                                                 <i class="fas fa-calendar fa-2x text-primary "></i>
+
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                            </div>
+
+                        </div>
+                  </a>
+
+
+                        <!-- Earnings (Monthly) Card Example -->
+                        <div class="col-xl-3 col-md-6 mb-4">
+                            <div class="card border-left-success shadow h-100 py-2 hover_links">
+                                <div class="card-body">
+                                    <div class="row no-gutters align-items-center">
+                                        <div class="col mr-2">
+                                                <a href="{% url 'listado_donaciones' %}" >
+                                            <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
+                                               Reportes de Adopciones </div>
+                                            <div class="h5 mb-0 font-weight-bold text-gray-800">
+
+                                            </div>
+                                                </a>
+                                        </div>
+                                        <div class="col-auto">
+                                            <a >
+                                     <i class=" fas fa-dog  fa-2x text-success" ></i>
+
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Earnings (Monthly) Card Example -->
+                        <div class="col-xl-3 col-md-6 mb-4">
+                            <div class="card border-left-info shadow h-100 py-2">
+                                <div class="card-body">
+                                    <div class="row no-gutters align-items-center">
+                                        <div class="col mr-2">
+                                            <div class="text-xs font-weight-bold text-info text-uppercase mb-1">
+                                               Reporte de Donaciones
+                                            </div>
+                                            <div class="row no-gutters align-items-center">
+                                                <div class="col-auto">
+                                                    <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">
+                                                 <!--       50%-->
+                                                    </div>
+                                                </div>
+                                                <div class="col">
+                                               <!--     <div class="progress progress-sm mr-2">
+                                                        <div class="progress-bar bg-info" role="progressbar"
+                                                            style="width: 50%" aria-valuenow="50" aria-valuemin="0"
+                                                            aria-valuemax="100"></div>
+                                                    </div>-->
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-auto">
+                                            <i class="fas fa-handshake fa-2x text-info"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Pending Requests Card Example -->
+                        <div class="col-xl-3 col-md-6 mb-4">
+                            <div class="card border-left-warning shadow h-100 py-2">
+                                <div class="card-body">
+                                    <div class="row no-gutters align-items-center">
+                                        <div class="col mr-2">
+                                            <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
+                                                Reporte de Ventas</div>
+                                            <div class="h5 mb-0 font-weight-bold text-gray-800">
+
+                                            </div>
+                                        </div>
+                                        <div class="col-auto">
+                                            <i class=" fas fa-shopping-cart fa-2x text-warning"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+
 
 </div>
 
 
 <!-- TUTOS SCRIPS  -->
 <script src="https://unpkg.com/intro.js/minified/intro.min.js"></script>
+<!--
 <script>
 introJs().setOptions({
        steps:[
@@ -63,6 +174,7 @@ introJs().setOptions({
      }).start();
      introJS.addHints();
 </script>
+-->
 
 
 {% endblock contenido %}

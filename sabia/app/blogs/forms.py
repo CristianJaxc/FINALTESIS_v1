@@ -1,5 +1,5 @@
 from django import forms
-from app.blogs.models import Blogs
+from app.blogs.models import Blogs,Noticia,NotiInfo
 
 class BlogsForm(forms.ModelForm):
     titulo = forms.CharField(max_length=100,widget=forms.TextInput(attrs={'class': 'form-control'}),label='Titulo')
@@ -18,3 +18,16 @@ class BlogsForm2(forms.ModelForm):
     class Meta:
         model = Blogs
         fields = ['titulo','estado','descripcion']
+
+
+class NoticiaForm(forms.ModelForm):
+
+    class Meta:
+        model = Noticia
+        fields = '__all__'
+
+
+class NoticiaBlogForm(forms.ModelForm):
+    class Meta:
+        model = NotiInfo
+        fields = '__all__'

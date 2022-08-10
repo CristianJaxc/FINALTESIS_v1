@@ -1,0 +1,121 @@
+{% extends "denuncias/pagina_denuncias.html" %}
+{% load static %}
+{% block titulo %} Condiciones de Adopcion{% endblock %}
+{% block contenido %}
+
+ <link rel="stylesheet" href="{% static 'css/voluntario1.css' %}">
+
+
+ <div class="container-fluid colorFondo2 py-5  mb-5">
+    <div class="row py-3" >
+        <div class="col-12 text-center">
+            <h1 class="display-3 text-white animated zoomIn">Terminos de Adopción</h1>
+
+        </div>
+    </div>
+</div>
+    <section class="voluntariado">
+         <!-- Hero Start -->
+<!-- Hero End -->
+
+       <section id="main-container">
+          <div class="container">
+              <div class="row">
+                  <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12">
+                      <div class="post-content">
+                          <!-- imagen principal  -->
+                                   <h3 class="widget-title" style="text-align: center;">Adopciones con SABIA</h3>
+                     <!--     <div class="post-image-wrapper">
+                              <img   src="{% static 'img/Fondo_casaSabia.webp' %}" data-toggle="modal" data-target="#largeModal" style="cursor: pointer;width: 100%;height:250px;" >
+                          </div>-->
+                          <!-- fin de la imagen  -->
+                      <p style="text-align: justify;padding-top: 5%;">
+SABIA tiene el objetivo de ayudar a encontrar hogar a todos los perros que han sido retirados de hogares o de la calle por denuncias de maltrato animal, de la venta ambulante
+                          de cachorros y del trabajo en conjunto que venimos realizando con diferentes organizaciones de la ciudad, después del retiro les brindamos asistencia médica y tratamientos correspondientes según el caso. Culminado sus tratamientos y siendo esterilizados, son puestos en adopción y de esta forma poder brindarles un hogar digno.</p>
+
+<p style="text-align:justify">
+El traslado a su nuevo hogar puede ser una experiencia traumática para él. Realiza el cambio de la forma menos estresante posible, no hagas demasiado ruido ni le presentes a toda la familia, amigos a la vez.
+
+Hasta que no te ganes su confianza no le sueltes la correa cuando lo saques de paseo ya que el miedo puede hacer que tienda a escaparse.
+
+El cambio de alimentación debe realizarse de forma gradual, mezclando su antigua comida con cantidades cada vez mayores de la nueva. Conviene que se le administre la comida siempre a las mismas horas, repartido en 2-3 tomas diarias. </p>
+
+                          <hr>
+                          <div class="gap-20"></div>
+
+                          <h3 class="widget-title" style="text-align: center;">Normativas de cumplimiento </h3>
+
+                          <p class="widget-title" style="font-weight:bold;">1.-Normativa de Registro</p>
+
+<p style="text-align:justify">
+En cuanto a la tenencia de animales de SABIA,
+    debes comunicar cualquier variación de los datos del Registro o situación del animal (baja por muerte o por traslado fuera de la comunidad autónoma, desaparición por pérdida o robo, etc.).
+</p>
+   <p class="widget-title" style="font-weight:bold;">2.-Normativa de Salud</p>
+
+<p style="text-align:justify">
+    El animal ha sido debidamente desparasitado, no obstante has de continuar este tratamiento cada tres meses durante toda su vida. Es importante seguir esta pauta correctamente puesto que los parásitos internos se contagian a las personas. La desparasitación externa es igualmente importante ya que nos permite controlar las pulgas, garrapatas y evitar la picadura del mosquito que trasmite la Leishmaniosis.
+Un perro sano se empieza a vacunar a las seis/ocho semanas de edad.
+
+</p>
+
+                      </div><!--/ fin de l post  -->
+
+                  </div><!--/fin del contenedor -->
+
+
+
+
+
+                  <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+
+                      <div class="sidebar sidebar-right">
+
+
+
+
+                          <!-- inicio de categorias sabia  -->
+                          <div class="widget widget-categories">
+                              <h3 class="widget-title" style="text-align:center;">Tener en Cuenta antes de Adoptar </h3>
+                              <ul class="category-list clearfix "  style="padding-top: 5%;text-align:justify" >
+                                  <a style="text-align:justify;">
+                                  Los perros son animales extraordinarios con una capacidad infinita de ofrecer cariño, pero tienen un talante dependiente y una serie de necesidades que no puedes pasar por alto. Los paseos diarios, la rutina de cuidados (baño, cepillado, corte de uñas y limpieza de dientes), así como los tiempos de juego y la socialización con otros perros, son aspectos que formarán parte de vuestra convivencia durante más de 10 años. Y a esto hay que añadir las visitas veterinarias que puedan producirse, con el coste que ello conlleva.
+
+                                  </a>
+
+                              </ul>
+
+                          </div><!-- fin de las categorias ofertadas  -->
+
+<h3 class="widget-title" style="text-align: center;">Proceso de Adopción</h3>
+
+                          <div class="widget widget-tags">
+                                        <div class="widget widget-categories">
+                              <ul class="category-list clearfix "  style="padding-top: 5%;">
+                                <li class="redondo" style="background-color: #469150;font-size: 16px;color: white;padding: 3%;"><a href="#" style="color: white;">Entrar al portal para ver los perros
+                                          disponibles y escoger al que quisieran adoptar. </a></li>
+                                <li  class="redondo"style="background-color: rgb(51, 50, 49);font-size: 16px;color: white;padding: 3%;"><a href="#" style="color: white;"> llenar el formulario de adopción,
+                                          adjuntar la información solicitada. </a></li>
+                                <li  class="redondo" style="background-color: #469150;font-size: 16px;color: white;padding: 3%;"><a href="#" style="color: white;">Esta documentación subida al portal llegará directamente en digital al gerente de SABIA,
+                                          quienes analizarán cada caso. </a></li>
+                                <li class="redondo" style="background-color: rgb(51, 50, 49);font-size: 16px;color: white;padding: 3%;"><a href="#" style="color: white;">  Se contactara para el dialogo previo y constancia de los terminos requeridos.a </a></li>
+
+                                                <a  class="btn btn-secundario" href="{% url 'Pagina_adopciones1' %} " style="margin:5%;">Ir a la Página de Adoptar</a>
+
+                              </ul>
+
+                          </div><!-- fin de las categorias ofertadas  -->
+
+                          </div><!-- fin del tags  -->
+
+
+
+
+
+                      </div><!--/ fin de la seccion de slider -->
+                  </div><!--/ fin de la columna de slider  -->
+              </div><!--/fin de la columna general -->
+          </div><!--/ fin del contenedor  -->
+       </section><!--/ fin de la seccion del voluntariado  -->
+    </section>
+{% endblock contenido %}

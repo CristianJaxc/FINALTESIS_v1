@@ -184,6 +184,16 @@
 
 
                         <h6 class="collapse-header">Gestiones </h6>
+
+                          <div class="collapse-divider"></div>
+                        <h6 class="collapse-header ">Noticias </h6>
+                        <a class="collapse-item" href="{% url 'listado_noticia' %}">Gestión Noticia</a>
+
+
+                         <h6 class="collapse-header ">Blog Noticia </h6>
+                      <a class="collapse-item" href="{% url 'listado_noticia_blogs' %}">Gestión de Blog Noticia </a>
+
+                        <h6 class="collapse-header ">Contactos </h6>
                         <a class="collapse-item tutoGes  "data-title="Hey" data-intro="This is a login button" href="{% url 'denuncias_listado' %}">Gestión denuncias</a>
                         <a class="collapse-item" href="{% url 'contacto_listado' %}">Gestión Contactos</a>
                  
@@ -288,7 +298,7 @@ data-layout="button_count">Compartir Sitio </a>
         <div id="content-wrapper" class="d-flex flex-column">
 
             <!-- Main Content -->
-            <div id="content" style="background-color:white;">
+            <div id="content" style="background-color:white;" >
 
                 <!-- Topbar -->
                 <nav class=" navbar navbar-expand navbar-light  topbar mb-4 static-top shadow" style="background-color:#72CF7F;">
@@ -308,28 +318,23 @@ Administración
 
                     <!-- Topbar Navbar -->
                     <ul class="navbar-nav ml-auto  ">
-
-                        <!-- Nav Item - Search Dropdown (Visible Only XS) -->
-                     
-
-                        <!-- Nav Item - Alerts -->
-                        <li class="nav-item dropdown no-arrow mx-1">
+                            <li class="nav-item dropdown no-arrow mx-1">
                             <a class="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <i class="fas fa-bell fa-fw"></i>
+                         <i class="fas fa-poll" style="color:white"></i>
                                 <!-- Counter - Alerts -->
                                 <span class="badge badge-danger badge-counter">
 
 
-                                    3+
+                                Reportes
 
                                 </span>
                             </a>
                             <!-- Dropdown - Alerts -->
                             <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in"
                                 aria-labelledby="alertsDropdown">
-                                <h6 class="dropdown-header">
-                                    Notificaciones 
+                                <h6 class="dropdown-header" style="text-align:center;background-color:#43914E;border-color:white;">
+                                 Panle de  Reportes
                                 </h6>
                                 <a class="dropdown-item d-flex align-items-center" href="#">
                                     <div class="mr-3">
@@ -338,16 +343,49 @@ Administración
                                         </div>
                                     </div>
                                     <div>
-                                        <div class="small text-gray-500">Abril, 22, 2022</div>
-                                        <span class="font-weight-bold">Denuncia Reportada</span>
+                                  <!--      <div class="small text-gray-500">Abril, 22, 2022</div>-->
+                                        <span class="font-weight-bold">Reporte de Denuncias</span>
                                     </div>
                                 </a>
-                           
-                           
-                                <a class="dropdown-item text-center small text-gray-500" href="#">Ver todas las Notificaciones</a>
+     <a class="dropdown-item d-flex align-items-center" href="#">
+                                    <div class="mr-3">
+                                        <div class="icon-circle bg-success">
+                                            <i class="fas fa-file-alt text-white"></i>
+                                        </div>
+                                    </div>
+                                    <div>
+
+                                        <span class="font-weight-bold">Reporte de Adopciones</span>
+                                    </div>
+                                </a>
+     <a class="dropdown-item d-flex align-items-center" href="#">
+                                    <div class="mr-3">
+                                        <div class="icon-circle bg-info ">
+                                            <i class="fas fa-file-alt text-white"></i>
+                                        </div>
+                                    </div>
+                                    <div>
+
+                                        <span class="font-weight-bold">Reporte de Donaciones</span>
+                                    </div>
+                                </a>
+
+     <a class="dropdown-item d-flex align-items-center" href="#">
+                                    <div class="mr-3">
+                                        <div class="icon-circle bg-warning">
+                                            <i class="fas fa-file-alt text-white"></i>
+                                        </div>
+                                    </div>
+                                    <div>
+
+                                        <span class="font-weight-bold">Reporte de Ventas</span>
+                                    </div>
+                                </a>
+
+                                <a class="dropdown-item text-center small text-gray-500" href="#">Reportes obtenidos 2022</a>
                             </div>
                         </li>
-
+                            <!-- Dropdown - Alerts -->
                         <!-- Nav Item - Messages -->
                    
 
@@ -391,11 +429,11 @@ Administración
 
                 <!-- Begin Page Content -->
         
+
+                <!-- /.container-fluid -->
     {% block contenido %}
 
     {% endblock contenido %}
-                <!-- /.container-fluid -->
-
             </div>
             <!-- End of Main Content -->
 
@@ -461,7 +499,6 @@ Administración
  <a class="scroll-to-top rounded" href="#page-top">
     <i class="fas fa-angle-up"></i>
 </a>
-
 
 
 </body>
@@ -539,4 +576,10 @@ fjs.parentNode.insertBefore(js, fjs);
   <!-- Page level custom scripts -->
   <script src="{% static 'lib/demo/chart-area-demo.js' %}"></script>
   <script src="{% static 'lib/demo/chart-pie-demo.js' %}"></script>
+
+<script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+    <script type="text/javascript" src="{% static 'lib/daterangepicker3/spanish.js' %}"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
 </html>

@@ -1,0 +1,17 @@
+{% extends "denuncias/pagina_denuncias.html" %}
+
+
+{% block contenido %}
+
+<body>
+    <h1>Pagina de edicion de Noticias</h1>
+    <div class="container">
+        <form method="post", enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <input type="submit" value="Actualizar">
+        </form>
+    </div>
+
+</body>
+{% endblock contenido %}

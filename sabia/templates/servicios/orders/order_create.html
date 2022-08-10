@@ -79,26 +79,38 @@ display: none;
  </div>
 </div>
     </div>
-    <div class="col-xl-4 col-lg-6 wow slideInUp" data-wow-delay="0.3s">
-        <div class="container">
-                  <form action="." method="post" class="uniForm" >
-            <div class="row g-3">
-                <div class="col-12">
-                    <h2>Formulario de Compra </h2>
-            {% csrf_token %}
-            {{ form|crispy }}
-            <button class="btn btn-primary w-100 py-3" type="submit" value="enviar consulta">Comprar  </button>
 
-                </div>
-            </div>
-        </form>
+      {% if user.is_authenticated %}
+     <div class="col-xl-4 col-lg-6 wow slideInUp" data-wow-delay="0.3s" style="margin-top:15%;">
+        <div class="container">
+               <h3>Gracias : {{user.username}}  </h3>
+  <form method="post",action="." enctype="multipart/form-data">
+                    {% csrf_token %}
+                    {{ form.as_p  }}
+                    <hr><br>
+                    {{ context.form2.as_p  }}
+            <hr><br>
+
+
+                    <div class="my-2"></div>
+                    <a href="#"class="btn btn-success btn-icon-split" style="margin-left: 25%;">
+                        <span class="icon text-white-50">
+                            <i class="fas fa-check"></i>
+                        </span>
+
+                        <input type="submit" value="Comprar">
+                    </a>
+
+
+
+            </form>
         </div>
 
     </div>
-<div class="col">
-    <h3>Si ya tienes una Cuenta ? </h3>
+        {% endif %}
 
-</div>
+
+
 </div>
 
 </div>

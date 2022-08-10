@@ -5,7 +5,7 @@
 {% block contenido %}
 
 <head>
-    <link rel="stylesheet" href="{% static 'css/perro_estilo.css' %}">
+    <link rel="stylesheet" href="{% static 'css/perro_estilo5.css' %}">
 </head>
 
 <style>
@@ -176,7 +176,11 @@
           </div>
         </div>
         <p class="card__description">{{m.descripcion}}</p>
-          <a href="{% url 'registrar_solicitud' m.id %}">
+         <!-- <a href="{% url 'registrar_solicitud' m.id %}">
+               <button class="btn btn-warning">Adoptar</button>
+          </a>
+-->
+          <a href="{% url 'detalle_perro' m.id %}">
                <button class="btn btn-warning">Adoptar</button>
           </a>
 
@@ -284,6 +288,7 @@
 </div>
                 {% endif %}
    </div>
+
 
 {% endblock contenido %}
 

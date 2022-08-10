@@ -1,0 +1,239 @@
+{% extends "Reportes/Plantilla.html" %}
+{% load static %}
+{% csrf_token %}
+{% block contenido %}
+<h2 style="color:white;">
+    {% block tema %}
+{{title}}
+ {% endblock tema %}
+</h2>
+
+<head>
+      {% block head %}
+<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.1.3/css/bootstrap.min.css"/>
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs5/dt-1.12.0/af-2.4.0/b-2.2.3/b-html5-2.2.3/b-print-2.2.3/date-1.1.2/r-2.3.0/rr-1.2.8/sc-2.0.6/sp-2.0.1/datatables.min.css"/>
+
+
+    <link rel="stylesheet" href="{% static 'lib/datatables-1.10.20/css/dataTables.bootstrap4.min.css' %}"/>
+    <link rel="stylesheet"
+          href="{% static 'lib/datatables-1.10.20/plugins/responsive-2.2.3/css/responsive.bootstrap4.min.css' %}"/>
+
+<script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+<script type="text/javascript" src="{% static 'lib/daterangepicker3/spanish.js' %}"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
+ <script src="{% static 'lib/highcharts-8.1.2/highcharts.js'  %}"></script>
+        <script src="{% static 'lib/highcharts-8.1.2/modules/series-label.js'  %}"></script>
+    <script src="{% static 'lib/highcharts-8.1.2/modules/exporting.js'  %}"></script>
+    <script src="{% static 'lib/highcharts-8.1.2/modules/export-data.js'  %}"></script>
+    <script src="{% static 'lib/highcharts-8.1.2/modules/accessibility.js'  %}"></script>
+
+    {% endblock head %}
+</head>
+<div class="container-fluid">
+    <div class="card shadow mb-4">
+        <div class="card-header py-3">
+            <h6 class="m-0 font-weight-bold " style="text-align: center;color:black">
+                {% block title %} {{entity}} {% endblock title  %} </h6>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+        <table class="table table-bordered "  id="producto" width="100%" cellspacing="0">
+        <thead class="thead-dark">
+             {% block columns %}
+<tr>
+            <th scope="col">Id</th>
+        <th scope="col">Nombre</th>
+                    <th scope="col">Fecha</th>
+                    <th scope="col">Cedula</th>
+                    <th scope="col">Telefono</th>
+                     <th scope="col">Ubicación</th>
+                     <th scope="col">Descripción</th>
+
+</tr>
+                {% endblock %}
+        </thead>
+        <tbody>
+            {% block rows %}
+
+                {% endblock %}
+        </tbody>
+  <div class="card-footer">
+            {% block buttons_list %}
+              <div class="col-lg-4">
+        <div class="form-group">
+            <label>Rango de Fecha  </label>
+            {{ form.date_range }}
+
+        </div>
+    </div>
+            {% endblock %}
+        </div>
+    </table>
+
+{% block edicion %}
+     <!--           <a href="{% url 'reporte_grafico'   %}" >Ver grafico</a>
+<button class="btn btn-danger btnTest">Actualizar</button>-->
+{% endblock edicion %}
+            </div>
+<figure class="highcharts-figure">
+    <div id="container"></div>
+    <p class="highcharts-description">
+        This chart demonstrates an inverted area chart with a floating legend.
+        Inverted charts can often be a good choice on smaller screens, as
+        most users find it easier to scroll vertically to see more data compared
+        to scrolling horizontally.
+    </p>
+</figure>
+
+</div>
+        </div>
+    </div>
+</div>
+<!-- REFERENCIA JS -->
+
+{% block script %}
+ <script src="{% static 'lib/datatables-1.10.20/js/jquery.dataTables.js' %}"></script>
+    <script src="{% static 'lib/datatables-1.10.20/js/dataTables.bootstrap4.min.js' %}"></script>
+    <script src="{% static 'lib/datatables-1.10.20/plugins/responsive-2.2.3/js/dataTables.responsive.min.js' %}"></script>
+    <script src="{% static 'lib/datatables-1.10.20/plugins/responsive-2.2.3/js/responsive.bootstrap4.min.js' %}"></script>
+
+  <link rel="stylesheet" href="{% static 'lib/datatables-1.10.20/plugins/buttons-1.6.1/css/buttons.bootstrap.min.css' %}"></link>
+  <script src="{% static 'lib/datatables-1.10.20/plugins/buttons-1.6.1/js/dataTables.buttons.min.js' %}"></script>
+  <script src="{% static 'lib/datatables-1.10.20/plugins/jszip-2.5.0/jszip.min.js' %}"></script>
+  <script src="{% static 'lib/datatables-1.10.20/plugins/pdfmake-0.1.36/pdfmake.min.js' %}"></script>
+  <script src="{% static 'lib/datatables-1.10.20/plugins/pdfmake-0.1.36/vfs_fonts.js' %}"></script>
+  <script src="{% static 'lib/datatables-1.10.20/plugins/buttons.html5.min.js' %}"></script>
+
+    <link rel="stylesheet" href="{% static 'lib/datatables-1.10.20/plugins/buttons-1.6.1/css/buttons.bootstrap.min.css' %}"/>
+    <script src="{% static 'lib/datatables-1.10.20/plugins/buttons-1.6.1/js/dataTables.buttons.min.js' %}" type="text/javascript"></script>
+    <script src="{% static 'lib/datatables-1.10.20/plugins/jszip-2.5.0/jszip.min.js' %}" type="text/javascript"></script>
+    <script src="{% static 'lib/datatables-1.10.20/plugins/pdfmake-0.1.36/pdfmake.min.js' %}" type="text/javascript"></script>
+    <script src="{% static 'lib/datatables-1.10.20/plugins/pdfmake-0.1.36/vfs_fonts.js' %}" type="text/javascript"></script>
+    <script src="{% static 'lib/datatables-1.10.20/plugins/buttons-1.6.1/js/buttons.html5.min.js' %}" type="text/javascript"></script>
+
+
+
+   <script type="text/javascript" src="https://cdn.datatables.net/1.12.0/js/jquery.dataTables.min.js"></script>
+   <script type="text/javascript" src="https://cdn.datatables.net/1.12.0/js/dataTables.bootstrap5.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.1.3/js/bootstrap.bundle.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/pdfmake.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/vfs_fonts.js"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/v/bs5/dt-1.12.0/af-2.4.0/b-2.2.3/b-html5-2.2.3/b-print-2.2.3/date-1.1.2/r-2.3.0/rr-1.2.8/sc-2.0.6/sp-2.0.1/datatables.min.js"></script>
+<!--<script src="{% static 'js/list.js' %}"></script>-->
+<script type="text/javascript" src="{% static 'js/reportes/reporte_denuncia.js' %}"></script>
+
+<script>
+  var grancolumn = Highcharts.chart('container', {
+    chart: {
+        type: 'column'
+    },
+    title: {
+        text: 'Indice de Reportes por mes del año 2022'
+    },
+    subtitle: {
+        text: 'Source: <a href="#">SABIA</a>'
+    },
+    xAxis: {
+        type: 'category',
+        labels: {
+            rotation: -45,
+            style: {
+                fontSize: '13px',
+                fontFamily: 'Verdana, sans-serif'
+            }
+        }
+    },
+    yAxis: {
+        min: 0,
+        title: {
+            text: 'Cantidad'
+        }
+    },
+    legend: {
+        enabled: false
+    },
+    tooltip: {
+        pointFormat: 'Cantidad en el  2022 </b>'
+    },
+
+});
+function get_grafico(){
+  $.ajax({
+    url:window.location.pathname,
+    type:'POST',
+    data:{
+        'action':'get_grafico'
+     },
+    dataType :'json'
+    }).done(function(data){
+    if(!data.hasOwnProperty('error')){
+         grancolumn.addSeries(data);
+        console.log(data);
+         return false;
+    }
+    message_error(data.errro);
+    }).fail(function(jqXHR,textStatus,errorThrown){
+    alert(textStatus +':'+errorThrown);
+    }).always(function(data){
+
+    });
+
+}
+
+$(function () {
+    get_grafico();
+});
+</script>
+
+{% endblock script %}
+
+
+<script>
+$(document).ready(function() {
+    $('#producto').DataTable( {
+       retrieve: true,
+        paging: false,
+     "language": {
+            "lengthMenu": "Display _MENU_ records per page",
+            "zeroRecords": "No encontrado - sorry",
+            "info": "Numero de Pagina page _PAGE_ de _PAGES_",
+            "infoEmpty": "No records available",
+            "infoFiltered": "(filtered from _MAX_ total records)",
+            "search":"Buscar:",
+            "paginate":{
+            "next":"siguiente",
+            "previous":"anterior",
+            }
+        },
+        dom: 'Bfrtip',
+        buttons: [
+            'pdf',
+        ]
+
+    });
+
+} );
+
+</script>
+<script>
+    $('.btnTest').on('click',function(){
+    $.ajax({
+    url:'{% url 'reportes_productos' %}',
+    type:'POST',
+    data:{ id:8 },
+    dataType :'json'
+    }).done(function(data){
+    console.log(data);
+    }).fail(function(jqXHR,textStatus,errorThrown){
+    alert(textStatus +':'+errorThrown);
+    }).always(function(data){
+     alert('complete');
+    });
+
+    });
+</script>
+
+
+{% endblock contenido %}

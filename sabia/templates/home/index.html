@@ -17,38 +17,54 @@
     <link rel="manifest" href="/manifest.json">
     <!-- ARCHIVOS CDN REFERENCIA  -->
     <!-- referencia a los archivos de tipo javascript propios para Boostrap 5 tanto para la funcionalidad como para el diseño  -->
+<!--
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+-->
     <!--<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
             integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
             crossorigin="anonymous"></script>-->
+<!--
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.min.js"></script>
+-->
 
 
     <!-- referencia a los estilos propios de Boostrap 5 , para el tipo de estilos , modelos y  alertas necesarias  -->
+<!--
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+-->
     <!-- estilos de texto -->
+
     <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900&display=swap"
           rel="stylesheet">
+
     <!-- Trabajar con  Font Awesome -->
 
     <!-- Icon Font Stylesheet -->
+
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+
+
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
 
 
+
     <!-- Trabajar con Google Fonts -->
+
     <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" rel="stylesheet"/>
+
     <!-- trabajar con los modelos vistas  -->
 
+<!--
     <link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/3.10.1/mdb.min.css" rel="stylesheet"/>
+-->
 
     <!--<link rel="stylesheet" href="{% static 'css/base1.css' %}">-->
 
 
     <!-- Estilos staticos : :: -->
     <!-- estilos de Bootstrap -->
-    <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
+    <!--<link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">-->
 
     <!-- Estilos del Template -->
     <link href="{% static 'css/style1.css' %}" rel="stylesheet">
@@ -75,7 +91,7 @@
 
 <!--REDES SOCIALES -->
 
-    <div class="social ">
+    <div class="social "style="margin:-2.5%;">
 
             <ul class="socialAdaptativo  responsive">
 			<li><a href="#" target="_blank" class="icon-facebook"><i class="fab fa-facebook-f fw-normal" style="width:20px"></i></a></li>
@@ -165,7 +181,7 @@
 
                     <p class="text-white">Contamos con más de 120 Perros rescatados, que buscan un Hogar </p>
 
-                    <a href="{% url 'pagina_adopciones' %}" class="btn btn-light" href="">Encuentra tu Mascota</a>
+                    <a href="{% url 'Pagina_adopciones1' %}" class="btn btn-light" href="">Encuentra tu Mascota</a>
                 </div>
             </div>
             <div class="col-lg-4 wow zoomIn" data-wow-delay="0.6s">
@@ -206,7 +222,7 @@
   <p class="read-more-wrap"  style="text-align:justify">
 
 
-                    <b> SABIA (Santuario de Bienestar Animal)</b> lleva 8 años dando cobijo a animales abandonados y
+                    <b> SABIA (Santuario de Bienestar Animal)</b> lleva  desde el 2014 dando cobijo a animales abandonados y
                     maltratados. Nació por la necesidad de actuar ante el maltrato, abandono y sufrimiento por la que
                     pasan miles de animales en estado de vulnerabilidad, principalmente en la zona centro del Ecuador.
 
@@ -402,7 +418,7 @@
 
 
                                     </p>
-                                            <a href="{% url 'pagina_adopciones' %}">Más Información</a>
+                                            <a href="{% url 'Pagina_adopciones1' %}">Más Información</a>
                                 </div>
                             </div>
 
@@ -595,7 +611,7 @@
                     <h3>¿Cómo Funciona ? </h3>
                     <p>El proceso de Adopción, es personal, pero puedes apartar un canino, y poder conocerlos un poco más, tanto en la página como en el Instagram
 
-                    <a href="{% url 'pagina_adopciones' %}" class="btn btn-principal " style="">Continuar </a>
+                    <a href="{% url 'Pagina_adopciones1' %}" class="btn btn-principal " style="">Continuar </a>
 
                     </p>
                 </div>
@@ -672,6 +688,8 @@
                 {% endif %}
                 </div><!-- /end col-md-4 -->
             </div>
+
+
             <div class="col carousel-course-card wow zoomIn" data-wow-delay="0.1s"
                  data-flickity='{ "freescroll": true, "pageDots": false, "wrapAround": true }'>
                 {% for m in voluntariado %}
@@ -694,33 +712,42 @@
                     </div>
                     <div class="card-cell-content" style="margin-bottom: 15%;">
                         <div class="card-cell-text">
-                            <h2>{{m.User.username}}</h2>
+                            <h2>{{m.User.first_name}}</h2>
                         </div>
                     </div>
                     <div class="card-cell-button btn-secundario">
-                        <a href="{% url 'pagina_blogs' %}" style="border-style:none;color: #ffffff;">Leer Más</a>
+                        <a href="{% url 'detalle_voluntario' m.User.id %}" style="border-style:none;color: #ffffff;" >Leer Más</a>
+
+
                     </div>
+                    <!-- Modal -->
+
                 </div>
 
 
-                {% endfor %}
-
-
+      {% endfor %}
             </div>
 
 
         </div>
 
 
+
+
     </div>
+
     <!--FIN VOLUNTARIADO :: -->
+
+
+
+
 
     <!-- Offer Start -->
     <div class="container ">
         <div class="row justify-content-center">
             <div class="col-lg-12 wow zoomIn" data-wow-delay="0.6s">
                 <div class="offer-text text-center rounded p-5">
-                    <h1 class="display-5 text-white">Juntos Podemos Ser mas </h1>
+                    <h1 class="display-5 text-white">Juntos Podemos Ser Más </h1>
                     <p class="text-white mb-4">Si quieres poder trabajar con nosotros encaminado en el bien de la
                         Fundación </p>
                     <a href="https://www.worldpackers.com/es/positions/36380 " target="_blank"  class="btn btn-secundario py-3 px-5 me-3">Aplicar Ahora</a>
@@ -901,14 +928,14 @@
       <div class="col-md-3 col-sm-12 col-lg-4 wow fadeIn" data-wow-delay="0.2s">
         <a href="https://www.worldpackers.com/es/positions/36380" target="_blank" style="margin-left:15%">
             <img class="img-fluid wow zoomIn" data-wow-delay="0.1s" src="{% static 'img/worldpackers.webp' %}"
-                 alt="empresa" style="max-height: 300px;min-height: max-content;"/>
+                 alt="empresa" style="max-height:300px;min-height:max-content;"/>
         </a>
 
     </div>
   <div class="col-md-3 col-sm-12 col-lg-4 wow fadeIn" data-wow-delay="0.2s">
         <a href="https://www.workaway.info/en/host/114368541237" target="_blank" style="margin-left:15%;">
             <img class="img-fluid wow zoomIn" data-wow-delay="0.1s" src="{% static 'img/fondos/workawayinfo.png' %}"
-                 alt="empresa" style="max-height: 300px;min-height: max-content;"/>
+                 alt="empresa" style="max-height:300px;min-height:max-content;"/>
         </a>
 
     </div>

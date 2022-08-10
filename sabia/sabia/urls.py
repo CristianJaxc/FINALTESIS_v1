@@ -40,6 +40,7 @@ urlpatterns = [
     path('accounts/', include('django.contrib.auth.urls')),
     #-----------------cliente
     url('cliente/', include('app.cliente.urls')),
+    path('reportes/', include('app.reports.urls')),
     path('i18n/', include("django.conf.urls.i18n")),
     path('',include('pwa.urls')),
 

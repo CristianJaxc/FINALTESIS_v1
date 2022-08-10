@@ -1,0 +1,88 @@
+
+{% load static %}
+{% csrf_token %}
+{% block contenidoGrafico %}
+<head>
+
+
+
+
+    <script src="{% static 'lib/highcharts-8.1.2/highcharts.js'  %}"></script>
+        <script src="{% static 'lib/highcharts-8.1.2/modules/series-label.js'  %}"></script>
+    <script src="{% static 'lib/highcharts-8.1.2/modules/exporting.js'  %}"></script>
+    <script src="{% static 'lib/highcharts-8.1.2/modules/export-data.js'  %}"></script>
+    <script src="{% static 'lib/highcharts-8.1.2/modules/accessibility.js'  %}"></script>
+
+</head>
+
+<body>
+<figure class="highcharts-figure">
+    <div id="container"></div>
+    <p class="highcharts-description">
+       Estos son los productos existentes dentro de Sabia
+    </p>
+</figure>
+</body>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+    <script type="text/javascript" src="{% static 'lib/daterangepicker3/spanish.js' %}"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
+<script>
+ var grancolumn = Highcharts.chart('container', {
+    chart: {
+        plotBackgroundColor: null,
+        plotBorderWidth: null,
+        plotShadow: false,
+        type: 'pie'
+    },
+    title: {
+        text: 'Reporte de Productos 2022'
+    },
+    tooltip: {
+        pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+    },
+    accessibility: {
+        point: {
+            valueSuffix: '%'
+        }
+    },
+    plotOptions: {
+        pie: {
+            allowPointSelect: true,
+            cursor: 'pointer',
+            dataLabels: {
+                enabled: false
+            },
+            showInLegend: true
+        }
+    },
+
+});
+function get_grafico(){
+  $.ajax({
+    url:window.location.pathname,
+    type:'POST',
+    data:{
+        'action':'get_grafico'
+     },
+    dataType :'json'
+    }).done(function(data){
+    if(!data.hasOwnProperty('error')){
+         grancolumn.addSeries(data);
+         return false;
+    }
+    message_error(data.errro);
+    }).fail(function(jqXHR,textStatus,errorThrown){
+    alert(textStatus +':'+errorThrown);
+    }).always(function(data){
+
+    });
+
+}
+
+$(function () {
+    get_grafico();
+});
+</script>
+{% endblock contenidoGrafico %}
