@@ -35,8 +35,29 @@ self.addEventListener('instalar', (evento) => {
 self.addEventListener('activar', (evento) => {
  console.log('activar', evento); return self.clients.claim(); });
 
+/*
 self.addEventListener('fetch', function(evento) {
   event.respondWith(fetch(event.request));
   event.respondWith( caches.match( event.request).then(function(response) { return response || fetch(event. request); }) );
    });
+*/
 
+
+self.addEventListener("fetch", event => {
+    event.respondWith(
+        fetch(event.request)
+        .then(function(result){
+        return caches.open(staticCacheName)
+        .then(function(c){
+        c.put(event.request.url, result.clone())
+        return result;
+        })
+        })
+        .catch(function(e){
+        return caches.match(event.request);
+
+        })
+
+
+    )
+});
