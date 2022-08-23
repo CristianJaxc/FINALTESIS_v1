@@ -320,4 +320,18 @@ PWA_APP_SHORTCUTS = [{
     ]
 
 }]
+shortcuts = [{
+    "name": "Adopciones",
+    "description": "Adopta un perro",
+    "url": "./",
+    "icons": [
+    {
+        'src': '/static/images/icons/icon-192x192.png',
+        'size': '192x192',
+        "type": "image/png",
+        "purpose": "any"
+    }
+]
+
+}]
 #PWA_APP_DEBUG_MODE = False
