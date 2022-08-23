@@ -1,4 +1,7 @@
 // Base Service Worker implementation.  To use your own Service Worker, set the PWA_SERVICE_WORKER_PATH variable in settings.py
+const CACHE_NAME = 'offline';
+const OFFLINE_URL = 'offline.html';
+
 
 var staticCacheName = "django-pwa-v" + new Date().getTime();
 var filesToCache = [
@@ -25,57 +28,15 @@ var filesToCache = [
 ];
 
 // Cache on install
-self.addEventListener("install", event => {
-    this.skipWaiting();
-    event.waitUntil(
-        caches.open(staticCacheName)
-            .then(cache => {
-                return cache.addAll(filesToCache);
-            })
-    )
-});
 
-// Clear cache on activate
-self.addEventListener('activate', event => {
-    event.waitUntil(
-        caches.keys().then(cacheNames => {
-            return Promise.all(
-                cacheNames
-                    .filter(cacheName => (cacheName.startsWith("django-pwa-")))
-                    .filter(cacheName => (cacheName !== staticCacheName))                    .map(cacheName => caches.delete(cacheName))
-            );
-        })
-    );
-});
+self.addEventListener('instalar', (evento) => {
+ console.log('instalar', evento); self.skipWaiting(); });
 
-// Serve from Cache
-/*self.addEventListener("fetch", event => {
-    event.respondWith(
-        caches.match(event.request)
-            .then(response => {
-                return response || fetch(event.request);
-            })
-            .catch(() => {
-                return caches.match('/offline/');
-            })
-    )
-});*/
+self.addEventListener('activar', (evento) => {
+ console.log('activar', evento); return self.clients.claim(); });
 
-self.addEventListener("fetch", event => {
-    event.respondWith(
-        fetch(event.request)
-        .then(function(result){
-        return caches.open(staticCacheName)
-        .then(function(c){
-        c.put(event.request.url, result.clone())
-        return result;
-        })
-        })
-        .catch(function(e){
-        return caches.match(event.request);
+self.addEventListener('fetch', function(evento) {
+  event.respondWith(fetch(event.request));
+  event.respondWith( caches.match( event.request).then(function(response) { return response || fetch(event. request); }) );
+   });
 
-        })
-
-
-    )
-});
