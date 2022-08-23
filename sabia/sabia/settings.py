@@ -320,7 +320,7 @@ PWA_APP_SHORTCUTS = [{
     ]
 
 }]
-shortcuts = [{
+SHORTCUTS= [{
     "name": "Adopciones",
     "description": "Adopta un perro",
     "url": "./",
