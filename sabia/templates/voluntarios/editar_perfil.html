@@ -37,14 +37,17 @@ Editar Perfil
                     {% csrf_token %}
                     {{ context.form.as_p  }}
                     <hr><br>
-                    {{ context.form2.as_p  }}
+
+            {{ context.form2.as_p}}
+
+
                     <div class="my-2"></div>
                     <a href="{% url 'editar_volunt' user.id %}"class="btn btn-success btn-icon-split" style="margin-left: 25%;">
                         <span class="icon text-white-50">
                             <i class="fas fa-check"></i>
                         </span>
                       
-                        <input type="submit" value="Actualizar">
+                        <input type="submit" class="btn " style="color:white" value="Actualizar">
                     </a>
 
 

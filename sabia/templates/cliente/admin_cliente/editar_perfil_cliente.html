@@ -35,9 +35,20 @@ Editar Perfil
                 <h5 style="text-align: center;padding: 5%;">Datos de Usuario </h5>
                <form method="post", enctype="multipart/form-data">
                     {% csrf_token %}
-                    {{ form.as_p  }}
+                    {{ context.form.as_p  }}
                     <hr><br>
-                    {{ form2.as_p  }}
+               <!--     {{ context.form2.as_p  }}-->
+                     <label for="image" class="form-label fw-bolder ">Imagen</label>
+                     <input type="file" class="form-control fs-5" name="imagen_perfil"  value="{{perfil.imagen_perfil}}">
+                    <label for="cedula" class="form-label fw-bolder ">Cedula</label>
+                     <input type="text" minlength="10" maxlength="10" class="form-control fs-5" name="cedula"  value="{{perfil.cedula}}">
+                     <label for="direccion" class="form-label fw-bolder ">Direccion</label>
+                     <input type="text" class="form-control fs-5" name="direccion"  value="{{perfil.direccion}}">
+                    <label for=" telefono" class="form-label fw-bolder "> telefono</label>
+                     <input type="number" class="form-control fs-5" name="telefono"  minlength="10" maxlength="10" value="{{perfil.telefono}}">
+   <label for="nacionalidad" class="form-label fw-bolder "> nacionalidad</label>
+                     <input type="text" class="form-control fs-5" name="nacionalidad"  value="{{perfil.nacionalidad}}">
+
                     <div class="my-2"></div>
                     <a href="{% url 'editar_volunt' user.id %}"class="btn btn-success btn-icon-split" style="margin-left: 25%;">
                         <span class="icon text-white-50">

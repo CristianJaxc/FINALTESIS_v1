@@ -5,13 +5,13 @@
  
 
     {% block tema %}
-   Listados 
+  Contactos Listados
      {% endblock tema %}
      {% block title %}Contactos Listados  {% endblock title  %} 
     
-     {% block tablas %}
+
      {% block tr %}
-                    <th scope="col">#</th>
+
                     <th scope="col">Codigo</th>
                     <th scope="col">Solicitante</th>
                     <th scope="col">email</th>
@@ -23,7 +23,7 @@
           
                 {% for i in object_list %}
                 <tr>
-                    <th scope="row">{{forloop.counter}}</th>
+
                     <td>{{i.id}}</td>
                     <td>{{i.nombres}} {{i.apellidos}}</td>
                     <td>{{i.email}}</td>
@@ -52,7 +52,7 @@
                 </tr>
                 {% endfor %}
                 {% endblock tbody  %}   
-                {% endblock tablas %}
+
 
 </body>
 

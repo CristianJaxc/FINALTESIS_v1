@@ -5,7 +5,7 @@ from decimal import Decimal
 from django.conf import settings
 from django.urls import reverse
 from django.shortcuts import render, get_object_or_404
-from app.orders.models import Order
+from app.orders.models import Order,OrderItem
 from paypal.standard.forms import PayPalPaymentsForm
 from django.views.decorators.csrf import csrf_exempt
 
@@ -34,7 +34,9 @@ def payment_process(request):
 
 @csrf_exempt
 def payment_done(request):
-    return render(request, 'payment/done.html')
+    order_id = request.session.get('order_id')
+    order = get_object_or_404(Order, id=order_id)
+    return render(request, 'payment/done.html',{'order':order})
 
 
 @csrf_exempt

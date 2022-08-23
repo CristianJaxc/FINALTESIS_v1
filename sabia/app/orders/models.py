@@ -1,9 +1,10 @@
 from django.db import models
 from app.servicios.models import Product
-
+from django.contrib.auth.models import User
+from app.usuario.models import Perfil
 # Create your models here.
 from django.forms import model_to_dict
-
+from django.contrib.auth import settings
 
 class Order(models.Model):
     first_name = models.CharField(max_length=50)
@@ -14,13 +15,16 @@ class Order(models.Model):
     city = models.CharField(max_length=100)
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
+    image = models.ImageField(upload_to='products/%Y/%m/%d', blank=True)
     paid = models.BooleanField(default=False)
-
+    user = models.ForeignKey(User, on_delete=models.CASCADE, blank=True)
     class Meta:
         ordering = ('-created',)
 
     def __str__(self):
         return 'Order {}'.format(self.id)
+
+
 
     def get_total_cost(self):
         return sum(item.get_cost() for item in self.items.all())

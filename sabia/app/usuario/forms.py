@@ -16,7 +16,7 @@ class PerfilForm(forms.ModelForm):
         ]
         labels = {
             'imagen_perfil':'imagen_perfil',
-            'role':'role',
+            'role':'Tipo de usuario',
             'cedula_perfil': 'Cédula',
             'direccion_perfil': 'Dirección',
             'telefono_perfil': 'Teléfono',
@@ -54,15 +54,11 @@ class PerfilFormVoluntario(forms.ModelForm):
         }
 
 class UpdateUserForm(forms.ModelForm):
-    username = forms.CharField(max_length=100,required=True,widget=forms.TextInput(attrs={'class': 'form-control'}),label='Nombre de Usuario')
+    #username = forms.CharField(max_length=100,required=True,widget=forms.TextInput(attrs={'class': 'form-control'}),label='Nombre de Usuario')
     email = forms.EmailField(required=True,widget=forms.TextInput(attrs={'class': 'form-control'}),label='Correo Electrónico')
     first_name = forms.CharField(max_length=100,required=True,widget=forms.TextInput(attrs={'class': 'form-control'}),label='Nombres')
     last_name = forms.CharField(max_length=100,required=True,widget=forms.TextInput(attrs={'class': 'form-control'}),label='Apellidos')
     class Meta:
         model = User
-        fields = ['username', 'email','first_name','last_name',]
+        fields = [ 'email','first_name','last_name',]
 
-        widgets = {
-            'username': forms.TextInput(attrs={'class': 'form__field'}),
-   
-        }

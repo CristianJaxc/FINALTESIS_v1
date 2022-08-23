@@ -5,7 +5,7 @@
 
 {% block contenido %}
 <link href="{% static 'css/perro.css' %}" rel="stylesheet">
-
+    <link rel="stylesheet" href="{% static 'css/perro_estilo5.css' %}">
 
  <div class="container-fluid colorFondo py-5  mb-5">
     <div class="row py-3" >
@@ -31,13 +31,13 @@
           <h4>Categorias</h4>
           <br>
 
-          <div class="list-group">
+          <div class="list-group" >
 
-<ul>
+<ul style="display:flex">
 
 
             <li {% if not category %}class="selected"{% endif %} style="list-style:none;padding:2%">
-                <a href="{% url 'product_list' %}"  class="list-group-item  btn btn-secundario">All</a>
+                <a href="{% url 'product_list' %}"  class="list-group-item  btn btn-secundario">Todas</a>
 
 
             </li>
@@ -194,18 +194,18 @@ Para poder, adquirir nuestros Productos:
         <hr class="extra-margins">
 
         <!--Second row-->
-        <div class="row">
-          <!--First columnn-->
+<!--        <div class="row">
+          &lt;!&ndash;First columnn&ndash;&gt;
 
 
 
               {% for product in products %}
 
           <div class="col-lg-4">
-            <!--Card-->
+            &lt;!&ndash;Card&ndash;&gt;
             <div class="card  wow fadeIn" data-wow-delay="0.2s">
 
-              <!--Card image-->
+              &lt;!&ndash;Card image&ndash;&gt;
               <div class="view overlay hm-white-slight">
                   <a href="{{ product.get_absolute_url }}">
 
@@ -219,41 +219,101 @@ Para poder, adquirir nuestros Productos:
                 </a>
 
               </div>
-              <!--/.Card image-->
+              &lt;!&ndash;/.Card image&ndash;&gt;
 
-              <!--Card content-->
+              &lt;!&ndash;Card content&ndash;&gt;
               <div class="card-block">
-                <!--Title-->
+                &lt;!&ndash;Title&ndash;&gt;
                 <h4 class="card-title" style="text-align:center;">{{ product.name }}</h4>
 
                                  <h4 class="card-title" style="text-align:center;">Existencias : {{ product.stock }}</h4>
-                <!--Text-->
+                &lt;!&ndash;Text&ndash;&gt;
                 <p class="card-text"></p>
                 <a href="{{ product.get_absolute_url }}" class="btn btn-default">Adquiere a solo  <strong>  ${{ product.price }}</strong></a>
 
 
               </div>
-              <!--/.Card content-->
+              &lt;!&ndash;/.Card content&ndash;&gt;
 
             </div>
-            <!--/.Card-->
+            &lt;!&ndash;/.Card&ndash;&gt;
           </div>
-          <!--First columnn-->
+          &lt;!&ndash;First columnn&ndash;&gt;
 
 
             {% endfor %}
 
-        </div>
+        </div>-->
         <!--/.Second row-->
+
+
+
 
       </div>
       <!--/.Main column-->
 
     </div>
+      <ul class="cards">
+
+{% for product in products %}
+    {% if forloop.counter < 7 %}
+    <li >
+    <div href="" class="card">
+      {% if product.image %}
+                <br/>
+                <img src="/media/{{product.image}}" alt="{{product.image}}"  class="card__image" style="max-height:250px;min-height:250px;">
+                {% else %}
+                <img src="{% static 'imagenes/adopciones/adop1.jpg'  %}"  class="card__image"  style="max-height: 300px;min-height: max-content;" >
+                {% endif %}
+      <div class="card__overlay">
+        <div class="card__header">
+          <svg class="card__arc" xmlns="http://www.w3.org/2000/svg"><path /></svg>
+<a href="{{ product.get_absolute_url }} ">
+    <div class="icon">
+	<i class="fas fa-cart-arrow-down" style="color:green;
+    	font-size: 50px;
+		line-height: 60px;
+		position: relative;
+		z-index: 1;"></i>
+</div>
+</a>
+
+
+
+
+          <div class="card__header-text">
+            <h3 class="card__title">{{ product.name }}</h3>
+
+                   <span class="card__description"> ${{ product.price }}</span>
+          </div>
+        </div>
+             <span class="card__status"> {{ product.stock }}</span>
+
+
+
+      </div>
+
+
+    </div>
+
+  </li>
+    {% endif %}
+      {% endfor %}
+
+
+</ul>
   </div>
   <!--/.Main layout-->
 
 </main>
+
+
+
+
+
+
+
+
 
 {% if messages %}
     {% for m in messages %}

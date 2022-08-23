@@ -1,10 +1,14 @@
-{% extends "denuncias/pagina_denuncias.html" %}
+{% extends "voluntarios/pagina_voluntario.html" %}
+{% load static %}
+{% block tema %}
+   Pagina de edicion de Noticias
+ {% endblock tema %}
 
 
 {% block contenido %}
 
 <body>
-    <h1>Pagina de edicion de Noticias</h1>
+
     <div class="container">
         <form method="post", enctype="multipart/form-data">
             {% csrf_token %}

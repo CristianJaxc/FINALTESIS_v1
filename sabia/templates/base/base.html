@@ -177,7 +177,7 @@ display: block;
 
                   <div class="dropdown-menu m-0">
                          {% ifequal user.perfil.role 'usuario' %}
-                              <a class="dropdown-item" href="{% url 'pagina_cliente' %}">Información</a>
+                              <a class="dropdown-item" href="{% url 'pagina_cliente' user.id %} ">Información</a>
 
                     {% else %}
   <a class="dropdown-item" href="{% url 'pagina' %}">Perfil</a>
@@ -281,7 +281,9 @@ display: block;
         Donaciones &raquo;
       </a>
       <ul class="dropdown-menu dropdown-submenu">
+<!--
            <li>  <a href="{% url 'pagina_apadrinamiento' %}"class="dropdown-item">Apadrinamiento </a></li>
+-->
     <li>  <a href="{% url 'pagina_donaciones' %}" class="dropdown-item">Donaciones Directas</a></li>
       </ul>
     </li>
@@ -368,7 +370,7 @@ display: block;
               <!-- redireccion al perfil  -->
 
                 {% ifequal user.perfil.role 'usuario' %}
-                              <li><a class="dropdown-item" href="{% url 'pagina_cliente' %}">Información</a></li>
+                              <li><a class="dropdown-item" href="{% url 'pagina_cliente' user.id %}">Información</a></li>
 
                     {% else %}
   <li><a class="dropdown-item" href="{% url 'pagina' %}">Perfil</a></li>
@@ -423,7 +425,9 @@ display: block;
                 <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"> <i class="fas fa-handshake" >
 </i> Donaciones</a>
                 <div class="dropdown-menu m-0" id="drop-movil">
+<!--
                     <a href="{% url 'pagina_apadrinamiento' %}"class="dropdown-item">Apadrinamiento </a>
+-->
                     <a href="{% url 'pagina_donaciones' %}" class="dropdown-item">Donaciones </a>
 
                 </div>

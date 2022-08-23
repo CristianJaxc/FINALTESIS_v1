@@ -1,0 +1,90 @@
+
+{% extends "cliente/pagina_cliente.html" %}
+{% load static %}
+{% block tema %}
+Detalles de la Orden
+ {% endblock tema %}
+
+
+{% block contenido %}
+
+
+<body>
+
+
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6 mb-4">
+                    <div class="card shadow mb-4">
+                        <div class="card-header py-3">
+                            <h6 style="text-align: center;">Datos de la Orden </h6>
+                                    </div>
+        <ul>
+            <li style="list-style: none;"><strong>codigo de Orden :</strong> {{Order1.id}}</li>
+             <li style="list-style: none;"><strong>Nombre Solicitante:</strong> {{Order1.first_name }}</li>
+             <li style="list-style: none;"><strong>Email :</strong> {{Order1.email}}</li>
+            <li style="list-style: none;"><strong>Direcion :</strong> {{Order1.address }}</li>
+            <li style="list-style: none;"><strong>Codigo Postal:</strong> {{Order1.postal_code }}</li>
+            <li style="list-style: none;"><strong>Ciudad:</strong> {{Order1.city }}</li>
+              <li style="list-style: none;"><strong>Fecha de Pedido :</strong> {{Order1.created }}</li>
+             <li style="list-style: none;"><strong>Estado de Pedido:</strong>
+
+                 {% ifequal Order1.paid True %}
+                 Pagado
+                  {% else %}
+                 No cancelado
+                 {% endifequal %}
+             </li>
+
+        </ul>
+    </div>
+
+                    </div>
+
+                       <div class="col-lg-6 mb-4">
+                    <div class="card shadow mb-4">
+                        <div class="card-header py-3">
+                            <h6 style="text-align: center;">Productos Seleccionados </h6>
+                                    </div>
+
+
+        <ul>
+
+            {% for m in Order3 %}
+     {% ifequal m.order Order1 %}
+    {% if m.product.image %}
+
+          <li style="list-style: none;">
+            <img src="/media/{{m.product.image }}" alt="{{m.product.Product.image }}"  style="width: 40%;margin-left: 35%;" >
+
+            {% else %}
+            <img class="img-fluid rounded-top" src="{% static 'img/albergue1.png ' %}"    style="width: 40%;" alt="">
+
+
+            {% endif %}
+
+          </li>
+
+         <li style="list-style: none;"><strong>codigo de Orden :</strong> {{m.id}}</li>
+             <li style="list-style: none;"><strong>Nombre Producto:</strong> {{m.product }}</li>
+              <li style="list-style: none;"><strong>Precio Producto:</strong> {{m.price }}</li>
+                  <li style="list-style: none;"><strong>Cantidad del Producto:</strong> {{m.quantity }}</li>
+
+
+
+        </ul>
+
+{% endifequal %}
+
+            {% endfor %}
+
+    </div>
+
+                    </div>
+                </div>
+
+        </div>
+</body>
+
+
+{% endblock contenido %}

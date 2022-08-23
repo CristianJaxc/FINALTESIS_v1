@@ -18,12 +18,12 @@
                       {% endblock tema %}
                       {% block title %}Perros del Albergue  {% endblock title  %} 
                      
-                      {% block tablas %}
+
                  
 
                       {% block tr %}
 
-                    <th scope="col">#</th>
+
                     <th scope="col " style="text-align: center;">Imagen</th>
                     <th scope="col">Nombre</th>
                     <th scope="col">edad</th>
@@ -37,7 +37,7 @@
            
                 {% for i in object_list %}
                 <tr>
-                    <th scope="row">{{forloop.counter}}</th>
+
             
 
                     {% if i.imagen_mascota %}
@@ -52,7 +52,15 @@
 
                     <td>{{i.nombre}}</td>
                     <td>{{i.edad}}</td>
-                    <td>{{i.estado}}</td>
+                    <td>
+                            {% ifequal i.estado True %}
+                   Disponible
+                        {% else %}
+                    No disponible
+                        {% endifequal %}
+
+
+                    </td>
 
 
 
@@ -85,7 +93,7 @@
                 {% endblock tbody  %}   
               
                
-                {% endblock tablas %}
+
                 {% block edicion %}
                 <a href="{% url 'registrar_perro' %}" class="btn btn-success btn-icon-split">
                     <span class="icon text-white-50">

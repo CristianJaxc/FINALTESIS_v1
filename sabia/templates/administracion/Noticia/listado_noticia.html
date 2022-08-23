@@ -19,7 +19,7 @@
                       {% block title %}Noticias Registradas  {% endblock title  %}
                       {% block tr %}
 
-                    <th scope="col">#</th>
+
                     <th scope="col " style="text-align: center;">Imagen</th>
                     <th scope="col">Titulo</th>
                     <th scope="col">Contenido</th>
@@ -34,9 +34,10 @@
 
                 {% for i in object_list %}
                 <tr>
-                    <th scope="row">{{forloop.counter}}</th>
-                    {% if i.imagen_noticia %}
+
+
           <td class="col-lg-4 mb-4 ">
+               {% if i.imagen_noticia %}
             <img src="/media/{{i.imagen_noticia}}" alt="{{i.imagen_noticia}}"  style="width: 40%;margin-left: 35%;" >
 
             {% else %}

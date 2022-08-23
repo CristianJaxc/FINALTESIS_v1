@@ -1,13 +1,22 @@
-from django.shortcuts import redirect
+from django.contrib.auth.models import User
+from django.contrib.messages.views import SuccessMessageMixin
+from django.shortcuts import redirect, get_object_or_404
 from django.contrib.auth.forms import UserCreationForm
 # Create your views here.
 from django.contrib import messages
 from django.views import generic
+from django.views.decorators.csrf import csrf_exempt
+
 from .models import Client
 from django.views.generic import ListView, DetailView, UpdateView, TemplateView, DeleteView
 from django.urls import reverse_lazy
 from django.shortcuts import render, HttpResponseRedirect
 from django.contrib import messages
+
+from ..orders.models import Order, OrderItem
+from ..orders.views import OrderDetail
+from ..usuario.models import Perfil
+
 
 def login(request):
     if request.session.get('id') != None:  # Puede iniciar sesión solo cuando no haya iniciado sesión
@@ -67,3 +76,36 @@ def logouts(request):
     request.session.flush()
     messages.success(request, "ssss")
     return redirect('product_list')
+
+
+
+
+@csrf_exempt
+def estadoPedido(request):
+    user = Perfil()
+    model = OrderItem
+
+    if request.session.get('order_id') :
+        order_id = request.session.get('order_id')
+        order = get_object_or_404(Order, id=order_id)
+        return render(request, 'cliente/admin_cliente/estado_pedido.html',{'order':order})
+
+
+    else :
+
+        order = OrderItem.objects.all().order_by('id')
+        return render(request, 'cliente/admin_cliente/estado_pedido.html',{'order':order})
+
+
+class Listado_Order1(SuccessMessageMixin, ListView):
+    model = Order
+    template_name = 'cliente/admin_cliente/estado_pedido.html'
+
+    def get_context_data(self, **kwargs):
+        context = super(Listado_Order1, self).get_context_data(**kwargs)
+        pk = self.kwargs.get('pk', 0)
+        usuario = User.objects.get(id=pk)
+        perfil = Perfil.objects.get(User_id=usuario.id)
+        order = Order.objects.all().order_by('id')
+        return {'usuario': usuario, 'perfil': perfil,'order':order}
+

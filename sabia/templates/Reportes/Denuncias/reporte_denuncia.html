@@ -24,11 +24,15 @@
 <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
 <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
  <script src="{% static 'lib/highcharts-8.1.2/highcharts.js'  %}"></script>
-        <script src="{% static 'lib/highcharts-8.1.2/modules/series-label.js'  %}"></script>
+<script src="{% static 'lib/highcharts-8.1.2/modules/series-label.js'  %}"></script>
     <script src="{% static 'lib/highcharts-8.1.2/modules/exporting.js'  %}"></script>
     <script src="{% static 'lib/highcharts-8.1.2/modules/export-data.js'  %}"></script>
     <script src="{% static 'lib/highcharts-8.1.2/modules/accessibility.js'  %}"></script>
 
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+<script src="https://code.highcharts.com/modules/exporting.js"></script>
+<script src="https://code.highcharts.com/modules/export-data.js"></script>
+<script src="https://code.highcharts.com/modules/accessibility.js"></script>
     {% endblock head %}
 </head>
 <div class="container-fluid">
@@ -77,13 +81,11 @@
 <button class="btn btn-danger btnTest">Actualizar</button>-->
 {% endblock edicion %}
             </div>
+
 <figure class="highcharts-figure">
     <div id="container"></div>
     <p class="highcharts-description">
-        This chart demonstrates an inverted area chart with a floating legend.
-        Inverted charts can often be a good choice on smaller screens, as
-        most users find it easier to scroll vertically to see more data compared
-        to scrolling horizontally.
+ Datos Obtenidos de Ventas en el año
     </p>
 </figure>
 
@@ -125,37 +127,57 @@
 <script type="text/javascript" src="{% static 'js/reportes/reporte_denuncia.js' %}"></script>
 
 <script>
-  var grancolumn = Highcharts.chart('container', {
+   var grancolumn = Highcharts.chart('container', {
     chart: {
-        type: 'column'
+        type: 'spline',
+        inverted: true
     },
     title: {
-        text: 'Indice de Reportes por mes del año 2022'
+        text: 'Denuncias Reportadas '
     },
     subtitle: {
-        text: 'Source: <a href="#">SABIA</a>'
+        text: 'Evaluación de las denuncias por mes '
     },
     xAxis: {
-        type: 'category',
+        reversed: false,
+        title: {
+            enabled: true,
+            text: 'Cantidad'
+        },
         labels: {
-            rotation: -45,
-            style: {
-                fontSize: '13px',
-                fontFamily: 'Verdana, sans-serif'
-            }
-        }
+            format: '{value} '
+        },
+        accessibility: {
+            rangeDescription: 'Range: 0 to 80 m.'
+        },
+        maxPadding: 0.05,
+        showLastLabel: true
     },
     yAxis: {
-        min: 0,
         title: {
-            text: 'Cantidad'
-        }
+            text: 'año '
+        },
+        labels: {
+            format: '{value}'
+        },
+        accessibility: {
+            rangeDescription: 'Range: -90°C to 20°C.'
+        },
+        lineWidth: 2
     },
     legend: {
         enabled: false
     },
     tooltip: {
-        pointFormat: 'Cantidad en el  2022 </b>'
+        headerFormat: '<b>{series.name}</b><br/>',
+        pointFormat: '{point.y} denuncia: {point.name}'
+    },
+    plotOptions: {
+        spline: {
+            marker: {
+                enable: false
+            }
+        }
     },
 
 });

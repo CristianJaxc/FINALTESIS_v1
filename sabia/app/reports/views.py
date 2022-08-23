@@ -9,6 +9,7 @@ from app.orders.models import OrderItem
 from app.servicios.models import *
 from datetime import datetime
 # Create your views here.
+from ..orders.models import Order
 from ..servicios.models import Product
 from ..denuncias.models import  Denuncias
 from ..adopciones.models import Perros,Solicitudes
@@ -136,35 +137,64 @@ class reporteProductos(TemplateView):
 
 class reportVentas(TemplateView):
     template_name = 'Reportes/Reportes_ventas.html'
-
-
+    model = Order
     @method_decorator(csrf_exempt)
-    def dispatch(self,request,*args,**kwargs):
-        return super().dispatch(request,*args,**kwargs)
+    def dispatch(self, request, *args, **kwargs):
+        return super().dispatch(request, *args, **kwargs)
 
-    def post(self,request,*args,**kwargs):
-        data= {}
+    def post(self, request, *args, **kwargs):
+        data = {}
         try:
-            action=request.POST['action']
-            if action =='search_report':
-                data=[]
-                start_date=request.POST.get('start_date','')
-                end_date= request.POST.get('end_date','')
-                search=OrderItem.all()
+            action = request.POST['action']
+            if action == 'searchdata':
+                data = []
+                start_date = request.POST.get('start_date', '')
+                end_date = request.POST.get('end_date', '')
+                search = Order.objects.all()
                 if len(start_date) and len(end_date):
-                    search =search.filter(date_joined_range=[start_date,end_date])
+                    search = search.filter(created__range=[start_date, end_date])
                 for s in search:
                     data.append([
-                        s.order,
-                        s.product,
-                        s.price,
-                        s.quantity
-                    ])
-            else:
-                data['error']='Ha ocurrido un error'
-        except Exception as e:
-            return  JsonResponse(data,safe=False)
+                        s.id,
+                        s.first_name,
+                        s.email,
+                        s.city,
+                        s.created.strftime('%Y-%m-%d'),
+                        s.paid,
 
+
+                    ])
+            elif action == 'get_grafico':
+                        data = {
+                            'name': 'Cantidad',
+                            'colorByPoint': True,
+                            'data': self.get_grafico(),
+                        }
+            else:
+                data['error'] = 'ha ocurrido un error'
+
+            # data = Product.objects.get(pk=request.POST['id']).toJSON()
+            # data['name'] = data
+            # print(Product.objects.get(pk=request.POST['id']))
+            # print(request.POST)
+        except Exception as e:
+            data['error'] = str(e)
+        return JsonResponse(data, safe=False)
+
+    def get_grafico(self):
+        data = []
+        try:
+            year = datetime.now().year
+            for p in Product.objects.all():
+                # Order2 = Order.objects.filter(id=Order1.id)
+                data.append({
+                    'name': p.name,
+                    'y': float(p.stock),
+                }
+                )
+        except:
+            pass
+        return data
     def get_context_data(self, **kwargs):
         context=super(reportVentas, self).get_context_data(**kwargs)
         context['title']='Reporte de ventas'
@@ -176,7 +206,6 @@ class reportVentas(TemplateView):
 #REPORTE DE DENUNCIAS ::
 class reportDenuncia(TemplateView):
     model = Denuncias
-
     template_name = 'Reportes/Denuncias/reporte_denuncia.html'
     @method_decorator(csrf_exempt)
     def dispatch(self, request, *args, **kwargs):
@@ -204,9 +233,8 @@ class reportDenuncia(TemplateView):
                         s.descripcion,
                     ])
             elif action == 'get_grafico':
-
                 data = {
-                    'name': 'Cantidad',
+                    'name': 'numero de denuncias ',
                     'colorByPoint': True,
                     'data': self.get_grafico(),
                 }
@@ -224,7 +252,7 @@ class reportDenuncia(TemplateView):
     def get_grafico(self):
         data = []
         try:
-            stock = 20
+
             year = datetime.now().year
 
             #for m in range(1,13):
@@ -232,7 +260,7 @@ class reportDenuncia(TemplateView):
                 # Order2 = Order.objects.filter(id=Order1.id)
                # stock=Denuncias.objects.filter(fecha_creacion__year=year,Denuncias_id=p.id).aggregate(p.id)
                 data.append({
-                    'name': p.nombres,
+                    'name': p.fecha_creacion,
                     'y': float(year),
                 })
 
@@ -253,7 +281,7 @@ class reportDenuncia(TemplateView):
 class reportAdopciones(TemplateView):
     model =Solicitudes
 
-    template_name = 'Reportes/Denuncias/reporte_denuncia.html'
+    template_name = 'Reportes/Denuncias/reporte_adopciones.html'
     @method_decorator(csrf_exempt)
     def dispatch(self, request, *args, **kwargs):
         return super().dispatch(request, *args, **kwargs)
@@ -271,14 +299,15 @@ class reportAdopciones(TemplateView):
                     search = search.filter(date_joined__range=[start_date, end_date])
                 for s in search:
                     data.append([
-                        s.date_joined.strftime('%Y-%m-%d'),
+
                         s.id,
                         s.nombre,
-                        s.apellido,
+                        s.date_joined.strftime('%Y-%m-%d'),
                         s.cedula,
+                        s.telefono,
                         s.direccion,
                         s.descripcion,
-                        s.perros.nombre,
+
                     ])
             elif action == 'get_grafico':
 
@@ -309,8 +338,9 @@ class reportAdopciones(TemplateView):
                 # Order2 = Order.objects.filter(id=Order1.id)
                # stock=Denuncias.objects.filter(fecha_creacion__year=year,Denuncias_id=p.id).aggregate(p.id)
                 data.append({
-                    'name': p.nombres,
-                    'y': float(year),
+                    'name': p.perros.nombre,
+                    'name2': p.perros.category.name,
+                    'y': float(p.perros.id),
                 })
 
             return data
@@ -319,7 +349,7 @@ class reportAdopciones(TemplateView):
 
     def get_context_data(self, **kwargs):
         context=super(reportAdopciones, self).get_context_data(**kwargs)
-        context['title']='Reporte de Adocpiones'
+        context['title']='Reporte de Adopciones'
         context['entity']="Despliegue de reportes de Adopciones"
         context['list_url']=reverse_lazy('reporte_adopciones')
         context['form'] = Report_Form()
@@ -327,7 +357,7 @@ class reportAdopciones(TemplateView):
 #REPORTE DONACIONES :
 class reportDonaciones(TemplateView):
     model =Soli
-    template_name = 'Reportes/Denuncias/reporte_denuncia.html'
+    template_name = 'Reportes/reportes_productos.html'
     @method_decorator(csrf_exempt)
     def dispatch(self, request, *args, **kwargs):
         return super().dispatch(request, *args, **kwargs)
@@ -345,14 +375,12 @@ class reportDonaciones(TemplateView):
                     search = search.filter(date_joined__range=[start_date, end_date])
                 for s in search:
                     data.append([
-                        s.date_joined.strftime('%Y-%m-%d'),
+
                         s.id,
                         s.nombre,
-                        s.apellido,
-                        s.cedula,
+                        s.date_joined.strftime('%Y-%m-%d'),
                         s.telefono,
-                        s.email,
-                        s.descripcion,
+
                         s.productos.nombre,
                     ])
             elif action == 'get_grafico':
@@ -395,7 +423,7 @@ class reportDonaciones(TemplateView):
     def get_context_data(self, **kwargs):
         context=super(reportDonaciones, self).get_context_data(**kwargs)
         context['title']='Reporte de Donaciones'
-        context['entity']="Despliegue de reportes de Adopciones"
-        context['list_url']=reverse_lazy('reporte_adopciones')
+        context['entity']="Despliegue de reportes de Donaciones"
+        context['list_url']=reverse_lazy('reporte_donaciones')
         context['form'] = Report_Form()
         return context

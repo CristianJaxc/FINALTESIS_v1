@@ -9,9 +9,9 @@
       {% endblock tema %}
       {% block title %}Listado de posibles donaciones  {% endblock title  %} 
      
-      {% block tablas %}
+
       {% block tr %}
-                    <th scope="col">#</th>
+
                     <th scope="col">Codigo</th>
                     <th scope="col">Solicitante</th>
                     <th scope="col">contacto</th>
@@ -24,12 +24,20 @@
                           
                 {% for i in object_list %}
                 <tr>
-                    <th scope="row">{{forloop.counter}}</th>
+
                     <td>{{i.id}}</td>
                     <td>{{i.nombre}} {{i.apellido}}</td>
                     <td>{{i.telefono}}</td>
-                    <td>{{i.estado}}</td>
-                    <td>{{i.productos_id}}</td>
+
+                    <td>
+                         {% ifequal i.estado True %}
+                       Receptada
+                        {% else %}
+                        En espera
+                        {% endifequal %}
+
+                    </td>
+                    <td>{{i.productos.nombre}}</td>
                     <td>
                         
                         <a href="{% url 'detalle_solicitud_donacion' i.id %}"class="btn btn-warning btn-icon-split">
@@ -57,7 +65,7 @@
                 {% endfor %}
                     
                 {% endblock tbody  %}   
-                {% endblock tablas %}
+
 </body>
 
 

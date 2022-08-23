@@ -11,10 +11,10 @@
      {% endblock tema %}
      {% block title %}Listado de Posibles Adopciones {% endblock title  %} 
     
-     {% block tablas %}
+
      {% block tr %}
            
-                    <th scope="col">#</th>
+
                     <th scope="col">Codigo</th>
                     <th scope="col">Solicitante</th>
                     <th scope="col">contacto</th>
@@ -27,12 +27,21 @@
      
                 {% for i in object_list %}
                 <tr>
-                    <th scope="row">{{forloop.counter}}</th>
+
                     <td>{{i.id}}</td>
                     <td>{{i.nombre}} {{i.apellido}}</td>
                     <td>{{i.telefono}}</td>
-                    <td>{{i.estado}}</td>
-                    <td>{{i.perros_id}}</td>
+                    <td>
+                        {% ifequal i.estado True %}
+                        Adoptado
+                        {% else %}
+                        En espera
+                        {% endifequal %}
+
+
+
+                    </td>
+                    <td>{{i.perros.nombre}}</td>
 
                    
 
@@ -57,6 +66,6 @@
                 </tr>
                 {% endfor %}
                 {% endblock tbody  %}   
-                {% endblock tablas %} 
+
          
 </body>

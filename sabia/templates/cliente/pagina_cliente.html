@@ -19,7 +19,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Administración </title>
+    <title>Cliente {{user.first_name}} </title>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.15/dist/sweetalert2.all.min.js"></script>
     <!--DATATABLE-->
 
@@ -42,6 +42,7 @@
     <link href="{% static 'css/sb-admin-2.min.css' %}" rel="stylesheet">
 
     <link href="{% static 'css/dash1.css' %}" rel="stylesheet">
+     <link href="{% static 'css/perfil.css' %}" rel="stylesheet">
 </head>
 {% endblock head %}
 
@@ -84,10 +85,13 @@
 
             <!-- Nav Item - Utilities Collapse Menu -->
             <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities"
+                <a class="nav-link collapsed" href="{% url 'estado_pedido1' %}"  data-target="#collapseUtilities"
                     aria-expanded="true" aria-controls="collapseUtilities">
                     <i class="fas fa-truck-loading"></i>
                     <span>Pedidos</span>
+
+
+
                 </a>
                 <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities"
                     data-parent="#accordionSidebar">
@@ -99,12 +103,12 @@
             <hr class="sidebar-divider">
 
             <!-- Heading -->
-            <div class="sidebar-heading tuto2">
+       <!--     <div class="sidebar-heading tuto2">
           Adopciones
-            </div>
+            </div>-->
 
             <!-- Nav Item - Pages Collapse Menu -->
-            <li class="nav-item">
+    <!--        <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages"
                     aria-expanded="true" aria-controls="collapsePages">
                     <i class="fas fa-clock"></i>
@@ -112,15 +116,15 @@
                 </a>
                 <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
                 </div>
-            </li>
+            </li>-->
 
      <!-- PARA Donaciones -->
-              <div class="sidebar-heading tuto">
+        <!--      <div class="sidebar-heading tuto">
                 Donaciones
-            </div>
+            </div>-->
 
             <!-- Nav Item - Pages Collapse Menu -->
-            <li class="nav-item">
+        <!--    <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseVentas"
                     aria-expanded="true" aria-controls="collapseVentas">
                     <i class="fas fa-hands-helping "></i>
@@ -129,10 +133,10 @@
                 <div id="collapseVentas" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
 
                 </div>
-            </li>
+            </li>-->
 
             <!-- Nav Item - Utilities Collapse Menu -->
-            <li class="nav-item">
+       <!--     <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseVentas2"
                     aria-expanded="true" aria-controls="collapseVentas2">
                     <i class=" fas fa-exclamation-triangle"></i>
@@ -142,7 +146,7 @@
                     data-parent="#accordionSidebar">
 
                 </div>
-            </li>
+            </li>-->
 
 
 
@@ -165,11 +169,17 @@
 
 
             <!-- Sidebar Message -->
-            <div class="sidebar-card d-none d-lg-flex">
-                <img class="sidebar-card-illustration mb-2" src="{% static 'img/albergue1.png ' %}"  alt="SABIA">
-                <p class="text-center mb-2"><strong>En bien de los caninos de Latacunga </strong> SABIA -2022</p>
-                <a class="btn btn-success btn-sm fb-share-button " data-href="http://cristiansabia.pythonanywhere.com/"
-data-layout="button_count">Compartir Sitio </a>
+            <div class="sidebar-card d-none d-lg-flex" style="background-color:white">
+                <a href="{% url 'cart_detail' %}">
+                                    <i class=" fas fa-cart-plus" style="color: rgb(95, 95, 95);font-size: 50px;padding-left: 5%;padding-top: 2%;"></i>
+
+                </a>
+
+        <li class="nav-item">
+                 <span style="color:black;">Regresar a la Tienda</span>
+            </li>
+
+
             </div>
 
         </ul>
@@ -192,8 +202,9 @@ data-layout="button_count">Compartir Sitio </a>
 
 <h3 style="margin-left:5%;color:white">
     {% block tema %}
-        Gracias por formar parte de esta labor social
+Bienvenido
 {% endblock tema %}
+
 </h3>
 
                     <!-- Topbar Navbar -->
@@ -210,31 +221,75 @@ data-layout="button_count">Compartir Sitio </a>
                                 <!-- Counter - Alerts -->
                                 <span class="badge badge-danger badge-counter">
 
+  {% if cart|length <= 0 %}
+                                            0
+   {% else %}
+      {% with total_items=cart|length %}
+        {% if cart|length > 0 %}
+         {{ total_items }}
+        {% else %}
+      0
+        {% endif %}
+    {% endwith %}
 
-                                    3+
+
+        {% endif %}
 
                                 </span>
                             </a>
                             <!-- Dropdown - Alerts -->
+
                             <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in"
                                 aria-labelledby="alertsDropdown">
+                                   {% if cart|length <= 0 %}
+                             {% else %}
                                 <h6 class="dropdown-header">
                                     Notificaciones
                                 </h6>
-                                <a class="dropdown-item d-flex align-items-center" href="#">
+                                <div class="dropdown-item d-flex align-items-center" href="#">
                                     <div class="mr-3">
                                         <div class="icon-circle bg-primary">
-                                            <i class="fas fa-file-alt text-white"></i>
+                                            <i class="fas fa-file-alt text-white">
+
+
+                                            </i>
                                         </div>
+
                                     </div>
+
                                     <div>
+
+ <div class="font-weight-bold">
+
+
+      {% with total_items=cart|length %}
+        {% if cart|length > 0 %}
+             <div class="container">
+                 <a href="{% url 'cart_detail' %}" style="color:black">
+                            {{ total_items }} Producto{{ total_items|pluralize }},
+                ${{ cart.get_total_price }}
+                 </a>
+
+            </div>
+
+ </div>
+
+
                                    <!--     <div class="small text-gray-500">Abril, 22, 2022</div>
                                         <span class="font-weight-bold">Denuncia Reportada</span>-->
                                     </div>
-                                </a>
 
 
-                                <a class="dropdown-item text-center small text-gray-500" href="#">Ver todas las Notificaciones</a>
+
+                                </div>
+
+
+                                <a class="dropdown-item text-center small text-gray-500" href="#"></a>
+                           {% else %}
+
+        {% endif %}
+    {% endwith %}
+        {% endif %}
                             </div>
                         </li>
 
@@ -282,7 +337,76 @@ data-layout="button_count">Compartir Sitio </a>
                 <!-- Begin Page Content -->
 
     {% block contenido %}
+     <div class="container">
+       <div class="row">
+   <div class="row">
+     <div class="col-lg-4 mb-4">
 
+           <div class="avatar">
+          {% if user.perfil.imagen_perfil %}
+
+                <td class="col-lg-4 mb-4 ">
+                  <img src="/media/{{user.perfil.imagen_perfil }}" alt="{{user.perfil.imagen_perfil }}"    class="img-fluid" >
+                  {% else %}
+
+                  <img class="img-fluid rounded-top" src="{% static 'img/despues1.png' %}"     class="img-fluid">
+                  {% endif %}
+           </div>
+         </div>
+
+
+           <div class="col-lg-6 mb-4">
+             <div class="datosycontacto">
+               <div class="datos">
+                   <h5 style="text-align: center;padding: 5%;">Información Personal  </h5>
+                 <div><i class="fas fa-quote-left"></i><b>Nombre : </b>
+                   {{user.first_name}}</div>
+                   <div><i class="fas fa-quote-left"></i><b>Apellido: </b>
+                       {{user.last_name}}</div>
+
+
+                 <div><i class="fas fa-quote-left"></i><b>Cedula</b>{{user.perfil.cedula}}</div>
+                 <div><i class="fas fa-quote-left"></i><b>Telefono:</b>
+                   {{user.perfil.telefono}}</div>
+                 <div><i class="fas fa-quote-left"></i><b>Direccion</b>
+                   {{user.perfil.direccion}}</div>
+                   <div><i class="fas fa-quote-left"></i><b>Email</b>
+                       {{user.email}}</div>
+
+
+
+               </div>
+
+             </div>
+
+             <div class="my-2"></div>
+             <a href="{% url 'editar_cliente' user.id %}"class="btn btn-success btn-icon-split" style="margin-left: 25%;">
+                 <span class="icon text-white-50">
+                     <i class="fas fa-check"></i>
+                 </span>
+
+                 <span class="text">Editar Perfil </span>
+             </a>
+           </div>
+
+
+
+         <div class="col-lg-6 mb-4">
+
+           <div class="rango-de">
+
+             <i class=" fas fa-globe-americas" style="color: rgb(95, 95, 95);font-size: 100px;padding-left: 5%;padding-top: 2%;"></i>
+
+             <div class="rang"> {{user.perfil.nacionalidad}}    </div>
+           </div>
+
+           <div class="footb"><i class="fas fa-quote-left"></i> Registrado el :    {{user.date_joined}}</div>
+           </div>
+
+         </div>
+       </div>
+
+       </div>
     {% endblock contenido %}
                 <!-- /.container-fluid -->
 
@@ -381,7 +505,7 @@ $(document).ready(function() {
     $('#example').DataTable( {
      "language": {
             "lengthMenu": "Display _MENU_ records per page",
-            "zeroRecords": "No encontrado - sorry",
+            "zeroRecords": "No se encontro ninguna Información , Gracias ",
             "info": "Numero de Pagina page _PAGE_ de _PAGES_",
             "infoEmpty": "No records available",
             "infoFiltered": "(filtered from _MAX_ total records)",

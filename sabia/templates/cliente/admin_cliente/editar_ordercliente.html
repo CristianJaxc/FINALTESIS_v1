@@ -1,0 +1,44 @@
+
+{% extends "cliente/pagina_cliente.html" %}
+{% load static %}
+{% block tema %}
+Edicion de Orden de Pedido
+ {% endblock tema %}
+{% block contenido %}
+<body>
+    <div class="container">
+        <form method="post", enctype="multipart/form-data">
+
+            {% csrf_token %}
+
+       <input type="hidden" class="form-control fs-5" name="first_name"  value="{{user.first_name}}">
+
+
+       <input type="hidden" class="form-control fs-5" name="last_name"  value="{{user.last_name}}">
+
+
+       <input type="hidden" class="form-control fs-5" name="email"  value="{{user.email}}">
+
+
+       <input type="hidden" class="form-control fs-5" name=" address"  value="{{user.perfil.direccion}}">
+
+
+       <input type="hidden" class="form-control fs-5" name="postal_code" value="{{order.postal_code}}" >
+
+       <input type="hidden" class="form-control fs-5" name="city" value="{{order.city}}" >
+
+ <label for="image" class="form-label fw-bolder fs-5">Comprobante</label>
+       <input type="file" class="form-control fs-5" name="image" value="{{order.image}}">
+              <a href="{% url 'editar_producto' id %}"class="btn btn-success btn-icon-split" style="margin-left: 25%;">
+                        <span class="icon text-white-50">
+                            <i class="fas fa-check"></i>
+                        </span>
+                        <input type="submit" value="Actualizar">
+                    </a>
+
+        </form>
+    </div>
+<hr>
+
+</body>
+{% endblock contenido %}

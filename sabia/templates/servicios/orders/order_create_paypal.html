@@ -1,90 +1,140 @@
+{% extends "base/base.html" %}
+{% block titulo %} Tienda SABIA {% endblock %}
 
-<!-- carga los archivos estaticos  -->
 {% load static %}
-<!DOCTYPE html>
-<html lang="en">
+{% load crispy_forms_tags %}
+{% block contenido %}
+<style>
+    .asteriskField {
+display: none;
+}
+</style>
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="https://kit.fontawesome.com/ab00d86059.js" crossorigin="anonymous"></script>
-
-    <link rel="stylesheet" href="{% static 'logins.css' %}">
-    <title>Registro</title>
     <link href="{% static 'css/perro.css' %}" rel="stylesheet">
 </head>
 
+<div class="container-fluid py-5">
+<div class="row ">
+    <div class="col-xl-4 col-lg-6 wow slideInUp" data-wow-delay="0.1s">
+        <div class="bg-light rounded h-100 p-5">
+            <div class="section-title">
+
+                <h1 class="display-6 mb-2" style="text-align:center;">Detalles </h1>
+            </div>
 
 
-<body>
- <div class="container" >
+            <table class="table">
 
-    <div class="forms-container">
-      <div class="signin-signup">
+                 <thead>
+                    <tr>
+                      <th scope="col">Producto</th>
+                      <th scope="col">Nombre</th>
+                      <th scope="col">cantidad</th>
+                      <th scope="col">Precio</th>
+                    </tr>
+                     </thead>
+                <tbody>
+                  {% for item in cart %}
 
-        <form method="post", enctype="multipart/form-data"  class="sign-in-form">
-                        {% csrf_token %}
-
-          <h2 class="title">Registrar 1/2 </h2>
-    <p>
-           <div class="input-field">
-            <i class="fas fa-user"></i>
-
-            <input type="text" placeholder="Usuario" name="username" id="Usuario" />
-
-          </div>
-
-               <div class="input-field">
-            <i class="fas fa-lock"></i>
-            <input type="password" placeholder="Contraseña" name="password1" />
-          </div>
-
-     <div class="input-field">
-            <i class="fas fa-lock"></i>
-            <input type="password" placeholder="Contraseña Confirmación" name="password2" />
-          </div>
+                <tr>
+                    <th>
+                          {% if item.product.image %}
+                <br/>
+                <img src="/media/{{item.product.image}}" alt="{{product.image}}"  class="img-fluid" width="100%">
+                {% else %}
+                <img src="{% static 'imagenes/adopciones/adop1.jpg'  %}" >
+                {% endif %}
+                    </th>
+                                <th>
+   <h5>   {{ item.product.name }}    </h5>
+                    </th>
 
 
-   <!--  <div>
-     <div class="input" id="loco1">
-      {{ field }}
-     </div>
-     </div>-->
-    </p>
+                    <th>
+   <h5>
 
-   <div>
- {% for field in form %}
-{% if form.errors %}
-  {% for error in field.errors %}
+       {{ item.quantity }}
 
-                <small style="color: grey" style="color:#1D281F">
-   <ul style="text-align:justify;">
-       <li style="text-align:left">
-            {{ error }}
-       </li>
-   </ul>
+   </h5>
+                    </th>
+
+
+                    <th>
+   <h5> ${{ item.total_price }}  </h5>
+                    </th>
+                </tr>
+                   {% endfor %}
+                </tbody>
+
+            </table>
 
 
 
-</small>
-  {% if field.help_text %}
-<!-- <small style="color: grey">{{ field.help_text }}</small>-->
-  {% endif %}
-  {% endfor %}
-  {% endif %}
-  {% endfor %}
-         </div>
-                      <input type="submit" value="Siguiente" class="btn solid"/>
-        </form>
-      </div>
+                   <span class="col">Total: ${{ cart.get_total_price }}</span>
+        </div>
+       <div class="row">
+    <div class="col">
+         <a href="{% url 'cart_detail' %}" class="button light btn btn-principal">Editar Compra </a>
+    </div>
+            <div class="col">
+                                    <a href="{% url 'product_list' %}" class="button light btn btn-principal">Comprar Mas </a>
+ </div>
+</div>
     </div>
 
-    <div class="panels-container" >
-      <div class="panel left-panel" >
-        <div class="content" >
-          <h3>Este es el Formulario de Registro </h3>
-          <p>
-      <div class="dairy-container">
+      {% if user.is_authenticated %}
+     <div class="col-xl-6  col-lg-6 wow slideInUp" data-wow-delay="0.3s">
+        <div class="container">
+               <h3>Paypal , Informacion  </h3>
+
+  <form method="post",action="." enctype="multipart/form-data">
+                    {% csrf_token %}
+       <label for="first_name" class="form-label fw-bolder fs-4">Nombre</label>
+       <input type="text" class="form-control fs-5" name="first_name"  value="{{user.first_name}}">
+
+       <label for="last_name" class="form-label fw-bolder fs-4">Apellido</label>
+       <input type="text" class="form-control fs-5" name="last_name"  value="{{user.last_name}}">
+
+  <!-- <h2>HOLLA : {{form.as_p}}</h2>-->
+      <label for="email" class="form-label fw-bolder fs-4">Correo</label>
+       <input type="email" class="form-control fs-5" name="email"  value="{{user.email}}">
+
+       <label for="address" class="form-label fw-bolder fs-4">Ubicacion</label>
+       <input type="text" class="form-control fs-5" name=" address"  value="{{user.perfil.direccion}}">
+
+       <label for="postal_code" class="form-label fw-bolder fs-4">Codigo Postal </label>
+       <input type="text" class="form-control fs-5" name="postal_code" >
+
+       <label for="city" class="form-label fw-bolder fs-4">Ciudad </label>
+       <input type="text" class="form-control fs-5" name="city" >
+
+
+
+               <!--     {{ form.as_p  }}-->
+
+            <hr><br>
+
+
+                    <div class="my-2"></div>
+                    <a href="#"class="" style="margin-left: 25%;">
+                        <span class="icon text-white-50">
+                            <i class="fas fa-check"></i>
+                        </span>
+
+                        <input type="submit" class="btn btn-success btn-icon-split" value="Adquirir">
+                    </a>
+
+
+
+            </form>
+
+        </div>
+
+    </div>
+       {% else %}
+    <div class="col">
+               <div class="dairy-position">
+  <div class="dairy-container">
     <svg version="1.1" class="dairy-phil" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="140" height="160" viewBox="0 0 140 160" xml:space="preserve">
       <path class="phil-body-color st0" d="" />
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 500" fill-rule="evenodd" clip-rule="evenodd" stroke-linejoin="round" stroke-miterlimit="1.414">
@@ -128,105 +178,61 @@
       <path class="phil-leg-left st4" d="" />
       <path class="phil-leg-right st4" d="" />
     </svg>
-    <span class="dairy-message" style="color:black">
-        Para regresar al sitio Web  <span class="dairy-link"></span>
-
-             <a class="dairy-link" href="{% url 'product_list' %}" >Home </a>
+    <span class="dairy-message">
+Para poder, adquirir nuestros Productos:
+      <a class="dairy-link" href="{% url 'signup_voluntario' %}">Registrate </a>
+      <hr style="margin:-1%;">
+        Si tienes cuenta:
+             <a class="dairy-link" href="{% url 'login' %}" >Iniciar Seción </a>
       <span class="dairy-close" style="color:white;background-color:green;padding-left:4px;">X</span>
     </span>
   </div>
-          </p>
+</div>
 
-
-        </div>
-      </div>
     </div>
-  </div>
 
+        {% endif %}
+
+
+
+</div>
+
+</div>
 
 <!--
-  <div class="container">
 
-        <form method="post", enctype="multipart/form-data">
-  <img class="avatar"alt="">
+<div class="row" >
+      <div class="col-md-3 col-sm-12 col-lg-4 wow fadeIn" data-wow-delay="0.2s">
+ {% for item in cart %}
+          <ul>
+                <li>
+                    {{ item.quantity }}x {{ item.product.name }}
+                    <span>${{ item.total_price }}</span>
+                </li>
+            {% endfor %}
+        </ul>
+        <p>Total: ${{ cart.get_total_price }}</p>
 
-  <i class=" fas fa-user-circle" style="font-size: 90px;margin-right: 30%;color: #43914E"></i>
-  <h2>Registro </h2>
-  {% csrf_token %}
-  {% for field in form %}
+      </div>
+      <div class="col-lg-8" style="border-style:solid;border-color:black;">
 
+    <form action="." method="post" >
+          <div class="form-group">
 
-  {% if form.errors %}
-
-  {% for error in field.errors %}
-  <p style="color:#1D281F">{{ error }}</p>
-  {% if field.help_text %}
-  &lt;!&ndash; <small style="color: grey">{{ field.help_text }}</small> &ndash;&gt;
-  {% endif %}
-  {% endfor %}
-  {% endif %}
-
-
-
-    <p>
-      <div class="input-div one">
-        <div class="i">
-          <i class="fas fa-user"></i>
+        {{ form.as_p}}
+        <p><input type="submit" value="Comprar"></p>
+        {% csrf_token %}
+              </div>
+    </form>
 
           </div>
-
-          <h5 style=" margin-top: 15px;
-          font-size: 15px;
-          color: #43914E;">
-            {{ field.label_tag }}
-          </h5>
-
-        </div>
-     <br>
-     <div>
-     <div class="input" id="loco1">
-      {{ field }}
-     </div>
-     </div>
-    </p>
-  {% endfor %}
-  <a  href="{% url 'login' %}"  style="margin-top: 5%;">Iniciar Sesion </a>
-
-
-  <input class="btn" type="submit" value="Continuar">
-
-
-
-</form>
-
-&lt;!&ndash; {# Assumes you setup the password_reset view in your URLconf #} &ndash;&gt;
-
-  </div>
+</div>
 
 -->
 
-</body>
-<script>
-    var dairyClose = document.getElementsByClassName('dairy-close')[0];
-var dairyMessage = document.getElementsByClassName('dairy-message')[0];
-var philArmLeft = document.getElementsByClassName('phil-arm-left')[0];
-var phil = document.getElementsByClassName('dairy-phil')[0];
-var dairyPosition = document.getElementsByClassName('dairy-position')[0];
 
-dairyClose.addEventListener('click', function() {
 
-  dairyMessage.textContent = 'Gracias Por visitarnos';
-  philArmLeft.classList.add('exit-wave');
-  phil.classList.add('dairy-phil-exit');
 
-  setTimeout(function(){
-    dairyMessage.style.display = 'none';
-    dairyPosition.style.display = 'none';
-  }, 800);
 
-}, false);
-</script>
 
-<script type="text/javascript" src="js/main.js"></script>
-
-</html>
+{% endblock %}

@@ -53,10 +53,10 @@ class volunView(SuccessMessageMixin, generic.CreateView):
     model = Perfil
 
     # Formularios de datos
-    form_class = PerfilForm
+    form_class = PerfilFormVoluntario
     # success forms
     template_name = 'voluntarios/perfil_volun.html'
-    success_url = reverse_lazy('pagina')
+    #success_url = reverse_lazy('pagina')
 
     def get_context_data(self, **kwargs): #pinto el formulario en el html
         context = super(volunView, self).get_context_data(**kwargs)
@@ -119,6 +119,8 @@ class Mi_Usuario_Update(SuccessMessageMixin, UpdateView):
     form_class = UpdateUserForm
     second_form_class = PerfilForm
 
+
+
     def get_context_data(self,**kwargs):
         context = super(Mi_Usuario_Update, self).get_context_data(**kwargs)
         pk_editar = self.kwargs.get('pk', 0)
@@ -129,6 +131,7 @@ class Mi_Usuario_Update(SuccessMessageMixin, UpdateView):
         usuario_editar_perfil= self.second_model.objects.get(User_id = usuario_editar.id)
         perfil = Perfil.objects.get(User_id = usuario.id)
         #print(usuario_editar.id,'aca el otro',usuario_editar_perfil.id)
+
         #----------------- consulta de datos -----------------
         if 'form' not in context:
             context['form'] = self.form_class(self.request.FILES,instance = usuario_editar)
@@ -207,17 +210,19 @@ class Detalle_voluntario(SuccessMessageMixin, TemplateView):
     # PARA ADMINISTRAR LOS VOLUNTARIOS  USUARIOS , COMPRADORES ::
 
 
-@login_required(login_url='/accounts/login')
-def clientes_sabia(request):
-    usuario = request.user.id
-    datos = User.objects.get(id=usuario)
+@method_decorator(login_required, name='dispatch')
+class clientes_sabia(SuccessMessageMixin,TemplateView):
+    template_name = 'cliente/pagina_cliente.html'
+    def get_context_data(self, **kwargs):
+        context = super(clientes_sabia, self).get_context_data(**kwargs)
+        pk = self.kwargs.get('pk', 0)
+        usuario = User.objects.get(id=pk)
+        perfil = Perfil.objects.get(User_id=usuario.id)
+        return {'usuario': usuario, 'perfil': perfil}
 
-    return render(request, 'cliente/pagina_cliente.html')
 
 class Usuarios_Sabia(SuccessMessageMixin, generic.CreateView):
-
     def userlog(request):
-
         a = request.user.id
         id_usuario = User.objects.get(id=a)
         print(id_usuario.id)
@@ -263,3 +268,43 @@ def signup_view_voluntario(request):
         login(request, user)
         return redirect('perfil_sabia')
     return render(request, 'cliente/register.html', {'form': form})
+
+class Mi_Usuario_Update_Cliente(SuccessMessageMixin, UpdateView):
+    model = User
+    second_model = Perfil
+    template_name = 'cliente/admin_cliente/editar_perfil_cliente.html'
+    form_class = UpdateUserForm
+    second_form_class =PerfilFormVoluntario
+
+
+    def get_context_data(self,**kwargs):
+        context = super(Mi_Usuario_Update_Cliente, self).get_context_data(**kwargs)
+        pk_editar = self.kwargs.get('pk', 0)
+        pk = self.kwargs.get('pk', 0)
+        usuario = User.objects.get(id=pk)
+        #------------------ obtengo id url -------------------
+        usuario_editar = self.model.objects.get(id = pk_editar)
+        usuario_editar_perfil= self.second_model.objects.get(User_id = usuario_editar.id)
+        perfil = Perfil.objects.get(User_id = usuario.id)
+        #print(usuario_editar.id,'aca el otro',usuario_editar_perfil.id)
+        #----------------- consulta de datos -----------------
+        if 'form' not in context:
+            context['form'] = self.form_class(self.request.FILES,instance = usuario_editar)
+        if 'form2' not in context:
+            context['form2'] = self.second_form_class(self.request.FILES, instance = usuario_editar_perfil)
+        context['id'] = pk_editar
+        return {'usuario':usuario, 'perfil':perfil,'context':context}
+
+    def post(self, request, *args, **kwargs):
+        self.object = self.get_object
+        id_user = kwargs['pk']
+        user2 = self.model.objects.get(id = id_user)
+        usuario2 = self.second_model.objects.get(User_id = user2.id)
+        form = self.form_class(request.POST,request.FILES,instance = user2)
+        form2 = self.second_form_class(request.POST,request.FILES,instance = usuario2)
+        if form.is_valid() and form2.is_valid():
+            form.save()
+            form2.save()
+            return HttpResponseRedirect(reverse_lazy('pagina_cliente', kwargs=kwargs))
+        else:
+            return HttpResponseRedirect(reverse_lazy('pagina_cliente', kwargs=kwargs))

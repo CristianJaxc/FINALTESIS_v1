@@ -21,14 +21,14 @@
 
 
 
-                    <th scope="col">#</th>
+
                     <th scope="col " style="text-align: center;">Antes</th>
                     <th scope="col">Despues</th>
                     <th scope="col">Titulo </th>
                     <th scope="col">Descripcion</th>
                     <th scope="col">Link del video </th>
+                    <th scope="col">Opciones</th>
 
-        <th scope="col">Opciones</th>
                     {% endblock tr %}
 
                     {% block tbody %}
@@ -36,17 +36,19 @@
 
                 {% for i in object_list %}
                 <tr>
-                    <th scope="row">{{forloop.counter}}</th>
-                    {% if i.imagen_antes %}
+
+
           <td class="col-lg-4 mb-4 ">
+              {% if i.imagen_antes %}
             <img src="/media/{{i.imagen_antes}}" alt="{{i.imagen_antes}}"  style="width: 40%;margin-left: 35%;" >
 
             {% else %}
             <img class="img-fluid rounded-top" src="{% static 'img/albergue1.png ' %}"    style="width: 40%;" alt="">
             {% endif %}
           </td>
-                         {% if i.imagen_despues %}
           <td class="col-lg-4 mb-4 ">
+
+                         {% if i.imagen_despues %}
             <img src="/media/{{i.imagen_despues}}" alt="{{i.imagen_despues}}"  style="width: 40%;margin-left: 35%;" >
 
             {% else %}

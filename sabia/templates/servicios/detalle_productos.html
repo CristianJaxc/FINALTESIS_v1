@@ -384,7 +384,7 @@ section {
                   <p class="_p-name" style="text-align:center;">{{ product.name }} </p>
                   <div class="_p-price-box">
                      <div class="p-list">
-                        <span> $ <i class="fa fa-inr"></i> <del> {{ product.price }} </del>   </span>
+                        <span> $ <i class="fa fa-inr"></i> <del> {{product.price}}</del>   </span>
                         <span class="price"> {{ product.price }} </span>
                      </div>
 
@@ -400,6 +400,8 @@ section {
                          {% else %}
                                <span>Stock : {{ product.stock }} </span>
   <!--Stock nuevo :  {{ cart.get_cantidad}}-->
+
+
                             {% endif %}
 
 

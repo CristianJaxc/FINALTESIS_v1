@@ -257,7 +257,7 @@
                     data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header ">Editar / Crear </h6>
-                        <a class="collapse-item" href="#">Perfiles de Compradores</a>
+
                         <a class="collapse-item" href="{% url 'pagina_order'  %}">Orden de Pedidos </a>
                     </div>
                 </div>
@@ -336,7 +336,7 @@ Administración
                                 <h6 class="dropdown-header" style="text-align:center;background-color:#43914E;border-color:white;">
                                  Panle de  Reportes
                                 </h6>
-                                <a class="dropdown-item d-flex align-items-center" href="#">
+                                <a class="dropdown-item d-flex align-items-center" href="{% url 'reporte_denuncia' %}">
                                     <div class="mr-3">
                                         <div class="icon-circle bg-primary">
                                             <i class="fas fa-file-alt text-white"></i>
@@ -347,7 +347,7 @@ Administración
                                         <span class="font-weight-bold">Reporte de Denuncias</span>
                                     </div>
                                 </a>
-     <a class="dropdown-item d-flex align-items-center" href="#">
+     <a class="dropdown-item d-flex align-items-center" href="{% url 'reporte_adopciones' %}">
                                     <div class="mr-3">
                                         <div class="icon-circle bg-success">
                                             <i class="fas fa-file-alt text-white"></i>
@@ -358,7 +358,7 @@ Administración
                                         <span class="font-weight-bold">Reporte de Adopciones</span>
                                     </div>
                                 </a>
-     <a class="dropdown-item d-flex align-items-center" href="#">
+     <a class="dropdown-item d-flex align-items-center" href="{% url 'reporte_donaciones' %}">
                                     <div class="mr-3">
                                         <div class="icon-circle bg-info ">
                                             <i class="fas fa-file-alt text-white"></i>
@@ -370,7 +370,7 @@ Administración
                                     </div>
                                 </a>
 
-     <a class="dropdown-item d-flex align-items-center" href="#">
+     <a class="dropdown-item d-flex align-items-center" href="{% url 'reportes_ventas' %}">
                                     <div class="mr-3">
                                         <div class="icon-circle bg-warning">
                                             <i class="fas fa-file-alt text-white"></i>

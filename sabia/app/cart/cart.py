@@ -97,9 +97,6 @@ class Cart(object):
                    self.cart.values())
 
 
-
-
-
     def get_total_producto(self):
             product_ids = self.cart.keys()
             # get the product objects and add them to the cart
