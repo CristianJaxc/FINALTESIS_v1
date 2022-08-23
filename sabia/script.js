@@ -78,3 +78,9 @@ self.addEventListener("fetch", event => {
     )
 });
 */
+/*
+{ "name": "Geekflare", "short_name": "Geekflare", "description": "Geekflare produce artículos de tecnología y finanzas de alta calidad, crea herramientas y API para ayudar a las empresas y a las personas a crecer", "start_url": "/", "iconos": [{ "origen": "activos/icono/icono-128x128.png", "tamaños": "128x128", "tipo": "imagen/png" }, { "origen": "activos/icono/icono-152x152.png", "tamaños": "152x152", "tipo": "imagen/png" }, { "src": "activos/icono/icono-192x192.png", "tamaños ": "192x192", "tipo": "imagen/png" }, { "origen": "activos/icono/icono-384x384.png", "tamaños": "384x384", "tipo": "imagen/png " }, { "src": "assets/icon/icon-512x512.png", "sizes": "512x512", "type": "image/png" }], "background_color": "#EDF2F4", " display": "independiente", "theme_color": "#B20422", "scope": "/",
+"shortcuts": [{ "name": "Artículos", "short_name": "Artículos", "descripción": "1595 artículos sobre seguridad, administrador de sistemas, marketing digital, computación en la nube, desarrollo y muchos otros temas"., "url": "/articles", "icons": [{ "src": "/assets/icon/icon- 152x152.png", "tamaño s": "152x152" }] },
+{ "name": "Autores", "short_name": "Autores", "descripción": "Geekflare - Autores", "url": "/autores", "iconos": [{ "src": "/assets/icon/icon-152x152.png", "sizes": "152x152" }] },
+{ "name": "Tools", "short_name": "Tools", "description" : "Geekflare - Herramientas", "url": "/herramientas", "iconos": [{ "src": "/assets/icon/icon-152x152.png", "tamaños": "152x152" }] },
+{ "name": "Ofertas", "short_name": "Ofertas", "descripción": "Geekflare - Ofertas", "url": "/ofertas", "iconos": [{ "src": "/activos/ icono/icono-152x152.png", "tamaños": "152x152" }] } ] }*/

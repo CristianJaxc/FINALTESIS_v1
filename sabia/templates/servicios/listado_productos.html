@@ -4,6 +4,109 @@
 {% load static %}
 
 {% block contenido %}
+<style>
+    <style>
+    .asteriskField {
+display: none;
+}
+input {
+  font-family: "Poppins", sans-serif;
+}
+
+.signin-signup {
+  position: absolute;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  left: 75%;
+  width: 50%;
+  transition: 1s 0.7s ease-in-out;
+  display: grid;
+  grid-template-columns: 1fr;
+  z-index: 5;
+}
+
+form {
+  display: flex;
+
+  justify-content: center;
+  flex-direction: column;
+  padding: 0rem 5rem;
+  transition: all 0.2s 0.7s;
+  overflow: hidden;
+  grid-column: 1 / 2;
+  grid-row: 1 / 2;
+}
+
+form.sign-up-form {
+  opacity: 0;
+  z-index: 1;
+}
+
+form.sign-in-form {
+  z-index: 2;
+}
+
+.title {
+  font-size: 2.2rem;
+  color: #444;
+  margin-bottom: 10px;
+}
+
+.input-field {
+  max-width: 380px;
+  width: 100%;
+  background-color: #f0f0f0;
+  margin: 10px 0;
+  height: 55px;
+  border-radius: 55px;
+  display: grid;
+  grid-template-columns: 15% 85%;
+  padding: 0 0.4rem;
+  position: relative;
+}
+
+.input-field i {
+  text-align: center;
+  line-height: 55px;
+  color: #acacac;
+  transition: 0.5s;
+  font-size: 1.1rem;
+}
+
+.input-field input {
+  background: none;
+  outline: none;
+  border: none;
+  line-height: 1;
+  font-weight: 600;
+  font-size: 1.1rem;
+  color: #333;
+}
+
+.input-field input::placeholder {
+  color: #aaa;
+  font-weight: 500;
+}
+.btn1 {
+  width: 150px;
+  background-color: #2c843c;
+  border: none;
+  outline: none;
+  height: 49px;
+  border-radius: 49px;
+  color: #fff;
+  text-transform: uppercase;
+  font-weight: 600;
+  margin: 10px 0;
+  cursor: pointer;
+  transition: 0.5s;
+}
+/*Boton Login*/
+.btn1:hover {
+  background-color: #4d84e2;
+}
+</style>
+</style>
 <link href="{% static 'css/perro.css' %}" rel="stylesheet">
     <link rel="stylesheet" href="{% static 'css/perro_estilo5.css' %}">
 
@@ -170,10 +273,15 @@ Bienvenido  <span class="dairy-link">{{user.username}}</span>
     </svg>
     <span class="dairy-message">
 Para poder, adquirir nuestros Productos:
-      <a class="dairy-link" href="{% url 'signup_voluntario' %}">Registrate </a>
+<!--      <a class="dairy-link" href="{% url 'signup_voluntario' %}">Registrate </a>-->
+       <a class="dairy-link"       href="#myModal5"  data-toggle="modal" >Registrate</a>
+
       <hr style="margin:-1%;">
         Si tienes cuenta:
-             <a class="dairy-link" href="{% url 'login' %}" >Iniciar Seción </a>
+                     <a class="dairy-link"       href="#myModal"  data-toggle="modal" >Iniciar Seción </a>
+
+
+         <!--    <a class="dairy-link" href="{% url 'login' %}" >Iniciar Seción </a>-->
       <span class="dairy-close" style="color:white;background-color:green;padding-left:4px;">X</span>
     </span>
   </div>
@@ -309,10 +417,167 @@ Para poder, adquirir nuestros Productos:
 
 
 
+    {% if user.is_authenticated %}
+        <div id="myModal55" class="modal fade">
+
+        </div>
+
+  {% else %}
+<div id="myModal" class="modal fade">
+            <div class="modal-dialog modal-login">
+                <div class="modal-content">
+                    <div class="modal-header">
+                               <h2 class="title">Iniciar sesión</h2>
+                        <button type="button" class="close btnClose" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    </div>
+                    <div class="modal-body">
+
+
+
+                              <form method="post" action="{% url 'login' %}" class="sign-in-form">
+                        {% csrf_token %}
+
+          <div class="input-field">
+            <i class="fas fa-user"></i>
+            <input type="text" placeholder="Usuario" name="username" id="Usuario" />
+          </div>
+
+               <div class="input-field">
+            <i class="fas fa-lock"></i>
+            <input type="password" placeholder="Contraseña" name="password" />
+          </div>
+
+
+          <input href="{% url
+                                    'order-create'%}" type="submit" value="Iniciar Sesión" class="btn1 solid"  />
+                        </form>
+                    </div>
+                    <div class="modal-footer btnAdd" >No tienes una Cuenta? <a href="#">Crear Cuenta </a></div>
+                </div>
+            </div>
+        </div>
+  <div id="myModal5" class="modal fade ">
+            <div class="modal-dialog modal-login">
+                <div class="modal-content">
+                    <div class="modal-header">
+                                <h2 class="title">Registro</h2>
+                        <button type="button" class="close btnClose" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    </div>
+                    <div class="modal-body">
+
+  <form method="post", enctype="multipart/form-data"  class="sign-in-form form5">
+                        {% csrf_token %}
+
+
+    <p>
+           <div class="input-field">
+            <i class="fas fa-user"></i>
+
+            <input type="text" placeholder="Usuario" name="username" id="Usuario" />
+
+          </div>
+
+               <div class="input-field">
+            <i class="fas fa-lock"></i>
+            <input type="password" placeholder="Contraseña" name="password1" />
+          </div>
+
+     <div class="input-field">
+            <i class="fas fa-lock"></i>
+            <input type="password" placeholder="Contraseña Confirmación" name="password2" />
+          </div>
+
+
+   <!--  <div>
+     <div class="input" id="loco1">
+      {{ field }}
+     </div>
+     </div>-->
+    </p>
+
+   <div>
+
+         </div>
+                      <input type="submit" value="Siguiente" class="btn1 solid"/>
+
+
+{% if form5.errors %}
+      {% for field in form5 %}
+  {% for error in field.errors %}
+
+        <script>
+            Swal.fire({
+              title: 'Cuidado',
+              text: '{{ error }}',
+              icon: 'warning',
+              confirmButtonText: 'Ok'
+})
+        </script>
+
+ {% endfor %}
+
+  {% endfor %}
+      {% endif %}
+
+{% if next %}
+    {% if user.is_authenticated %}
+              <script>
+            Swal.fire({
+              title: 'Inicio Cliente',
+              text: 'No tiene acceso a la Pagina, Error , Contraseña/Nombre',
+              icon: 'info',
+              confirmButtonText: 'Ok'
+})
+        </script>
+
+    {% else %}
+                     <script>
+            Swal.fire({
+              title: 'Inicio Cliente',
+              text: ' Inicie Sesion Para continuar , Porfavor.',
+              icon: 'info',
+              confirmButtonText: 'Ok'
+})
+        </script>
+
+    {% endif %}
+{% endif %}
+
+
+
+        </form>
+                    </div>
+                    <div class="modal-footer btnAdd5">Ya tienes una Cuenta  <a href="#">Inicia Sesion</a></div>
+                </div>
+            </div>
+        </div>
+
+  {% endif %}
+
+
+
+<script>
+$( document ).ready(function() {
+    $('#myModal').modal('toggle')
+});
+
+$('.btnClose').on('click', function(){
+          $('#myModal').modal('hide');
+});
+
+$('.btnAdd').on('click', function(){
+        $('#myModal').modal('hide');
+        $('#myModal5').modal('show');
+    });
+$('.btnAdd5').on('click', function(){
+        $('#myModal5').modal('hide');
+        $('#myModal').modal('show');
+    });
 
 
 
 
+</script>
 
 
 {% if messages %}

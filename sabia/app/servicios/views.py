@@ -1,3 +1,5 @@
+from django.contrib.auth import login, authenticate
+from django.contrib.auth.forms import UserCreationForm
 from django.shortcuts import render
 from .models import Product,Category,ImagenProducto
 from app.cliente.models import Client
@@ -15,6 +17,8 @@ from .forms import *
 from app.orders.models import OrderItem
 from django.contrib.auth.decorators import login_required
 # Create your views here.
+from ..usuario.models import Perfil
+from app.usuario.forms import PerfilForm, UpdateUserForm,PerfilFormVoluntario
 
 def esterilizacion(request):
 
@@ -37,13 +41,33 @@ def product_list(request, category_slug=None):
     category = None
     categories = Category.objects.all()
     products = Product.objects.filter(available=True)
+    form5 = UserCreationForm(request.POST)
+    model = Perfil
+    form6 = PerfilFormVoluntario
+
+    if form5.is_valid():
+        form5.save()
+        username = form5.cleaned_data.get('username')
+        password = form5.cleaned_data.get('password1')
+        user = authenticate(username=username, password=password)
+        login(request, user)
+        # return redirect('perfil')
+        a = user.id
+        id_usu = user.id  # usuario logeado
+        form6 = form6(request.POST, request.FILES)
+
+        if form6.is_valid():
+            new = form6.save(commit=False)
+            new.User_id = id_usu
+            form6.save()
+            return redirect('pagina')
     if category_slug:
         category = get_object_or_404(Category, slug=category_slug)
         products = products.filter(category=category)
 
     return render(request, 'servicios/listado_productos.html',
                   {'category': category, 'categories': categories,
-                   'products': products})
+                   'products': products,'form5': form5,'form6':form6})
 
 
 

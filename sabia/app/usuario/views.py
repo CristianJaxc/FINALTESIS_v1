@@ -1,6 +1,7 @@
 from pipes import Template
 from pyexpat import model
 from urllib import request
+
 from venv import create
 from django.shortcuts import render
 from django.shortcuts import render, redirect
@@ -38,7 +39,7 @@ from app.blogs.forms import BlogsForm, BlogsForm2
 
 @method_decorator(login_required, name='dispatch')
 class volunView(SuccessMessageMixin, generic.CreateView):
-
+    success_url=reverse_lazy('listado_usuarios')
     def userlog(request):
       
       
@@ -53,7 +54,7 @@ class volunView(SuccessMessageMixin, generic.CreateView):
     model = Perfil
 
     # Formularios de datos
-    form_class = PerfilFormVoluntario
+    form_class = PerfilForm
     # success forms
     template_name = 'voluntarios/perfil_volun.html'
     #success_url = reverse_lazy('pagina')

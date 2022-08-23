@@ -353,7 +353,14 @@ display: block;
     <div class="col-md-12 " style="">
    {% if user.is_authenticated %}
  <li class="nav-item dropdown" style="list-style:none;">
-        <img src="{% static 'img/dueño.jpg' %}" width="50%" height="50%" alt="" class="img-fluid rounded-circle" >
+         {% if user.perfil.imagen_perfil %}
+
+                <td class="col-lg-4 mb-4 ">
+                  <img src="/media/{{user.perfil.imagen_perfil }}" alt="{{user.perfil.imagen_perfil }}"  width="50%" height="50%"    class="img-fluid rounded-circle" >
+                  {% else %}
+
+                  <img class="img-fluid rounded-top" src="{% static 'img/despues1.png' %}"  width="50%" height="50%"     class="img-fluid rounded-circle">
+                  {% endif %}
 
             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button"
               data-bs-toggle="dropdown" aria-expanded="false">

@@ -19,7 +19,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Cliente {{user.first_name}} </title>
+    <title>Cliente {{request.user.username}}  </title>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.15/dist/sweetalert2.all.min.js"></script>
     <!--DATATABLE-->
 
@@ -304,7 +304,7 @@ Bienvenido
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <span class="mr-2 d-none d-lg-inline  small" style="color:white;">
-                                    {{user.username}}
+                                {{request.user.username}}
                                 </span>
                                 <i class="fas fa-user fa-sm fa-fw mr-2 " style="color:white;"></i>
                             </a>
