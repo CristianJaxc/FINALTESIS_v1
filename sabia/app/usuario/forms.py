@@ -62,3 +62,18 @@ class UpdateUserForm(forms.ModelForm):
         model = User
         fields = [ 'email','first_name','last_name',]
 
+    def clean_email(self):
+        email = self.cleaned_data["email"]
+        try:
+            User._default_manager.get(email=email)
+        except User.DoesNotExist:
+            return email
+        raise forms.ValidationError('email duplicado')
+
+    # modificamos el método save() así podemos definir  user.is_active a False la primera vez que se registra
+
+    #def clean_email(self):
+    #    email= self.cleaned_data.get('email')
+     #   if User.objects.filter(email=email).exists():
+      #      raise forms.ValidationError(u'El email ya esta registrado prueba con otro')
+       # return  email

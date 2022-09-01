@@ -1,8 +1,10 @@
 from pyexpat import model
 from django.db import models
 from django.contrib.auth.models import User
+from datetime import datetime
 # Create your models here.
-
+import hashlib, datetime, random
+from django.utils import timezone
 class Perfil(models.Model):
     ROLE_CHOICES = (
         ('usuario', 'Usuario'),

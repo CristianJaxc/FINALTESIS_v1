@@ -32,7 +32,7 @@ Editar Perfil
         <div class="columna3">
           <div class="">
             <div class="">
-                <h5 style="text-align: center;padding: 5%;">Datos de Usuario </h5>
+                <h5 style="text-align: center;padding: 5%;">Datos del Usuario </h5>
                <form method="post", enctype="multipart/form-data">
                     {% csrf_token %}
                     {{ context.form.as_p  }}
@@ -57,6 +57,36 @@ Editar Perfil
 
                         <input type="submit" value="Actualizar">
                     </a>
+
+
+  {% for field in form %}
+    <p>
+      <div class="input-div one">
+          <h5 style=" margin-top: 15px;
+          font-size: 15px;
+          color: #43914E;">
+            {{ field.label_tag }}
+          </h5>
+
+        </div>
+     <br>
+     <div>
+     <div class="input" id="loco1">
+      {{ field }}
+     </div>
+     </div>
+    </p>
+ {% if form.errors %}
+
+  {% for error in field.errors %}
+<small style="color: grey" style="color:#1D281F">{{ error }}</small>
+  {% if field.help_text %}
+<!-- <small style="color: grey">{{ field.help_text }}</small>-->
+  {% endif %}
+  {% endfor %}
+  {% endif %}
+
+  {% endfor %}
 
 
 

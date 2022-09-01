@@ -54,6 +54,7 @@
 
 
 <body>
+
   <div class="container" >
     <div class="forms-container">
       <div class="signin-signup">
@@ -72,9 +73,12 @@
 
 
           <input type="submit" value="Iniciar Sesión" class="btn solid" />
-          <!--<p class="social-text">O regístrate con plataformas sociales</p>-->
-      <!--    <div class="social-media">
-            <a href="#" class="social-icon">
+
+        <div class="social-media">
+            <a  href="{% url 'password_reset' %}" style="color:grey">
+             Olvidaste tu contraseña
+            </a>
+          <!--  <a href="#" class="social-icon">
               <i class="fab fa-facebook-f"></i>
             </a>
             <a href="#" class="social-icon">
@@ -85,8 +89,8 @@
             </a>
             <a href="#" class="social-icon">
               <i class="fab fa-linkedin-in"></i>
-            </a>
-          </div>-->
+            </a>-->
+          </div>
         </form>
       </div>
     </div>

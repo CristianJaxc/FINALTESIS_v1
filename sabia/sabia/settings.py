@@ -165,6 +165,15 @@ MESSAGE_STORAGE = 'django.contrib.messages.storage.session.SessionStorage'
 PAYPAL_RECEIVER_EMAIL = 'sb-unzpk9185264@business.example.com'
 PAYPAL_TEST = True
 
+#PARA CONFIGURACION DE EMAIL :
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_USER = 'sabiadogs@gmail.com'
+EMAIL_HOST_PASSWORD = 'uhvo dklr qdqm vezj'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+DEFAULT_FROM_EMAIL = 'crisiaan.jaxc@gmail.com'
+EMAIL_BACKEND ='django.core.mail.backends.smtp.EmailBackend'
+
 #PARA LOS MENSAJES DE BOOSTRAP
 MESSAGE_TAGS ={
     message_constants.DEBUG: 'debug',

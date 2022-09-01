@@ -8,6 +8,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import login, authenticate
 from django.shortcuts import render, HttpResponseRedirect
 from django.contrib.auth.forms import UserCreationForm
+from django.template.context_processors import csrf
 from django.urls import reverse_lazy
 from django.views import generic
 from django.contrib.auth.decorators import login_required
@@ -17,7 +18,14 @@ from django.views.generic import ListView, DetailView, UpdateView, TemplateView,
 # ----------- Para Mesnsajes -------------
 from django.contrib import messages
 from django.contrib.messages.views import SuccessMessageMixin
+
+#-----------------PRUEBA PARA CORREO :: --------------------
+from django.shortcuts import redirect, get_object_or_404
+from django.http import HttpResponseRedirect, HttpResponse
+
 # ---------- Para modelos -------------
+
+
 from django.contrib.auth.models import User
 from app.blogs.models import Blogs
 from app import usuario
