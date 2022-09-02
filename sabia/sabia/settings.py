@@ -167,8 +167,8 @@ PAYPAL_TEST = True
 
 #PARA CONFIGURACION DE EMAIL :
 EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_HOST_USER = 'sabiadogs@gmail.com'
-EMAIL_HOST_PASSWORD = 'uhvo dklr qdqm vezj'
+EMAIL_HOST_USER = 'cristianjuegos3098@gmail.com'
+EMAIL_HOST_PASSWORD = 'mkkk afcu ojpv kmbk'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 DEFAULT_FROM_EMAIL = 'crisiaan.jaxc@gmail.com'
