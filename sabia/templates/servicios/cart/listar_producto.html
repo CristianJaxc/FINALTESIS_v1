@@ -22,12 +22,11 @@
 
       {% block tr %}
                     <th scope="col">#</th>
-    <th scrope="col">ID</th>
                     <th scope="col">Imagen</th>
-                    <th scope="col">Categoria</th>
+                    <th scope="col">Categoría</th>
                     <th scope="col">Nombre</th>
                     <th scope="col">slug</th>
-                    <th scope="col">Descripcion</th>
+                    <th scope="col">Descripción</th>
                      <th scope="col">Precio</th>
                      <th scope="col">Stock</th>
                <th scope="col">Opciones</th>
@@ -40,7 +39,6 @@
 
                 <tr>
                     <th scope="row">{{forloop.counter}}</th>
-                   <th scope="row">{{ i.id }}</th>
 
                 {% if i.image %}
                 <td class="col-lg-4 mb-4 ">
